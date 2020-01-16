@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<style>
+  /***
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+  body {
+    background: #F1F3FA;
+  }
+
+  /* Profile container */
+  .profile {
+    margin: 20px 0;
+  }
+
+  /* Profile sidebar */
+  .profile-sidebar {
+    padding: 20px 0 10px 0;
+    background: #fff;
+  }
+
+  .profile-userpic img {
+    float: none;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+  }
+
+  .profile-usertitle {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .profile-usertitle-name {
+    color: #5a7391;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+
+  .profile-usertitle-job {
+    text-transform: uppercase;
+    color: #5b9bd1;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .profile-userbuttons {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .profile-userbuttons .btn {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 15px;
+    margin-right: 5px;
+  }
+
+  .profile-userbuttons .btn:last-child {
+    margin-right: 0px;
+  }
+
+  .profile-usermenu {
+    margin-top: 30px;
+  }
+
+  .profile-usermenu ul li {
+    border-bottom: 1px solid #f0f4f7;
+  }
+
+  .profile-usermenu ul li:last-child {
+    border-bottom: none;
+  }
+
+  .profile-usermenu ul li a {
+    color: #93a3b5;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .profile-usermenu ul li a i {
+    margin-right: 8px;
+    font-size: 14px;
+  }
+
+  .profile-usermenu ul li a:hover {
+    background-color: #fafcfd;
+    color: #5b9bd1;
+  }
+
+  .profile-usermenu ul li.active {
+    border-bottom: none;
+  }
+
+  .profile-usermenu ul li.active a {
+    color: #5b9bd1;
+    background-color: #f6f9fb;
+    border-left: 2px solid #5b9bd1;
+    margin-left: -2px;
+  }
+
+  /* Profile Content */
+  .profile-content {
+    padding: 20px;
+    background: #fff;
+    min-height: 460px;
+  }
+</style>
+
+<body>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    <div class="row profile">
+      <div class="col-md-3">
+        <div class="profile-sidebar">
+          <!-- SIDEBAR USERPIC -->
+          <div class="profile-userpic">
+            <img src="http://keenthemes.com/preview/metronic/theme/assets/admin/pages/media/profile/profile_user.jpg"
+              class="img-responsive" alt="">
+          </div>
+          <!-- END SIDEBAR USERPIC -->
+          <!-- SIDEBAR USER TITLE -->
+          <div class="profile-usertitle">
+            <div class="text-center">
+              <div class="card-img-top" id="qrcode" alt="Card image" style="width:100%"></div>
+            </div>
+          </div>
+          <!-- END SIDEBAR USER TITLE -->
+          <!-- SIDEBAR BUTTONS -->
+          <div class="profile-userbuttons">
+            <a class="printPage btn btn-danger btn-sm" href="#">Print</a>
+          </div>
+          <!-- END SIDEBAR BUTTONS -->
+          <!-- SIDEBAR MENU -->
+          <div class="profile-usermenu">
+            <ul class="nav">
+              <li class="active">
+                <a href="#">
+                  <i class="glyphicon glyphicon-home"></i>
+                  Overview </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="glyphicon glyphicon-user"></i>
+                  Account Settings </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="glyphicon glyphicon-ok"></i>
+                  Tasks </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="glyphicon glyphicon-flag"></i>
+                  Help </a>
+              </li>
+            </ul>
+          </div>
+          <!-- END MENU -->
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="profile-content">
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+              <hr>
+              <form class="form" action="##" method="post" id="registrationForm">
+                <div class="form-group">
+
+                  <div class="col-xs-6">
+                    <label for="first_name">
+                      <h4>First name</h4>
+                    </label>
+                    <input type="text" class="form-control" name="first_name" id="receiverName" placeholder="first name"
+                      title="enter your first name if any.">
+                  </div>
+                </div>
+                <div class="form-group">
+
+                  <div class="col-xs-6">
+                    <label for="last_name">
+                      <h4>Last name</h4>
+                    </label>
+                    <input type="text" class="form-control" name="last_name" id="receiverLastName"
+                      placeholder="last name" title="enter your last name if any.">
+                  </div>
+                </div>
+
+                <div class="form-group">
+
+                  <div class="col-xs-6">
+                    <label for="phone">
+                      <br>
+                      <h4>Student ID</h4>
+                    </label>
+                    <input type="text" class="form-control" name="phone" id="receiverLastID" placeholder="enter phone"
+                      title="enter your phone number if any.">
+                  </div>
+
+                </div>
+
+                <div class="form-group">
+                  <div class="col-xs-6">
+                    <label for="mobile">
+                      <br>
+                      <h4>Wallet</h4>
+
+                    </label>
+                    <input type="text" class="form-control" name="mobile" id="fromAddress"
+                      placeholder="enter mobile number" title="enter your mobile number if any.">
+                  </div>
+                </div>
+
+                <div class="form-group">
+
+
+                </div>
+                <div class="form-group">
+
+                  <div class="col-xs-10">
+                    <label for="password">
+                      <br>
+                      <h4>PrivateKey  <a>show</a></h4> 
+                    
+                    </label>
+                    <input class="form-control" name="password" id="privateKey" placeholder="password"
+                      title="enter your password.">
+                  </div>
+                </div>
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <br>
+                    <hr>
+                  
+                    <a class="btn btn-lg btn-success" onclick="gotoindex()">BACK</a>
+                  </div>
+                </div>
+              </form>
+
+              <hr>
+
+            </div>
+            </form>
+
+            <hr>
+
+          </div>
+          <!--/tab-pane-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script src="./web3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- <script src="./psulogin.js"></script>  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script src="/front/js/jquery.qrcode.min.js"></script>
+<br>
+
+<script>
+
+
+
+
+
+
+  var url;
+  var id;
+  (() => {
+    url = window.location.href
+    id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
+  })()
+
+  function gotoCheckBalance() {
+    // window.location.href = url.replace('send', 'balance')
+    window.location.href = url.replace('send', 'balance', 'index')
+  }
+  function gotoindex() {
+    // window.location.href = url.replace('send', 'balance')
+    window.location.href = url.replace('profile', 'index', 'send')
+  }
+
+  $(document).ready(function () {
+
+
+    var readURL = function (input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('.avatar').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+
+    $(".file-upload").on('change', function () {
+      readURL(this);
+    });
+  });
+
+  // function gotoSendETH() {
+  //   window.location.href = window.location.href.replace('send', 'send', 'index')
+  // }
+  axios({
+    method: 'GET',
+    url: '/getProfileById', //ส่งไปค่านี้
+    headers: {
+      id: id  // รหัสนักศึกษา
+    }
+  }).then(result => {
+    console.log("result_data_getProfileById", result)
+    // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+    $('#receiverName').val(result.data.name)
+    $('#receiverLastName').val(result.data.lastName)
+    $('#receiverLastID').val(result.data.id)
+    //$("#result").text(link)
+  })
+
+  /*<a id="receiverName"></a>
+  <a id="receiverLastName" ></a><br>
+  <a id="showid" ></a><br>
+  <a id="fromAddress"></a><br>
+  <a id="privateKey" ></a><br>*/
+
+
+  axios({
+    method: 'GET',
+    url: '/getWalletById', //ส่งไปค่านี้
+    headers: {
+      id: id  // รหัสนักศึกษา
+    }
+  }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+    console.log("result_data", result)
+    console.log("result_address", result.data.address)
+    console.log("result_privateKey", result.data.privateKey)
+    console.log("result_id", result.config.headers.id)
+
+    //var test = result.data.address;
+
+
+    $('#fromAddress').val(result.data.address)
+    // $('#privateKey').val(result.data.privateKey)
+    $('#showid').val(result.config.headers.id)
+
+    $(document).ready(function () {
+      $("a").click(function () {
+        $('#privateKey').val(result.data.privateKey)
+      });
+
+      $(function () {
+        // กำหนดการตั้งค่ารูปแบบ qrcode ที่ต้องการเรียกใช้
+        var qrcodeConfig = {
+          width: 200,
+          height: 200,
+          correctLevel: 0
+        }
+        // สมมติค่าเริ่มเต้น ที่ตอ้งการแสดงเป็น qrcode
+        $("#qrcode").qrcode($.extend(qrcodeConfig, {
+          text: result.data.address
+
+        }));
+
+
+        $('a.printPage').click(function () {
+          window.print();
+          return false;
+        });
+
+        // เมื่อมีการเปลี่ยนแปลงค่าใน input text และเกิด blur หรือ keypress event
+        /* $("#fromAddress").on("keypress blur", function (e) {
+           if (e.type == 'keypress' && e.keyCode == 13) { // ถ้ามีการกรอกข้อมูลใหม่ และกด Enter
+             $("#qrcode").html("") // ล้างค่า qrcode
+               .qrcode($.extend(qrcodeConfig, {
+                 text: $(this).val()
+               }));
+           } else if (e.type == 'blur') { // ถ้ามีการกรอกข้อมูล แล้ว โฟกัสออกจาก input text
+             $("#qrcode").html("") // ล้างค่า qrcode
+               .qrcode($.extend(qrcodeConfig, {
+                 text: $(this).val()
+               }));
+           }
+         });*/
+      });
+
+    });
+
+  })
+
+
+
+  /*axios({
+        method: 'GET',
+        url: '/getProfileById', //ส่งไปค่านี้
+        headers: {
+          id: e.target.value  // รหัสนักศึกษา
+        }
+      }).then(result => {
+        console.log("getProfileById_Showptofile",result) // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+        $('#receiverName').val(result.data.name)
+        $('#receiverLastName').val(result.data.lastName)
+        $('#receiverLastID').val(result.data.id)
+      })*/
+
+  // axios({
+  //   method: 'GET',
+  //   url: '/getWalletById_FormPSU', //ส่งไปค่านี้
+  //   headers: {
+  //     id: id  // รหัสนักศึกษา
+  //   }
+  // }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+  //   console.log("result_FormPSU", result)
+  //   // $('#fromAddress').val(result.data.address)
+  //   // $('#privateKey').val(result.data.privateKey)
+  //   // $('#showid').val(result.config.headers.id)
+  // })
+
+  /*document.querySelector('#submitSend').addEventListener('submit', e => {
+    e.preventDefault()
+    axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
+      method: 'GET',
+      url: '/send/' + id + '/confirm', // ส่งไปยังค่านี้
+      headers: {
+        fromAddress: $('#fromAddress').val(),
+        toAddress: $('#toAddress').val(),
+        privateKey: $('#privateKey').val(),
+        money: $('#money').val(),
+        TEST: 'test string'
+      }
+    }).then(result => {
+      let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
+      $("#result").attr("href", link)
+      $("#result").text(link)
+      // $("#result").val()
+    }).catch(result => {
+      console.log("errr")
+    })
+  })*/
+</script>
+
+</html>

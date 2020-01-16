@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="./web3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
+        <div class="container">
+        <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
+          <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto my-2 my-lg-0">
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" onclick="gotosendadmin()">Sendadmin</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <form action='/showtime' class="col-6" method="GET">
+    </form>
+
+    <style>
+
+
+table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+    <div class="container">
+    
+        <div class="row">
+            <div class="panel panel-primary filterable">
+                <div class="panel-heading">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                  
+                    <br>
+                    <br>
+                </div>
+        
+    <div class="card">
+        <div class="card-header border-0">
+            <div class="card-body table-responsive p-0">
+                <table class="table table-striped table-valign-middle">
+                    <thead>
+                            <tr>
+                              <th>Student</th>
+                                 <th>PSU</th>
+                                     </tr>
+                                         </thead>
+                                        <tbody id="ex-table" >
+                                                <thead>
+                                    <tr>
+           
+                            </tr>
+                        </thead>          
+                    </tbody>
+                </table>
+            </div>
+            </div>
+    </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        <!-- /.card -->
+
+      
+      </div>
+
+</body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+
+<title>Show data</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!--===============================================================================================-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+
+<!--===============================================================================================-->
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="./web3.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- <script src="./psulogin.js"></script>  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+<script>
+    function gotoCheckBalance() {
+        window.location.href = window.location.href.replace('static', 'balanceadmin', '')
+    }
+
+    function gotoindex() {
+        window.location.href = url.replace('static', 'indexadmin', 'send')
+    }
+
+    function gotosendadmin() {
+        window.location.href = url.replace('static', 'sendadmin', 'send')
+    }
+</script>
+
+
+<script>
+
+
+  // Your web app's Firebase configuration
+
+   /* axios({
+        method: 'GET',
+        // url: '/getWalletById', //???????????
+        url: '/showdata/' + id + '/confirm',
+        //url: '/balance/' + id + '/confirm', // ??????????????
+        headers: {
+            id: id,
+            //result : result,
+        }
+    }).then(result => {
+        //console.log("result_showdata", result.data)
+        JSON.parse(result.data).forEach( function (result) {
+
+            //console.log("result_showdata_id", result.name.GetStaffDetailsResult.string[0])
+            //console.log("result_showdata_address", result.address)
+          //  console.log("result_showdata", result)
+            const data = result.name.GetStaffDetailsResult.string[0] //5935512088 < ==== เฉพาะ ID
+            console.log("data......", data)
+                axios({
+                method: 'POST',
+                url: '/balance_admin/' + id + '/confirm',
+                headers: {
+                    result_test: data,
+                }
+            })
+        })
+    });*/
+
+
+    var url;
+    var id;
+    (() => {
+        url = window.location.href
+        id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
+    })()
+
+    axios({
+    method: 'GET',
+    url: '/getWalletById', //ส่งไปค่านี้
+    headers: {
+      id: id  // รหัสนักศึกษา
+    }
+  }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+    console.log("result_data", result)
+    $('#fromAddress').val(result.data.address)
+    $('#privateKey').val(result.data.privateKey)
+    $('#showid').val(result.config.headers.id)
+  })
+
+   // <!--===============================================================================================-->
+    var firebaseConfig = {
+    apiKey: "AIzaSyDPwR_Tlxe5MODIEPugWCnO_drEh6-4jjw",
+    authDomain: "login-psu-final.firebaseapp.com",
+    databaseURL: "https://login-psu-final.firebaseio.com",
+    projectId: "login-psu-final",
+    storageBucket: "login-psu-final.appspot.com",
+    messagingSenderId: "152285332333",
+    appId: "1:152285332333:web:bc428892887d5004"
+};
+    firebase.initializeApp(firebaseConfig);
+
+   // <!--===============================================================================================-->
+        const database = firebase.database();
+        var leadsRef = database.ref('users');
+        leadsRef.on('value', (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+                var max = 0
+                var childData = childSnapshot.val();
+                 if(childData.balance >= 40  ){
+                    var tr = document.createElement('tr')
+                        tr.innerHTML = `
+                        <td>${childData.name.GetStaffDetailsResult.string[0]}</td>
+                        <td>${childData.balance}</td>
+                    `
+                    $(document).ready(() => { 
+                       document.querySelector('#ex-table').append(tr) //อัพ    
+                     });  
+
+                       $("#ex-table").html("") //ลบ
+                }
+              //  var data = []
+              
+
+
+                       
+                        //console.log("remove data")     
+                        
+                        
+
+
+   // <!--===============================================================================================-->               
+            const data = childData.name.GetStaffDetailsResult.string[0] //5935512088 < ==== เฉพาะ ID
+               // console.log("data......", data)
+                    axios({
+                    method: 'POST',
+                    url: '/balance_admin/' + id + '/confirm',
+                    headers: {
+                        result_test: data,
+                    }
+                })
+            })
+        }) 
+// <!--============================================================================================
+//     $(document).ready( function () {
+//     $('#ex-table').DataTable();
+//     console.log("test")
+// } );
+
+// <!--===============================================================================================-->
+
+
+ // <!--===============================================================================================-->
+        $(document).ready(function(){
+    $('.filterable .btn-filter').click(function(){
+        var $panel = $(this).parents('.filterable'),
+        $filters = $panel.find('.filters input'),
+        $tbody = $panel.find('.table tbody');
+        if ($filters.prop('disabled') == true) {
+            $filters.prop('disabled', false);
+            $filters.first().focus();
+        } else {
+            $filters.val('').prop('disabled', true);
+            $tbody.find('.no-result').remove();
+            $tbody.find('tr').show();
+        }
+    });
+
+    $('.filterable .filters input').keyup(function(e){
+        /* Ignore tab key */
+        var code = e.keyCode || e.which;
+        if (code == '9') return;
+        /* Useful DOM data and selectors */
+        var $input = $(this),
+        inputContent = $input.val().toLowerCase(),
+        $panel = $input.parents('.filterable'),
+        column = $panel.find('.filters th').index($input.parents('th')),
+        $table = $panel.find('.table'),
+        $rows = $table.find('tbody tr');
+
+        var $filteredRows = $rows.filter(function(){
+            var value = $(this).find('td').eq(column).text().toLowerCase();
+            return value.indexOf(inputContent) === -1;
+        });
+     
+        $table.find('tbody .no-result').remove();
+        /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+        $rows.show();
+        $filteredRows.hide();
+        /* Prepend no-result row if all rows are filtered */
+        if ($filteredRows.length === $rows.length) {
+            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No data......</td></tr>'));
+        }
+    });
+});
+
+ // <!--===============================================================================================-->
+ /*  axios({
+        method: 'GET',
+        // url: '/getWalletById', //???????????
+        url: '/showdata_admin/' + id + '/confirm',
+        //url: '/balance/' + id + '/confirm', // ??????????????
+        headers: {
+            id: id,  // ????????????
+        }
+    }).then(result => { // ?????? firebase ????????????????
+        JSON.parse(result.data).forEach(function (result) {
+           // console.log(result)
+            //console.log("1111",result.address)
+            var tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td>${result.name.GetStaffDetailsResult.string[0]}</td>
+                <td>${result.address}</td>
+                <td>${result.balance}</td>
+                <td>PSU</td>
+                <td>
+                    <div class="row">
+                    <button type="button" class="btn btn-info ml-2"
+                        onclick="window.location.href='/user/update?id=${result.address}'">edit</button>
+                    <button type="button" class="btn btn-danger ml-2"
+                        onclick="myClick(${result.address})">delete</button>
+                        </div>
+                </td>
+            `
+            document.querySelector('#ex-table').append(tr)
+        })
+    });*/
+
+       
+        
+  //  var result = [];
+   /* var leadsRef = database.ref('users');
+    leadsRef.on('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            var result = childSnapshot.val();
+            console.log("showdata_admin ===>", result)
+         //   result.push(childData)
+            JSON.parse(result.data).forEach(function (result) {
+            console.log(result)
+            //console.log("1111",result.address)
+            var tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td>${result.name.GetStaffDetailsResult.string[0]}</td>
+                <td>${result.address}</td>
+                <td>${result.balance}</td>
+                <td>PSU</td>
+                <td>
+                    <div class="row">
+                    <button type="button" class="btn btn-info ml-2"
+                        onclick="window.location.href='/user/update?id=${result.address}'">edit</button>
+                    <button type="button" class="btn btn-danger ml-2"
+                        onclick="myClick(${result.address})">delete</button>
+                        </div>
+                </td>
+            `
+            document.querySelector('#ex-table').append(tr)
+        }) // id , address , balance
+        });
+    });*/
+
+   /* axios({
+        method: 'GET',
+        // url: '/getWalletById', //???????????
+        url: '/showdata_admin/' + id + '/confirm',
+        //url: '/balance/' + id + '/confirm', // ??????????????
+        headers: {
+            id: id,  // ????????????
+        }
+    }).then(result => { 
+        // ?????? firebase ????????????????
+  
+    });*/
+
+</script>
+
+
+</html>
