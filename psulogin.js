@@ -145,7 +145,7 @@ router.route('/register')
                 if (snapshot.exists()) { // check ????????????????????????
                     console.log('already exists')
                     // res.send('<script>alert("??????????????????");</script>');
-                    res.redirect('/index/' + user.username)
+                    //res.redirect('/index/' + user.username)
                     return false;
                 } else {
                     let string = []
@@ -159,7 +159,7 @@ router.route('/register')
                         pass: user.password
                     }).then(() => {
                         console.log('create new wallet')
-                        res.redirect('/indexadmin/' + user.username)
+                        res.redirect('/adminlogin')
                         return false;
                     }).catch(e => {
                         console.log(e)
@@ -394,6 +394,11 @@ router.route('/show/:id/confirm')
     .get((req, res) => {
     })
 
+router.route('/camera/:id')
+    .get((req, res) => {
+        res.render('camera.html')
+    })
+
 
 router.route('/balance/:id/confirm')
     .get((req, res) => {
@@ -622,9 +627,9 @@ router.route('/getProfileByIdadmin')
                 //console.log("data", data)
                 res.send(JSON.stringify({
                     // id: data,
-                    name:     data1,
+                    name: data1,
                     lastName: data2,
-                    balance:  data3
+                    balance: data3
                 }))
             } else {
                 res.send(JSON.stringify({

@@ -221,8 +221,13 @@ table {
         var leadsRef = database.ref('users');
         leadsRef.on('value', (snapshot) => {
             snapshot.forEach((childSnapshot) => {
-                var max = 0
+                // var max = 0
+                
                 var childData = childSnapshot.val();
+                // var balance = [childData.balance]
+                // var result = []
+                // result.push(balance[0])
+                console.log("result result",result)
                  if(childData.balance >= 40  ){
                     var tr = document.createElement('tr')
                         tr.innerHTML = `

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Instascan</title>
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <style>
+            #container {
+                margin: 0px auto;
+                width: 500px;
+                height: 375px;
+                border: 10px #333 solid;
+            }
+    
+            #videoElement {
+                width: 500px;
+                height: 375px;
+                background-color: #666;
+            }
+        </style>
+</head>
+
+<body>
+    <video autoplay="true" id="videoElement">
+    </video>
+    <button onclick="stop()">stop</button>
+
+
+
+    <script type="text/javascript">
+
+        var video = document.querySelector("#videoElement");
+        var button = document.querySelector("#videoElement");
+ // ---------- Scan camera -------------------------------------------- //       
+        let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+        scanner.addListener('scan',  (content) => {
+            console.log("Show Qrcode", content);
+        });
+        Instascan.Camera.getCameras().then( (cameras) => {
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                console.error('No cameras found.');
+            }
+        }).catch(function (e) {
+            console.error(e);
+        });
+// ---------- Open camera -------------------------------------------- //
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then( (stream) => {
+                    video.srcObject = stream;
+                    // console.log("Something======", stream);
+                })
+                .catch( (err0r)  => {
+                    console.log("Something went wrong!");
+                });
+        }
+// ---------- Stop camera -------------------------------------------- //
+        function stop(e) { //stop
+            var stream = video.srcObject;
+            var tracks = stream.getTracks();
+
+            for (var i = 0; i < tracks.length; i++) {
+                var track = tracks[i];
+                track.stop();
+            }
+
+            video.srcObject = null;
+        }
+
+    </script>
+</body>
+
+</html>
