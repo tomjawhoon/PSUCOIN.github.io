@@ -7,7 +7,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
     <div class="container">
-      <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
+    <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -40,8 +40,8 @@
           <form id="submitSend" method="GET">
             <br>
             <br>
-
-            <h4 style="color:#FFFFFF">TRANFER</h4>
+            
+            <h4 style="color:#FFFFFF" >TRANFER</h4>
             <hr>
             <!-- <h5>FORM Address</h5> -->
             <div id="containerLeft">
@@ -52,15 +52,16 @@
                   <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
                   <!-- <h5>privateKey</h5> -->
                   <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="80"></input>
-                  <h5 style="color:#FFFFFF">Recipients</h5>
+                  <h5 style="color:#FFFFFF" >Recipients</h5>
                   <h5 style="color:#FFFFFF">(Student ID)</h5>
                   <input type="text" class="form-control" name="toAddress" id="toAddress" size="80"></input><br>
                   <!-- <p>e.g. 5935512042</p> -->
-                  <h5 style="color:#FFFFFF">Money</h5>
+                  <h5 style="color:#FFFFFF" >Money</h5>
                   <input type="number" class="form-control" name="money" id="money" size="80"></input>
                   <br>
-                  <a id="result" style="color:#FFFFFF"></a>
-                  <br> <button type="submit" class="btn btn-primary">ENTER</button>
+                  <a id="result" style="color:#FFFFFF" ></a>
+                  <br>
+                  <button type="submit" class="btn btn-primary">ENTER</button>
                 </div>
               </div>
             </div>
@@ -68,7 +69,7 @@
               <div id="Right">
                 <br>
                 <br>
-                <h5 style="color:#FFFFFF">PROFILE</h5>
+                <h5 style="color:#FFFFFF" >PROFILE</h5>
                 <input id="receiverName" type="text" class="form-control" size="80"></input><br>
                 <input id="receiverLastName" type="text" class="form-control" size="80"></input><br>
                 <input id="receiverLastID" type="text" class="form-control" size="80"></input>
@@ -159,6 +160,20 @@
     $('#showid').val(result.config.headers.id)
   })
 
+
+  // axios({
+  //   method: 'GET',
+  //   url: '/getWalletById_FormPSU', //ส่งไปค่านี้
+  //   headers: {
+  //     id: id  // รหัสนักศึกษา
+  //   }
+  // }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+  //   console.log("result_FormPSU", result)
+  //   // $('#fromAddress').val(result.data.address)
+  //   // $('#privateKey').val(result.data.privateKey)
+  //   // $('#showid').val(result.config.headers.id)
+  // })
+
   document.querySelector('#submitSend').addEventListener('submit', e => {
     e.preventDefault()
     axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
@@ -181,23 +196,7 @@
     })
   })
 
-  document.querySelector('#toAddress').addEventListener('keyup', e => {
-    if (e.target.value) {
-      axios({
-        method: 'GET',
-        url: '/getProfileforbalance', //ส่งไปค่านี้
-        headers: {
-          id: e.target.value,
-          value1: $('#value1').val(), // รหัสนักศึกษา
-        }
-      }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        console.log("testapi_getProfileforbalance", result)
-        $('#value1').val(result)
-      })
-    }
-  })
-
-
+  
 </script>
 
 </html>
