@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
+        <div class="container">
+            <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Home</a>
+                    </li>
+                    <!-- <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Tranfers</a>
+          </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <form id="submitSend" method="GET">
+                        <br>
+                        <br>
+                        <!-- <h4>{{data}}</h4> -->
+                        <h4 style="color:#FFFFFF">TRANFER</h4>
+                        <hr>
+                        <!-- <h5>FORM Address</h5> -->
+                        <div id="containerLeft">
+                            <div class="form-group">
+                                <div id="Left">
+                                    <input type="hidden" class="form-control" name="fromAddress" id="showid"
+                                        size="80"></input><br>
+                                    <input type="hidden" class="form-control" name="fromAddress" id="fromAddress"
+                                        size="80"></input>
+                                    <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
+                                    <!-- <h5>privateKey</h5> -->
+                                    <input type="hidden" class="form-control" name="privateKey" id="privateKey"
+                                        size="80"></input>
+                                    <h5 style="color:#FFFFFF">Recipients</h5>
+                                    <h5 style="color:#FFFFFF">(Student ID)</h5>
+                                    <input type="text" class="form-control" name="toAddress" id="toAddress"
+                                        size="80"></input><br>
+                                    <!-- <p>e.g. 5935512042</p> -->
+                                    <h5 style="color:#FFFFFF">Money</h5>
+                                    <input type="number" class="form-control" name="money" id="money" size="80"></input>
+                                    <br>
+                                    <a id="result" style="color:#FFFFFF"></a>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">ENTER</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="containerRight">
+                            <div id="Right">
+                                <br>
+                                <br>
+                                <h5 style="color:#FFFFFF">PROFILE</h5>
+                                <input id="receiverName" type="text" class="form-control" size="80"></input><br>
+                                <input id="receiverLastName" type="text" class="form-control" size="80"></input><br>
+                                <input id="receiverLastID" type="text" class="form-control" size="80"></input>
+
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+<script src="./web3.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/front/css/tranfer.css">
+
+<!-- <script src="./psulogin.js"></script>  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+<script>
+
+    axios({
+        method: 'GET',
+        url: '/camera/' + id + '/confirm', // ส่งไปยังค่านี้
+    }).then(result => {
+        console.log("Get_Api_camera ", result)
+    }).catch(result => {
+        console.log("errr")
+    })
+
+    // axios.get('/camera1/' + id + '/confirm')
+    //     .then((response) => {
+    //         console.log("response_camera1", response);
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     })
+
+    document.querySelector('#toAddress').addEventListener('keyup', e => {
+        if (e.target.value) {
+            axios({
+                method: 'GET',
+                url: '/getProfileById', //ส่งไปค่านี้
+                headers: {
+                    id: e.target.value  // รหัสนักศึกษา
+                }
+            }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+                $('#receiverName').val(result.data.name)
+                $('#receiverLastName').val(result.data.lastName)
+                $('#receiverLastID').val(result.data.id)
+            })
+        }
+
+    })
+
+    document.querySelector('#toAddress').addEventListener('keyup', e => {
+        if (e.target.value) {
+            axios({
+                method: 'GET',
+                url: '/getProfileforbalance', //ส่งไปค่านี้
+                headers: {
+                    id: e.target.value,
+                    value1: $('#value1').val(), // รหัสนักศึกษา
+                }
+            }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+                console.log("testapi_getProfileforbalance", result)
+                $('#value1').val(result)
+            })
+        }
+    })
+
+    var url;
+    var id;
+    (() => {
+        url = window.location.href
+        id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
+    })()
+
+    function gotoCheckBalance() {
+        // window.location.href = url.replace('send', 'balance')
+        window.location.href = url.replace('send', 'balance', 'index')
+    }
+    function gotoindex() {
+        // window.location.href = url.replace('send', 'balance')
+        window.location.href = url.replace('send', 'index', 'send')
+    }
+
+    // function gotoSendETH() {
+    //   window.location.href = window.location.href.replace('send', 'send', 'index')
+    // }
+
+    axios({
+        method: 'GET',
+        url: '/getWalletById', //ส่งไปค่านี้
+        headers: {
+            id: id  // รหัสนักศึกษา
+        }
+    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+        console.log("result_data", result)
+        $('#fromAddress').val(result.data.address)
+        $('#privateKey').val(result.data.privateKey)
+        $('#showid').val(result.config.headers.id)
+    })
+
+
+
+    // axios({
+    //   method: 'GET',
+    //   url: '/getWalletById_FormPSU', //ส่งไปค่านี้
+    //   headers: {
+    //     id: id  // รหัสนักศึกษา
+    //   }
+    // }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+    //   console.log("result_FormPSU", result)
+    //   // $('#fromAddress').val(result.data.address)
+    //   // $('#privateKey').val(result.data.privateKey)
+    //   // $('#showid').val(result.config.headers.id)
+    // })
+
+    document.querySelector('#submitSend').addEventListener('submit', e => {
+        e.preventDefault()
+        axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
+            method: 'GET',
+            url: '/send/' + id + '/confirm', // ส่งไปยังค่านี้
+            headers: {
+                fromAddress: $('#fromAddress').val(),
+                toAddress: $('#toAddress').val(),
+                privateKey: $('#privateKey').val(),
+                money: $('#money').val(),
+                TEST: 'test string'
+            }
+        }).then(result => {
+            let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
+            $("#result").attr("href", link)
+            $("#result").text(link)
+            // $("#result").val()
+        }).catch(result => {
+            console.log("errr")
+        })
+    })
+
+
+</script>
+
+</html>

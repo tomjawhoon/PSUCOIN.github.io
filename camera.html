@@ -7,28 +7,29 @@
     <style>
         #container {
             margin: 0px auto;
-            width: 500px;
+            width: 360px;
             height: 375px;
-            border: 10px #333 solid;
+            border: 10px rgb(219, 0, 0) solid;
         }
 
         #videoElement {
-            width: 500px;
-            height: 375px;
-            background-color: #666;
+            width: 360px;
+            height: 370px;
+            background-color: rgb(255, 255, 255);
         }
     </style>
 </head>
 
 <body>
-
-    <video autoplay="true" id="videoElement">
-    </video>
-    <form id="submitSend" method="GET">
-        <button onclick="stop()">stop</button>
+    <div id="container">
+        <video autoplay="true" id="videoElement">
+        </video>
+    </div>
+ 
+    <form id="submitSend" method="POST" action="/sendQrcode/:id">
         <br>
         <p>Toaddress Wallet</p>
-        <input id="show" type="text" class="form-control" size="80"></input>
+        <input id="show" name="show" type="text" class="form-control" size="80"></input>
         <p>Money</p>
         <input type="number" class="form-control" name="money" id="money" size="80"></input>
         <input type="hidden" class="form-control" name="fromAddress" id="showid" size="80"></input><br>
@@ -37,9 +38,9 @@
         <!-- <h5>privateKey</h5> -->
         <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="80"></input>
         <br> <button type="submit" class="btn btn-primary">ENTER</button>
+        <button onclick="stop()">stop</button>
 
-
-        <a id="result" ></a>
+        <a id="result"></a>
     </form>
 
 
@@ -79,6 +80,23 @@
             $('#privateKey').val(result.data.privateKey)
             $('#showid').val(result.config.headers.id)
         })
+
+
+
+
+
+        axios({
+            method: 'GET',
+            url: '/getProfileforbalance', //ส่งไปค่านี้
+            headers: {
+                id: id  // รหัสนักศึกษา
+            }
+        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+            console.log("result_data_balance", result.data)
+            // $('#fromAddress').val(result.data.address)
+            // $('#privateKey').val(result.data.privateKey)
+            // $('#showid').val(result.config.headers.id)
+        })
         // ---------- Scan camera -------------------------------------------- //       
         let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
         scanner.addListener('scan', (content) => {
@@ -90,7 +108,7 @@
                     method: 'POST',
                     url: '/ShowTranferQrcode/' + id + '/confirm', // ส่งไปยังค่านี้
                     headers: {
-                        id : id,
+                        id: id,
                         fromAddress: $('#fromAddress').val(),
                         toAddress: $('#toAddress').val(),
                         privateKey: $('#privateKey').val(),
@@ -111,30 +129,42 @@
                 method: 'GET',
                 url: '/camera/' + id + '/confirm', // ส่งไปยังค่านี้
                 headers: {
-                    // fromAddress: $('#fromAddress').val(),
-                    // toAddress: $('#toAddress').val(),
-                    // privateKey: $('#privateKey').val(),
-                    // money: $('#money').val(),
                     content: content
                 }
-
             },
-                $('#show').val(content)
+                $('#show').val(content),
+                $('#submitSend').submit()
             ).then(result => {
-                // value1: $('#text').val(content)
-                // $('#text').val(content)
-                console.log("Good Get Api ")
-                // value1: $('#text').val(content)
-                // let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
-                // $("#result").attr("href", link)
-                // $("#result").text(link)
-                // // $("#result").val()
+                console.log("Good Get Api ", result.data)
+               // window.location.href = url.replace('camera', 'sendQrcode')
+                //  }
             }).catch(result => {
                 console.log("errr")
             })
 
+            // axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
+            //     method: 'GET',
+            //     url: '/sendQrcode/' + id + '/confirm', // ส่งไปยังค่านี้
+            //     headers: {
+            //         content: content
+            //     }
+            // },
+            //     $('#show').val(content),
+            //     $('#show').submit()
+            // ).then(result => {
+            //     console.log("Good Get Api ", result.data)
+            //     window.location.href = url.replace('camera', 'sendQrcode')
+            //     //  }
+            // }).catch(result => {
+            //     console.log("errr")
+            // })
+
+
+
+
 
         });
+
         Instascan.Camera.getCameras().then((cameras) => {
             if (cameras.length > 0) {
                 scanner.start(cameras[0]);
