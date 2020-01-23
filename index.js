@@ -135,6 +135,18 @@ router.route('/register')
         console.log("user.name", user.name)
         console.log("user.surname", user.surname)
 
+        // const newObject = {
+        //     address: data.address,
+        //     balance: data.balance,
+        //     name: {
+        //       GetStaffDetailsResult: {
+        //         string: [data.id, data.name, data.surname, data.xxx]
+        //       }
+        //     }
+        //   }
+          
+        //   database.ref('users').child(user.username).set(newObject)
+
         if (user.username != "") { //เข้ารหัสผิดดดดด ๆ 
             //เข้ารหัสถูกกกกกกก แล้วจร้า
             var account = new Web3EthAccounts('ws://kovan.infura.io/v3/37dd526435b74012b996e147cda1c261');
@@ -148,22 +160,40 @@ router.route('/register')
                     //res.redirect('/index/' + user.username)
                     return false;
                 } else {
-                    let string = []
+                    // let string = []
                     console.log('bad bad')
-                    database.ref('users').child(user.username).set({
+                    const newObject = {
                         address: user_eth.address,
                         privateKey: user_eth.privateKey.substring(2).toUpperCase(),
                         balance: "",
-                        name: user.username,
-                        surname: user.surname,
-                        pass: user.password
-                    }).then(() => {
+                        pass: user.password,
+                        name: {
+                          GetStaffDetailsResult: {
+                            string: ["", user.username, user.surname,"60"]
+                          }
+                        }
+                        
+                      }
+                    database.ref('users').child(user.username).set(newObject).then(() => {
                         console.log('create new wallet')
-                        res.redirect('/adminlogin')
-                        return false;
-                    }).catch(e => {
-                        console.log(e)
+                       res.redirect('/adminlogin')
+                         return false;
                     })
+
+                    // database.ref('users').child(user.username).set({
+                    //     address: user_eth.address,
+                    //     privateKey: user_eth.privateKey.substring(2).toUpperCase(),
+                    //     balance: "",
+                    //     name: user.username,
+                    //     surname: user.surname,
+                    //     pass: user.password
+                    // }).then(() => {
+                    //     console.log('create new wallet')
+                    //     res.redirect('/adminlogin')
+                    //     return false;
+                    // }).catch(e => {
+                    //     console.log(e)
+                    // })
                 }
             })
 
@@ -413,42 +443,64 @@ router.route('/camera/:id')
         res.render('camera.html')
     })
 
-app.get('/camera/:id/confirm', (req, res) => {
-    const show = req.headers.content;
-    console.log(JSON.stringify(show))
-    res.json(JSON.stringify(show))
-})
+router.route('/camera/:id/confirm')
+    .get((req, res) => {
+        const show = req.headers.content;
+        console.log(JSON.stringify(show))
+        res.json(JSON.stringify(show))
+    })
 
-app.get('/sendQrcode/:id/', (req, res) => {
-    let data = req.body;
-    console.log('this is sendQrcode', { data })
-    // res.render('sendQrcode.html')
-    res.render('sendQrcode.html', { data: 'somethings' })
-})
+router.route('/sendQrcode/:id')
+    .get((req, res) => {
+        res.render('sendQrcode.html')
+    })
+
+router.route('/sendQrcode/:id/confirm')
+    .get((req, res) => {
+        let data = req.body;
+        console.log('this is sendQrcode', { data })
+        // res.render('sendQrcode.html')
+        // res.render('sendQrcode.html', { data: 'somethings' })
+    })
+
+// app.get('/camera/:id/confirm', (req, res) => {
+//     const show = req.headers.content;
+//     console.log(JSON.stringify(show))
+//     res.json(JSON.stringify(show))
+// })
+
+// app.get('/sendQrcode/:id/', (req, res) => {
+//     let data = req.body;
+//     console.log('this is sendQrcode', { data })
+//     // res.render('sendQrcode.html')
+//     res.render('sendQrcode.html', { data: 'somethings' })
+// })
 
 // router.route('/sendQrcode/:id/confirm')
 
-app.post('/sendQrcode/:id/confirm', (req, res) => {
-    const show = req.body;
-    console.log(JSON.stringify(show))
-    res.json(JSON.stringify(show))
-})
+// app.post('/sendQrcode/:id/confirm', (req, res) => {
+//     const show = req.body;
+//     console.log(JSON.stringify(show))
+//     res.json(JSON.stringify(show))
+// })
 
-// router.route('/TranferQrcode/:id')
-//     .get((req, res) => {
-//         res.render('TranferQrcode.html')
-//     })
 
-// router.route('/TranferQrcode/:id/confirm')
-//     .get((req, res) => {
-//         // const show = req.headers;
-//         // console.log("show Qrcode ",show)
-//     })
 
-// router.route('/ShowTranferQrcode/:id')
-//     .get((req, res) => {
-//         res.render('ShowTranferQrcode.html')
-//     })
+router.route('/TranferQrcode/:id')
+    .get((req, res) => {
+        res.render('TranferQrcode.html')
+    })
+
+router.route('/TranferQrcode/:id/confirm')
+    .get((req, res) => {
+        // const show = req.headers;
+        // console.log("show Qrcode ",show)
+    })
+
+router.route('/ShowTranferQrcode/:id')
+    .get((req, res) => {
+        res.render('ShowTranferQrcode.html')
+    })
 
 router.route('/ShowTranferQrcode/:id/confirm')
     .post((req, res) => {

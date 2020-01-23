@@ -21,12 +21,14 @@
 </head>
 
 <body>
+    
     <div id="container">
         <video autoplay="true" id="videoElement">
         </video>
     </div>
- 
-    <form id="submitSend" method="POST" action="/sendQrcode/:id">
+
+    <!-- <form id="submitSend" method="POST" action="/sendQrcode/:id"> -->
+    <form id="submitSend" method="POST" action="/sendQrcode">
         <br>
         <p>Toaddress Wallet</p>
         <input id="show" name="show" type="text" class="form-control" size="80"></input>
@@ -136,7 +138,7 @@
                 $('#submitSend').submit()
             ).then(result => {
                 console.log("Good Get Api ", result.data)
-               // window.location.href = url.replace('camera', 'sendQrcode')
+                //window.location.href = url.replace('camera', 'sendQrcode')
                 //  }
             }).catch(result => {
                 console.log("errr")
