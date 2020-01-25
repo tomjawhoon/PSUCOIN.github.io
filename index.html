@@ -57,7 +57,7 @@
             <a class="nav-link js-scroll-trigger" href="#about" onclick="gotoShowdata()">Showdata</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            <a class="nav-link js-scroll-trigger" onclick="gotoCalendar()">Calendar</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#services">Tranfers</a>
@@ -98,11 +98,11 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
-          <h2 class="text-white mt-0">About</h2>
+          <h2 class="text-white mt-0">Calendar</h2>
           <hr class="divider light my-4">
           <p class="text-white-50 mb-4">     
           </p>
-          <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
+          <a class="btn btn-light btn-xl js-scroll-trigger" href="#services" onclick="gotoCalendar()" >Calendar</a>
         </div>
       </div>
     </div>
@@ -340,6 +340,10 @@
 
       function gotoStatic() {
         window.location.href = url.replace('index', 'static', 'balance')
+      }
+
+      function gotoCalendar() {
+        window.location.href = url.replace('index', 'Calendar', 'balance')
       }
       // axios({
       //   method: 'GET',

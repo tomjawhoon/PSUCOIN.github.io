@@ -144,7 +144,7 @@ router.route('/register')
         //       }
         //     }
         //   }
-          
+
         //   database.ref('users').child(user.username).set(newObject)
 
         if (user.username != "") { //เข้ารหัสผิดดดดด ๆ 
@@ -168,16 +168,16 @@ router.route('/register')
                         balance: "",
                         pass: user.password,
                         name: {
-                          GetStaffDetailsResult: {
-                            string: ["", user.username, user.surname,"60"]
-                          }
+                            GetStaffDetailsResult: {
+                                string: ["", user.username, user.surname, "60"]
+                            }
                         }
-                        
-                      }
+
+                    }
                     database.ref('users').child(user.username).set(newObject).then(() => {
                         console.log('create new wallet')
-                       res.redirect('/adminlogin')
-                         return false;
+                        res.redirect('/adminlogin')
+                        return false;
                     })
 
                     // database.ref('users').child(user.username).set({
@@ -483,6 +483,17 @@ router.route('/sendQrcode/:id/confirm')
 //     console.log(JSON.stringify(show))
 //     res.json(JSON.stringify(show))
 // })
+
+router.route('/Calendar/:id')
+    .get((req, res) => {
+        res.render('Calendar.html')
+    })
+
+router.route('/event1/:id')
+    .get((req, res) => {
+        res.render('event1.html')
+    })
+
 
 
 
