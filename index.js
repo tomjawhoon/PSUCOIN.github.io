@@ -494,6 +494,11 @@ router.route('/event1/:id')
         res.render('event1.html')
     })
 
+router.route('/event2/:id')
+    .get((req, res) => {
+        res.render('event2.html')
+    })
+
 
 
 
