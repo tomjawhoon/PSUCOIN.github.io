@@ -11,6 +11,7 @@ const web3 = new Web3();
 const EthereumTx = require('ethereumjs-tx').Transaction;
 const Buffer = require('safer-buffer').Buffer;
 const cors = require('cors');
+require('tls').DEFAULT_MIN_VERSION = 'TLSv1'
 const _ = require("lodash")
 // <!--===============================================================================================-->
 app.use(cors());
