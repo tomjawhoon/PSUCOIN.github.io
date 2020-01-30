@@ -232,7 +232,6 @@
             loadingMessage.hidden = true;
             canvasElement.hidden = false;
             outputContainer.hidden = false;
-
             canvasElement.height = video.videoHeight;
             canvasElement.width = video.videoWidth;
             canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
@@ -292,6 +291,16 @@
                 })
 
                 if (code.data != '') {
+                    $(() => {
+                        $(document).ready(() => {
+                            console.log("Show")
+                            $("#canvas").hide(3000);
+                            //$("#submitSend").hide();
+                            // $("#output").show("slow");
+                            // $('#canvas').delay(5000).fadeOut('slow');
+                            // $("#submitSend").show('normal');  // slow, normal, fast
+                        });
+                    });
                     // $(document).ready(function () {
 
 
@@ -315,16 +324,7 @@
                     //     $('#some-id').trigger('click');
                     // });
 
-                    $(() => {
-                        $(document).ready(() => {
-                            console.log("Show")
-                            $("#canvas").hide(3000);
-                            //$("#submitSend").hide();
-                            // $("#output").show("slow");
-                            // $('#canvas').delay(5000).fadeOut('slow');
-                            // $("#submitSend").show('normal');  // slow, normal, fast
-                        });
-                    });
+           
 
 
                     // $("button").click(function () {
