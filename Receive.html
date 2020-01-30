@@ -200,8 +200,7 @@
 </body>
 <br>
 <br>
-<br>
-<br>
+
 
 
 <footer class="bg-info py-3">
@@ -222,21 +221,26 @@
     <script src="/front/js/jquery.qrcode.min.js"></script>
 <script>
     function gotoSendETH() {
-        window.location.href = window.location.href.replace('balance', 'send', 'index')
+        window.location.href = window.location.href.replace('Receive', 'send', 'index')
     }
 
     function gotoindex() {
-        // window.location.href = url.replace('send', 'balance')
-        window.location.href = url.replace('balance', 'index', 'send')
+        // window.location.href = url.replace('send', 'Receive')
+        window.location.href = url.replace('Receive', 'index', 'send')
     }
 
     function gotoPayment() {
-        // window.location.href = url.replace('send', 'balance')
-        window.location.href = url.replace('balance', 'camera', 'send')
+        // window.location.href = url.replace('send', 'Receive')
+        window.location.href = url.replace('Receive', 'camera', 'send')
+    }
+
+    function gotoCheckBalance() {
+        // window.location.href = url.replace('send', 'Receive')
+        window.location.href = url.replace('Receive', 'balance', 'send')
     }
 
 
-
+    // gotoCheckBalance
 
 </script>
 <script>
