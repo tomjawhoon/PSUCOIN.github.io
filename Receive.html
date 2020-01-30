@@ -31,7 +31,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 1000px;
+        width: px;
         height: auto;
         border: black;
         background: linear-gradient(to bottom right, rgb(188, 189, 230), #082299);
@@ -166,23 +166,17 @@
                 <img class="Logo" src="https://dorm.psu.ac.th/system/files/images/psu-logo.png" alt="">
                 <div class="textCoin">
                     <div class="coinandsymbol"><span class="numcoin">
-                            <a id="result" style="color:#FFFFFF"></a></span><span class="symbolcoin">PSU Coin</span>
-
+                    
+                       
+                              <div class="card-img-top" id="qrcode" alt="Card image" style="width:100%"></div>
+                         
+                        
                     </div>
-
-                    <p class="fontwallet">Wallet:<span class="publicKey"> <a id="fromAddress"
-                                class="symbolcoin"></a></span>
-                        <ion-icon name="copy" class="copy" >
-
-
-                        </ion-icon>
-                    </p>
-
                 </div>
                 <div class="boxbutton">
                     <button type="button" class="btn btn-light btn">
                         <div class="betweenput">
-                            <ion-icon name="send"></ion-icon><span  onclick="gotoSendETH()" >SEND</span>
+                            <ion-icon name="send"></ion-icon><span onclick="gotoSendETH()">SEND</span>
                         </div>
                     </button>
                     <button type="button" class="btn btn-light btn">
@@ -193,7 +187,7 @@
                     <button type="button" class="btn btn-light btn">
                         <div class="betweenput">
                             <ion-icon name="folder-open"></ion-icon>
-                            </ion-icon><span onclick="gotoReceive()" >Receive</span>
+                            </ion-icon><span>Profile</span>
                         </div>
                     </button>
 
@@ -225,6 +219,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
+    <script src="/front/js/jquery.qrcode.min.js"></script>
 <script>
     function gotoSendETH() {
         window.location.href = window.location.href.replace('balance', 'send', 'index')
@@ -240,12 +235,7 @@
         window.location.href = url.replace('balance', 'camera', 'send')
     }
 
-    function gotoReceive() {
-        // window.location.href = url.replace('send', 'balance')
-        window.location.href = url.replace('balance', 'Receive', 'send')
-    }
 
-  
 
 
 </script>
@@ -256,6 +246,8 @@
         url = window.location.href
         id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
     })()
+
+
 
 
     axios({
@@ -275,17 +267,68 @@
         method: 'GET',
         url: '/getWalletById', //ส่งไปค่านี้
         headers: {
-            id: id // รหัสนักศึกษา
+            id: id  // รหัสนักศึกษา
         }
     }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        console.log("result_formaxios_getWalletById", result)
-        console.log("result_formaxios_getWalletById", result.config.headers.id)
-        $("#fromAddress").attr("href", result.data.address)
-        $("#fromAddress").text(result.data.address)
+        console.log("result_data", result)
+        console.log("result_address", result.data.address)
+        console.log("result_privateKey", result.data.privateKey)
+        console.log("result_id", result.config.headers.id)
+
+        //var test = result.data.address;
+
+
+        $('#fromAddress').val(result.data.address)
+        // $('#privateKey').val(result.data.privateKey)
         $('#showid').val(result.config.headers.id)
-    }).catch(result => {
-        console.log("errr")
+
+        $(document).ready(function () {
+            $("a").click(function () {
+                $('#privateKey').val(result.data.privateKey)
+            });
+
+            $(function () {
+                // กำหนดการตั้งค่ารูปแบบ qrcode ที่ต้องการเรียกใช้
+                var qrcodeConfig = {
+                    width: 200,
+                    height: 200,
+                    correctLevel: 0
+                }
+                // สมมติค่าเริ่มเต้น ที่ตอ้งการแสดงเป็น qrcode
+                $("#qrcode").qrcode($.extend(qrcodeConfig, {
+                    text: result.data.address
+
+                }));
+
+
+                $('a.printPage').click(function () {
+                    window.print();
+                    return false;
+                });
+
+                // เมื่อมีการเปลี่ยนแปลงค่าใน input text และเกิด blur หรือ keypress event
+                /* $("#fromAddress").on("keypress blur", function (e) {
+                   if (e.type == 'keypress' && e.keyCode == 13) { // ถ้ามีการกรอกข้อมูลใหม่ และกด Enter
+                     $("#qrcode").html("") // ล้างค่า qrcode
+                       .qrcode($.extend(qrcodeConfig, {
+                         text: $(this).val()
+                       }));
+                   } else if (e.type == 'blur') { // ถ้ามีการกรอกข้อมูล แล้ว โฟกัสออกจาก input text
+                     $("#qrcode").html("") // ล้างค่า qrcode
+                       .qrcode($.extend(qrcodeConfig, {
+                         text: $(this).val()
+                       }));
+                   }
+                 });*/
+            });
+
+        });
+
     })
+
+
+
+
     document.querySelector('#submitSend').addEventListener('submit', e => {
         e.preventDefault()
         axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs

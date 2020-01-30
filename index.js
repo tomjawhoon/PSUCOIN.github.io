@@ -508,10 +508,16 @@ router.route('/TranferQrcode/:id')
         res.render('TranferQrcode.html')
     })
 
-    router.route('/test/:id')
+router.route('/Receive/:id')
+    .get((req, res) => {
+        res.render('Receive.html')
+    })
+
+router.route('/test/:id')
     .get((req, res) => {
         res.render('test.html')
     })
+
 
 router.route('/TranferQrcode/:id/confirm')
     .get((req, res) => {
