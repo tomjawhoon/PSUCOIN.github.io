@@ -6,12 +6,10 @@
     <script src="https://cozmo.github.io/jsQR/jsQR.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
     <style>
- 
-
         #canvas {
             width: 50%;
         }
-  
+
 
         @import url('https://fonts.googleapis.com/css?family=Francois+One&display=swap');
 
@@ -144,80 +142,84 @@
 
 
     <div class="d-flex justify-content-center h-100">
-    <div class="containerout">
-        <div class="Boxcontainer">
-            <img class="Logo" src="https://dorm.psu.ac.th/system/files/images/psu-logo.png" alt="">
-            <div class="textCoin">
-                <div class="coinandsymbol"><span class="numcoin">
-                        <a id="result" style="color:#FFFFFF"></a></span><span class="symbolcoin">PSU Coin</span>
+        <div class="containerout">
+            <div class="Boxcontainer">
+                <img class="Logo" src="https://dorm.psu.ac.th/system/files/images/psu-logo.png" alt="">
+                <div class="textCoin">
+                    <div class="coinandsymbol"><span class="numcoin">
+                            <a id="result" style="color:#FFFFFF"></a></span><span class="symbolcoin">PSU Coin</span>
 
 
-                </div>
+                    </div>
 
-               
 
-  
+
+
                     <div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam
                         enabled)</div>
 
                     <canvas id="canvas" hidden></canvas>
+                    <form id="submitSend" method="POST" action="/sendQrcode">
+                        <div id="output">
+                            <center>
+                                <div id="outputMessage"></div>
+                                <div hidden><b>Data:</b> <span id="outputData"></span></div>
+                                <br>
+                                <!-- <p>Toaddress Wallet</p> -->
+                                <input id="show" name="show" type="text" class="form-control" size="80" placeholder="Toaddress Wallet"></input>
+                                <p></p>
+                                <input type="number" class="form-control" name="money" id="money" size="80" placeholder="Money"></input>
+                                <input type="hidden" class="form-control" name="fromAddress" id="showid"
+                                    size="80"></input><br>
+                                <input type="hidden" class="form-control" name="fromAddress" id="fromAddress"
+                                    size="80"></input>
+                                <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
+                                <!-- <h5>privateKey</h5> -->
+                                <input type="hidden" class="form-control" name="privateKey" id="privateKey"
+                                    size="80"></input>
+                                <br> <button id="btnEnter" type="submit" class="btn btn-primary">ENTER</button>
+                                <!-- <button onclick="stop()">stop</button> -->
+
+                                <a id="result"></a>
+                            </center>
+                        </div>
+
+                    </form>
                     <div id="output">
-                            <div id="outputMessage"></div>
-                            <div hidden><b>Data:</b> <span id="outputData"></span></div>
-                            
+                        <div id="outputMessage"></div>
+                        <div hidden><b>Data:</b> <span id="outputData"></span></div>
+
                     </div>
 
-            </div>
+                </div>
 
-            <div class="boxbutton">
-                <button type="button" class="btn btn-light btn">
-                    <div class="betweenput">
-                        <ion-icon name="send"></ion-icon><span onclick="gotoSendETH()">SEND</span>
-                    </div>
-                </button>
-                <button type="button" class="btn btn-light btn">
-                    <div class="betweenput">
-                        <ion-icon name="qr-scanner"></ion-icon><span onclick="gotoPayment()">QRcode</span>
-                    </div>
-                </button>
-                <button type="button" class="btn btn-light btn">
-                    <div class="betweenput">
-                        <ion-icon name="folder-open"></ion-icon>
-                        </ion-icon><span onclick="gotoReceive()">Receive</span>
-                    </div>
-                </button>
+                <div class="boxbutton">
+                    <button type="button" class="btn btn-light btn">
+                        <div class="betweenput">
+                            <ion-icon name="send"></ion-icon><span onclick="gotoSendETH()">SEND</span>
+                        </div>
+                    </button>
+                    <button type="button" class="btn btn-light btn">
+                        <div class="betweenput">
+                            <ion-icon name="qr-scanner"></ion-icon><span onclick="gotoPayment()">QRcode</span>
+                        </div>
+                    </button>
+                    <button type="button" class="btn btn-light btn">
+                        <div class="betweenput">
+                            <ion-icon name="folder-open"></ion-icon>
+                            </ion-icon><span onclick="gotoReceive()">Receive</span>
+                        </div>
+                    </button>
 
 
+                </div>
             </div>
         </div>
-    </div>
 
     </div>
 
-    <form id="submitSend" method="POST" action="/sendQrcode">
-        <div id="output">
-            <center>
-                <div id="outputMessage"></div>
-                <div hidden><b>Data:</b> <span id="outputData"></span></div>
-                <br>
-                <p>Toaddress Wallet</p>
-                <input id="show" name="show" type="text" class="form-control" size="80"></input>
-                <p>Money</p>
-                <input type="number" class="form-control" name="money" id="money" size="80"></input>
-                <input type="hidden" class="form-control" name="fromAddress" id="showid" size="80"></input><br>
-                <input type="hidden" class="form-control" name="fromAddress" id="fromAddress" size="80"></input>
-                <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
-                <!-- <h5>privateKey</h5> -->
-                <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="80"></input>
-                <br> <button type="submit" class="btn btn-primary">ENTER</button>
-                <!-- <button onclick="stop()">stop</button> -->
 
-                <a id="result"></a>
-            </center>
-        </div>
-
-    </form>
-</div>
+    </div>
     <!-- p id="id1"> Hello world</p>
     <p id="id2"> Hello world</p>
     <p id="id3"> Hello world</p>
@@ -240,6 +242,16 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
 <script>
+
+    // ======  manage input PSU Coin section ====
+    $("#btnEnter").hide();
+    $("#show").hide();
+    $("#money").hide();
+    //    $("#btnEnter").hide();
+
+
+
+
     var video = document.createElement("video");
     var canvasElement = document.getElementById("canvas");
     var canvas = canvasElement.getContext("2d");
@@ -396,6 +408,9 @@
                         $(document).ready(() => {
                             console.log("Show")
                             $("#canvas").hide(3000);
+                            $("#btnEnter").show(2000);
+                            $("#show").show(2000);
+                            $("#money").show(2000);
                             //$("#submitSend").hide();
                             // $("#output").show("slow");
                             // $('#canvas').delay(5000).fadeOut('slow');
@@ -455,6 +470,7 @@
             }
         }
         requestAnimationFrame(tick);
+
 
 
 
