@@ -112,7 +112,7 @@ router.route('/loginadmin')
                 if (snapshot.exists()) { // check ????????????????????????
                     console.log('already exists')
                     // res.send('<script>alert("??????????????????");</script>');
-                    res.redirect('/indexadmin/' + user.username)
+                    res.redirect('/index/' + user.username)
                     return false;
                 }
             })
@@ -173,11 +173,10 @@ router.route('/register')
                                 string: ["", user.username, user.surname, "60"]
                             }
                         }
-
                     }
                     database.ref('users').child(user.username).set(newObject).then(() => {
                         console.log('create new wallet')
-                        res.redirect('/adminlogin')
+                        res.redirect('/index')
                         return false;
                     })
 

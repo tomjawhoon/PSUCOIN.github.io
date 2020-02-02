@@ -1,86 +1,406 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>jQuery Progress Bars</title>
-    <script src="http://code.jquery.com/jquery-1.4.4.min.js" type="text/javascript"></script>
-    <script type="text/javascript" charset="utf-8">
-      $(document).ready(function(){
-        $(".progress-bar").each(function(){
-          var percentage = parseInt($(this).html());
-          if(percentage > 0){
-            $(this).animate({'width':''+percentage+'px'}, 800);
-          }else{
-            $(this).css({'color':'black', 'background':'none'}, 800);
-          }
-        })
-      })
-    </script>
-    <style type="text/css" media="screen">
-      *{ font-family: "Lucida Grande";}
-      .progress-bar-holder{
-        width: 125px;
-        border: 1px solid #ccc;
-        padding: 0.2em;
-        margin: 1em 0.2em;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
+
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --body_gradient_left: rgb(0, 20, 85);
+      --body_gradient_right: rgb(40, 101, 194);
+      --form_bg: #ffffff;
+      --input_bg: #E5E5E5;
+      --input_hover: #eaeaea;
+      --submit_bg: rgb(15, 44, 122);
+      --submit_hover: #071b8b;
+      --icon_color: #6b6b6b;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      /* make the body full height*/
+      height: 100vh;
+      /* set our custom font */
+      font-family: 'Roboto',
+        sans-serif;
+      /* create a linear gradient*/
+      background-image: linear-gradient(to right, var(--body_gradient_left), var(--body_gradient_right));
+      display: flex;
+    }
+
+    #form_wrapper {
+      width: 1000px;
+      height: 700px;
+      /* this will help us center it*/
+      margin: auto;
+      background-color: var(--form_bg);
+      border-radius: 50px;
+      /* make it a grid container*/
+      display: grid;
+      /* with two columns of same width*/
+      grid-template-columns: 1fr 1fr;
+      /* with a small gap in between them*/
+      grid-gap: 5vw;
+      /* add some padding around */
+      padding: 5vh 15px;
+    }
+
+    #form_left {
+      /* center the image */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #form_left img {
+      width: 290px;
+      height: 350px;
+    }
+
+    #form_right {
+      display: grid;
+      /* single column layout */
+      grid-template-columns: 1fr;
+      /* have some gap in between elements*/
+      grid-gap: 20px;
+      padding: 10% 5%;
+    }
+
+    .input_container {
+      background-color: var(--input_bg);
+      /* vertically align icon and text inside the div*/
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+    }
+
+    .input_container:hover {
+      background-color: var(--input_hover);
+    }
+
+    .input_container,
+    #input_submit {
+      height: 60px;
+      /* make the borders more round */
+      border-radius: 30px;
+      width: 100%;
+    }
+
+    .input_field {
+      /* customize the input tag with lighter font and some padding*/
+      color: var(--icon_color);
+      background-color: inherit;
+      width: 90%;
+      border: none;
+      font-size: 1.3rem;
+      font-weight: 400;
+      padding-left: 30px;
+    }
+
+    .input_field:hover,
+    .input_field:focus {
+      /* remove the outline */
+      outline: none;
+    }
+
+    #input_submit {
+      /* submit button has a different color and different padding */
+      background-color: var(--submit_bg);
+      padding-left: 0;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+    }
+
+    #input_submit:hover {
+      background-color: var(--submit_hover);
+      /* simple color transition on hover */
+      transition: background-color,
+        1s;
+      cursor: pointer;
+    }
+
+    h1,
+    span {
+      text-align: center;
+    }
+
+    /* shift it a bit lower */
+    #create_account {
+      display: block;
+      position: relative;
+      top: 30px;
+    }
+
+    a {
+      /* remove default underline */
+      text-decoration: none;
+      color: var(--submit_bg);
+      font-weight: bold;
+    }
+
+    a:hover {
+      color: var(--submit_hover);
+    }
+
+    i {
+      color: var(--icon_color);
+    }
+
+    /* make it responsive */
+    @media screen and (max-width:768px) {
+
+      /* make the layout  a single column and add some margin to the wrapper */
+      #form_wrapper {
+        grid-template-columns: 1fr;
+        margin-left: 10px;
+        margin-right: 10px;
       }
 
-      .progress-bar{
-        height: 30px;
-        color: #fff;
-        font-weight: bold;
-        text-align: right;
-        background: #63A25C;
-        width: 0px;
-        padding: 0.8em;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
+      /* on small screen we don't display the image */
+      #form_left {
+        display: none;
       }
-      
-      a{ color: red; }
-      a:hover{ color: green;}
-      
-    </style>
-  </head>
-  <body>
-    <h1>jQuery Progress Bars</h1>
+    }
 
-    <div class='progress-bar-holder'>
-      <div class='progress-bar'>
-        0%
-      </div>
-    </div>
+    body {font-family: Arial, Helvetica, sans-serif;}
 
-    <div class='progress-bar-holder'>
-      <div class='progress-bar'>
-        25%
-      </div>
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #121fd8;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 10px 0 10px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+
+
+  <div id="form_wrapper">
+    <div id="form_left">
+      <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/PSU-logo-Original.png"
+        alt="computer icon">
     </div>
+   
+      <div id="form_right">
+        <h1>PSU Admin</h1>
+        <div class="input_container">
+          <i class="fas fa-envelope"></i>
+          <input placeholder="username" type="username" name="username" id="username" class='input_field'>
+
+
+
+        </div>
+        <div class="input_container">
+          <i class="fas fa-lock"></i>
+          <input placeholder="password" type="password" name="password" id="password" class='input_field'>
+
+
+
+        </div>
+        <input type="submit" value="Login" id='input_submit' class='input_field ' onclick="document.getElementById('id01').style.display='block'" style="width:auto;">
+ 
+
+    <div id="id01" class="modal">
+      <form class="modal-content animate" action="/action_page.php" method="post">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+          <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="Avatar" class="avatar">
+          <p>LOGIN SUCCESS</p>
+        </div>
     
-    <div class='progress-bar-holder'>
-      <div class='progress-bar'>
-        50%
-      </div>
+        <div class="container">
+         
+        </div>
+    
+        <div class="container" style="background-color:#f1f1f1">
+          <center>
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn" href="/index">Success</button></center>
+    
+        </div>
+      </form>
+
     </div>
-    
-    <div class='progress-bar-holder'>
-      <div class='progress-bar'>
-        75%
+    <span>Login <a href="/adminlogin">Admin</a></span>
+    <span id='create_account'>
+      <a href="/Register">Create your account ➡ </a>
+    </span>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <center>
+      <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
+      <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
+          style="font-size: 24px; vertical-align: super; margin-left: 5px;">
+          Sponsored by
+          <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="Smiley face"
+            width="80" height="30">
       </div>
-    </div>
-    
-    <div class='progress-bar-holder'>
-      <div class='progress-bar'>
-        100%
-      </div>
-    </div>
-    
-    <a href="">Replay</a>
-    
-  </body>
+    </center>
+  </div>
+  </div>
+
+
+
+
+
+</body>
+
+<script>
+  // Get the modal
+  var modal = document.getElementById('id01');
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  var url;
+  var id;
+  (() => {
+    url = window.location.href
+    id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
+  })()
+  function gotoadminlogin() {
+    //window.location.href = url.replace('adminlogin')
+    window.location.href = window.location.href.replace('PSULOGIN', 'adminlogin')
+  }
+
+  function gotoregister() {
+    //window.location.href = url.replace('adminlogin')
+    window.location.href = window.location.href.replace('PSULOGIN', 'Register')
+  }
+
+
+</script>
+
 </html>
