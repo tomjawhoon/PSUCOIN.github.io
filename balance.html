@@ -60,6 +60,11 @@
         padding: 4%;
     }
 
+    .refresh {
+        color: cornsilk;
+        font-size: 15px;
+    }
+
     .boxbutton {
         display: flex;
         width: 90%;
@@ -155,24 +160,43 @@
     <br>
     <br>
     <br>
-    <br>
-    <br>
+
+
     <!-- <div class="container"> -->
     <div class="d-flex justify-content-center h-100">
-
-
         <div class="containerout">
             <div class="Boxcontainer">
                 <img class="Logo" src="https://dorm.psu.ac.th/system/files/images/psu-logo.png" alt="">
                 <div class="textCoin">
-                    <div class="coinandsymbol"><span class="numcoin">
-                            <a id="result" style="color:#FFFFFF"></a></span><span class="symbolcoin">PSU Coin</span>
+                    <form id="submitSend" method="GET">
+                        <div class="coinandsymbol"><span class="numcoin">
+                                <a id="result" style="color:#FFFFFF"></a></span><span class="symbolcoin">PSU Coin</span>
+                            <input type="hidden" class="form-control" name="fromAddress1" id="fromAddress1"
+                                size="80"></input>
+                            <br>
 
-                    </div>
+                            <!--  -->
+                            <!-- <div class="refresh"> -->
+                            <button type="submit">...
+                                <!-- <span class="glyphicon glyphicon-star" aria-hidden="true">Refresh </span> -->
+                            </button>
+                            <!-- </div> -->
+                            <!-- <button type="button" class="btn btn-default" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                            </button> -->
 
+                            <!-- <button><span type="submit" class="icon is-small"><i class="mdi mdi-refresh"></i></span>
+                                Click to refresh
+                            </button> -->
+                            <!-- <ion-icon  type="submit" name="copy" class="copy">
+
+
+                                    </ion-icon> -->
+                        </div>
+                    </form>
                     <p class="fontwallet">Wallet:<span class="publicKey"> <a id="fromAddress"
                                 class="symbolcoin"></a></span>
-                        <ion-icon name="copy" class="copy" >
+                        <ion-icon name="copy" class="copy">
 
 
                         </ion-icon>
@@ -182,7 +206,7 @@
                 <div class="boxbutton">
                     <button type="button" class="btn btn-light btn">
                         <div class="betweenput">
-                            <ion-icon name="send"></ion-icon><span  onclick="gotoSendETH()" >SEND</span>
+                            <ion-icon name="send"></ion-icon><span onclick="gotoSendETH()">SEND</span>
                         </div>
                     </button>
                     <button type="button" class="btn btn-light btn">
@@ -193,7 +217,7 @@
                     <button type="button" class="btn btn-light btn">
                         <div class="betweenput">
                             <ion-icon name="folder-open"></ion-icon>
-                            </ion-icon><span onclick="gotoReceive()" >Receive</span>
+                            </ion-icon><span onclick="gotoReceive()">Receive</span>
                         </div>
                     </button>
 
@@ -205,14 +229,23 @@
     </div>
 </body>
 <br>
-<br>
 
 
-<footer class="bg-info py-3">
-    <div class="container">
-        <div class="small text-center text-dark">Copyright &copy; Masterofnodejs</div>
+
+
+
+<center>
+    <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
+    <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
+            style="font-size: 24px; vertical-align: super; margin-left: 10px;">
+            Sponsored by
+            <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="Smiley face"
+                width="80" height="52"> Best Rate Digital Assets |
+            <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>.
+        </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
     </div>
-</footer>
+</center>
+
 
 <script src="./web3.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -243,7 +276,7 @@
         window.location.href = url.replace('balance', 'Receive', 'send')
     }
 
-  
+
 
 
 </script>
@@ -254,7 +287,6 @@
         url = window.location.href
         id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
     })()
-
 
     axios({
         method: 'GET',
@@ -278,8 +310,10 @@
     }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
         console.log("result_formaxios_getWalletById", result)
         console.log("result_formaxios_getWalletById", result.config.headers.id)
+        $("#fromAddress1").val(result.data.address)
         $("#fromAddress").attr("href", result.data.address)
         $("#fromAddress").text(result.data.address)
+
         $('#showid').val(result.config.headers.id)
     }).catch(result => {
         console.log("errr")
@@ -290,7 +324,7 @@
             method: 'GET',
             url: '/balance/' + id + '/confirm', // ส่งไปยังค่านี้
             headers: {
-                fromAddress: $('#fromAddress').val(),
+                fromAddress: $('#fromAddress1').val(),
             }
         }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
             console.log("Retuen_value_balance", result)

@@ -2,63 +2,139 @@
 
 <head>
     <meta charset="utf-8">
-    <title>jsQR Demo</title>
+    <title>Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://cozmo.github.io/jsQR/jsQR.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <style>
-        body {
-            font-family: 'Ropa Sans', sans-serif;
-            color: #333;
-            max-width: 640px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        #githubLink {
-            position: absolute;
-            right: 0;
-            top: 12px;
-            color: #2D99FF;
-        }
-
-        h1 {
-            margin: 10px 0;
-            font-size: 40px;
-        }
-
-        #loadingMessage {
-            text-align: center;
-            padding: 40px;
-            background-color: #eee;
-        }
-
         #canvas {
-            width: 100%;
+            width: 50%;
         }
 
-        #output {
-            margin-top: 20px;
-            background: #eee;
-            padding: 10px;
-            padding-bottom: 0;
-        }
 
-        #output div {
-            padding-bottom: 10px;
-            word-wrap: break-word;
-        }
+        @import url('https://fonts.googleapis.com/css?family=Francois+One&display=swap');
 
-        #noQRFound {
-            text-align: center;
-        }
+        body {
+        margin: 8px;
+        font-family: 'Francois One', sans-serif;
+    }
+
+    .containerout {
+        display: flex;
+        min-width: 400px;
+        width: 100%;
+        height: auto;
+        justify-content: center;
+
+
+
+    }
+
+    .Boxcontainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 1000px;
+        height: 650px;
+        border: black;
+        background: linear-gradient(to bottom right, rgb(188, 189, 230), #082299);
+        padding: 2% 0 2% 0;
+        box-shadow: 0 0 10px 0 rgba(236, 236, 236, 0.8);
+
+
+
+    }
+
+    .Logo {
+        width: 20%;
+        height: auto;
+        margin: auto;
+        padding: 4% 0 2% 0;
+
+    }
+
+    .textCoin {
+        display: flex;
+        flex-direction: column;
+        color: cornsilk;
+        font-size: 15px;
+        align-items: center;
+        justify-content: center;
+        padding: 4%;
+    }
+
+    .boxbutton {
+        display: flex;
+        width: 90%;
+        align-items: center;
+        justify-content: space-around;
+        margin: 10px;
+        padding: 3%;
+
+    }
+
+    .btn {
+        display: inline-block;
+        font-size: 20px;
+        width: 30%;
+    }
+
+    .betweenput {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .betweenput span {
+        margin-left: 3%;
+    }
+
+    .numcoin {
+        font-size: 50px;
+        font-weight: 200;
+    }
+
+    .symbolcoin {
+
+        margin-left: 8px;
+        font-size: 15px;
+        font-weight: 200;
+        color: rgb(248, 217, 43);
+
+    }
+
+    .copy {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+    }
+
+    .fontwallet {
+        font-size: 20px;
+        color: rgb(250, 250, 250);
+    }
+
+    .publicKey {
+        font-size: 15px;
+        margin: 5px;
+        color: rgb(248, 217, 43);
+    }
+
+    .coinandsymbol {
+        padding: 0 0 4% 0;
+    }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
         <div class="container">
-            <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52"> <a
-                class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
+            <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -70,8 +146,8 @@
                         <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Home</a>
                     </li>
                     <!-- <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Tranfers</a>
-          </li> -->
+                <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Tranfers</a>
+              </li> -->
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
                     </li>
@@ -82,6 +158,7 @@
             </div>
         </div>
     </nav>
+
     <br>
     <br>
     <br>
@@ -89,33 +166,90 @@
     <!-- <h1>PSUCOIN QRcode</h1> -->
     <!-- <a id="githubLink" href="https://github.com/cozmo/jsQR">View documentation on Github</a> -->
     <!-- <p>Pure JavaScript QR code decoding library.</p> -->
-    <div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
+    <!-- <div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
 
-    <canvas id="canvas" hidden></canvas>
+    <canvas id="canvas" hidden></canvas> -->
 
-    <form id="submitSend" method="POST" action="/sendQrcode">
-        <div id="output">
-            <center>
-                <div id="outputMessage"></div>
-                <div hidden><b>Data:</b> <span id="outputData"></span></div>
-                <br>
-                <p>Toaddress Wallet</p>
-                <input id="show" name="show" type="text" class="form-control" size="80"></input>
-                <p>Money</p>
-                <input type="number" class="form-control" name="money" id="money" size="80"></input>
-                <input type="hidden" class="form-control" name="fromAddress" id="showid" size="80"></input><br>
-                <input type="hidden" class="form-control" name="fromAddress" id="fromAddress" size="80"></input>
-                <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
-                <!-- <h5>privateKey</h5> -->
-                <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="80"></input>
-                <br> <button type="submit" class="btn btn-primary">ENTER</button>
-                <!-- <button onclick="stop()">stop</button> -->
 
-                <a id="result"></a>
-            </center>
+    <div class="d-flex justify-content-center h-100">
+        <div class="containerout">
+            <div class="Boxcontainer">
+                <img class="Logo" src="https://dorm.psu.ac.th/system/files/images/psu-logo.png" alt="">
+                <div class="textCoin">
+                    <div class="coinandsymbol"><span class="numcoin">
+                            <a id="result" style="color:#FFFFFF"></a></span><span class="symbolcoin">PSU Coin</span>
+
+
+                    </div>
+
+
+
+
+                    <div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam
+                        enabled)</div>
+
+                    <canvas id="canvas" hidden></canvas>
+                    <form id="submitSend" method="POST" action="/sendQrcode">
+                        <div id="output">
+                            <center>
+                                <div id="outputMessage"></div>
+                                <div hidden><b>Data:</b> <span id="outputData"></span></div>
+                                <br>
+                                <!-- <p>Toaddress Wallet</p> -->
+                                <input id="show" name="show" type="text" class="form-control" size="80" placeholder="Toaddress Wallet"></input>
+                                <p></p>
+                                <input type="number" class="form-control" name="money" id="money" size="80" placeholder="Money"></input>
+                                <input type="hidden" class="form-control" name="fromAddress" id="showid"
+                                    size="80"></input><br>
+                                <input type="hidden" class="form-control" name="fromAddress" id="fromAddress"
+                                    size="80"></input>
+                                <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
+                                <!-- <h5>privateKey</h5> -->
+                                <input type="hidden" class="form-control" name="privateKey" id="privateKey"
+                                    size="80"></input>
+                                <br> <button id="btnEnter" type="submit" class="btn btn-primary">ENTER</button>
+                                <!-- <button onclick="stop()">stop</button> -->
+
+                                <a id="result"></a>
+                            </center>
+                        </div>
+
+                    </form>
+                    <div id="output">
+                        <div id="outputMessage"></div>
+                        <div hidden><b>Data:</b> <span id="outputData"></span></div>
+
+                    </div>
+
+                </div>
+<!-- 
+                <div class="boxbutton">
+                    <button type="button" class="btn btn-light btn">
+                        <div class="betweenput">
+                            <ion-icon name="send"></ion-icon><span onclick="gotoSendETH()">SEND</span>
+                        </div>
+                    </button>
+                    <button type="button" class="btn btn-light btn">
+                        <div class="betweenput">
+                            <ion-icon name="qr-scanner"></ion-icon><span onclick="gotoPayment()">QRcode</span>
+                        </div>
+                    </button>
+                    <button type="button" class="btn btn-light btn">
+                        <div class="betweenput">
+                            <ion-icon name="folder-open"></ion-icon>
+                            </ion-icon><span onclick="gotoReceive()">Receive</span>
+                        </div>
+                    </button>
+
+
+                </div> -->
+            </div>
         </div>
 
-    </form>
+    </div>
+
+
+    </div>
 
     <!-- p id="id1"> Hello world</p>
     <p id="id2"> Hello world</p>
@@ -134,11 +268,24 @@
     </div> -->
 
 </body>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
 <script>
+
+    // ======  manage input PSU Coin section ====
+    $("#btnEnter").hide();
+    $("#show").hide();
+    $("#money").hide();
+    //    $("#btnEnter").hide();
+
+
+
+
     var video = document.createElement("video");
     var canvasElement = document.getElementById("canvas");
     var canvas = canvasElement.getContext("2d");
@@ -295,6 +442,9 @@
                         $(document).ready(() => {
                             console.log("Show")
                             $("#canvas").hide(3000);
+                            $("#btnEnter").show(2000);
+                            $("#show").show(2000);
+                            $("#money").show(2000);
                             //$("#submitSend").hide();
                             // $("#output").show("slow");
                             // $('#canvas').delay(5000).fadeOut('slow');
@@ -324,7 +474,7 @@
                     //     $('#some-id').trigger('click');
                     // });
 
-           
+
 
 
                     // $("button").click(function () {
@@ -354,6 +504,7 @@
             }
         }
         requestAnimationFrame(tick);
+
 
 
 
