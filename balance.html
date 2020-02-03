@@ -464,6 +464,7 @@
 
 </script>
 <script>
+      
 
     var modal = document.getElementById('id01');
 
@@ -473,6 +474,7 @@
             modal.style.display = "none";
         }
     }
+    
     var url;
     var id;
     (() => {
@@ -519,6 +521,14 @@
                 fromAddress: $('#fromAddress1').val(),
             }
         }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+            if (result != '') {
+                    $(() => {
+                        $(document).ready(() => {
+                            console.log("Show === result === Modal")
+                            $("#id01").hide();
+                        });
+                    });
+                }
             console.log("Retuen_value_balance", result)
             console.log("test_send => ", result.data)
             // $('#fromAddress').val(result.data.address)
