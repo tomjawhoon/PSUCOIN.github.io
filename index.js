@@ -176,7 +176,7 @@ router.route('/register')
                     }
                     database.ref('users').child(user.username).set(newObject).then(() => {
                         console.log('create new wallet')
-                        res.redirect('/index')
+                        res.redirect('/index/' + user.username)
                         return false;
                     })
 
