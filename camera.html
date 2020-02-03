@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Payment</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://cozmo.github.io/jsQR/jsQR.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
@@ -17,116 +17,223 @@
         @import url('https://fonts.googleapis.com/css?family=Francois+One&display=swap');
 
         body {
-        margin: 8px;
-        font-family: 'Francois One', sans-serif;
-    }
+            margin: 8px;
+            font-family: 'Francois One', sans-serif;
+        }
 
-    .containerout {
-        display: flex;
-        min-width: 400px;
-        width: 100%;
-        height: auto;
-        justify-content: center;
-
-
-
-    }
-
-    .Boxcontainer {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 1000px;
-        height: 650px;
-        border: black;
-        background: linear-gradient(to bottom right, rgb(188, 189, 230), #082299);
-        padding: 2% 0 2% 0;
-        box-shadow: 0 0 10px 0 rgba(236, 236, 236, 0.8);
+        .containerout {
+            display: flex;
+            min-width: 400px;
+            width: 100%;
+            height: auto;
+            justify-content: center;
 
 
 
-    }
+        }
 
-    .Logo {
-        width: 20%;
-        height: auto;
-        margin: auto;
-        padding: 4% 0 2% 0;
+        .Boxcontainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 1000px;
+            height: 650px;
+            border: black;
+            background: linear-gradient(to bottom right, rgb(188, 189, 230), #082299);
+            padding: 2% 0 2% 0;
+            box-shadow: 0 0 10px 0 rgba(236, 236, 236, 0.8);
 
-    }
 
-    .textCoin {
-        display: flex;
-        flex-direction: column;
-        color: cornsilk;
-        font-size: 15px;
-        align-items: center;
-        justify-content: center;
-        padding: 4%;
-    }
 
-    .boxbutton {
-        display: flex;
-        width: 90%;
-        align-items: center;
-        justify-content: space-around;
-        margin: 10px;
-        padding: 3%;
+        }
 
-    }
+        .Logo {
+            width: 20%;
+            height: auto;
+            margin: auto;
+            padding: 4% 0 2% 0;
 
-    .btn {
-        display: inline-block;
-        font-size: 20px;
-        width: 30%;
-    }
+        }
 
-    .betweenput {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        .textCoin {
+            display: flex;
+            flex-direction: column;
+            color: cornsilk;
+            font-size: 15px;
+            align-items: center;
+            justify-content: center;
+            padding: 4%;
+        }
 
-    }
+        .boxbutton {
+            display: flex;
+            width: 90%;
+            align-items: center;
+            justify-content: space-around;
+            margin: 10px;
+            padding: 3%;
 
-    .betweenput span {
-        margin-left: 3%;
-    }
+        }
 
-    .numcoin {
-        font-size: 50px;
-        font-weight: 200;
-    }
+        .btn {
+            display: inline-block;
+            font-size: 20px;
+            width: 30%;
+        }
 
-    .symbolcoin {
+        .betweenput {
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-        margin-left: 8px;
-        font-size: 15px;
-        font-weight: 200;
-        color: rgb(248, 217, 43);
+        }
 
-    }
+        .betweenput span {
+            margin-left: 3%;
+        }
 
-    .copy {
-        width: 25px;
-        height: 25px;
-        cursor: pointer;
-    }
+        .numcoin {
+            font-size: 50px;
+            font-weight: 200;
+        }
 
-    .fontwallet {
-        font-size: 20px;
-        color: rgb(250, 250, 250);
-    }
+        .symbolcoin {
 
-    .publicKey {
-        font-size: 15px;
-        margin: 5px;
-        color: rgb(248, 217, 43);
-    }
+            margin-left: 8px;
+            font-size: 15px;
+            font-weight: 200;
+            color: rgb(248, 217, 43);
 
-    .coinandsymbol {
-        padding: 0 0 4% 0;
-    }
+        }
+
+        .copy {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .fontwallet {
+            font-size: 20px;
+            color: rgb(250, 250, 250);
+        }
+
+        .publicKey {
+            font-size: 15px;
+            margin: 5px;
+            color: rgb(248, 217, 43);
+        }
+
+        .coinandsymbol {
+            padding: 0 0 4% 0;
+        }
+    </style>
+
+    <style type="text/css">
+        @keyframes ldio-2fzcezdt162 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .ldio-2fzcezdt162 div {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 20px solid #5b9ce1;
+            border-top-color: transparent;
+            border-radius: 50%;
+        }
+
+        .ldio-2fzcezdt162 div {
+            animation: ldio-2fzcezdt162 1s linear infinite;
+            top: 100px;
+            left: 100px
+        }
+
+        .loadingio-spinner-rolling-n2856siz85m {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            overflow: hidden;
+
+        }
+
+        .ldio-2fzcezdt162 {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform: translateZ(0) scale(1);
+            backface-visibility: hidden;
+            transform-origin: 0 0;
+            /* see note above */
+        }
+
+        .ldio-2fzcezdt162 div {
+            box-sizing: content-box;
+        }
+
+        /*************************************************************************************************************/
+        .imgcontainer {
+            text-align: center;
+            margin: 10px 0 10px 0;
+            position: relative;
+        }
+
+        img.avatar {
+            width: 10%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            /* background-color: #fefefe; */
+            margin: 5% auto 15% auto;
+            /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%;
+            /* Could be more or less, depending on screen size */
+        }
+
+        /*************************************************************************************************************
+  
+    /* generated by https://loading.io/ */
     </style>
 </head>
 
@@ -196,9 +303,11 @@
                                 <div hidden><b>Data:</b> <span id="outputData"></span></div>
                                 <br>
                                 <!-- <p>Toaddress Wallet</p> -->
-                                <input id="show" name="show" type="text" class="form-control" size="80" placeholder="Toaddress Wallet"></input>
+                                <input id="show" name="show" type="text" class="form-control" size="80"
+                                    placeholder="Toaddress Wallet"></input>
                                 <p></p>
-                                <input type="number" class="form-control" name="money" id="money" size="80" placeholder="Money"></input>
+                                <input type="number" class="form-control" name="money" id="money" size="80"
+                                    placeholder="Money"></input>
                                 <input type="hidden" class="form-control" name="fromAddress" id="showid"
                                     size="80"></input><br>
                                 <input type="hidden" class="form-control" name="fromAddress" id="fromAddress"
@@ -207,13 +316,38 @@
                                 <!-- <h5>privateKey</h5> -->
                                 <input type="hidden" class="form-control" name="privateKey" id="privateKey"
                                     size="80"></input>
-                                <br> <button id="btnEnter" type="submit" class="btn btn-primary">ENTER</button>
+                                <br> <button id="btnEnter" type="submit" class="btn btn-primary"
+                                    onclick="document.getElementById('id01').style.display='block'"
+                                    style="width:auto;">ENTER</button>
                                 <!-- <button onclick="stop()">stop</button> -->
                                 <a id="result"></a>
                             </center>
                         </div>
 
                     </form>
+                    <div id="id01" class="modal">
+                        <form action="/action_page.php" method="post">
+                            <div class="imgcontainer">
+                                <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                                    title="Close Modal">&times;</span>
+                                <div class="loadingio-spinner-rolling-n2856siz85m">
+                                    <div class="ldio-2fzcezdt162">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <p style="color:#FFFFFF">Loading .....</p>
+                            </div>
+
+                            <div class="container">
+
+                            </div>
+
+                            <!-- <div class="container" style="background-color:#f1f1f1"> -->
+                            <center>
+                                <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn"
+                            >Success</button></center> -->
+
+                    </div>
                     <div id="output">
                         <div id="outputMessage"></div>
                         <div hidden><b>Data:</b> <span id="outputData"></span></div>
@@ -221,7 +355,7 @@
                     </div>
 
                 </div>
-<!-- 
+                <!-- 
                 <div class="boxbutton">
                     <button type="button" class="btn btn-light btn">
                         <div class="betweenput">
@@ -275,6 +409,15 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
 <script>
+
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
     // ======  manage input PSU Coin section ====
     $("#btnEnter").hide();
@@ -409,9 +552,18 @@
                             content: code.data, //toaddress wallet
                         }
                     }).then(result => {
-                        let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
-                        $("#result").attr("href", link)
-                        $("#result").text(link)
+                        if (result != '') {
+                            $(() => {
+                                $(document).ready(() => {
+                                    console.log("Show === result === Modal")
+                                    $("#id01").hide();
+                                });
+                                let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
+                                $("#result").attr("href", link)
+                                $("#result").text(link)
+                            });
+     // $("#result").val()
+                        }
                         // $('.alert')
                         // $("#result").val()
                     }).catch(result => {
