@@ -128,7 +128,6 @@
             padding: 0 0 4% 0;
         }
     </style>
-
     <style type="text/css">
         @keyframes ldio-2fzcezdt162 {
             0% {
@@ -144,7 +143,7 @@
             position: absolute;
             width: 120px;
             height: 120px;
-            border: 20px solid #5b9ce1;
+            border: 20px solid #1dd60c;
             border-top-color: transparent;
             border-radius: 50%;
         }
@@ -265,17 +264,12 @@
             </div>
         </div>
     </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <!-- <h1>PSUCOIN QRcode</h1> -->
-    <!-- <a id="githubLink" href="https://github.com/cozmo/jsQR">View documentation on Github</a> -->
-    <!-- <p>Pure JavaScript QR code decoding library.</p> -->
-    <!-- <div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
-
-    <canvas id="canvas" hidden></canvas> -->
 
 
     <div class="d-flex justify-content-center h-100">
@@ -308,8 +302,13 @@
                                 <p></p>
                                 <input type="number" class="form-control" name="money" id="money" size="80"
                                     placeholder="Money"></input>
-                                <input type="hidden" class="form-control" name="fromAddress" id="showid"
+
+                                <!-- <input type="number" class="form-control" name="money1" id="money1" size="80"
+                                    placeholder="Money"></input> -->
+
+                                <input type="hidden" class="form-control" name="showid" id="showid"
                                     size="80"></input><br>
+
                                 <input type="hidden" class="form-control" name="fromAddress" id="fromAddress"
                                     size="80"></input>
                                 <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
@@ -320,11 +319,13 @@
                                     onclick="document.getElementById('id01').style.display='block'"
                                     style="width:auto;">ENTER</button>
                                 <!-- <button onclick="stop()">stop</button> -->
-                                <a id="result"></a>
+                                <!-- <a id="result"></a> -->
                             </center>
                         </div>
 
                     </form>
+
+
                     <div id="id01" class="modal">
                         <form action="/action_page.php" method="post">
                             <div class="imgcontainer">
@@ -380,25 +381,7 @@
         </div>
 
     </div>
-
-
     </div>
-
-    <!-- p id="id1"> Hello world</p>
-    <p id="id2"> Hello world</p>
-    <p id="id3"> Hello world</p>
-    <p id="id4"> Hello world</p>
-    <div> DIV Area </div>
-    <div id="d1"> DIV Area </div> -->
-    <!-- <button id="b1"> Show/Hide </button>
-    <button id="b2"> Toggle </button> -->
-    <!-- <button>Show it</button>
-    <p style="display: none">Hello 2</p> -->
-
-    <!-- <div id="output" hidden>
-        <div id="outputMessage">No QR code detected.</div>
-        <div text><b>Data:</b> <span id="outputData"></span></div>
-    </div> -->
 
 </body>
 
@@ -423,6 +406,9 @@
     $("#btnEnter").hide();
     $("#show").hide();
     $("#money").hide();
+    // $("#money1").hide();
+
+
     //    $("#btnEnter").hide();
 
 
@@ -557,15 +543,10 @@
                                 $(document).ready(() => {
                                     console.log("Show === result === Modal")
                                     $("#id01").hide();
+                                    window.location.href = url.replace('camera', 'balance', 'send')
                                 });
-                                let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
-                                $("#result").attr("href", link)
-                                $("#result").text(link)
                             });
-     // $("#result").val()
                         }
-                        // $('.alert')
-                        // $("#result").val()
                     }).catch(result => {
                         console.log("errr_send")
                     })
@@ -596,57 +577,13 @@
                             $("#btnEnter").show(2000);
                             $("#show").show(2000);
                             $("#money").show(2000);
-                            //$("#submitSend").hide();
-                            // $("#output").show("slow");
-                            // $('#canvas').delay(5000).fadeOut('slow');
-                            // $("#submitSend").show('normal');  // slow, normal, fast
+                            // $("#money1").show(2000);
                         });
                     });
-                    // $(document).ready(function () {
-
-
-
-                    //     // $('input[type=radio]').change(function () {
-                    //         if ($('#canvas').is(':checked')) {
-                    //             $("#canvas").hide(3000);
-                    //             // $('##output').show();
-                    //         }
-
-                    //         // if ($('#Payment2').is(':checked')) {
-                    //         //     $('#PaymentContainer2').show();
-                    //         // } else {
-                    //         //     $('#PaymentContainer2').hide();
-                    //         // }
-                    //     // });
-                    // });
-                    // $("#canvas").prop("checked", true).change();
-
-                    // $(document).ready( ()=> {
-                    //     $('#some-id').trigger('click');
-                    // });
-
-
-
-
-                    // $("button").click(function () {
-                    //     $("p").show("slow");
-                    // });
-
 
                 }
 
 
-                // $( () => {
-                //     $("#b2").click( () => {
-                //         $("#id4").toggle('slow',  () => {
-                //             var test = $(this).css('display');
-                //             if (test == 'none')
-                //                 alert('hide');
-                //             else
-                //                 alert('show')
-                //         })
-                //     });
-                // });
 
                 console.log("QRcode 555555 ====== >", outputData)
             } else {

@@ -82,6 +82,60 @@
         justify-content: center;
 
     }
+    /*************************************************************************************************************/
+    .imgcontainer {
+        text-align: center;
+        margin: 10px 0 10px 0;
+        position: relative;
+    }
+
+    img.avatar {
+        width: 10%;
+        border-radius: 50%;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        /* background-color: #fefefe; */
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%;
+        /* Could be more or less, depending on screen size */
+    }
+/*************************************************************************************************************/
 
     .betweenput span {
         margin-left: 3%;
@@ -155,7 +209,7 @@
     <br>
     <br>
     <br>
-
+    <br>
     <!-- <div class="container"> -->
     <div class="d-flex justify-content-center h-100">
 
@@ -186,7 +240,7 @@
                     <button type="button" class="btn btn-light btn">
                         <div class="betweenput">
                             <ion-icon name="folder-open"></ion-icon>
-                            </ion-icon><span>Profile</span>
+                            </ion-icon><span onclick="gotoCheckBalance()" >Balance</span>
                         </div>
                     </button>
 
@@ -209,8 +263,8 @@
         <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
                 style="font-size: 24px; vertical-align: super; margin-left: 10px;">
                 Sponsored by
-                <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="Smiley face" width="80" height="52"> Best Rate Digital Assets |
-                <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>.
+        <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="Smiley face" width="80" height="52"> 
+                <!-- <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>. -->
             </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
     </div>
     </center>

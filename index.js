@@ -136,17 +136,6 @@ router.route('/register')
         console.log("user.name", user.name)
         console.log("user.surname", user.surname)
 
-        // const newObject = {
-        //     address: data.address,
-        //     balance: data.balance,
-        //     name: {
-        //       GetStaffDetailsResult: {
-        //         string: [data.id, data.name, data.surname, data.xxx]
-        //       }
-        //     }
-        //   }
-
-        //   database.ref('users').child(user.username).set(newObject)
 
         if (user.username != "") { //เข้ารหัสผิดดดดด ๆ 
             //เข้ารหัสถูกกกกกกก แล้วจร้า
@@ -170,7 +159,7 @@ router.route('/register')
                         pass: user.password,
                         name: {
                             GetStaffDetailsResult: {
-                                string: ["", user.username, user.surname, "60"]
+                                string: [user.username, user.username, user.surname, "60"]
                             }
                         }
                     }
