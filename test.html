@@ -1,357 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <style>
-    :root {
-      --body_gradient_left: rgb(0, 20, 85);
-      --body_gradient_right: rgb(40, 101, 194);
-      --form_bg: #ffffff;
-      --input_bg: #E5E5E5;
-      --input_hover: #eaeaea;
-      --submit_bg: rgb(15, 44, 122);
-      --submit_hover: #071b8b;
-      --icon_color: #6b6b6b;
-    }
-
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      /* make the body full height*/
-      height: 100vh;
-      /* set our custom font */
-      font-family: 'Roboto',
-        sans-serif;
-      /* create a linear gradient*/
-      background-image: linear-gradient(to right, var(--body_gradient_left), var(--body_gradient_right));
-      display: flex;
-    }
-
-    #form_wrapper {
-      width: 1000px;
-      height: 700px;
-      /* this will help us center it*/
-      margin: auto;
-      background-color: var(--form_bg);
-      border-radius: 50px;
-      /* make it a grid container*/
-      display: grid;
-      /* with two columns of same width*/
-      grid-template-columns: 1fr 1fr;
-      /* with a small gap in between them*/
-      grid-gap: 5vw;
-      /* add some padding around */
-      padding: 5vh 15px;
-    }
-
-    #form_left {
-      /* center the image */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #form_left img {
-      width: 370px;
-      height: 350px;
-    }
-
-    #form_right {
-      display: grid;
-      /* single column layout */
-      grid-template-columns: 1fr;
-      /* have some gap in between elements*/
-      grid-gap: 20px;
-      padding: 10% 5%;
-    }
-
-    .input_container {
-      background-color: var(--input_bg);
-      /* vertically align icon and text inside the div*/
-      display: flex;
-      align-items: center;
-      padding-left: 20px;
-    }
-
-    .input_container:hover {
-      background-color: var(--input_hover);
-    }
-
-    .input_container,
-    #input_submit {
-      height: 60px;
-      /* make the borders more round */
-      border-radius: 30px;
-      width: 100%;
-    }
-
-    .input_field {
-      /* customize the input tag with lighter font and some padding*/
-      color: var(--icon_color);
-      background-color: inherit;
-      width: 90%;
-      border: none;
-      font-size: 1.3rem;
-      font-weight: 400;
-      padding-left: 30px;
-    }
-
-    .input_field:hover,
-    .input_field:focus {
-      /* remove the outline */
-      outline: none;
-    }
-
-    #input_submit {
-      /* submit button has a different color and different padding */
-      background-color: var(--submit_bg);
-      padding-left: 0;
-      font-weight: bold;
-      color: white;
-      text-transform: uppercase;
-    }
-
-    #input_submit:hover {
-      background-color: var(--submit_hover);
-      /* simple color transition on hover */
-      transition: background-color,
-        1s;
-      cursor: pointer;
-    }
-
-    h1,
-    span {
-      text-align: center;
-    }
-
-    /* shift it a bit lower */
-    #create_account {
-      display: block;
-      position: relative;
-      top: 30px;
-    }
-
-    a {
-      /* remove default underline */
-      text-decoration: none;
-      color: var(--submit_bg);
-      font-weight: bold;
-    }
-
-    a:hover {
-      color: var(--submit_hover);
-    }
-
-    i {
-      color: var(--icon_color);
-    }
-
-    /* make it responsive */
-    @media screen and (max-width:768px) {
-
-      /* make the layout  a single column and add some margin to the wrapper */
-      #form_wrapper {
-        grid-template-columns: 1fr;
-        margin-left: 10px;
-        margin-right: 10px;
-      }
-
-      /* on small screen we don't display the image */
-      #form_left {
-        display: none;
-      }
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    /* Full-width input fields */
-    input[type=text],
-    input[type=password] {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-
-    /* Set a style for all buttons */
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    button:hover {
-      opacity: 0.8;
-    }
-
-    /* Extra styles for the cancel button */
-    .cancelbtn {
-      width: auto;
-      padding: 10px 18px;
-      background-color: #121fd8;
-    }
-
-    /* Center the image and position the close button */
-    .imgcontainer {
-      text-align: center;
-      margin: 10px 0 10px 0;
-      position: relative;
-    }
-
-    img.avatar {
-      /* width: 40%; */
-      border-radius: 50%;
-    }
-
-    .container {
-      padding: 16px;
-    }
-
-    span.psw {
-      float: right;
-      padding-top: 16px;
-    }
-
-    /* The Modal (background) */
-    .modal {
-      display: none;
-      /* Hidden by default */
-      position: fixed;
-      /* Stay in place */
-      z-index: 1;
-      /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%;
-      /* Full width */
-      height: 100%;
-      /* Full height */
-      overflow: auto;
-      /* Enable scroll if needed */
-      background-color: rgb(0, 0, 0);
-      /* Fallback color */
-      background-color: rgba(0, 0, 0, 0.4);
-      /* Black w/ opacity */
-      padding-top: 60px;
-    }
-
-    /* Modal Content/Box */
-    .modal-content {
-      background-color: #fefefe;
-      margin: 5% auto 15% auto;
-      /* 5% from the top, 15% from the bottom and centered */
-      border: 1px solid #888;
-      width: 80%;
-      /* Could be more or less, depending on screen size */
-    }
-
-    /* The Close Button (x) */
-    .close {
-      position: absolute;
-      right: 25px;
-      top: 0;
-      color: #000;
-      font-size: 35px;
-      font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: red;
-      cursor: pointer;
-    }
-
-    /* Add Zoom Animation */
-    .animate {
-      -webkit-animation: animatezoom 0.6s;
-      animation: animatezoom 0.6s
-    }
-
-    @-webkit-keyframes animatezoom {
-      from {
-        -webkit-transform: scale(0)
-      }
-
-      to {
-        -webkit-transform: scale(1)
-      }
-    }
-
-    @keyframes animatezoom {
-      from {
-        transform: scale(0)
-      }
-
-      to {
-        transform: scale(1)
-      }
-    }
-
-    /* Change styles for span and cancel button on extra small screens */
-    @media screen and (max-width: 300px) {
-      span.psw {
-        display: block;
-        float: none;
-      }
-
-      .cancelbtn {
-        width: 100%;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>E-wallet</title>
+  <link rel="stylesheet" href="E-wallet.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<style>
+  body {
+    background-color: #3fb0ef !important;
+
+  }
+
+  .wallet-container {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjOvSperRYjHH9-EHlKZJBfwvXy4rJpyerzHQsnp8DuuycYU5_);
+    width: 320px;
+    color: #fff;
+    font-size: 15px;
+    padding: 20px 20px 0;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+
+
+  }
+
+  .page-title {
+    text-align: left;
+  }
+
+  .fa-user {
+    float: right;
+  }
+
+  .fa-align-left {
+    margin-right: 15px;
+  }
+
+  .amount-box img {
+    width: 50px;
+  }
+
+  .amount {
+    font-size: 35px;
+  }
+
+  .amount-box p {
+    margin-top: 10px;
+    margin-bottom: -10px;
+  }
+
+  .btn-group {
+    margin: 20px 0;
+  }
+
+  .btn-group .btn {
+    margin: 8px;
+    border-radius: 20px !important;
+    font-size: 12px;
+  }
+
+  .txn-history {
+    text-align: left;
+  }
+
+  .txn-list {
+    background-color: #fff;
+    padding: 12px 10px;
+    color: #777;
+    font-size: 14px;
+    margin: 7px 0;
+  }
+
+  .debit-amount {
+    color: red;
+    float: right;
+  }
+
+  .credit-amount {
+    color: green;
+    float: right;
+
+  }
+
+  .footer-menu {
+    margin: 20px -20px 0;
+    bottom: 0;
+    border-top: 1px solid #ccc;
+    padding: 10px 10px 0;
+  }
+
+  .footer-menu p {
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 800px) {
+    .wallet-container {
+      height: 115%;
+      bottom: 20px;
+      margin-top: 100px;
+    }
+
+  }
+</style>
 
 <body>
-
-
-
-  <div id="form_wrapper">
-    <div id="form_left">
-      <img src="https://999slot.casino/wp-content/uploads/2018/01/register.png"
-        alt="computer icon">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
+    <div class="container">
+        <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Home</a>
+                </li>
+                <!-- <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Tranfers</a>
+          </li> -->
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <form action="/register" method="post">
-    <div id="form_right">
-      <h1>Register</h1>
-      <div class="input_container">
-        <i class="fas fa-envelope"></i>
-        <input placeholder="Username" type="username" name="username" id="username" class='input_field'>
-      </div>
-            <div class="input_container">
-        <i class="fas fa-lock"></i>
-        <input placeholder="Password" type="name" name="password" id="password" class='input_field'>
-      </div>
-   
-      <div class="input_container">
-        <i class="fa fa-address-book" aria-hidden="true"></i>
-        <input placeholder="Name" type="name" name="name" id="name" class='input_field'>
-      </div>
-      <div class="input_container">
-        <i  class="fa fa-id-card" aria-hidden="true"></i>
-        <input placeholder="Surname" type="surname" name="surname" id="surname" class='input_field'>
-      </div>
-      <!-- <input type="submit" value="Register" id='input_submit' class='input_field'> -->
+</nav>
+  <div class="wallet-container text-center">
+    <p class="page-title"><i class="fa fa-align-left"></i>My E-wallet<i class="fa fa-user"></i></p>
 
-      <input type="submit" value="Register" id='input_submit' class='input_field '
-        onclick="document.getElementById('id01').style.display='block'" style="width:auto;">
-      </form>
+    <div class="amount-box text-center">
+      <img src="https://lh3.googleusercontent.com/ohLHGNvMvQjOcmRpL4rjS3YQlcpO0D_80jJpJ-QA7-fQln9p3n7BAnqu3mxQ6kI4Sw"
+        alt="wallet">
+      <p>Total Balance</p>
+      <p class="amount">$ 123</p>
+    </div>
+
+    <div class="btn-group text-center">
+      <button type="button" class="btn btn-outline-light">Add Money</button>
+      <button type="button" class="btn btn-outline-light">Widthdraw</button>
+    </div>
+
+    <div class="txn-history">
+      <p><b>History</b></p>
+      <p class="txn-list">Payment to xyz shop<span class="debit-amount">-$100</span></p>
 
       <span id='create_account'>
         <a href="/">BACK </a>
@@ -367,14 +168,17 @@
             <p>Register Success</p>
           </div>
 
-          <div class="container">
+      <p class="txn-list">Credit From abc ltd<span class="credit-amount">+$300</span></p>
 
-          </div>
+      <p class="txn-list">Transfer From John Doe<span class="credit-amount">+$100</span></p>
+    </div>
 
-          <!-- <div class="container" style="background-color:#f1f1f1"> -->
-            <center>
-              <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn"
-                >Success</button></center> -->
+    <div class="footer-menu">
+      <div class="row text-center">
+        <div class="col-md-3">
+          <i class="fa fa-home"></i>
+          <p>Home</p>
+        </div>
 
           <!-- </div> -->
         </form> 
@@ -396,44 +200,9 @@
             <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="Smiley face"
               width="80" height="30">
         </div>
-      </center> -->
+      </div>
     </div>
   </div>
-
-
-
-
-
 </body>
-
-<script>
-  // Get the modal
-  var modal = document.getElementById('id01');
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-
-  var url;
-  var id;
-  (() => {
-    url = window.location.href
-    id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
-  })()
-  function gotoadminlogin() {
-    //window.location.href = url.replace('adminlogin')
-    window.location.href = window.location.href.replace('PSULOGIN', 'adminlogin')
-  }
-
-  function gotoregister() {
-    //window.location.href = url.replace('adminlogin')
-    window.location.href = window.location.href.replace('PSULOGIN', 'Register')
-  }
-
-
-</script>
 
 </html>
