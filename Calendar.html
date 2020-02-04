@@ -981,8 +981,8 @@ border-bottom-right-radius: 3px;
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
         <div class="container">
-            <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
+            <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52" onclick="gotoindex()">
+            <a class="navbar-brand js-scroll-trigger" href="./index">PSU COIN</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -997,7 +997,7 @@ border-bottom-right-radius: 3px;
                         <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" onclick="gotosendadmin()">Sendadmin</a>
+                        <a class="nav-link js-scroll-trigger" onclick="gotosendadmin()">Transfer</a>
                     </li>
                 </ul>
             </div>
@@ -1023,15 +1023,15 @@ border-bottom-right-radius: 3px;
     })()
 
     function gotoCheckBalance() {
-        window.location.href = window.location.href.replace('calender', 'balance')
+        window.location.href = window.location.href.replace('Calendar', 'balance')
     }
 
     function gotoindex() {
-        window.location.href = url.replace('calender', 'index', 'send')
+        window.location.href = url.replace('Calendar', 'index', 'send')
     }
 
     function gotosendadmin() {
-        window.location.href = url.replace('calender', 'send', 'send')
+        window.location.href = url.replace('Calendar', 'send', 'send')
     }
 
     /*!
