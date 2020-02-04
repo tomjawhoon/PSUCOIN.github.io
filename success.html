@@ -296,7 +296,36 @@
 
 
 
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
+        <div class="container">
+          <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
+          <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto my-2 my-lg-0">
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Home</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Tranfers</a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <br>
+      <br>
+      <br>
     <!-- <div class="container"> -->
     <div class="d-flex justify-content-center h-100">
         <div class="containerout">
@@ -317,7 +346,7 @@
                                     <div class="boxbutton">
                                         <button type="button" class="btn btn-success" >
                                             <div class="betweenput">
-                                                <ion-icon name="qr-scanner"></ion-icon><span onclick="gotoPayment()" >OK</span>
+                                                <span onclick="gotoPayment()" >OK</span>
                                             </div>
                                         </button>
                     
@@ -394,7 +423,7 @@
 
     function gotoPayment() {
         // window.location.href = url.replace('send', 'balance')
-        window.location.href = url.replace('success', 'balance', 'send')
+        window.location.href = url.replace('SUCCESS', 'balance', 'send')
     }
 
     function gotoReceive() {
