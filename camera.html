@@ -546,6 +546,8 @@
                                     window.location.href = url.replace('camera', 'SUCCESS', 'send')
                                 });
                             });
+                        }else {
+                            window.location.href = url.replace('camera', 'NOTSUCCESS', 'send')
                         }
                     }).catch(result => {
                         console.log("errr_send")

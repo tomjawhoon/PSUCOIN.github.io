@@ -56,7 +56,7 @@ router.route('/')
                 user.password = req.body.password
                 client.GetStaffDetails(user, (err, response) => {
                     if (response.GetStaffDetailsResult.string[0] == "") { //เข้ารหัสผิดดดดด ๆ 
-                        res.redirect('/error')
+                        res.redirect('/errorlogin')
                         console.error(err);
                     }
                     else { //เข้ารหัสถูกกกกกกก แล้วจร้า
@@ -506,9 +506,21 @@ router.route('/test/:id')
         res.render('test.html')
     })
 
+router.route('/errorlogin')
+    .get((req, res) => {
+        res.render('errorlogin.html')
+    })
+
+
+
 router.route('/success/:id')
     .get((req, res) => {
         res.render('success.html')
+    })
+
+router.route('/NOTSUCCESS/:id')
+    .get((req, res) => {
+        res.render('NOTSUCCESS.html')
     })
 
 

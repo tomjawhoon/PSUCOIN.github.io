@@ -344,9 +344,9 @@
                                         <!-- <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>. -->
                                     </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
                                     <div class="boxbutton">
-                                        <button type="button" class="btn btn-danger"  >
+                                        <button type="button" class="btn btn-danger" >
                                             <div class="betweenput">
-                                                <a href="/">BACK</a>
+                                                <span  >  <a href="/">BACK</a></span>
                                             </div>
                                         </button>
                     
@@ -402,7 +402,6 @@
 </center>
 
 
-<script src="./web3.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -423,7 +422,7 @@
 
     function gotoPayment() {
         // window.location.href = url.replace('send', 'balance')
-        window.location.href = url.replace('NOTSUCCESS', 'balance', 'send')
+        window.location.href = url.replace('errorlogin', '/', 'send')
     }
 
     function gotoReceive() {
@@ -451,68 +450,6 @@
         }
     }
 
-    var url;
-    var id;
-    (() => {
-        url = window.location.href
-        id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
-    })()
-
-    axios({
-        method: 'GET',
-        url: '/getProfileforbalance', //ส่งไปค่านี้
-        headers: {
-            id: id  // รหัสนักศึกษา
-        }
-    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        console.log("result_data_balance", result.data)
-        $("#result").attr("href", result.data)
-        $("#result").text(result.data)
-        // $("#result").val()
-    })
-
-    axios({
-        method: 'GET',
-        url: '/getWalletById', //ส่งไปค่านี้
-        headers: {
-            id: id // รหัสนักศึกษา
-        }
-    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        console.log("result_formaxios_getWalletById", result)
-        console.log("result_formaxios_getWalletById", result.config.headers.id)
-        $("#fromAddress1").val(result.data.address)
-        $("#fromAddress").attr("href", result.data.address)
-        $("#fromAddress").text(result.data.address)
-
-        $('#showid').val(result.config.headers.id)
-    }).catch(result => {
-        console.log("errr")
-    })
-    document.querySelector('#submitSend').addEventListener('submit', e => {
-        e.preventDefault()
-        axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
-            method: 'GET',
-            url: '/balance/' + id + '/confirm', // ส่งไปยังค่านี้
-            headers: {
-                fromAddress: $('#fromAddress1').val(),
-            }
-        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-            if (result != '') {
-                $(() => {
-                    $(document).ready(() => {
-                        console.log("Show === result === Modal")
-                        $("#id01").hide();
-                    });
-                });
-            }
-            console.log("Retuen_value_balance", result)
-            console.log("test_send => ", result.data)
-            // $('#fromAddress').val(result.data.address)
-            $('#result').text(result.data)
-        }).catch(result => {
-            console.log("errr")
-        })
-    })
 
 </script>
 
