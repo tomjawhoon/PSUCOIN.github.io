@@ -10,7 +10,8 @@
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <style>
         #canvas {
-            width: 50%;
+            width: 640px;
+            height: 480px;
         }
 
 
@@ -38,7 +39,7 @@
             justify-content: center;
             align-items: center;
             width: 1000px;
-            height: 650px;
+            height: 700px;
             border: black;
             background: linear-gradient(to bottom right, rgb(188, 189, 230), #082299);
             padding: 2% 0 2% 0;
@@ -239,7 +240,8 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
         <div class="container">
-            <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52" onclick="gotoindex()">
+            <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52"
+                onclick="gotoindex()">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -279,16 +281,9 @@
                 <div class="textCoin">
                     <div class="coinandsymbol"><span class="numcoin">
                             <a id="result" style="color:#FFFFFF"></a></span><span class="symbolcoin">PSU Coin</span>
-
-
                     </div>
-
-
-
-
                     <div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam
                         enabled)</div>
-
                     <canvas id="canvas" hidden></canvas>
                     <form id="submitSend" method="POST" action="/sendQrcode">
                         <div id="output">
@@ -546,7 +541,7 @@
                                     window.location.href = url.replace('camera', 'SUCCESS', 'send')
                                 });
                             });
-                        }else {
+                        } else {
                             window.location.href = url.replace('camera', 'NOTSUCCESS', 'send')
                         }
                     }).catch(result => {

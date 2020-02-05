@@ -178,6 +178,12 @@
         /* Could be more or less, depending on screen size */
     }
 
+    .btnsend{
+        border: none;
+        background: none;
+        outline: none;
+    }
+
     /*************************************************************************************************************
     /* The Close Button (x) */
     .close {
@@ -289,40 +295,40 @@
 </style>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
-        <div class="container">
-            <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52" onclick="gotoindex()">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                    <li class="nav-item">
+  
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
+                <div class="container">
+                  <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52" onclick="gotoindex()">
+                  <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
+                  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                      <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Home</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Tranfers</a>
-              </li> -->
-                    <li class="nav-item">
+                      </li>
+                      <!-- <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Tranfers</a>
+                      </li> -->
+                      <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
-                    </li>
-                    <!-- <li class="nav-item">
+                      </li>
+                      <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-                    </li> -->
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+          
+              <br>
+              <br>
+              <br>
+              <br>
+<br>      
 
     <!-- <div class="container"> -->
     <div class="d-flex justify-content-center h-100">
@@ -335,20 +341,20 @@
                                 <a id="result" style="color:#FFFFFF"></a></span><span class="symbolcoin">PSU Coin
                                 ..</span>
 
-                              
-                                <ion-icon name="send" onclick="document.getElementById('id01').style.display='block'"  ></ion-icon>
+<!-- 
+                            <ion-icon name="send" onclick="document.getElementById('id01').style.display='block'">
+                            </ion-icon> -->
 
                             <input type="hidden" class="form-control" name="fromAddress1" id="fromAddress1"
                                 size="80"></input>
 
 
-                                <input type="submit" 
-                                onclick="document.getElementById('id01').style.display='block' " 
-                                class="btn btn-danger">
+                            <button type="submit" onclick="document.getElementById('id01').style.display='block' "
+                                class=" btnsend" value="re" > <ion-icon name="send"></ion-icon></button>
                             <br>
 
                             <!--  -->
-                            <!-- <div class="refresh"> -->
+                            <!-- <div class="refresh"b> -->
 
                             <!-- </div> -->
                             <!-- <button type="button" class="btn btn-default" aria-label="Left Align">
@@ -401,7 +407,7 @@
                     </button>
                     <button type="button" class="btn btn-light btn">
                         <div class="betweenput">
-                            <ion-icon name="qr-scanner"></ion-icon><span onclick="gotoPayment()">QRcode</span>
+                            <ion-icon name="qr-scanner"></ion-icon><span onclick="gotoPayment()">Payment</span>
                         </div>
                     </button>
                     <button type="button" class="btn btn-light btn">
@@ -526,7 +532,7 @@
             url: '/balance/' + id + '/confirm', // ส่งไปยังค่านี้
             headers: {
                 fromAddress: $('#fromAddress1').val(),
-                id: id ,
+                id: id,
 
             }
         }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
