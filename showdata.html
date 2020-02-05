@@ -47,15 +47,15 @@ table {
         }
 
         td,
-        th { 
-            border: 1px solid #dddddd; 
-            text-align: left;
-            padding: 8px;
-            /*  เส้นตารางทั้งหมดเลย  */
-        }
-
         tr:nth-child(even) {
             background-color: #e06c9d;
+            border: 1px solid #dddddd; 
+        }
+
+        td1,
+        tr:nth-child(even) {
+            background-color: #27d604;
+            /* border: 1px solid #dddddd;  */
         }
 
 
@@ -188,6 +188,7 @@ table {
         leadsRef.on('value', (snapshot) => {
             snapshot.forEach((childSnapshot) => {
                 
+                
                 var childData = childSnapshot.val();
               //  var data = []
                 console.log("showdata_admin_form_ui ===>", childData)
@@ -205,22 +206,20 @@ table {
                      });  
 
                        $("#ex-table").html("") //ลบ
-
-                    }else{
+                    }
+                    if(childData.balance <= 40 )
+                    {
                         var tr = document.createElement('tr')
                         tr.innerHTML = `
-                        <td>${childData.name.GetStaffDetailsResult.string[0]}</td>
-                        <td>${childData.address}</td>
-                        <td>${childData.balance}</td>
-                        <td>PSU</td>
+                        <td1>${childData.name.GetStaffDetailsResult.string[0]}</td1>
+                        <td1>${childData.address}</td1>
+                        <td1>${childData.balance}</td1>
+                        <td1>PSU</td1>
                     `
                     $(document).ready(() => { 
                        document.querySelector('#ex-table').append(tr) //อัพ    
                      });  
-
                        $("#ex-table").html("") //ลบ
-
-
                     }
                        
                         //console.log("remove data")     
