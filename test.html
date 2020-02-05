@@ -11,6 +11,11 @@
     <script src="/front/js/jquery.qrcode.min.js"></script>
 </head>
 <style>
+    #canvas {
+        width: 640px;
+        height: 480px;
+    }
+
     .imgcontainer {
         text-align: center;
         margin: 10px 0 10px 0;
@@ -668,16 +673,22 @@
             <div class="Boxwallet">
                 <div class="card-img-top" id="qrcode" alt="Card image" style="width:100%"></div>
             </div>
-
-            <a id="fromAddress" class="symbolcoin"
-            style="color:#FFFFFF"></a>
+            <div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam
+                enabled)</div>
+            <canvas id="canvas" hidden></canvas>
+            <a id="fromAddress" class="symbolcoin" style="color:#FFFFFF"></a>
+            <div id="output">
+                <div id="outputMessage"></div>
+                <div hidden><b>Data:</b> <span id="outputData"></span></div>
+            </div>
             <div class="threebtn">
                 <button type="button" class="btn btn-light Allbtn">
-                    <ion-icon name="copy"><span onclick="gotoPayment()"></ion-icon>Payment</span>
+                    <ion-icon name="qr-scanner"></ion-icon>
+                    </ion-icon><span onclick="gotoCheckBalance()">Payment</span>
                 </button>
                 <button type="button" class="btn btn-light Allbtn">
                     <ion-icon name="arrow-back"></ion-icon>
-                    </ion-icon><span onclick="gotoCheckBalance()">Back</span>
+                    </ion-icon><span onclick="gotoCheckBalance1()">Back</span>
                 </button>
             </div>
 
@@ -707,7 +718,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <script src="/front/js/jquery.qrcode.min.js"></script>
+    <script src="/front/js/jquery.qrcode.min.js"></script>
     <script>
         function gotoSendETH() {
             window.location.href = window.location.href.replace('Receive', 'send', 'index')
@@ -720,13 +731,20 @@
 
         function gotoPayment() {
             // window.location.href = url.replace('send', 'Receive')
+            window.location.href = url.replace('Receive', 'balance')
+        }
+
+        function gotoCheckBalance1() {
+            // window.location.href = url.replace('send', 'Receive')
+            window.location.href = url.replace('Receive', 'balance', 'send')
+        }
+
+        function gotoCheckBalance() {
+            // window.location.href = url.replace('send', 'Receive')
             window.location.href = url.replace('Receive', 'camera', 'send')
         }
 
-        function gotoReceive() {
-            // window.location.href = url.replace('send', 'Receive')
-            window.location.href = url.replace('Receive', 'Receive', 'send')
-        }
+
 
 
 
@@ -734,118 +752,212 @@
     </script>
     <script>
 
-        var url;
-        var id;
-        (() => {
-            url = window.location.href
-            id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
-        })()
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// ======  manage input PSU Coin section ====
+$("#btnEnter").hide();
+$("#show").hide();
+$("#money").hide();
+// $("#money1").hide();
+
+
+//    $("#btnEnter").hide();
 
 
 
 
-        axios({
-            method: 'GET',
-            url: '/getProfileforbalance', //ส่งไปค่านี้
-            headers: {
-                id: id  // รหัสนักศึกษา
-            }
-        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-            console.log("result_data_balance", result.data)
-            $("#result").attr("href", result.data)
-            $("#result").text(result.data)
-            // $("#result").val()
-        })
+var video = document.createElement("video");
+var canvasElement = document.getElementById("canvas");
+var canvas = canvasElement.getContext("2d");
+var loadingMessage = document.getElementById("loadingMessage");
+var outputContainer = document.getElementById("output");
+var outputMessage = document.getElementById("outputMessage");
+var outputData = document.getElementById("outputData");
+var url;
+var id;
+(() => {
+    url = window.location.href
+    id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
+})()
 
-        axios({
-            method: 'GET',
-            url: '/getWalletById', //ส่งไปค่านี้
-            headers: {
-                id: id  // รหัสนักศึกษา
-            }
-        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-            console.log("result_data", result)
-            console.log("result_address", result.data.address)
-            console.log("result_privateKey", result.data.privateKey)
-            console.log("result_id", result.config.headers.id)
-         
-            $("#fromAddress").attr("href", result.data.address)
-            $("#fromAddress").text(result.data.address)
-
-            //var test = result.data.address;
+function gotoCheckBalance() {
+    // window.location.href = url.replace('send', 'balance')
+    window.location.href = url.replace('camera', 'balance', 'index')
+}
+function gotoindex() {
+    // window.location.href = url.replace('camera', 'balance')
+    window.location.href = url.replace('camera', 'index', 'send')
+}
+// var video = document.querySelector("#videoElement");
+// var button = document.querySelector("#videoElement");
 
 
-           
-            // $('#privateKey').val(result.data.privateKey)
-            $('#showid').val(result.config.headers.id)
+axios({
+    method: 'GET',
+    url: '/getWalletById', //ส่งไปค่านี้
+    headers: {
+        id: id  // รหัสนักศึกษา
+    }
+}).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+    console.log("result_data", result)
+    $('#fromAddress').val(result.data.address)
+    $('#privateKey').val(result.data.privateKey)
+    $('#showid').val(result.config.headers.id)
+})
 
-            $(document).ready(function () {
-                $("a").click(function () {
-                    $('#privateKey').val(result.data.privateKey)
-                });
 
-                $(function () {
-                    // กำหนดการตั้งค่ารูปแบบ qrcode ที่ต้องการเรียกใช้
-                    var qrcodeConfig = {
-                        width: 220,
-                        height: 200,
-                        correctLevel: 0
+
+
+
+axios({
+    method: 'GET',
+    url: '/getProfileforbalance', //ส่งไปค่านี้
+    headers: {
+        id: id  // รหัสนักศึกษา
+    }
+}).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+    console.log("result_data_balance", result.data)
+    // $('#fromAddress').val(result.data.address)
+    // $('#privateKey').val(result.data.privateKey)
+    // $('#showid').val(result.config.headers.id)
+})
+
+// function stop(e) { //stop
+//         var stream = video.srcObject;
+//         var tracks = stream.getTracks();
+
+//         for (var i = 0; i < tracks.length; i++) {
+//             var track = tracks[i];
+//             track.stop();
+//         }
+
+//         video.srcObject = null;
+//     }
+
+
+
+function drawLine(begin, end, color) {
+    canvas.beginPath();
+    canvas.moveTo(begin.x, begin.y);
+    canvas.lineTo(end.x, end.y);
+    canvas.lineWidth = 4;
+    canvas.strokeStyle = color;
+    canvas.stroke();
+}
+
+// Use facingMode: environment to attemt to get the front camera on phones
+navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
+    video.srcObject = stream;
+    video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+    video.play();
+    requestAnimationFrame(tick);
+});
+
+function tick() {
+    loadingMessage.innerText = "⌛ Loading video..."
+    if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        loadingMessage.hidden = true;
+        canvasElement.hidden = false;
+        outputContainer.hidden = false;
+        canvasElement.height = video.videoHeight;
+        canvasElement.width = video.videoWidth;
+        canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+        var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+        var code = jsQR(imageData.data, imageData.width, imageData.height, {
+            inversionAttempts: "dontInvert",
+        });
+        if (code) {
+            drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
+            drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
+            drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
+            drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
+            outputMessage.hidden = true;
+
+            outputData.parentElement.hidden = false;
+            outputData.innerText = code.data;
+            console.log("QRcode ====== >", code.data)
+            document.querySelector('#submitSend').addEventListener('submit', e => {
+                e.preventDefault()
+                axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
+                    method: 'POST',
+                    url: '/ShowTranferQrcode/' + id + '/confirm', // ส่งไปยังค่านี้
+                    headers: {
+                        id: id,
+                        fromAddress: $('#fromAddress').val(),
+                        toAddress: $('#toAddress').val(),
+                        privateKey: $('#privateKey').val(),
+                        money: $('#money').val(),
+                        content: code.data, //toaddress wallet
                     }
-                
-                    // สมมติค่าเริ่มเต้น ที่ตอ้งการแสดงเป็น qrcode
-                    $("#qrcode").qrcode($.extend(qrcodeConfig, {
-                        
-                        text: result.data.address
+                }).then(result => {
+                    if (result != '') {
+                        $(() => {
+                            $(document).ready(() => {
+                                console.log("Show === result === Modal")
+                                $("#id01").hide();
+                                window.location.href = url.replace('camera', 'SUCCESS', 'send')
+                            });
+                        });
+                    } else {
+                        window.location.href = url.replace('camera', 'NOTSUCCESS', 'send')
+                    }
+                }).catch(result => {
+                    console.log("errr_send")
+                })
+            })
 
-                    }));
-
-
-                    $('a.printPage').click(function () {
-                        window.print();
-                        return false;
-                    });
-
-                    // เมื่อมีการเปลี่ยนแปลงค่าใน input text และเกิด blur หรือ keypress event
-                    /* $("#fromAddress").on("keypress blur", function (e) {
-                       if (e.type == 'keypress' && e.keyCode == 13) { // ถ้ามีการกรอกข้อมูลใหม่ และกด Enter
-                         $("#qrcode").html("") // ล้างค่า qrcode
-                           .qrcode($.extend(qrcodeConfig, {
-                             text: $(this).val()
-                           }));
-                       } else if (e.type == 'blur') { // ถ้ามีการกรอกข้อมูล แล้ว โฟกัสออกจาก input text
-                         $("#qrcode").html("") // ล้างค่า qrcode
-                           .qrcode($.extend(qrcodeConfig, {
-                             text: $(this).val()
-                           }));
-                       }
-                     });*/
-                });
-
-            });
-
-        })
-
-
-
-
-        document.querySelector('#submitSend').addEventListener('submit', e => {
-            e.preventDefault()
             axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
                 method: 'GET',
-                url: '/balance/' + id + '/confirm', // ส่งไปยังค่านี้
+                url: '/camera/' + id + '/confirm', // ส่งไปยังค่านี้
                 headers: {
-                    fromAddress: $('#fromAddress').val(),
+                    content: code.data
                 }
-            }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-                console.log("Retuen_value_balance", result)
-                console.log("test_send => ", result.data)
-                // $('#fromAddress').val(result.data.address)
-                $('#result').text(result.data)
+            },
+                $('#show').val(code.data),
+                // $('#submitSend').submit()
+            ).then(result => {
+                console.log("Good Get Api ", result.data)
+                //window.location.href = url.replace('camera', 'sendQrcode')
+                //  }
             }).catch(result => {
                 console.log("errr")
             })
-        })
 
+            if (code.data != '') {
+                $(() => {
+                    $(document).ready(() => {
+                        console.log("Show")
+                        $("#canvas").hide(3000);
+                        $("#btnEnter").show(2000);
+                        $("#show").show(2000);
+                        $("#money").show(2000);
+                        // $("#money1").show(2000);
+                    });
+                });
+
+            }
+
+
+
+            console.log("QRcode 555555 ====== >", outputData)
+        } else {
+            outputMessage.hidden = false;
+            outputData.parentElement.hidden = true;
+        }
+    }
+    requestAnimationFrame(tick);
+
+
+
+
+}
     </script>
 
 
