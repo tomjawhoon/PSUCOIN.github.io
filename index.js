@@ -616,7 +616,7 @@ router.route('/ShowTranferQrcode/:id/confirm')
 router.route('/balance/:id/confirm')
     .get((req, res) => {
         web3.setProvider(new web3.providers.HttpProvider("https://kovan.infura.io/v3/37dd526435b74012b996e147cda1c261"));
-        function getERC20TokenBalance(tokenAddress, walletAddress, callback) {
+        function getERC20TokenBalance(tokenAddress, walletAddress,id,callback) {
             let minABI = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
             let contract = new web3.eth.Contract(minABI, tokenAddress);
             contract.methods.balanceOf(walletAddress).call((error, balance) => {
@@ -624,7 +624,25 @@ router.route('/balance/:id/confirm')
                     balance = balance / (10 ** decimals);
                     console.log("decimals => ", decimals);
                     console.log("balance => ", balance, "PSU");
-                    res.json(JSON.stringify(balance))
+
+                    database.ref('users').child(id).update({
+                        // address: user_eth.address,
+                        // privateKey: user_eth.privateKey.substring(2).toUpperCase(),
+                        balance: balance,
+                        // name: response,
+                    }).then(() => {
+                        console.log('Push balance in firebase')
+                        // console.log('test_Show',name)
+                        // res.send({ user_eth, response });
+                        res.json(JSON.stringify(balance))
+                        // res.redirect('/index/' + user.username)
+                        return false;
+                        // res.redirect("/showdata)                 
+                    }).catch(e => {
+                        console.log(e)
+                    })
+                    
+                   
                     // res.send(JSON.stringify(balance))
                 }).then(() => {
                     console.log('complete_check_balance')
@@ -635,11 +653,13 @@ router.route('/balance/:id/confirm')
         }
         function onAddressChange(e) {
             const walletAddress = req.headers.fromaddress;
+            const id = req.headers.id;
             let tokenAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
             console.log("walletAddress =>", walletAddress)
             console.log("tokenAddress =>", tokenAddress)
+            console.log("id =>", id)
             if (tokenAddress != "" && walletAddress != "") {
-                getERC20TokenBalance(tokenAddress, walletAddress, (balance) => {
+                getERC20TokenBalance(tokenAddress, walletAddress,id, (balance) => {
                 })
             }
         }

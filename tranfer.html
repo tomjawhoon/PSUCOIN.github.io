@@ -171,7 +171,9 @@
                   <h5 style="color:#FFFFFF">Money</h5>
                   <input type="number" class="form-control" name="money" id="money" size="80"></input>
                   <br>
+                  <!-- <ion-icon name="send" onclick="document.getElementById('id01').style.display='block'"  ></ion-icon> -->
                   <a id="result" style="color:#FFFFFF"></a>
+                  
                   <br>
                   <button type="submit" class="btn btn-primary"
                     onclick="document.getElementById('id01').style.display='block'" style="width:auto;">ENTER</button>
@@ -323,17 +325,17 @@
             console.log("Show === result === Modal")
             $("#id01").hide();
             console.log("SUCCESS")
-            window.location.href = url.replace('send', 'SUCCESS')
+            // window.location.href = url.replace('send', 'SUCCESS')
           });
 
           let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
           $("#result").attr("href", link)
           $("#result").text(link)
         });
-        if (result == ''){
-          console.log("NOTSUCCESS")
-          window.location.href = url.replace('send', 'NOTSUCCESS', 'send')
-        }
+        // if (result == ''){
+        //   console.log("NOTSUCCESS")
+        //   window.location.href = url.replace('send', 'NOTSUCCESS', 'send')
+        // }
         // $("#result").val()
       } 
 

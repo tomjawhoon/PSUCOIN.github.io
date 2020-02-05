@@ -526,6 +526,8 @@
             url: '/balance/' + id + '/confirm', // ส่งไปยังค่านี้
             headers: {
                 fromAddress: $('#fromAddress1').val(),
+                id: id ,
+
             }
         }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
             if (result != '') {
