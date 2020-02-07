@@ -10,761 +10,59 @@
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css?family=Francois+One&display=swap');
-
-
-
-
-    .imgcontainer {
-        text-align: center;
-        margin: 10px 0 10px 0;
-        position: relative;
-    }
-
-    .symbolcoin {
-        margin-right: 20px;
-    }
-
-    .iconre {
-        width: 30px;
-        height: 20px;
-
-    }
-
-
-
-    img.avatar {
-        width: 10%;
-        border-radius: 50%;
-    }
-
-
-
-    span.psw {
-        float: right;
-        padding-top: 16px;
-    }
-
-    /* The Modal (background) */
-    .modal {
-        display: none;
-        /* Hidden by default */
-        position: fixed;
-        /* Stay in place */
-        z-index: 1;
-        /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%;
-        /* Full width */
-        height: 100%;
-        /* Full height */
-        overflow: auto;
-        /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0);
-        /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4);
-        /* Black w/ opacity */
-        padding-top: 60px;
-    }
-
-    /* Modal Content/Box */
-    .modal-content {
-        /* background-color: #fefefe; */
-        margin: 5% auto 15% auto;
-        /* 5% from the top, 15% from the bottom and centered */
-        border: 1px solid #888;
-        width: 80%;
-        /* Could be more or less, depending on screen size */
-    }
-
-    .btnsend {
-        border: none;
-        background: none;
-        outline: none;
-    }
-
-
-
-    /*************************************************************************************************************
-    /* The Close Button (x) */
-    .close {
-        position: absolute;
-        right: 25px;
-        top: 0;
-        color: #000;
-        font-size: 35px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: red;
-        cursor: pointer;
-    }
-
-    /* Add Zoom Animation */
-    .animate {
-        -webkit-animation: animatezoom 0.6s;
-        animation: animatezoom 0.6s
-    }
-
-    @-webkit-keyframes animatezoom {
-        from {
-            -webkit-transform: scale(0)
-        }
-
-        to {
-            -webkit-transform: scale(1)
-        }
-    }
-
-    @keyframes animatezoom {
-        from {
-            transform: scale(0)
-        }
-
-        to {
-            transform: scale(1)
-        }
-    }
-
-    /* Change styles for span and cancel button on extra small screens */
-    @media screen and (max-width: 300px) {
-        span.psw {
-            display: block;
-            float: none;
-        }
-
-        .cancelbtn {
-            width: 100%;
-        }
-
-
-
-
-    }
-</style>
-<style>
-        body {
-            background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
-        }
-
-        .contact-form {
-            background: #fff;
-            margin-top: 7%;
-            margin-bottom: 5%;
-            /*width: 100%;*/
-        }
-
-        .contact-form .form-control {
-            border-radius: 1rem;
-        }
-
-        .contact-image {
-            text-align: center;
-        }
-
-        .contact-image img {
-            border-radius: 6rem;
-            width: 11%;
-            margin-top: -3%;
-
-        }
-
-        .contact-form form {
-            padding: 5%;
-        }
-
-        .contact-form form .row {
-            margin-bottom: -3%;
-        }
-
-        .contact-form h3 {
-            margin-bottom: 8%;
-            margin-top: -10%;
-            text-align: center;
-            color: #0062cc;
-        }
-
-        .contact-form .btnContact {
-            width: 50%;
-            border: none;
-            border-radius: 1rem;
-            padding: 1.5%;
-            background: #0ccf36;
-            font-weight: 600;
-            color: #fff;
-            cursor: pointer;
-
-        }
-
-        .btnContactSubmit {
-            width: 50%;
-            border-radius: 1rem;
-            padding: 1.5%;
-            color: #fff;
-            background-color: #0062cc;
-            border: none;
-            cursor: pointer;
-        }
-</style>
-<style type="text/css">
-        @keyframes ldio-2fzcezdt162 {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
-        }
-
-        .ldio-2fzcezdt162 div {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border: 20px solid #3de71c;
-            border-top-color: transparent;
-            border-radius: 50%;
-        }
-
-        .ldio-2fzcezdt162 div {
-            animation: ldio-2fzcezdt162 1s linear infinite;
-            top: 100px;
-            left: 100px
-        }
-
-        .loadingio-spinner-rolling-n2856siz85m {
-            width: 200px;
-            height: 200px;
-            display: inline-block;
-            overflow: hidden;
-
-        }
-
-        .ldio-2fzcezdt162 {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform: translateZ(0) scale(1);
-            backface-visibility: hidden;
-            transform-origin: 0 0;
-            /* see note above */
-        }
-
-        .ldio-2fzcezdt162 div {
-            box-sizing: content-box;
-        }
-
-        /* generated by https://loading.io/ */
-        /* ----------------------------ส่วนล่างจาก Menu------------------------------ */
-        @import url('https://fonts.googleapis.com/css?family=Francois+One&display=swap');
-
-        body {
-            display: flex;
-            justify-content: center;
-            height: 90%;
-        }
-
-        .Boxcontainer {
-            min-width: 320pxsss;
-            display: flex;
-            flex-direction: column;
-            width: 1200px;
-            height: 600px;
-            justify-content: space-around;
-            align-items: center;
-            background: linear-gradient(to bottom right, #9471d0, #43b7e6);
-            margin-top: 80px;
-
-        }
-
-        .Logo {
-            width: 180px;
-            height: 118px;
-
-        }
-
-
-
-        .Boxwallet {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: 'Francois One', sans-serif;
-
-        }
-
-        .BoxwalletSymnol {
-            font-size: 50px;
-
-        }
-
-        .Boxpublickey {
-            font-size: 20px;
-            margin-top: 18px;
-            color: white;
-        }
-
-        .Allbtn {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            width: 400px;
-            height: 50px;
-        }
-
-        .threebtn {
-            display: flex;
-            flex-direction: column;
-            width: 600px;
-            height: 150px;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .Sponsored {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 15px;
-        }
-
-        .Textsponsored {
-            font-size: 24px;
-            vertical-align: super;
-            margin-left: 10px;
-        }
-
-        .imgCOC {
-
-            width: 120px;
-            height: 52px;
-        }
-
-        @media (max-width:1024px) {
-            #canvas {
-                width: 250px;
-                height: 310px;
-            }
-
-            .Boxcontainer {
-                display: flex;
-                flex-direction: column;
-                width: 900px;
-                height: 600px;
-                justify-content: space-around;
-                align-items: center;
-                background: linear-gradient(to bottom right, #9471d0, #43b7e6);
-                margin-top: 80px;
-
-            }
-
-            .Logo {
-                width: 140px;
-                height: 78px;
-
-            }
-
-            .Boxwallet {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-family: 'Francois One', sans-serif;
-
-            }
-
-            .BoxwalletSymnol {
-                font-size: 45px;
-
-            }
-
-            .Boxpublickey {
-                font-size: 20px;
-                margin-top: 18px;
-                color: white;
-            }
-
-            .Allbtn {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                width: 400px;
-                height: 50px;
-            }
-
-            .threebtn {
-                display: flex;
-                flex-direction: column;
-                width: 600px;
-                height: 150px;
-                justify-content: space-around;
-                align-items: center;
-            }
-
-            .Sponsored {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 15px;
-            }
-
-            .Textsponsored {
-                font-size: 20px;
-                vertical-align: super;
-                margin-left: 10px;
-            }
-
-            .imgCOC {
-
-                width: 120px;
-                height: 52px;
-            }
-        }
-
-        @media (max-width:768px) {
-
-            .contact-form {
-                background: #fff;
-                margin-top: 25%;
-                margin-bottom: 45%;
-                width: 100%;
-            }
-
-            .Boxcontainer {
-                display: flex;
-                flex-direction: column;
-                width: 700px;
-                height: 600px;
-                justify-content: space-around;
-                align-items: center;
-                background: linear-gradient(to bottom right, #9471d0, #43b7e6);
-                margin-top: 80px;
-
-            }
-
-            .Logo {
-                width: 140px;
-                height: 78px;
-
-            }
-
-            .Boxwallet {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-family: 'Francois One', sans-serif;
-
-            }
-
-            .BoxwalletSymnol {
-                font-size: 40px;
-
-            }
-
-            .Boxpublickey {
-                font-size: 20px;
-                margin-top: 18px;
-                color: white;
-            }
-
-            .Allbtn {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                width: 400px;
-                height: 50px;
-            }
-
-            .threebtn {
-                display: flex;
-                flex-direction: column;
-                width: 600px;
-                height: 150px;
-                justify-content: space-around;
-                align-items: center;
-            }
-
-            .Sponsored {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 15px;
-            }
-
-            .imgCOC {
-
-                width: 120px;
-                height: 52px;
-            }
-        }
-
-        @media (max-width:425px) {
-
-            .contact-form {
-                background: #fff;
-                margin-top: 25%;
-                margin-bottom: 30%;
-                width: 90%;
-            }
-
-
-            .Boxcontainer {
-                display: flex;
-                flex-direction: column;
-                width: 425px;
-                height: 300px;
-                justify-content: space-around;
-                align-items: center;
-                background: linear-gradient(to bottom right, #9471d0, #43b7e6);
-                margin-top: 80px;
-
-            }
-
-            .Logo {
-                width: 140px;
-                height: 78px;
-
-            }
-
-            .Boxwallet {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-family: 'Francois One', sans-serif;
-
-            }
-
-            .BoxwalletSymnol {
-                font-size: 30px;
-
-            }
-
-            .Boxpublickey {
-                font-size: 15px;
-                margin-top: 18px;
-                color: white;
-            }
-
-            .Allbtn {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                width: 300px;
-                height: 40px;
-            }
-
-            .threebtn {
-                display: flex;
-                flex-direction: column;
-                width: 425px;
-                height: 120px;
-                justify-content: space-around;
-                align-items: center;
-            }
-
-            .Sponsored {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 15px;
-            }
-
-            .Textsponsored {
-                font-size: 15px;
-                vertical-align: super;
-            }
-
-            .imgCOC {
-
-                width: 90px;
-                height: 32px;
-            }
-        }
-
-
-        @media (max-width:375px) {
-
-
-            .contact-form {
-                background: #fff;
-                margin-top: 35%;
-                margin-bottom: 5%;
-                width: 95%;
-                height: 65%;
-            }
-
-            .Boxcontainer {
-                display: flex;
-                flex-direction: column;
-                width: 600px;
-                height: 470px;
-                justify-content: space-around;
-                align-items: center;
-                background: linear-gradient(to bottom right, #9471d0, #43b7e6);
-                margin-top: 80px;
-
-            }
-
-            .Logo {
-                width: 120px;
-                height: 60px;
-
-            }
-
-            .QRCODE {
-                width: 260px;
-                height: 260px;
-            }
-
-            .Boxwallet {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-family: 'Francois One', sans-serif;
-
-            }
-
-            .BoxwalletSymnol {
-                font-size: 30px;
-
-            }
-
-            .Boxpublickey {
-                font-size: 13px;
-                margin-top: 18px;
-                color: white;
-            }
-
-            .threebtn {
-                display: flex;
-                flex-direction: column;
-                width: 300px;
-                height: 150px;
-                justify-content: space-around;
-                align-items: center;
-            }
-
-            .Allbtn {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                width: 300px;
-                height: 40px;
-            }
-
-            .Sponsored {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 15px;
-            }
-
-            .imgCOC {
-
-                width: 90px;
-                height: 32px;
-            }
-        }
-
-
-        @media (max-width:320px) {
-            .contact-form {
-                background: #fff;
-                margin-top: 35%;
-                margin-bottom: 5%;
-                width: 80%;
-                height: 55%;
-            }
-
-
-            .contact-form {
-                background: #fff;
-                margin-top: 25%;
-                margin-bottom: 30%;
-                width: 90%;
-            }
-
-
-            .Boxcontainer {
-                display: flex;
-                flex-direction: column;
-                width: 425px;
-                height: 300px;
-                justify-content: space-around;
-                align-items: center;
-                background: linear-gradient(to bottom right, #9471d0, #43b7e6);
-                margin-top: 80px;
-
-            }
-
-            .Logo {
-                width: 140px;
-                height: 78px;
-
-            }
-
-            .Boxwallet {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-family: 'Francois One', sans-serif;
-
-            }
-
-            .BoxwalletSymnol {
-                font-size: 30px;
-
-            }
-
-            .Boxpublickey {
-                font-size: 15px;
-                margin-top: 18px;
-                color: white;
-            }
-
-            .Allbtn {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                width: 300px;
-                height: 40px;
-            }
-
-            .threebtn {
-                display: flex;
-                flex-direction: column;
-                width: 425px;
-                height: 120px;
-                justify-content: space-around;
-                align-items: center;
-            }
-
-            .Sponsored {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 15px;
-            }
-
-            .Textsponsored {
-                font-size: 15px;
-                vertical-align: super;
-            }
-
-            .imgCOC {
-
-                width: 90px;
-                height: 32px;
-            }
-        }
+    body{
+    background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
+}
+.contact-form{
+    background: #fff;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    width: 70%;
+}
+.contact-form .form-control{
+    border-radius:1rem;
+}
+.contact-image{
+    text-align: center;
+}
+.contact-image img{
+    border-radius: 6rem;
+    width: 11%;
+    margin-top: -3%;
+    transform: rotate(29deg);
+}
+.contact-form form{
+    padding: 14%;
+}
+.contact-form form .row{
+    margin-bottom: -7%;
+}
+.contact-form h3{
+    margin-bottom: 8%;
+    margin-top: -10%;
+    text-align: center;
+    color: #0062cc;
+}
+.contact-form .btnContact {
+    width: 50%;
+    border: none;
+    border-radius: 1rem;
+    padding: 1.5%;
+    background: #dc3545;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+}
+.btnContactSubmit
+{
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    color: #fff;
+    background-color: #0062cc;
+    border: none;
+    cursor: pointer;
+}
 </style>
 
 <body>
@@ -789,121 +87,40 @@
 
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
-            <div class="container">
-                <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52"
-                    onclick="gotoindex()">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Home</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Tranfers</a>
-                          </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                                    <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-                                </li> -->
-                    </ul>
-                </div>
-            </div>
-    
-        </nav>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
+        
         <div class="container contact-form">
-            <div class="contact-image">
-                <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="rocket_contact" />
-            </div>
-            <form id="submitSend" method="GET">
-                <input type="hidden" class="form-control" name="fromAddress" id="showid" size="80"></input><br>
-                <input type="hidden" class="form-control" name="fromAddress" id="fromAddress" size="80"></input>
-                <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
-                <!-- <h5>privateKey</h5> -->
-                <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="80"></input>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5 style="color:rgb(228, 46, 46)">(Student ID) Recipients </h5>
-                        <div class="form-group">
-                            <input type="text" name="toAddress" id="toAddress" class="form-control" placeholder="toAddress" />
-                        </div>
-                        <h5 style="color:rgb(228, 46, 46)">PSUCOIN</h5>
-                        <div class="form-group">
-                            <input type="number" name="money" id="money" class="form-control" placeholder="PSUCOIN" />
-                        </div>
-
-
+                    <div class="contact-image">
+                        <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
                     </div>
-                    <div class="col-md-6">
-                        <h5 style="color:rgb(228, 46, 46)">PROFILE</h5>
-                        
-                        <div class="form-group">
-                            <input id="receiverName" type="text" class="form-control" placeholder="receiverName"  />
+                    <form method="post">
+                        <h3>Drop Us a Message</h3>
+                       <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="txtName" class="form-control" placeholder="Your Name *" value="" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="txtEmail" class="form-control" placeholder="Your Email *" value="" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="txtPhone" class="form-control" placeholder="Your Phone Number *" value="" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" name="btnSubmit" class="btnContact" value="Send Message" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea name="txtMsg" class="form-control" placeholder="Your Message *" style="width: 100%; height: 150px;"></textarea>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <input id="receiverLastName" type="text" class="form-control" placeholder="receiverLastName"  />
-                        </div>
-
-                        <div class="form-group">
-                            <input id="receiverLastID" type="text" class="form-control"  placeholder="receiverLastID"  />
-                        </div>
-
-                        <a id="result" style="color:rgb(10, 5, 5)"></a>
-                    </div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <input type="submit" name="btnSubmit" class="btnContact" value="Send Message"  onclick="document.getElementById('id01').style.display='block'" style="width:auto;" />
-                </div>
-
-
-            </form>
-            <div id="id01" class="modal">
-                <form action="/action_page.php" method="post">
-                  <div class="imgcontainer">
-                    <span onclick="document.getElementById('id01').style.display='none'" class="close"
-                      title="Close Modal">&times;</span>
-                    <div class="loadingio-spinner-rolling-n2856siz85m">
-                      <div class="ldio-2fzcezdt162">
-                        <div></div>
-                      </div>
-                    </div>
-                    <p style="color:#FFFFFF">Loading .....</p>
-                  </div>
-          
-                  <div class="container">
-          
-                  </div>
-          
-                  <!-- <div class="container" style="background-color:#f1f1f1"> -->
-                  <center>
-                    <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn"
-                    >Success</button></center> -->
-          
-              </div>
-
-
-            <div class="Sponsored">
-                <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
-                <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
-                        class="Textsponsored">
-                        Sponsored by
-                        <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png"
-                            alt="Smiley face" class="imgCOC">
-                        <!-- <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>. -->
-                    </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
-            </div>
+                    </form>
         </div>
-
-
 
     </body>
 
