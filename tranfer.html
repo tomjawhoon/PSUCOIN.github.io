@@ -8,6 +8,7 @@
   <!-- <link rel="stylesheet" href="style.css"> -->
   <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
 </head>
 <style>
   @import url('https://fonts.googleapis.com/css?family=Francois+One&display=swap');
@@ -854,7 +855,6 @@
             <div class="form-group">
               <input id="receiverLastID" type="text" class="form-control" placeholder="receiverLastID" />
             </div>
-
             <a id="result" style="color:rgb(10, 5, 5)"></a>
           </div>
         </div>
@@ -920,28 +920,30 @@
     crossorigin="anonymous"></script>
   <script>
     function gotoSendETH() {
-      window.location.href = window.location.href.replace('balance', 'send', 'index')
+      window.location.href = window.location.href.replace('send', 'send')
     }
 
     function gotoindex() {
-      // window.location.href = url.replace('send', 'balance')
-      window.location.href = url.replace('balance', 'index', 'send')
+      // window.location.href = url.replace('send', 'send')
+      window.location.href = url.replace('send', 'index')
     }
 
-    function gotoPayment() {
-      // window.location.href = url.replace('send', 'balance')
-      window.location.href = url.replace('balance', 'camera', 'send')
+    function gotoCheckBalance() {
+      // window.location.href = url.replace('send', 'send')
+      window.location.href = url.replace('send', 'balance')
     }
 
     function gotoReceive() {
-      // window.location.href = url.replace('send', 'balance')
-      window.location.href = url.replace('balance', 'Receive', 'send')
+      // window.location.href = url.replace('send', 'send')
+      window.location.href = url.replace('send', 'Receive')
     }
 
 
 
 
   </script>
+
+
   <script>
 
 
@@ -961,15 +963,15 @@
       id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
     })()
 
-   /* $(function () {
-      var $input = $("#money");
-
-
-      
-        var input = $input.val();
-        alert(input);
-
-    });*/
+    /* $(function () {
+       var $input = $("#money");
+ 
+ 
+       
+         var input = $input.val();
+         alert(input);
+ 
+     });*/
 
 
 
@@ -1003,7 +1005,7 @@
     })
 
     document.querySelector('#submitSend').addEventListener('submit', e => {
-      
+
       e.preventDefault()
       axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
         method: 'GET',
@@ -1016,7 +1018,11 @@
           TEST: 'test string'
         }
       }).then(result => {
-        if (result != '') {
+        console.log("result.TEST",result.data)
+        if(result.data == "ERROR"){
+          window.location.href = url.replace('send', 'NOTSUCCESS')
+        }
+        else  {
           $(() => {
             $(document).ready(() => {
               console.log("Show === result === Modal")
@@ -1024,16 +1030,10 @@
               console.log("SUCCESS")
               // window.location.href = url.replace('send', 'SUCCESS')
             });
-
             let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
             $("#result").attr("href", link)
             $("#result").text(link)
           });
-          // if (result == ''){
-          //   console.log("NOTSUCCESS")
-          //   window.location.href = url.replace('send', 'NOTSUCCESS', 'send')
-          // }
-          // $("#result").val()
         }
 
       }).catch(result => {

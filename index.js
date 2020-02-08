@@ -219,61 +219,57 @@ router.route('/send/:id/confirm')
             console.log("toAddress_show_toAddress =>", toAddress)
             let toAddress2 = toAddress.val();
             let totalvalue = toAddress2.balance;
-            //let toAddress3 = toAddress.val([1].address);
-
-
+            let test =  "ERROR";
             console.log("toAddress2 =>", toAddress2)
             console.log("totalvalue =>", totalvalue)
-            //console.log("toAddress3 =>", toAddress3)
-            //console.log("toAddress_show_totalvalue =>" , toAddress)
-            // toAddress.(snap => { // ??????????????????????????????
-            //     toAddress2 = snap.val().address
-            //     console.log("toAddress2 =>", toAddress2)
-            // })
-
             web3.setProvider(new web3.providers.HttpProvider("https://kovan.infura.io/v3/37dd526435b74012b996e147cda1c261"));
             var abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
             var count = await web3.eth.getTransactionCount(fromAddress);
-            var contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
-            var contract = new web3.eth.Contract(abi, contractAddress, { from: fromAddress });
-            var weiTokenAmount = web3.utils.toWei(String(money), 'ether');
-            var Transaction = {
-                "from": fromAddress,
-                "nonce": "0x" + count.toString(16),
-                "gasPrice": "0x003B9ACA00",
-                "gasLimit": "0x250CA",//151754
-                "to": contractAddress,
-                "value": "0x0",
-                "data": contract.methods.transfer(toAddress2.address, weiTokenAmount).encodeABI(),
-                "chainId": 0x03
-            };
-            var privKey = Buffer.from(privateKey, 'hex');
-            console.log("privKey = > ", privKey);
-            const tx = new EthereumTx(Transaction, { chain: 'kovan' });
-            tx.sign(privKey);
-            var serializedTx = tx.serialize();
-            console.log("serializedTx =>", serializedTx)
-            var receipt = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
-            console.log("receipt =>", receipt)
-            res.json(JSON.stringify(receipt.transactionHash))
-            database.ref('users').child(id).once("value", snapshot => {
-                if (snapshot.exists()) { // check ????????????????????????
-                    console.log('Have_data')
-                    database.ref('users').child(id).update({
-                        // balance: (req.headers.money+toAddress2.balance),
-                        balance: parseInt(req.headers.money) + parseInt(toAddress2.balance)
-                    }).then(() => {
-                        console.log('push_send_perfect')
-                    }).catch(e => {
-                        console.log(e)
-                    })
+                var contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
+                var contract = new web3.eth.Contract(abi, contractAddress, { from: fromAddress });
+                if(money == ''){
+                    console.log("money..errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+                    res.json(test)
                 }
+                var weiTokenAmount = web3.utils.toWei(String(money), 'ether');
+                var Transaction = {
+                    "from": fromAddress,
+                    "nonce": "0x" + count.toString(16),
+                    "gasPrice": "0x003B9ACA00",
+                    "gasLimit": "0x250CA",//151754
+                    "to": contractAddress,
+                    "value": "0x0",
+                    "data": contract.methods.transfer(toAddress2.address, weiTokenAmount).encodeABI(),
+                    "chainId": 0x03
+                };
+                var privKey = Buffer.from(privateKey, 'hex');
+                console.log("privKey = > ", privKey);
+                const tx = new EthereumTx(Transaction, { chain: 'kovan' });
+                tx.sign(privKey);
+                var serializedTx = tx.serialize();
+                console.log("serializedTx =>", serializedTx)
+                var receipt = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
+                console.log("receipt =>", receipt)
+                res.json(JSON.stringify(receipt.transactionHash))
+                database.ref('users').child(id).once("value", snapshot => {
+                    if (snapshot.exists()) { // check ????????????????????????
+                        console.log('Have_data')
+                        database.ref('users').child(id).update({
+                            // balance: (req.headers.money+toAddress2.balance),
+                            balance: parseInt(req.headers.money) + parseInt(toAddress2.balance)
+                        }).then(() => {
+                            console.log('push_send_perfect')
+                        }).catch(e => {
+                            console.log(e)
+                        })
+                    }
+                })
+                // return receipt
+            }
+            Tranfer().then((result) => {
+                console.log(result)
             })
-            // return receipt
-        }
-        Tranfer().then((result) => {
-            console.log(result)
-        })
+
 
     })
 // <!--===============================================================================================-->
@@ -616,7 +612,7 @@ router.route('/ShowTranferQrcode/:id/confirm')
 router.route('/balance/:id/confirm')
     .get((req, res) => {
         web3.setProvider(new web3.providers.HttpProvider("https://kovan.infura.io/v3/37dd526435b74012b996e147cda1c261"));
-        function getERC20TokenBalance(tokenAddress, walletAddress,id,callback) {
+        function getERC20TokenBalance(tokenAddress, walletAddress, id, callback) {
             let minABI = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
             let contract = new web3.eth.Contract(minABI, tokenAddress);
             contract.methods.balanceOf(walletAddress).call((error, balance) => {
@@ -641,8 +637,8 @@ router.route('/balance/:id/confirm')
                     }).catch(e => {
                         console.log(e)
                     })
-                    
-                   
+
+
                     // res.send(JSON.stringify(balance))
                 }).then(() => {
                     console.log('complete_check_balance')
@@ -659,7 +655,7 @@ router.route('/balance/:id/confirm')
             console.log("tokenAddress =>", tokenAddress)
             console.log("id =>", id)
             if (tokenAddress != "" && walletAddress != "") {
-                getERC20TokenBalance(tokenAddress, walletAddress,id, (balance) => {
+                getERC20TokenBalance(tokenAddress, walletAddress, id, (balance) => {
                 })
             }
         }
