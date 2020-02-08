@@ -31,7 +31,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
     <div class="container">
-    <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
+      <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
       <a class="navbar-brand js-scroll-trigger" href="/">PSU COIN</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -41,10 +41,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
 
-   
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about" onclick="gotoStatic()">Static</a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#about" onclick="gotoprofile()">Profile</a>
           </li>
@@ -54,7 +51,11 @@
             </li> -->
 
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about" onclick="gotoShowdata()">Showdata</a>
+            <a class="nav-link js-scroll-trigger" href="#about" onclick="gotoShowdata()">List</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" onclick="gotoCalendar()">Calendar</a>
           </li>
 
           <li class="nav-item">
@@ -62,7 +63,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" onclick="gotoTranfer()" >Send</a>
+            <a class="nav-link js-scroll-trigger" onclick="gotoTranfer()">Transfer</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#portfolio">Balance</a>
@@ -102,7 +103,7 @@
         <div class="col-lg-8 text-center">
           <h2 class="text-white mt-0">About</h2>
           <hr class="divider light my-4">
-          <p class="text-white-50 mb-4">     
+          <p class="text-white-50 mb-4">
           </p>
           <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
         </div>
@@ -317,7 +318,7 @@
 
 
       function gotoTranfer() {
-        window.location.href = url.replace('indexadmin', 'tranferadmin')
+        window.location.href = url.replace('indexadmin', 'send')
       }
 
 
@@ -326,27 +327,27 @@
       }
 
       function gotoShowdata() {
-        window.location.href = url.replace('indexadmin', 'showdataadmin')
+        window.location.href = url.replace('indexadmin', 'showdata')
       }
 
       function gotoCheckBalance() {
-        window.location.href = url.replace('indexadmin', 'sendadmin', 'balanceadmin')
+        window.location.href = url.replace('indexadmin', 'sendadmin', 'balance')
       }
 
       function gotoSendETH() {
-        window.location.href = window.location.href.replace('indexadmin', 'balanceadmin', 'sendadmin')
+        window.location.href = window.location.href.replace('indexadmin', 'balance', 'send')
       }
 
       function gotoindex() {
-        window.location.href = url.replace('indexadmin', 'sendadmin', 'balanceadmin')
+        window.location.href = url.replace('indexadmin', 'sendadmin', 'balance')
       }
 
       function gotoprofile() {
-        window.location.href = url.replace('indexadmin', 'profile', 'balanceadmin')
+        window.location.href = url.replace('indexadmin', 'profile', 'balance')
       }
 
       function gotoStatic() {
-        window.location.href = url.replace('indexadmin', 'static', 'balanceadmin')
+        window.location.href = url.replace('indexadmin', 'static', 'balance')
       }
       // axios({
       //   method: 'GET',

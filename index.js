@@ -112,7 +112,7 @@ router.route('/loginadmin')
                 if (snapshot.exists()) { // check ????????????????????????
                     console.log('already exists')
                     // res.send('<script>alert("??????????????????");</script>');
-                    res.redirect('/index/' + user.username)
+                    res.redirect('/indexadmin/' + user.username)
                     return false;
                 }
             })
