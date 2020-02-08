@@ -253,6 +253,7 @@ router.route('/send/:id/confirm')
             tx.sign(privKey);
             var serializedTx = tx.serialize();
             console.log("serializedTx =>", serializedTx)
+
             var receipt = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
             console.log("receipt =>", receipt)
             res.json(JSON.stringify(receipt.transactionHash))
@@ -564,6 +565,7 @@ router.route('/ShowTranferQrcode/:id/confirm')
 
             // const toAddress = await getReceiverWalletFromId(id)
             // console.log("toAddress_show_toAddress =>", toAddress)
+            let test = "ERROR";
             let toAddress2 = req.headers.content;
             // let totalvalue = toAddress2.balance;
             //let toAddress3 = toAddress.val([1].address);
@@ -576,6 +578,10 @@ router.route('/ShowTranferQrcode/:id/confirm')
             var count = await web3.eth.getTransactionCount(fromAddress);
             var contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
             var contract = new web3.eth.Contract(abi, contractAddress, { from: fromAddress });
+            if (money == '') {
+                console.log("money..errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+                res.json(test)
+            }
             var weiTokenAmount = web3.utils.toWei(String(money), 'ether');
             var Transaction = {
                 "from": fromAddress,

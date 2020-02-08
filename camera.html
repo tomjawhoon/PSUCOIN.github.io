@@ -273,6 +273,7 @@
             width: 250px;
             height: 310px;
         }
+
         .Boxcontainer {
             display: flex;
             flex-direction: column;
@@ -353,6 +354,7 @@
             width: 250px;
             height: 310px;
         }
+
         .Boxcontainer {
             display: flex;
             flex-direction: column;
@@ -427,6 +429,7 @@
             width: 250px;
             height: 310px;
         }
+
         .Boxcontainer {
             display: flex;
             flex-direction: column;
@@ -587,6 +590,7 @@
             width: 250px;
             height: 310px;
         }
+
         .Boxcontainer {
             display: flex;
             flex-direction: column;
@@ -980,16 +984,17 @@
                                 content: code.data, //toaddress wallet
                             }
                         }).then(result => {
-                            if (result != '') {
+                            if (result.data == "ERROR") {
+                                window.location.href = url.replace('send', 'NOTSUCCESS')
+                            }
+                            else {
                                 $(() => {
                                     $(document).ready(() => {
                                         console.log("Show === result === Modal")
                                         $("#id01").hide();
-                                        window.location.href = url.replace('camera', 'SUCCESS', 'send')
+                                        window.location.href = url.replace('camera', 'SUCCESS')
                                     });
                                 });
-                            } else {
-                                window.location.href = url.replace('camera', 'NOTSUCCESS', 'send')
                             }
                         }).catch(result => {
                             console.log("errr_send")
