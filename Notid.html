@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Francois+One&display=swap');
+
+    body {
+        margin: 8px;
+        font-family: 'Francois One', sans-serif;
+    }
+
+    .containerout {
+        display: flex;
+        min-width: 400px;
+        width: 100%;
+        height: auto;
+        justify-content: center;
+    }
+
+    .Boxcontainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 1000px;
+        height: auto;
+        border: black;
+        background: linear-gradient(to bottom right, rgb(241, 240, 240), #f7f1f1);
+        padding: 2% 0 2% 0;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.8);
+
+
+
+    }
+
+    .Logo {
+        width: 20%;
+        height: auto;
+        margin: auto;
+        padding: 4% 0 2% 0;
+
+    }
+
+    .textCoin {
+        display: flex;
+        flex-direction: column;
+        color: cornsilk;
+        font-size: 15px;
+        align-items: center;
+        justify-content: center;
+        padding: 4%;
+    }
+
+    .refresh {
+        color: cornsilk;
+        font-size: 15px;
+    }
+
+    .boxbutton {
+        display: flex;
+        width: 90%;
+        align-items: center;
+        justify-content: space-around;
+        margin: 10px;
+        padding: 3%;
+
+    }
+
+    .btn {
+        display: inline-block;
+        font-size: 20px;
+        width: 30%;
+    }
+
+    .betweenput {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .betweenput span {
+        margin-left: 3%;
+    }
+
+    .numcoin {
+        font-size: 30px;
+        font-weight: 200;
+    }
+
+    .symbolcoin {
+
+        margin-left: 8px;
+        font-size: 15px;
+        font-weight: 200;
+        color: rgb(248, 217, 43);
+
+    }
+
+    .copy {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+    }
+
+    .fontwallet {
+        font-size: 25px;
+        color: rgb(250, 250, 250);
+    }
+
+    .publicKey {
+        font-size: 15px;
+        margin: 5px;
+        color: rgb(248, 217, 43);
+    }
+
+    .coinandsymbol {
+        padding: 0 0 4% 0;
+    }
+
+    /*************************************************************************************************************/
+    .imgcontainer {
+        text-align: center;
+        margin: 10px 0 10px 0;
+        position: relative;
+    }
+
+    img.avatar {
+        width: 10%;
+        border-radius: 50%;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        /* background-color: #fefefe; */
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    /*************************************************************************************************************
+    /* The Close Button (x) */
+    .close {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: red;
+        cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @keyframes animatezoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+
+        .cancelbtn {
+            width: 100%;
+        }
+
+
+
+
+    }
+</style>
+<style type="text/css">
+    @keyframes ldio-2fzcezdt162 {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+
+    .ldio-2fzcezdt162 div {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border: 20px solid #3de71c;
+        border-top-color: transparent;
+        border-radius: 50%;
+    }
+
+    .ldio-2fzcezdt162 div {
+        animation: ldio-2fzcezdt162 1s linear infinite;
+        top: 100px;
+        left: 100px
+    }
+
+    .loadingio-spinner-rolling-n2856siz85m {
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+        overflow: hidden;
+
+    }
+
+    .ldio-2fzcezdt162 {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform: translateZ(0) scale(1);
+        backface-visibility: hidden;
+        transform-origin: 0 0;
+        /* see note above */
+    }
+
+    .ldio-2fzcezdt162 div {
+        box-sizing: content-box;
+    }
+
+    /* generated by https://loading.io/ */
+</style>
+
+<body>
+
+    <br>
+    <br>
+    <br>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
+        <div class="container">
+          <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52" onclick="gotoindex()">
+          <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto my-2 my-lg-0">
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Home</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Tranfers</a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <br>
+      <br>
+      <br>
+    <!-- <div class="container"> -->
+    <div class="d-flex justify-content-center h-100">
+        <div class="containerout">
+            <div class="Boxcontainer">
+                <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="150" height="210">
+                <div class="textCoin">
+                    <form id="submitSend" method="GET">
+                        <div class="coinandsymbol"><span class="numcoin">
+                            </span>
+                                <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
+                                <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
+                                        style="font-size: 24px; vertical-align: super; margin-left: 10px; color:rgb(0, 0, 0) "  >
+                                        กรุณากรอกรหัสนักศึกษา
+                                        <img src="/front/img/computer-icons-true-png-favpng-FTvTRSzjct4UbH5Ck1T2j0ib9.jpg" alt="Smiley face"
+                                            width="63" height="52">
+                                        <!-- <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>. -->
+                                    </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
+                                    <div class="boxbutton">
+                                        <button type="button" class="btn btn-danger" >
+                                            <div class="betweenput">
+                                                <span onclick="gotoPayment()" >OK</span>
+                                            </div>
+                                        </button>
+                    
+                                    </div>
+                         
+                 
+
+                            <!--  -->
+                            <!-- <div class="refresh"> -->
+
+                            <!-- </div> -->
+                            <!-- <button type="button" class="btn btn-default" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                            </button> -->
+
+                            <!-- <button><span type="submit" class="icon is-small"><i class="mdi mdi-refresh"></i></span>
+                                Click to refresh
+                            </button> -->
+                            <!-- <ion-icon  type="submit" name="copy" class="copy">
+
+
+                                    </ion-icon> -->
+                        </div>
+                    </form>
+
+                    </form>
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+<br>
+
+
+
+
+
+<center>
+    <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
+    <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
+            style="font-size: 24px; vertical-align: super; margin-left: 10px;">
+            Sponsored by
+            <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="Smiley face"
+                width="80" height="52">
+            <!-- <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>. -->
+        </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
+    </div>
+</center>
+
+
+<script src="./web3.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- <script src="./psulogin.js"></script>  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+<script>
+    function gotoSendETH() {
+        window.location.href = window.location.href.replace('balance', 'send', 'index')
+    }
+
+    function gotoindex() {
+        // window.location.href = url.replace('send', 'balance')
+        window.location.href = url.replace('Notid', 'index', 'send')
+    }
+
+    function gotoPayment() {
+        // window.location.href = url.replace('send', 'balance')
+        window.location.href = url.replace('Notid', 'balance', 'send')
+    }
+
+    function gotoReceive() {
+        // window.location.href = url.replace('send', 'balance')
+        window.location.href = url.replace('Notid', 'Receive', 'send')
+    }
+    function gotobalance() {
+        // window.location.href = url.replace('send', 'balance')
+        window.location.href = url.replace('balance', 'Receive', 'send')
+    }
+
+
+
+
+</script>
+<script>
+
+
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    var url;
+    var id;
+    (() => {
+        url = window.location.href
+        id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
+    })()
+
+    axios({
+        method: 'GET',
+        url: '/getProfileforbalance', //ส่งไปค่านี้
+        headers: {
+            id: id  // รหัสนักศึกษา
+        }
+    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+        console.log("result_data_balance", result.data)
+        $("#result").attr("href", result.data)
+        $("#result").text(result.data)
+        // $("#result").val()
+    })
+
+    axios({
+        method: 'GET',
+        url: '/getWalletById', //ส่งไปค่านี้
+        headers: {
+            id: id // รหัสนักศึกษา
+        }
+    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+        console.log("result_formaxios_getWalletById", result)
+        console.log("result_formaxios_getWalletById", result.config.headers.id)
+        $("#fromAddress1").val(result.data.address)
+        $("#fromAddress").attr("href", result.data.address)
+        $("#fromAddress").text(result.data.address)
+
+        $('#showid').val(result.config.headers.id)
+    }).catch(result => {
+        console.log("errr")
+    })
+    document.querySelector('#submitSend').addEventListener('submit', e => {
+        e.preventDefault()
+        axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
+            method: 'GET',
+            url: '/balance/' + id + '/confirm', // ส่งไปยังค่านี้
+            headers: {
+                fromAddress: $('#fromAddress1').val(),
+            }
+        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+            if (result != '') {
+                $(() => {
+                    $(document).ready(() => {
+                        console.log("Show === result === Modal")
+                        $("#id01").hide();
+                    });
+                });
+            }
+            console.log("Retuen_value_balance", result)
+            console.log("test_send => ", result.data)
+            // $('#fromAddress').val(result.data.address)
+            $('#result').text(result.data)
+        }).catch(result => {
+            console.log("errr")
+        })
+    })
+
+</script>
+
+
+
+</html>

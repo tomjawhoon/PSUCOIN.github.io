@@ -205,6 +205,8 @@ router.route('/send/:id/confirm')
             const fromAddress = req.headers.fromaddress;
             const money = req.headers.money;
             const privateKey = req.headers.privatekey;
+            let testid = "IDERROR"
+
             // const testvalue = req.headers.result;
 
             console.log('xx: ', req.headers)
@@ -214,61 +216,64 @@ router.route('/send/:id/confirm')
             console.log("money =>", money)
             console.log("privateKey =>", privateKey)
 
-
+            if (id == '') {
+                console.log("TESTID")
+                res.json(testid)
+            }
             const toAddress = await getReceiverWalletFromId(id)
             console.log("toAddress_show_toAddress =>", toAddress)
             let toAddress2 = toAddress.val();
             let totalvalue = toAddress2.balance;
-            let test =  "ERROR";
+            let test = "ERROR";
             console.log("toAddress2 =>", toAddress2)
             console.log("totalvalue =>", totalvalue)
             web3.setProvider(new web3.providers.HttpProvider("https://kovan.infura.io/v3/37dd526435b74012b996e147cda1c261"));
             var abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
             var count = await web3.eth.getTransactionCount(fromAddress);
-                var contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
-                var contract = new web3.eth.Contract(abi, contractAddress, { from: fromAddress });
-                if(money == ''){
-                    console.log("money..errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
-                    res.json(test)
-                }
-                var weiTokenAmount = web3.utils.toWei(String(money), 'ether');
-                var Transaction = {
-                    "from": fromAddress,
-                    "nonce": "0x" + count.toString(16),
-                    "gasPrice": "0x003B9ACA00",
-                    "gasLimit": "0x250CA",//151754
-                    "to": contractAddress,
-                    "value": "0x0",
-                    "data": contract.methods.transfer(toAddress2.address, weiTokenAmount).encodeABI(),
-                    "chainId": 0x03
-                };
-                var privKey = Buffer.from(privateKey, 'hex');
-                console.log("privKey = > ", privKey);
-                const tx = new EthereumTx(Transaction, { chain: 'kovan' });
-                tx.sign(privKey);
-                var serializedTx = tx.serialize();
-                console.log("serializedTx =>", serializedTx)
-                var receipt = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
-                console.log("receipt =>", receipt)
-                res.json(JSON.stringify(receipt.transactionHash))
-                database.ref('users').child(id).once("value", snapshot => {
-                    if (snapshot.exists()) { // check ????????????????????????
-                        console.log('Have_data')
-                        database.ref('users').child(id).update({
-                            // balance: (req.headers.money+toAddress2.balance),
-                            balance: parseInt(req.headers.money) + parseInt(toAddress2.balance)
-                        }).then(() => {
-                            console.log('push_send_perfect')
-                        }).catch(e => {
-                            console.log(e)
-                        })
-                    }
-                })
-                // return receipt
+            var contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
+            var contract = new web3.eth.Contract(abi, contractAddress, { from: fromAddress });
+            if (money == '') {
+                console.log("money..errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+                res.json(test)
             }
-            Tranfer().then((result) => {
-                console.log(result)
+            var weiTokenAmount = web3.utils.toWei(String(money), 'ether');
+            var Transaction = {
+                "from": fromAddress,
+                "nonce": "0x" + count.toString(16),
+                "gasPrice": "0x003B9ACA00",
+                "gasLimit": "0x250CA",//151754
+                "to": contractAddress,
+                "value": "0x0",
+                "data": contract.methods.transfer(toAddress2.address, weiTokenAmount).encodeABI(),
+                "chainId": 0x03
+            };
+            var privKey = Buffer.from(privateKey, 'hex');
+            console.log("privKey = > ", privKey);
+            const tx = new EthereumTx(Transaction, { chain: 'kovan' });
+            tx.sign(privKey);
+            var serializedTx = tx.serialize();
+            console.log("serializedTx =>", serializedTx)
+            var receipt = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
+            console.log("receipt =>", receipt)
+            res.json(JSON.stringify(receipt.transactionHash))
+            database.ref('users').child(id).once("value", snapshot => {
+                if (snapshot.exists()) { // check ????????????????????????
+                    console.log('Have_data')
+                    database.ref('users').child(id).update({
+                        // balance: (req.headers.money+toAddress2.balance),
+                        balance: parseInt(req.headers.money) + parseInt(toAddress2.balance)
+                    }).then(() => {
+                        console.log('push_send_perfect')
+                    }).catch(e => {
+                        console.log(e)
+                    })
+                }
             })
+            // return receipt
+        }
+        Tranfer().then((result) => {
+            console.log(result)
+        })
 
 
     })
@@ -517,6 +522,11 @@ router.route('/success/:id')
 router.route('/NOTSUCCESS/:id')
     .get((req, res) => {
         res.render('NOTSUCCESS.html')
+    })
+
+router.route('/Notid/:id')
+    .get((req, res) => {
+        res.render('Notid.html')
     })
 
 

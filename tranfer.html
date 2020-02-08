@@ -1018,11 +1018,14 @@
           TEST: 'test string'
         }
       }).then(result => {
-        console.log("result.TEST",result.data)
-        if(result.data == "ERROR"){
+        console.log("result.TEST", result.data)
+        if (result.data == "IDERROR") {
+          window.location.href = url.replace('send', 'Notid')
+        }
+        else if (result.data == "ERROR") {
           window.location.href = url.replace('send', 'NOTSUCCESS')
         }
-        else  {
+        else {
           $(() => {
             $(document).ready(() => {
               console.log("Show === result === Modal")
