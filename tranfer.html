@@ -852,7 +852,12 @@
             <div class="form-group">
               <input id="receiverLastID" type="text" class="form-control" placeholder="receiverLastID" />
             </div>
-            <a id="result" style="color:rgb(10, 5, 5)" ></a>
+           
+      
+            <a id="result">View on Etherscan</a>
+
+
+            
           </div>
         </div>
         <br>
@@ -945,6 +950,8 @@
 
   <script>
 
+    $("#result").hide(); 
+
 
     var modal = document.getElementById('id01');
 
@@ -1034,7 +1041,8 @@
             });
             let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
             $("#result").attr("href", link)
-            $("#result").text(link)
+            $("#result").show(1000);
+
           });
         }
 
