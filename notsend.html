@@ -12,138 +12,138 @@
 <style>
     @import url('https://fonts.googleapis.com/css?family=Francois+One&display=swap');
 
-  
-
-
-        .imgcontainer {
-            text-align: center;
-            margin: 10px 0 10px 0;
-            position: relative;
-        }
-
-        .symbolcoin {
-            margin-right: 20px;
-        }
-
-        .iconre {
-            width: 18px;
-            height: 20px;
-
-        }
 
 
 
-        img.avatar {
-            width: 10%;
-            border-radius: 50%;
-        }
+    .imgcontainer {
+        text-align: center;
+        margin: 10px 0 10px 0;
+        position: relative;
+    }
+
+    .symbolcoin {
+        margin-right: 20px;
+    }
+
+    .iconre {
+        width: 30px;
+        height: 20px;
+
+    }
 
 
 
-        span.psw {
-            float: right;
-            padding-top: 16px;
-        }
-
-        /* The Modal (background) */
-        .modal {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1;
-            /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-            padding-top: 60px;
-        }
-
-        /* Modal Content/Box */
-        .modal-content {
-            /* background-color: #fefefe; */
-            margin: 5% auto 15% auto;
-            /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
-            width: 80%;
-            /* Could be more or less, depending on screen size */
-        }
-
-        .btnsend {
-            border: none;
-            background: none;
-            outline: none;
-        }
+    img.avatar {
+        width: 10%;
+        border-radius: 50%;
+    }
 
 
 
-        /*************************************************************************************************************
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        /* background-color: #fefefe; */
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    .btnsend {
+        border: none;
+        background: none;
+        outline: none;
+    }
+
+
+
+    /*************************************************************************************************************
     /* The Close Button (x) */
-        .close {
-            position: absolute;
-            right: 25px;
-            top: 0;
-            color: #000;
-            font-size: 35px;
-            font-weight: bold;
+    .close {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: red;
+        cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
         }
 
-        .close:hover,
-        .close:focus {
-            color: red;
-            cursor: pointer;
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @keyframes animatezoom {
+        from {
+            transform: scale(0)
         }
 
-        /* Add Zoom Animation */
-        .animate {
-            -webkit-animation: animatezoom 0.6s;
-            animation: animatezoom 0.6s
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
         }
 
-        @-webkit-keyframes animatezoom {
-            from {
-                -webkit-transform: scale(0)
-            }
-
-            to {
-                -webkit-transform: scale(1)
-            }
+        .cancelbtn {
+            width: 100%;
         }
 
-        @keyframes animatezoom {
-            from {
-                transform: scale(0)
-            }
-
-            to {
-                transform: scale(1)
-            }
-        }
-
-        /* Change styles for span and cancel button on extra small screens */
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-
-            .cancelbtn {
-                width: 100%;
-            }
 
 
 
-
-        }
+    }
 </style>
 <style type="text/css">
     @keyframes ldio-2fzcezdt162 {
@@ -218,7 +218,7 @@
 
     .Logo {
         width: 180px;
-        height: 118px;
+        height: 170px;
 
     }
 
@@ -283,7 +283,7 @@
             display: flex;
             flex-direction: column;
             width: 900px;
-            height: 600px;
+            height: 400px;
             justify-content: space-around;
             align-items: center;
             background: linear-gradient(to bottom right, #9471d0, #43b7e6);
@@ -293,7 +293,7 @@
 
         .Logo {
             width: 140px;
-            height: 78px;
+            height: 160px;
 
         }
 
@@ -363,7 +363,7 @@
             display: flex;
             flex-direction: column;
             width: 700px;
-            height: 600px;
+            height: 460px;
             justify-content: space-around;
             align-items: center;
             background: linear-gradient(to bottom right, #9471d0, #43b7e6);
@@ -373,7 +373,7 @@
 
         .Logo {
             width: 140px;
-            height: 78px;
+            height: 120px;
 
         }
 
@@ -437,7 +437,7 @@
             display: flex;
             flex-direction: column;
             width: 425px;
-            height: 500px;
+            height: 330px;
             justify-content: space-around;
             align-items: center;
             background: linear-gradient(to bottom right, #9471d0, #43b7e6);
@@ -447,7 +447,7 @@
 
         .Logo {
             width: 140px;
-            height: 78px;
+            height: 120px;
 
         }
 
@@ -508,6 +508,7 @@
 
 
     @media (max-width:375px) {
+
         .symbolcoin {
             margin-right: 9px;
         }
@@ -516,7 +517,7 @@
             display: flex;
             flex-direction: column;
             width: 375px;
-            height: 410px;
+            height: 300px;
             justify-content: space-around;
             align-items: center;
             background: linear-gradient(to bottom right, #9471d0, #43b7e6);
@@ -526,7 +527,7 @@
 
         .Logo {
             width: 100px;
-            height: 48px;
+            height: 95px;
 
         }
 
@@ -590,7 +591,7 @@
             display: flex;
             flex-direction: column;
             width: 320px;
-            height: 400px;
+            height: 310px;
             justify-content: space-around;
             align-items: center;
             background: linear-gradient(to bottom right, #9471d0, #43b7e6);
@@ -600,7 +601,7 @@
 
         .Logo {
             width: 100px;
-            height: 48px;
+            height: 85px;
 
         }
 
@@ -768,24 +769,15 @@
     <div>
         <div class="Boxcontainer">
             <div>
-                <img class="Logo" src="https://dorm.psu.ac.th/system/files/images/psu-logo.png" alt="">
+                <img class="Logo" src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="" width="63"
+                    height="80">
             </div>
             <form id="submitSend" method="GET">
                 <div class="Boxwallet">
                     <div class="BoxwalletSymnol">
-                        <span> <a id="result" style="color:rgb(255, 255, 255)" class="symbolcoin"></a>PSU</span><button
-                            type="submit" onclick="document.getElementById('id01').style.display='block' "
-                            class=" btnsend" value="re">
-                            <ion-icon name="refresh" class="iconre" style="color:#FFFFFF"></ion-icon>
-                        </button>
+                        <span style=" color:rgb(255, 255, 255) ">SEND ERROR </span>
                     </div>
-                    <div class="Boxpublickey">
-                        <p style="color:#ffed1b">Wallet: <span><a id="fromAddress" class="symbolcoin"
-                                    style="color:#FFFFFF"></a></span>
-                        </p>
-                        <input type="hidden" class="form-control" name="fromAddress1" id="fromAddress1"
-                            size="80"></input>
-                    </div>
+
                 </div>
             </form>
             <div id="id01" class="modal">
@@ -805,16 +797,16 @@
                     <center>
             </div>
             <div class="threebtn">
-                <button type="button" class="btn btn-light Allbtn">
-                    <ion-icon name="send"></ion-icon><span onclick="gotoSendETH()">SEND</span>
-                </button>
-                <button type="button" class="btn btn-light Allbtn">
-                    <ion-icon name="qr-scanner"></ion-icon><span onclick="gotoPayment()">Payment</span>
-                </button>
-                <button type="button" class="btn btn-light Allbtn">
-                    <ion-icon name="folder-open"></ion-icon>
-                    </ion-icon><span onclick="gotoReceive()">Receive</span>
-                </button>
+                <div class="boxbutton">
+                    <button type="button" class="btn btn-danger">
+                        <div class="betweenput">
+                            <span onclick="gotoPayment()">OK</span>
+                        </div>
+                    </button>
+
+                </div>
+
+
             </div>
 
         </div>
@@ -845,23 +837,30 @@
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script>
         function gotoSendETH() {
-            window.location.href = window.location.href.replace('balance', 'send', 'index')
+            window.location.href = window.location.href.replace('notsend', 'send', 'index')
         }
 
         function gotoindex() {
-            // window.location.href = url.replace('send', 'balance')
-            window.location.href = url.replace('balance', 'index', 'send')
+            // window.location.href = url.replace('send', 'notsend')
+            window.location.href = url.replace('notsend', 'index', 'send')
         }
 
         function gotoPayment() {
-            // window.location.href = url.replace('send', 'balance')
-            window.location.href = url.replace('balance', 'camera', 'send')
+            // window.location.href = url.replace('send', 'notsend')
+            window.location.href = url.replace('notsend', 'send', 'send')
         }
 
         function gotoReceive() {
-            // window.location.href = url.replace('send', 'balance')
-            window.location.href = url.replace('balance', 'Receive', 'send')
+            // window.location.href = url.replace('send', 'notsend')
+            window.location.href = url.replace('notsend', 'Receive', 'send')
         }
+
+        function gotoCheckBalance() {
+            // window.location.href = url.replace('send', 'notsend')
+            window.location.href = url.replace('notsend', 'balance', 'send')
+        }
+
+        
 
 
 

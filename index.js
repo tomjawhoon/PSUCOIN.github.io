@@ -525,6 +525,11 @@ router.route('/NOTSUCCESS/:id')
         res.render('NOTSUCCESS.html')
     })
 
+router.route('/notsend/:id')
+    .get((req, res) => {
+        res.render('notsend.html')
+    })
+
 router.route('/Notid/:id')
     .get((req, res) => {
         res.render('Notid.html')
