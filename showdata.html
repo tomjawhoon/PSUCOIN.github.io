@@ -38,8 +38,8 @@
 
     <style>
 
-
-table {
+    table   
+        {
             font-family: arial, sans-serif;
             border-collapse: collapse;
             width: 100%;
@@ -48,18 +48,19 @@ table {
 
         td,
         tr:nth-child(even) {
-            background-color: #e06c9d;
+            background-color: #4aaaeb;
             border: 1px solid #dddddd; 
         }
-
-        td1,
-        tr:nth-child(even) {
-            background-color: #27d604;
+        td.green {
+            background-color: #78e662;
+            /* border: 1px solid #dddddd;  */
+        }
+        td.red {
+            background-color: #e65b84;
             /* border: 1px solid #dddddd;  */
         }
 
-
-        
+   
     </style>
 
     <div class="container">
@@ -199,8 +200,7 @@ table {
                         <td>${childData.address}</td>
                         <td>${childData.balance}</td>
                         <td>PSU</td>
-                        
-        
+                    
                     `
                     $(document).ready(() => { 
                        document.querySelector('#ex-table').append(tr) //อัพ    
@@ -212,10 +212,24 @@ table {
                     {
                         var tr = document.createElement('tr')
                         tr.innerHTML = `
-                        <td1>${childData.name.GetStaffDetailsResult.string[0]}</td1>
-                        <td1>${childData.address}</td1>
-                        <td1>${childData.balance}</td1>
-                        <td1>PSU</td1>
+                         <td class="green">${childData.name.GetStaffDetailsResult.string[0]}</td>
+                         <td class="green">${childData.address}</td>
+                         <td class="green">${childData.balance}</td>
+                         <td class="green">PSU</td>
+                    `
+                    $(document).ready(() => { 
+                       document.querySelector('#ex-table').append(tr) //อัพ    
+                     });  
+                       $("#ex-table").html("") //ลบ
+                    }
+                    if(childData.balance ==0 )
+                    {
+                        var tr = document.createElement('tr')
+                        tr.innerHTML = `
+                         <td class="red">${childData.name.GetStaffDetailsResult.string[0]}</td>
+                         <td class="red">${childData.address}</td>
+                         <td class="red">${childData.balance}</td>
+                         <td class="red">PSU</td>
                     `
                     $(document).ready(() => { 
                        document.querySelector('#ex-table').append(tr) //อัพ    
@@ -304,7 +318,7 @@ table {
             //console.log("1111",result.address)
             var tr = document.createElement('tr')
             tr.innerHTML = `
-                <td>${result.name.GetStaffDetailsResult.string[0]}</td>
+                 <td class="green">${result.name.GetStaffDetailsResult.string[0]}</td>
                 <td>${result.address}</td>
                 <td>${result.balance}</td>
                 <td>PSU</td>
