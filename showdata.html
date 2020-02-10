@@ -171,7 +171,7 @@
       id: id  // รหัสนักศึกษา
     }
   }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-    console.log("result_data", result)
+    //console.log("result_data", result)
     $('#fromAddress').val(result.data.address)
     $('#privateKey').val(result.data.privateKey)
     $('#showid').val(result.config.headers.id)
@@ -199,7 +199,7 @@
                 
                 var childData = childSnapshot.val();
               //  var data = []
-                console.log("showdata_admin_form_ui ===>", childData)
+                //console.log("showdata_admin_form_ui ===>", childData)
                 if(childData.balance >= 40  ){
                     var tr = document.createElement('tr')
                         tr.innerHTML = `
@@ -251,7 +251,7 @@
 
    // <!--===============================================================================================-->               
             const data = childData.name.GetStaffDetailsResult.string[0] //5935512088 < ==== เฉพาะ ID
-                console.log("data......", data)
+                //console.log("data......", data)
                     axios({
                     method: 'POST',
                     url: '/balance_admin/' + id + '/confirm',

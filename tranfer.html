@@ -14,7 +14,9 @@
 <style>
   @import url('https://fonts.googleapis.com/css?family=Francois+One&display=swap');
 
-
+  .front {
+    font-size: 125%;
+  }
 
 
   .imgcontainer {
@@ -350,6 +352,20 @@
   }
 
   @media (max-width:1024px) {
+
+    .Sponsored {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px;
+    }
+
+    .Textsponsored {
+      font-size: 24px;
+      vertical-align: super;
+      margin-left: 10px;
+    }
+
     #canvas {
       width: 250px;
       height: 310px;
@@ -432,6 +448,19 @@
 
   @media (max-width:768px) {
 
+    .Sponsored {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px;
+    }
+
+    .Textsponsored {
+      font-size: 24px;
+      vertical-align: super;
+      margin-left: 10px;
+    }
+
     .contact-form {
       background: #fff;
       margin-top: 25%;
@@ -509,6 +538,19 @@
   }
 
   @media (max-width:425px) {
+
+    .Sponsored {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: -5px;
+    }
+
+    .Textsponsored {
+      font-size: 24px;
+      vertical-align: super;
+      margin-left: 10px;
+    }
 
     .contact-form {
       background: #fff;
@@ -596,6 +638,26 @@
   @media (max-width:375px) {
 
 
+    .Sponsored {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px;
+    }
+
+    .Textsponsored {
+      font-size: 24px;
+      vertical-align: super;
+      margin-left: 10px;
+    }
+
+    .contact-image img {
+      border-radius: 6rem;
+      width: 11%;
+      margin-top: 3%;
+    }
+
+
     .contact-form {
       background: #fff;
       margin-top: 22%;
@@ -679,7 +741,22 @@
   }
 
 
+
   @media (max-width:320px) {
+
+    .Sponsored {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px;
+    }
+
+    .Textsponsored {
+      font-size: 24px;
+      vertical-align: super;
+      margin-left: 10px;
+    }
+
     .contact-form {
       background: #fff;
       margin-top: 35%;
@@ -820,6 +897,7 @@
 
     </nav>
     <div class="container contact-form">
+      <span class="front"> Balnce : </span> <a class="front" id="result1"></a> PSU
       <div class="contact-image">
         <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="rocket_contact" />
       </div>
@@ -839,6 +917,7 @@
             <div class="form-group">
               <input type="number" name="money" id="money" class="form-control" placeholder="PSUCOIN" />
             </div>
+
 
 
           </div>
@@ -900,16 +979,7 @@
       </div>
 
 
-      <div class="Sponsored">
-        <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
-        <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
-            class="Textsponsored">
-            Sponsored by
-            <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="Smiley face"
-              class="imgCOC"> ทีมวิจัย Blockchain
-            <!-- <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>. -->
-          </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
-      </div>
+
     </div>
 
 
@@ -958,6 +1028,7 @@
     $("#result").hide();
 
 
+
     var modal = document.getElementById('id01');
 
     // When the user clicks anywhere outside of the modal, close it
@@ -987,18 +1058,18 @@
 
 
 
-    /* axios({
-         method: 'GET',
-         url: '/getProfileforbalance', //ส่งไปค่านี้
-         headers: {
-             id: id  // รหัสนักศึกษา
-         }
-     }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-         console.log("result_data_balance", result.data)
-         $("#result").attr("href", result.data)
-         $("#result").text(result.data)
-         // $("#result").val()
-     })*/
+    axios({
+      method: 'GET',
+      url: '/getProfileforbalance', //ส่งไปค่านี้
+      headers: {
+        id: id  // รหัสนักศึกษา
+      }
+    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+      console.log("result_data_balance", result.data)
+      $("#result1").attr("href", result.data)
+      $("#result1").text(result.data)
+      // $("#result").val()
+    })
 
     axios({
       method: 'GET',

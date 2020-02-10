@@ -158,11 +158,178 @@
     /* make it responsive */
     @media screen and (max-width:768px) {
 
+      .Sponsored {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -35px;
+
+      }
+
+      .Textsponsored {
+        font-size: 24px;
+        vertical-align: super;
+
+      }
+
       /* make the layout  a single column and add some margin to the wrapper */
       #form_wrapper {
         grid-template-columns: 1fr;
         margin-left: 10px;
         margin-right: 10px;
+      }
+
+      /* on small screen we don't display the image */
+      #form_left {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width:768px) {
+
+      .Sponsored {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -35px;
+
+      }
+
+      .Textsponsored {
+        font-size: 24px;
+        vertical-align: super;
+
+      }
+
+
+      /* make the layout  a single column and add some margin to the wrapper */
+      #form_wrapper {
+        grid-template-columns: 1fr;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 680px;
+      }
+
+      /* on small screen we don't display the image */
+      #form_left {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width:375px) {
+
+      .Sponsored {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -35px;
+
+      }
+
+      .Textsponsored {
+        font-size: 24px;
+        vertical-align: super;
+
+      }
+
+
+
+      /* make the layout  a single column and add some margin to the wrapper */
+      #form_wrapper {
+        grid-template-columns: 1fr;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 610px;
+      }
+
+      /* on small screen we don't display the image */
+      #form_left {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width:320px) {
+
+      .Sponsored {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -35px;
+
+      }
+
+      .Textsponsored {
+        font-size: 24px;
+        vertical-align: super;
+
+      }
+
+
+      /* make the layout  a single column and add some margin to the wrapper */
+      #form_wrapper {
+        grid-template-columns: 1fr;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 520px;
+      }
+
+      /* on small screen we don't display the image */
+      #form_left {
+        display: none;
+      }
+    }
+
+
+    @media screen and (max-width:425px) {
+      .Sponsored {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -35px;
+
+      }
+
+      .Textsponsored {
+        font-size: 24px;
+        vertical-align: super;
+
+      }
+
+      #form_wrapper {
+        grid-template-columns: 1fr;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 610px;
+      }
+
+      #form_left {
+        display: none;
+      }
+    }
+
+
+    @media screen and (max-width:1024px) {
+      .Sponsored {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -35px;
+
+      }
+
+      .Textsponsored {
+        font-size: 24px;
+        vertical-align: super;
+
+      }
+
+
+      /* make the layout  a single column and add some margin to the wrapper */
+      #form_wrapper {
+        grid-template-columns: 1fr;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 520px;
       }
 
       /* on small screen we don't display the image */
@@ -178,8 +345,7 @@
 
   <div id="form_wrapper">
     <div id="form_left">
-      <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png"
-        alt="computer icon">
+      <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="computer icon">
     </div>
     <form action="/loginadmin" method="post">
       <div id="form_right">
@@ -200,27 +366,25 @@
         </div>
         <input type="submit" value="Login" id='input_submit' class='input_field'>
     </form>
-    
+
     <span>Back <a href="/">Login PSU passpost</a></span>
     <br>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
 
     <center>
-      <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
-      <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
-          style="font-size: 24px; vertical-align: super; margin-left: 5px;">
-          Sponsored by
-          <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="Smiley face"
-            width="80" height="30">
+      <div class="Sponsored">
+        <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
+        <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
+            style="font-size: 24px; vertical-align: super; margin-left: 5px;">
+            Sponsored by
+            <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="Smiley face"
+              class="imgCOC" width="80" height="30">
+        </div>
       </div>
     </center>
+
+
   </div>
   </div>
 

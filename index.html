@@ -32,7 +32,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
     <div class="container">
     <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
-      <a class="navbar-brand js-scroll-trigger" href="/">PSU COIN</a>
+      <a class="navbar-brand js-scroll-trigger" onclick="gotoindex()">PSU COIN</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -53,9 +53,9 @@
               <a class="nav-link js-scroll-trigger" href="#about" onclick="gotosendadmin()">Sendadmin</a>
             </li> -->
 
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#about" onclick="gotoShowdata()">List</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" onclick="gotoCalendar()">Calendar</a>
           </li>
@@ -331,7 +331,7 @@
       }
 
       function gotoindex() {
-        window.location.href = url.replace('index', 'send', 'balance')
+        window.location.href = url.replace('index', 'index')
       }
 
       function gotoprofile() {
