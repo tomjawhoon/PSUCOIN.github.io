@@ -486,10 +486,21 @@ router.route('/event1/:id')
         res.render('event1.html')
     })
 
-router.route('/event2/:id')
+router.route('/event3/:id')
     .get((req, res) => {
-        res.render('event2.html')
+        res.render('event3.html')
     })
+
+router.route('/event4/:id')
+    .get((req, res) => {
+        res.render('event4.html')
+    })
+    
+router.route('/event5/:id')
+    .get((req, res) => {
+        res.render('event5.html')
+    })
+
 
 
 
