@@ -8,6 +8,7 @@
   <!-- <link rel="stylesheet" href="style.css"> -->
   <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 </head>
 <style>
@@ -149,6 +150,9 @@
 <style>
   body {
     background: -webkit-linear-gradient(left, #9471d0, #43b7e6);
+    font-family: "Open Sans", -apple-system,
+      BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+      "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .contact-form {
@@ -852,12 +856,12 @@
             <div class="form-group">
               <input id="receiverLastID" type="text" class="form-control" placeholder="receiverLastID" />
             </div>
-           
-      
+
+
             <a id="result">View on Etherscan</a>
 
 
-            
+
           </div>
         </div>
         <br>
@@ -870,6 +874,7 @@
 
 
       </form>
+
       <div id="id01" class="modal">
         <form action="/action_page.php" method="post">
           <div class="imgcontainer">
@@ -888,8 +893,8 @@
           </div>
 
           <!-- <div class="container" style="background-color:#f1f1f1"> -->
- 
-            <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn"
+
+          <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn"
                     >Success</button></center> -->
 
       </div>
@@ -898,13 +903,13 @@
       <div class="Sponsored">
         <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
         <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
-                class="Textsponsored">
-                Sponsored by 
-                <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png"
-                    alt="Smiley face" class="imgCOC"> ทีมวิจัย Blockchain
-                <!-- <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>. -->
-            </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
-    </div>
+            class="Textsponsored">
+            Sponsored by
+            <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png" alt="Smiley face"
+              class="imgCOC"> ทีมวิจัย Blockchain
+            <!-- <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>. -->
+          </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
+      </div>
     </div>
 
 
@@ -950,13 +955,13 @@
 
   <script>
 
-    $("#result").hide(); 
+    $("#result").hide();
 
 
     var modal = document.getElementById('id01');
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
+    window.onclick = (event) => {
       if (event.target == modal) {
         modal.style.display = "none";
       }
@@ -1037,11 +1042,19 @@
               console.log("Show === result === Modal")
               $("#id01").hide();
               console.log("SUCCESS")
+              $("#result").alert("Hello! I am an alert box!");
               // window.location.href = url.replace('send', 'SUCCESS')
             });
             let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
             $("#result").attr("href", link)
             $("#result").show(1000);
+            Swal.fire(
+              'Complete',
+              'Payment Success',
+              'success'
+            )
+
+
 
           });
         }

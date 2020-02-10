@@ -114,12 +114,13 @@ router.route('/loginadmin')
                     // res.send('<script>alert("??????????????????");</script>');
                     res.redirect('/indexadmin/' + user.username)
                     return false;
+                } else {
+                    console.log('Error admin')
+                    res.redirect('/error')
                 }
             })
         }
-        else {
-            res.redirect('/error/')
-        }
+
     })
 
 
