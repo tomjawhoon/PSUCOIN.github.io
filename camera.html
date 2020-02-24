@@ -979,7 +979,7 @@
                     console.log("QRcode ====== >", code.data)
                     document.querySelector('#submitSend').addEventListener('submit', e => {
                         e.preventDefault()
-                        axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
+                        axios({ 
                             method: 'POST',
                             url: '/ShowTranferQrcode/' + id + '/confirm', // ส่งไปยังค่านี้
                             headers: {
