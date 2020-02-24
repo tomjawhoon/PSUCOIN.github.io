@@ -1007,16 +1007,8 @@
                                     $(document).ready(() => {
                                         console.log("Show === result === Modal")
                                         $("#id01").hide();
-                                        //window.location.href = url.replace('camera', 'SUCCESS')
+                                    window.location.href = url.replace('camera', 'SUCCESS')
                                     });
-                                    swal.fire(
-                                        'Complete',
-                                        'Payment Success',
-                                        'success'
-                                    ).then(function () {
-                                        location.reload();
-                                    }
-                                    );
                                 });
                             }
                         }).catch(result => {
