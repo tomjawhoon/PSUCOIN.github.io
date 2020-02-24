@@ -897,7 +897,7 @@
 
     </nav>
     <div class="container contact-form">
-      <span class="front"> Balnce : </span> <a class="front" id="result1"></a> PSU
+      <span class="front"> Balance</span> <a class="front" id="result1"></a> PSU
       <div class="contact-image">
         <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="rocket_contact" />
       </div>
@@ -909,7 +909,7 @@
         <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="80"></input>
         <div class="row">
           <div class="col-md-6">
-            <h5 style="color:rgb(228, 46, 46)">(Student ID) Recipients </h5>
+            <h5 style="color:rgb(228, 46, 46)">(Student ID) Recipient </h5>
             <div class="form-group">
               <input type="text" name="toAddress" id="toAddress" class="form-control" placeholder="Recipients" />
             </div>
@@ -922,7 +922,7 @@
 
           </div>
           <div class="col-md-6">
-            <h5 style="color:rgb(228, 46, 46)">(PROFILE) Recipients</h5>
+            <h5 style="color:rgb(228, 46, 46)">(PROFILE) Recipient</h5>
 
             <div class="form-group">
               <input id="receiverName" type="text" class="form-control" placeholder="receiverName" />
@@ -999,7 +999,7 @@
     }
 
     function gotoindex() {
- 
+
       window.location.href = url.replace('send', 'index')
     }
 
@@ -1098,10 +1098,24 @@
       }).then(result => {
         console.log("result.TEST", result.data)
         if (result.data == "IDERROR") {
-          window.location.href = url.replace('send', 'Notid')
+          swal.fire(
+            'Student ID Error', 
+            'กรุณากรอกข้อมูลให้ถูกต้อง',
+            "error"
+          ).then(function () {
+            location.reload();
+          }
+          );
         }
         else if (result.data == "ERROR") {
-          window.location.href = url.replace('send', 'notsend')
+          swal.fire(
+            'Payment Error', 
+            'ใส่จำนวนเงินใหม่',
+            "error"
+          ).then(function () {
+            location.reload();
+          }
+          );
         }
         else {
           $(() => {
@@ -1120,6 +1134,10 @@
               'Payment Success',
               'success'
             )
+
+            /*'Complete',
+              'Payment Success',
+              'error'*/
 
 
 
