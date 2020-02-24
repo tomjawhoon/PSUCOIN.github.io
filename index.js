@@ -211,8 +211,8 @@ router.route('/send/:id/confirm')
 
             // const testvalue = req.headers.result;
 
-            console.log('xx: ', req.headers)
-            console.log("id", id)
+            // console.log('xx: ', req.headers)
+            console.log("id", id) //to id 
             //////////////////////////// sender ///////////////////////////////////////////////////
             console.log("id_sender", id_sender)
             const toAddress_sender = await getReceiverWalletFromId(id_sender)
@@ -226,13 +226,22 @@ router.route('/send/:id/confirm')
             console.log("fromAddress =>", fromAddress)
             console.log("money =>", money)
             console.log("privateKey =>", privateKey)
+            //var id = string.match(/(\d){10}/gm)
 
             if (id == '') {
                 console.log("TESTID")
                 res.json(testid)
             }
-            
+
+          /*  else if (id != toAddress) {
+                console.log("TESTID")
+                res.json(testid)
+            }*/
+
+
             const toAddress = await getReceiverWalletFromId(id)
+        
+
             console.log("toAddress_show_toAddress =>", toAddress)
 
             let toAddress2 = toAddress.val();
@@ -919,9 +928,9 @@ router.route('/getProfileByIdadmin')
                 //console.log("data", data)
                 res.send(JSON.stringify({
                     // id: data,
-                    name: data1,
+                    name:     data1,
                     lastName: data2,
-                    balance: data3
+                    balance:  data3
                 }))
             } else {
                 res.send(JSON.stringify({
