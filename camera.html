@@ -12,7 +12,7 @@
     <script src="https://cozmo.github.io/jsQR/jsQR.js"></script>
 </head>
 <style>
-     .form-control {
+    .form-control {
         border-radius: 1rem;
     }
 
@@ -712,32 +712,33 @@
             <canvas id="canvas" hidden></canvas>
             <form id="submitSend" method="POST" action="/sendQrcode">
                 <div id="output">
-           
-                        <div id="outputMessage"></div>
-                        <div hidden><b>Data:</b> <span id="outputData"></span></div>
-                        <br>
-                        <!-- <p>Toaddress Wallet</p> -->
-                        <input id="show" name="show" type="text" class="form-control" size="38"
-                            placeholder="Toaddress Wallet"></input>
-                        <p></p>
-                        <input type="number" class="form-control" name="money" id="money" size="38"
-                            placeholder="Money"></input>
 
-                        <!-- <input type="number" class="form-control" name="money1" id="money1" size="80"
+                    <div id="outputMessage"></div>
+                    <div hidden><b>Data:</b> <span id="outputData"></span></div>
+                    <br>
+                    <!-- <p>Toaddress Wallet</p> -->
+                    <input id="show" name="show" type="text" class="form-control" size="38"
+                        placeholder="Toaddress Wallet"></input>
+                    <p></p>
+                    <input type="number" class="form-control" name="money" id="money" size="38"
+                        placeholder="Money" min="1"></input>
+
+                    <!-- <input type="number" class="form-control" name="money1" id="money1" size="80"
                             placeholder="Money"></input> -->
 
-                        <input type="hidden" class="form-control" name="showid" id="showid" size="38"></input><br>
+                    <input type="hidden" class="form-control" name="showid" id="showid" size="38"></input><br>
 
-                        <input type="hidden" class="form-control" name="fromAddress" id="fromAddress" size="38"></input>
-                        <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
-                        <!-- <h5>privateKey</h5> -->
-                        <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="38"></input>
-                        <br> <center><button id="btnEnter" type="submit" class="btn btn-primary"
+                    <input type="hidden" class="form-control" name="fromAddress" id="fromAddress" size="38"></input>
+                    <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
+                    <!-- <h5>privateKey</h5> -->
+                    <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="38"></input>
+                    <br>
+                    <center><button id="btnEnter" type="submit" class="btn btn-primary"
                             onclick="document.getElementById('id01').style.display='block'"
                             style="width:auto;">ENTER</button></center>
-                        <!-- <button onclick="stop()">stop</button> -->
-                        <!-- <a id="result"></a> -->
-               
+                    <!-- <button onclick="stop()">stop</button> -->
+                    <!-- <a id="result"></a> -->
+
                 </div>
 
             </form>
@@ -791,7 +792,7 @@
             <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
             <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
                     class="Textsponsored">
-                    Sponsored by 
+                    Sponsored by
                     <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png"
                         alt="Smiley face" class="imgCOC"> ทีมวิจัย Blockchain
                     <!-- <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>. -->
@@ -992,15 +993,30 @@
                             }
                         }).then(result => {
                             if (result.data == "ERROR") {
-                                window.location.href = url.replace('send', 'NOTSUCCESS')
+                                swal.fire(
+                                    'Payment Error',
+                                    'ใส่จำนวนเงินใหม่',
+                                    "error"
+                                ).then(function () {
+                                    location.reload();
+                                }
+                                );
                             }
                             else {
                                 $(() => {
                                     $(document).ready(() => {
                                         console.log("Show === result === Modal")
                                         $("#id01").hide();
-                                        window.location.href = url.replace('camera', 'SUCCESS')
+                                        //window.location.href = url.replace('camera', 'SUCCESS')
                                     });
+                                    swal.fire(
+                                        'Complete',
+                                        'Payment Success',
+                                        'success'
+                                    ).then(function () {
+                                        location.reload();
+                                    }
+                                    );
                                 });
                             }
                         }).catch(result => {

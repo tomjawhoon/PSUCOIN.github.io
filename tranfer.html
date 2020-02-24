@@ -915,10 +915,8 @@
             </div>
             <h5 style="color:rgb(228, 46, 46)">PSUCOIN</h5>
             <div class="form-group">
-              <input type="number" name="money" id="money" class="form-control" placeholder="PSUCOIN" />
+              <input type="number" name="money" id="money" class="form-control" placeholder="PSUCOIN"  />
             </div>
-
-
 
           </div>
           <div class="col-md-6">
@@ -1093,7 +1091,8 @@
           toAddress: $('#toAddress').val(),
           privateKey: $('#privateKey').val(),
           money: $('#money').val(),
-          TEST: 'test string'
+          TEST: 'test string',
+          id:id
         }
       }).then(result => {
         console.log("result.TEST", result.data)
@@ -1134,13 +1133,6 @@
               'Payment Success',
               'success'
             )
-
-            /*'Complete',
-              'Payment Success',
-              'error'*/
-
-
-
           });
         }
 
