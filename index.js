@@ -334,9 +334,7 @@ router.route('/showdata/:id/confirm')
             });
         });
         res.json(JSON.stringify(test))
-        // var test_Show = req.headers
-        //var test_Show1 = req.data
-        // console.log("test_Show ===>", test_Show)
+
     })
 
 // <!--===============================================================================================-->
