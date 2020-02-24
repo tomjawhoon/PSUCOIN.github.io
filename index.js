@@ -340,7 +340,6 @@ router.route('/showdata/:id/confirm')
 // <!--===============================================================================================-->
 router.route('/showdata_admin/:id/confirm')
     .get((req, res) => {
-        //var test = req.headers.id;
         var test = [];
         var leadsRef = database.ref('users');
         leadsRef.on('value', (snapshot) => {
