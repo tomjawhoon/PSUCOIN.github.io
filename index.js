@@ -233,10 +233,7 @@ router.route('/send/:id/confirm')
                 res.json(testid)
             }
 
-          /*  else if (id != toAddress) {
-                console.log("TESTID")
-                res.json(testid)
-            }*/
+    
 
 
             const toAddress = await getReceiverWalletFromId(id)
