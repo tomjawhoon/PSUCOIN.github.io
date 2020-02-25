@@ -1150,7 +1150,7 @@
           headers: {
             id: e.target.value  // รหัสนักศึกษา
           }
-        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+        }).then(result => { 
           $('#receiverName').val(result.data.name)
           $('#receiverLastName').val(result.data.lastName)
           $('#receiverLastID').val(result.data.id)
