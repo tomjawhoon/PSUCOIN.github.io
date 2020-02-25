@@ -1046,6 +1046,12 @@
                     if (code.data != '') {
                         $(() => {
                             $(document).ready(() => {
+                                var stream = video.srcObject;
+                                var tracks = stream.getTracks();
+                                for (var i = 0; i < tracks.length; i++) {
+                                    var track = tracks[i];
+                                    track.stop();
+                                }
                                 console.log("Show")
                                 $("#canvas").hide(3000);
                                 $("#btnEnter").show(2000);
@@ -1054,12 +1060,11 @@
                                 // $("#money1").show(2000);
                             });
                         });
-
                     }
 
 
 
-                    console.log("QRcode 555555 ====== >", outputData)
+                    // console.log("QRcode 555555 ====== >", outputData)
                 } else {
                     outputMessage.hidden = false;
                     outputData.parentElement.hidden = true;
