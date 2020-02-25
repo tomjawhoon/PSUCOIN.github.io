@@ -12,7 +12,7 @@
     <script src="https://cozmo.github.io/jsQR/jsQR.js"></script>
 </head>
 <style>
-     .form-control {
+    .form-control {
         border-radius: 1rem;
     }
 
@@ -712,32 +712,33 @@
             <canvas id="canvas" hidden></canvas>
             <form id="submitSend" method="POST" action="/sendQrcode">
                 <div id="output">
-           
-                        <div id="outputMessage"></div>
-                        <div hidden><b>Data:</b> <span id="outputData"></span></div>
-                        <br>
-                        <!-- <p>Toaddress Wallet</p> -->
-                        <input id="show" name="show" type="text" class="form-control" size="38"
-                            placeholder="Toaddress Wallet"></input>
-                        <p></p>
-                        <input type="number" class="form-control" name="money" id="money" size="38"
-                            placeholder="Money"></input>
 
-                        <!-- <input type="number" class="form-control" name="money1" id="money1" size="80"
+                    <div id="outputMessage"></div>
+                    <div hidden><b>Data:</b> <span id="outputData"></span></div>
+                    <br>
+                    <!-- <p>Toaddress Wallet</p> -->
+                    <input id="show" name="show" type="text" class="form-control" size="38"
+                        placeholder="Toaddress Wallet"></input>
+                    <p></p>
+                    <input type="number" class="form-control" name="money" id="money" size="38"
+                        placeholder="Money"></input>
+
+                    <!-- <input type="number" class="form-control" name="money1" id="money1" size="80"
                             placeholder="Money"></input> -->
 
-                        <input type="hidden" class="form-control" name="showid" id="showid" size="38"></input><br>
+                    <input type="hidden" class="form-control" name="showid" id="showid" size="38"></input><br>
 
-                        <input type="hidden" class="form-control" name="fromAddress" id="fromAddress" size="38"></input>
-                        <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
-                        <!-- <h5>privateKey</h5> -->
-                        <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="38"></input>
-                        <br> <center><button id="btnEnter" type="submit" class="btn btn-primary"
+                    <input type="hidden" class="form-control" name="fromAddress" id="fromAddress" size="38"></input>
+                    <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
+                    <!-- <h5>privateKey</h5> -->
+                    <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="38"></input>
+                    <br>
+                    <center><button id="btnEnter" type="submit" class="btn btn-primary"
                             onclick="document.getElementById('id01').style.display='block'"
                             style="width:auto;">ENTER</button></center>
-                        <!-- <button onclick="stop()">stop</button> -->
-                        <!-- <a id="result"></a> -->
-               
+                    <!-- <button onclick="stop()">stop</button> -->
+                    <!-- <a id="result"></a> -->
+
                 </div>
 
             </form>
@@ -791,7 +792,7 @@
             <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
             <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
                     class="Textsponsored">
-                    Sponsored by 
+                    Sponsored by
                     <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png"
                         alt="Smiley face" class="imgCOC"> ทีมวิจัย Blockchain
                     <!-- <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>. -->
@@ -829,7 +830,7 @@
         }
 
         function gotoCheckBalance1() {
- 
+
             window.location.href = url.replace('camera', 'balance', 'send')
         }
 
@@ -837,11 +838,6 @@
             // window.location.href = url.replace('send', 'camera')
             window.location.href = url.replace('camera', 'camera', 'send')
         }
-
-
-
-
-
 
     </script>
     <script>
@@ -864,9 +860,6 @@
 
         //    $("#btnEnter").hide();
 
-
-
-
         var video = document.createElement("video");
         var canvasElement = document.getElementById("canvas");
         var canvas = canvasElement.getContext("2d");
@@ -874,12 +867,8 @@
         var outputContainer = document.getElementById("output");
         var outputMessage = document.getElementById("outputMessage");
         var outputData = document.getElementById("outputData");
-        var url;
-        var id;
-        (() => {
-            url = window.location.href
-            id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
-        })()
+        var url = window.location.href;
+        var id = url.split('/').slice(-1).toString(); // ไอดี ของผู้ login
 
         function gotoCheckBalance() {
             // window.location.href = url.replace('send', 'balance')
@@ -892,50 +881,52 @@
         // var video = document.querySelector("#videoElement");
         // var button = document.querySelector("#videoElement");
 
+        $(() => {
+            axios({
+                method: 'GET',
+                url: '/getWalletById', //ส่งไปค่านี้
+                headers: {
+                    id: id  // รหัสนักศึกษา
+                }
+            }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+                console.log("result_data", result)
+                $('#fromAddress').val(result.data.address)
+                $('#privateKey').val(result.data.privateKey)
+                $('#showid').val(result.config.headers.id)
+            })
+            axios({
+                method: 'GET',
+                url: '/getProfileforbalance', //ส่งไปค่านี้
+                headers: {
+                    id: id  // รหัสนักศึกษา
+                }
+            }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+                console.log("result_data_balance", result.data)
+                // $('#fromAddress').val(result.data.address)
+                // $('#privateKey').val(result.data.privateKey)
+                // $('#showid').val(result.config.headers.id)
+            })
 
-        axios({
-            method: 'GET',
-            url: '/getWalletById', //ส่งไปค่านี้
-            headers: {
-                id: id  // รหัสนักศึกษา
-            }
-        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-            console.log("result_data", result)
-            $('#fromAddress').val(result.data.address)
-            $('#privateKey').val(result.data.privateKey)
-            $('#showid').val(result.config.headers.id)
+            // function stop(e) { //stop
+            //         var stream = video.srcObject;
+            //         var tracks = stream.getTracks();
+
+            //         for (var i = 0; i < tracks.length; i++) {
+            //             var track = tracks[i];
+            //             track.stop();
+            //         }
+
+            //         video.srcObject = null;
+            //     }
+
+            // Use facingMode: environment to attemt to get the front camera on phones
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
+                video.srcObject = stream;
+                video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+                video.play();
+                requestAnimationFrame(tick);
+            });
         })
-
-
-
-
-
-        axios({
-            method: 'GET',
-            url: '/getProfileforbalance', //ส่งไปค่านี้
-            headers: {
-                id: id  // รหัสนักศึกษา
-            }
-        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-            console.log("result_data_balance", result.data)
-            // $('#fromAddress').val(result.data.address)
-            // $('#privateKey').val(result.data.privateKey)
-            // $('#showid').val(result.config.headers.id)
-        })
-
-        // function stop(e) { //stop
-        //         var stream = video.srcObject;
-        //         var tracks = stream.getTracks();
-
-        //         for (var i = 0; i < tracks.length; i++) {
-        //             var track = tracks[i];
-        //             track.stop();
-        //         }
-
-        //         video.srcObject = null;
-        //     }
-
-
 
         function drawLine(begin, end, color) {
             canvas.beginPath();
@@ -945,14 +936,6 @@
             canvas.strokeStyle = color;
             canvas.stroke();
         }
-
-        // Use facingMode: environment to attemt to get the front camera on phones
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
-            video.srcObject = stream;
-            video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
-            video.play();
-            requestAnimationFrame(tick);
-        });
 
         function tick() {
             loadingMessage.innerText = "⌛ Loading video..."
@@ -979,7 +962,7 @@
                     console.log("QRcode ====== >", code.data)
                     document.querySelector('#submitSend').addEventListener('submit', e => {
                         e.preventDefault()
-                        axios({ 
+                        axios({
                             method: 'POST',
                             url: '/ShowTranferQrcode/' + id + '/confirm', // ส่งไปยังค่านี้
                             headers: {
