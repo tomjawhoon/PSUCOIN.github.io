@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- TEST camera wowowowowowo-->
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="/front/js/jquery.qrcode.min.js"></script>
@@ -79,7 +79,7 @@
     }
 
     /*************************************************************************************************************
-
+    /* The Close Button (x) */
     .close {
         position: absolute;
         right: 25px;
@@ -674,7 +674,7 @@
         <div class="container">
             <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52"
                 onclick="gotoindex()">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN _camera</a>
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -815,27 +815,27 @@
     <script src="/front/js/jquery.qrcode.min.js"></script>
     <script>
         function gotoSendETH() {
-            window.location.href = window.location.href.replace('camera', 'send', 'index')
+            window.location.href = window.location.href.replace('Receive', 'send', 'index')
         }
 
         function gotoindex() {
-            // window.location.href = url.replace('send', 'camera')
-            window.location.href = url.replace('camera', 'index', 'send')
+            // window.location.href = url.replace('send', 'Receive')
+            window.location.href = url.replace('Receive', 'index', 'send')
         }
 
         function gotoPayment() {
-            // window.location.href = url.replace('send', 'camera')
-            window.location.href = url.replace('camera', 'balance')
+            // window.location.href = url.replace('send', 'Receive')
+            window.location.href = url.replace('Receive', 'balance')
         }
 
         function gotoCheckBalance1() {
- 
-            window.location.href = url.replace('camera', 'balance', 'send')
+            // window.location.href = url.replace('send', 'Receive')
+            window.location.href = url.replace('Receive', 'balance', 'send')
         }
 
         function gotoCheckBalance() {
-            // window.location.href = url.replace('send', 'camera')
-            window.location.href = url.replace('camera', 'camera', 'send')
+            // window.location.href = url.replace('send', 'Receive')
+            window.location.href = url.replace('Receive', 'camera', 'send')
         }
 
 
@@ -979,7 +979,7 @@
                     console.log("QRcode ====== >", code.data)
                     document.querySelector('#submitSend').addEventListener('submit', e => {
                         e.preventDefault()
-                        axios({ 
+                        axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
                             method: 'POST',
                             url: '/ShowTranferQrcode/' + id + '/confirm', // ส่งไปยังค่านี้
                             headers: {
@@ -1033,7 +1033,6 @@
                                 $("#show").show(2000);
                                 $("#money").show(2000);
                                 // $("#money1").show(2000);
-                                //testtesttest 
                             });
                         });
 

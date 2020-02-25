@@ -206,46 +206,26 @@ router.route('/send/:id/confirm')
             const fromAddress = req.headers.fromaddress;
             const money = req.headers.money;
             const privateKey = req.headers.privatekey;
-            const id_sender = req.headers.id;
             let testid = "IDERROR"
 
             // const testvalue = req.headers.result;
 
-            // console.log('xx: ', req.headers)
-            console.log("id", id) //to id 
-            //////////////////////////// sender ///////////////////////////////////////////////////
-            console.log("id_sender", id_sender)
-            const toAddress_sender = await getReceiverWalletFromId(id_sender)
-            let id_sendershow = toAddress_sender.val();
-            let id_sendershow_balance = id_sendershow.balance;
-            console.log("id_sendershow_balance =>", id_sendershow_balance)
-            //////////////////////////// sender ///////////////////////////////////////////////////
-
-            //let totalvalue = toAddress2.balance;
+            console.log('xx: ', req.headers)
+            console.log("id", id)
             console.log("testvalue === >", req.header.value1)
             console.log("fromAddress =>", fromAddress)
             console.log("money =>", money)
             console.log("privateKey =>", privateKey)
-            //var id = string.match(/(\d){10}/gm)
 
             if (id == '') {
                 console.log("TESTID")
                 res.json(testid)
             }
-
-    
-
-
             const toAddress = await getReceiverWalletFromId(id)
-        
-
             console.log("toAddress_show_toAddress =>", toAddress)
-
             let toAddress2 = toAddress.val();
             let totalvalue = toAddress2.balance;
             let test = "ERROR";
-            //let moneybalance = "moneybalance";
-
             console.log("toAddress2 =>", toAddress2)
             console.log("totalvalue =>", totalvalue)
             web3.setProvider(new web3.providers.HttpProvider("https://kovan.infura.io/v3/37dd526435b74012b996e147cda1c261"));
@@ -257,19 +237,6 @@ router.route('/send/:id/confirm')
                 console.log("money..errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
                 res.json(test)
             }
-
-            else if (money > id_sendershow_balance) {
-                console.log("MAX_MONEY..........................................")
-                res.json(test)
-            }
-
-
-            else if (money < 0) {
-                console.log("MIN_MONEY..........................................")
-                res.json(test)
-            }
-
-
             var weiTokenAmount = web3.utils.toWei(String(money), 'ether');
             var Transaction = {
                 "from": fromAddress,
@@ -287,18 +254,15 @@ router.route('/send/:id/confirm')
             tx.sign(privKey);
             var serializedTx = tx.serialize();
             console.log("serializedTx =>", serializedTx)
-            /////////////////////////////////////////////////// errrrorr //////////////////////////////////////////////////////////////////////////
-            /*if (money <= id_sendershow_balance) {
-                console.log("errorrrrrrrrrrrrrrrrrrrrrrrr.receipt")
-                res.json(moneybalance)
-            }*/
+
             var receipt = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
             console.log("receipt =>", receipt)
             res.json(JSON.stringify(receipt.transactionHash))
             database.ref('users').child(id).once("value", snapshot => {
-                if (snapshot.exists()) {
+                if (snapshot.exists()) { // check ????????????????????????
                     console.log('Have_data')
                     database.ref('users').child(id).update({
+                        // balance: (req.headers.money+toAddress2.balance),
                         balance: parseInt(req.headers.money) + parseInt(toAddress2.balance)
                     }).then(() => {
                         console.log('push_send_perfect')
@@ -334,12 +298,15 @@ router.route('/showdata/:id/confirm')
             });
         });
         res.json(JSON.stringify(test))
-
+        // var test_Show = req.headers
+        //var test_Show1 = req.data
+        // console.log("test_Show ===>", test_Show)
     })
 
 // <!--===============================================================================================-->
 router.route('/showdata_admin/:id/confirm')
     .get((req, res) => {
+        //var test = req.headers.id;
         var test = [];
         var leadsRef = database.ref('users');
         leadsRef.on('value', (snapshot) => {
@@ -528,7 +495,7 @@ router.route('/event4/:id')
     .get((req, res) => {
         res.render('event4.html')
     })
-
+    
 router.route('/event5/:id')
     .get((req, res) => {
         res.render('event5.html')
@@ -618,7 +585,7 @@ router.route('/ShowTranferQrcode/:id/confirm')
             let test = "ERROR";
             let toAddress2 = req.headers.content;
             // let totalvalue = toAddress2.balance;
-            //let id_sender = toAddress.val([1].address);
+            //let toAddress3 = toAddress.val([1].address);
 
             console.log("toAddress2 =>", toAddress2)
             // console.log("totalvalue =>", totalvalue)
@@ -922,9 +889,9 @@ router.route('/getProfileByIdadmin')
                 //console.log("data", data)
                 res.send(JSON.stringify({
                     // id: data,
-                    name:     data1,
+                    name: data1,
                     lastName: data2,
-                    balance:  data3
+                    balance: data3
                 }))
             } else {
                 res.send(JSON.stringify({
@@ -960,7 +927,7 @@ async function getReceiverWalletFromId(id) {
     // console.log("getReceiverWalletFromId = >",id)
 }
 // <!--===============================================================================================-->
-app.listen(5001, () => console.log('Server is ready!'))
+app.listen(9000, () => console.log('Server is ready!'))
 
 
 // 791786F6D865B4FAFAC0E92A5961D0526AF0072EFA757D5E46E59A69EF63FF70
