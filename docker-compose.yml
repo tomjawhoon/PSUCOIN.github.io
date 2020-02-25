@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+    express:
+        container_name: coin-app
+        build: ./
+        ports:
+            - "5001:5001"
