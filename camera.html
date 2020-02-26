@@ -712,9 +712,9 @@
                 enabled)</div>
             <canvas id="canvas" hidden></canvas>
             <form id="submitSend" method="POST" action="/sendQrcode">
-                <div id="output">
+                <div id="output" hidden">
 
-                    <div id="outputMessage"></div>
+                    <div id="outputMessage" hidden></div>
                     <!-- <div hidden><b>Data:</b> <span id="outputData"></span></div> -->
                     <br>
                     <!-- <p>Toaddress Wallet</p> -->
@@ -767,7 +767,7 @@
 
             </div>
             <div id="output">
-                <div id="outputMessage"></div>
+                <div id="outputMessage" hidden></div>
                 <!-- <div hidden><b>Data:</b> <span id="outputData"></span></div> -->
 
             </div>
@@ -785,8 +785,8 @@
 
         </div>
         <div id="output">
-            <div id="outputMessage"></div>
-           <span id="outputData" type="hidden"></span>
+            <div id="outputMessage" hidden></div>
+           <div id="outputData" hidden></div>
 
         </div>
         <div class="Sponsored">
@@ -978,7 +978,7 @@
 
                     outputData.parentElement.hidden = false;
                     outputData.innerText = code.data;
-                    console.log("QRcode ====== >", code.data)
+                    // console.log("QRcode ====== >", code.data)
                     document.querySelector('#submitSend').addEventListener('submit', e => {
                         e.preventDefault()
                         axios({

@@ -608,11 +608,16 @@ router.route('/ShowTranferQrcode/:id/confirm')
             // const testvalue = req.headers.result;
 
             // console.log('xx: ', req.headers)
-            console.log("id", id)
+            console.log("id ===== camera ====== ", id)
             console.log("testvalue === >", req.header.value1)
             console.log("fromAddress =>", fromAddress)
             console.log("money =>", money)
             console.log("privateKey =>", privateKey)
+
+            const toAddress_sender = await getReceiverWalletFromId(id)
+            let id_sendershow = toAddress_sender.val();
+            let id_sendershow_balance = id_sendershow.balance;
+            console.log("id_sendershow_balance =>", id_sendershow_balance)
             // const id = req.headers.content;
             // console.log("id  ", id)
 
@@ -635,6 +640,19 @@ router.route('/ShowTranferQrcode/:id/confirm')
                 console.log("money..errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
                 res.json(test)
             }
+
+            else if (money > id_sendershow_balance) {
+                console.log("MAX_MONEY..........................................")
+                res.json(test)
+            }
+
+
+            else if (money < 0) {
+                console.log("MIN_MONEY..........................................")
+                res.json(test)
+            }
+
+            
             var weiTokenAmount = web3.utils.toWei(String(money), 'ether');
             var Transaction = {
                 "from": fromAddress,
