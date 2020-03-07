@@ -7,12 +7,19 @@ const router = express.Router()
 const Web3 = require("web3");
 const fs = require('fs');
 const path = require('path');
-const web3 = new Web3();
 const EthereumTx = require('ethereumjs-tx').Transaction;
 const Buffer = require('safer-buffer').Buffer;
 const cors = require('cors');
 require('tls').DEFAULT_MIN_VERSION = 'TLSv1'
 const _ = require("lodash")
+const infura = {
+    projectId: '37dd526435b74012b996e147cda1c261',
+    projectSecret: '55c6430534c042a1b762cd5f6e0f0a55',
+    endpoint: "wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261"
+}
+const web3 = new Web3(infura.endpoint);
+
+
 // <!--===============================================================================================-->
 app.use(cors());
 var engines = require('consolidate');
@@ -29,6 +36,7 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
 // app.use(function (req, res, next) {
 //     console.log(req.body) // populated!
 // })
+
 // <!--===============================================================================================-->
 var firebaseConfig = {
     apiKey: "AIzaSyDPwR_Tlxe5MODIEPugWCnO_drEh6-4jjw",
@@ -197,6 +205,7 @@ router.route('/send/:id')
     .get((req, res) => {
         res.render('tranfer.html')
     })
+
 router.route('/send/:id/confirm')
     .get((req, res) => {
         async function Tranfer() {
@@ -233,11 +242,11 @@ router.route('/send/:id/confirm')
                 res.json(testid)
             }
 
-    
+
 
 
             const toAddress = await getReceiverWalletFromId(id)
-        
+
 
             console.log("toAddress_show_toAddress =>", toAddress)
 
@@ -315,6 +324,39 @@ router.route('/send/:id/confirm')
 
 
     })
+// <!--===============================================================================================-->
+
+router.route('/transection/:id/confirm')
+    .get(async (req, res) => {
+        const id = req.headers.id;
+        const toAddress = await getReceiverWalletFromId(id)
+        const toAddress2 = toAddress.val();
+        const address = toAddress2.address;
+        console.log("address ==================>",address);
+        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
+        const contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
+        const contract = new web3.eth.Contract(abi, contractAddress);
+        
+        try {
+            const events = await contract.getPastEvents('Transfer', {
+                filter: { _to: address },
+                fromBlock: 0,
+                toBlock: 'latest'
+            });
+            let transactions = {}
+            events.forEach((event) => {
+                const { transactionHash, returnValues } = event;
+                console.log(returnValues);
+                const { _from, _to, _value } = returnValues;
+                transactions[transactionHash] = { from: _from, to: _to, value: _value }
+            })
+            res.json(transactions)
+        } catch (e) {
+            console.error(e);
+            res.json(e)
+        }
+    });
+
 // <!--===============================================================================================-->
 
 router.route('/showdata/:id')
@@ -608,16 +650,11 @@ router.route('/ShowTranferQrcode/:id/confirm')
             // const testvalue = req.headers.result;
 
             // console.log('xx: ', req.headers)
-            console.log("id ===== camera ====== ", id)
+            console.log("id", id)
             console.log("testvalue === >", req.header.value1)
             console.log("fromAddress =>", fromAddress)
             console.log("money =>", money)
             console.log("privateKey =>", privateKey)
-
-            const toAddress_sender = await getReceiverWalletFromId(id)
-            let id_sendershow = toAddress_sender.val();
-            let id_sendershow_balance = id_sendershow.balance;
-            console.log("id_sendershow_balance =>", id_sendershow_balance)
             // const id = req.headers.content;
             // console.log("id  ", id)
 
@@ -640,19 +677,6 @@ router.route('/ShowTranferQrcode/:id/confirm')
                 console.log("money..errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
                 res.json(test)
             }
-
-            else if (money > id_sendershow_balance) {
-                console.log("MAX_MONEY..........................................")
-                res.json(test)
-            }
-
-
-            else if (money < 0) {
-                console.log("MIN_MONEY..........................................")
-                res.json(test)
-            }
-
-            
             var weiTokenAmount = web3.utils.toWei(String(money), 'ether');
             var Transaction = {
                 "from": fromAddress,
@@ -943,9 +967,9 @@ router.route('/getProfileByIdadmin')
                 //console.log("data", data)
                 res.send(JSON.stringify({
                     // id: data,
-                    name:     data1,
+                    name: data1,
                     lastName: data2,
-                    balance:  data3
+                    balance: data3
                 }))
             } else {
                 res.send(JSON.stringify({
