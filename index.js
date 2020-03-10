@@ -344,17 +344,16 @@ router.route('/transection/:id/confirm')
                 toBlock: 'latest'
 
             });
-            let transactions = {}
-            let test =  events.map((event) => {
-            console.log("event ===> " ,event  )
-
-                const { transactionHash, returnValues } = event;
+            //let transactions = {}
+            let transections =  events.map((event) => {
+            //console.log("event ===> " ,event  
+                const { returnValues } = event;
                 console.log(returnValues);
                 const { from, to, tokens } = returnValues;
                 return  { from: from, to: to, tokens: tokens  }
             })
            // res.json(JSON.stringify(returnValues))
-            res.json(test);
+            res.json(transections);
         } catch (e) {
             console.error(e);
             res.json(e)
