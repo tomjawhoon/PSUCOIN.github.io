@@ -116,15 +116,18 @@
 
                     <thead>
                         <tr class="filters">
-                            <th><input type="text" class="form-control" placeholder="FORM" disabled></th>
-                            <th><input type="text" class="form-control" placeholder="TO" disabled></th>
-                            <th><input type="text" class="form-control" placeholder="TOKEN" disabled></th>
-                            <th><input type="text" class="form-control" placeholder="PSUCOIN" disabled></th>
+                            <th><input type="text" class="form-control" placeholder="FORM"></th>
+                            <th><input type="text" class="form-control" placeholder="TO"></th>
+                            <th><input type="text" class="form-control" placeholder="TOKEN"></th>
+                            <th><input type="text" class="form-control" placeholder="PSUCOIN"></th>
+                            <th><input type="text" class="form-control" placeholder="View"></th>
                         </tr>
                     </thead>
                     <tbody id="ex-table">
                         <thead>
                             <tr>
+
+                                <a id="result">View on Etherscan</a>
 
                             </tr>
                         </thead>
@@ -214,33 +217,33 @@
             }
         }).then(test => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
 
-      
+
 
             console.log("test.data.address = >", test.data.address) //address
             result.data.forEach((childSnapshot) => {
+
+                // $("#result").attr("href", link)
                 // console.log("Transection = >" ,childSnapshot.to)
-                console.log("Transection = >", childSnapshot)
                 // console.log("show value ===>",childSnapshot.tokens) //จัดได้เลยๆ  . ค่าเอาเลยจร้า
                 let show = childSnapshot.tokens / 1000000000000000000;
-                console.log("show ===", result)
-
+                //console.log("show ===", childSnapshot.traneiei)
+                let link = "https://kovan.etherscan.io/tx/" + childSnapshot.transaction
+                $("#result").attr("href", link)
                 if (childSnapshot.to == test.data.address) {
                     var tr = document.createElement('tr')
+                    let view;
                     tr.innerHTML = `
                         <td>${childSnapshot.from}</td> 
                         <td>${childSnapshot.to}</td>
                         <td>${show}</td>
                         <td>RECEIVED</td>
-                    
+                        <td>${link}</td>
                     `
                     $(document).ready(() => {
                         document.querySelector('#ex-table').append(tr) //อัพ    
                     });
-
                     $("#ex-table").html("") //ลบ
-
                 }
-
                 if (childSnapshot.from == test.data.address) {
                     var tr = document.createElement('tr')
                     tr.innerHTML = `
@@ -248,31 +251,15 @@
                         <td class="green">${childSnapshot.to}</td class="green">
                         <td class="green">${show}</td class="green">
                         <td class="green">SEND</td class="green">
-                    
+                        <td class="green">${link}</td>
                     `
                     $(document).ready(() => {
                         document.querySelector('#ex-table').append(tr) //อัพ    
                     });
-
                     $("#ex-table").html("") //ลบ
-
                 }
-
             })
-
-
-
         })
-
-
-
-
-
-        // console.log("transection....",)
-
-
-
-
     });
 
  // <!--===============================================================================================-->

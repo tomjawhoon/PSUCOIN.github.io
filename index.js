@@ -346,11 +346,13 @@ router.route('/transection/:id/confirm')
             });
             //let transactions = {}
             let transections = events.map((event) => {
-                //console.log("event ===> " ,event  );
-                const { returnValues } = event;
+               
+                const transaction = event.transactionHash;
+                console.log("event ===> " ,transaction);
+                const { returnValues  } = event;
                 console.log(returnValues);
-                const { from, to, tokens, address } = returnValues;
-                return { from: from, to: to, tokens: tokens, address: address }
+                const { from, to, tokens,  } = returnValues;
+                return { from: from, to: to, tokens: tokens, transaction : transaction }
             })
             // res.json(JSON.stringify(returnValues))
             res.json(transections);
