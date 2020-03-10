@@ -188,7 +188,14 @@
             //result : result,
         }
     }).then(result => {
-        console.log("transection....", result)
+        console.log("transection....",)
+
+        result.data.forEach((childSnapshot) => {
+                console.log("childSnapshot  =>>>>" ,childSnapshot)
+                
+        })
+        
+        
     });
 
  // <!--===============================================================================================-->

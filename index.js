@@ -18,8 +18,6 @@ const infura = {
     endpoint: "wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261"
 }
 const web3 = new Web3(infura.endpoint);
-
-
 // <!--===============================================================================================-->
 app.use(cors());
 var engines = require('consolidate');
@@ -33,6 +31,8 @@ var firebase = require('firebase')
 app.use(bodyParser.urlencoded({ extended: true }), router)
 app.use(bodyParser.json, router)
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
+//app.use(bodyParser.json({ type: 'X-Foo', 'bar'}))
+// app.use(bodyParser.json(200, { 'Content-Type': 'text/plain' }))
 // app.use(function (req, res, next) {
 //     console.log(req.body) // populated!
 // })
@@ -339,18 +339,22 @@ router.route('/transection/:id/confirm')
         
         try {
             const events = await contract.getPastEvents('Transfer', {
-                filter: { _to: address },
+                filter: { to: address  },
                 fromBlock: 0,
                 toBlock: 'latest'
+
             });
             let transactions = {}
-            events.forEach((event) => {
+            let test =  events.map((event) => {
+            console.log("event ===> " ,event  )
+
                 const { transactionHash, returnValues } = event;
                 console.log(returnValues);
-                const { _from, _to, _value } = returnValues;
-                transactions[transactionHash] = { from: _from, to: _to, value: _value }
+                const { from, to, tokens } = returnValues;
+                return  { from: from, to: to, tokens: tokens  }
             })
-            res.json(transactions)
+           // res.json(JSON.stringify(returnValues))
+            res.json(test);
         } catch (e) {
             console.error(e);
             res.json(e)
@@ -1005,7 +1009,7 @@ async function getReceiverWalletFromId(id) {
     // console.log("getReceiverWalletFromId = >",id)
 }
 // <!--===============================================================================================-->
-app.listen(5001, () => console.log('Server is ready!'))
+app.listen(5002, () => console.log('Server is ready!'))
 
 
 // 791786F6D865B4FAFAC0E92A5961D0526AF0072EFA757D5E46E59A69EF63FF70
