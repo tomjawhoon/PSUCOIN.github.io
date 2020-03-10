@@ -49,11 +49,46 @@
 
         td,
         tr:nth-child(even) {
-            background-color: #c1d7e6;
+            background-color: #3adfd6;
             border: 1px solid #dddddd;
         }
 
-    
+        td.green {
+            background-color: #e9e773;
+            /* border: 1px solid #dddddd;  */
+        }
+
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            /* background-color: #fefefe; */
+            margin: 5% auto 15% auto;
+            /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%;
+            /* Could be more or less, depending on screen size */
+        }
     </style>
 
     <div class="container">
@@ -100,6 +135,7 @@
     </div>
 
 
+
 </body>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
@@ -109,7 +145,7 @@
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
 
-<title>Show data</title>
+<title>Transection</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -149,12 +185,6 @@
 <script>
 
 
-
-
-    // Your web app's Firebase configuration
-
-
-
     var url;
     var id;
     (() => {
@@ -162,18 +192,7 @@
         id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
     })()
 
-    axios({
-        method: 'GET',
-        url: '/getWalletById', //ส่งไปค่านี้
-        headers: {
-            id: id  // รหัสนักศึกษา
-        }
-    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        console.log("result_data", result)
-        $('#fromAddress').val(result.data.address)
-        $('#privateKey').val(result.data.privateKey)
-        $('#showid').val(result.config.headers.id)
-    })
+
 
     axios({
         method: 'GET',
@@ -186,28 +205,72 @@
             //result : result,
         }
     }).then(result => {
-        // console.log("transection....",)
 
-        result.data.forEach((childSnapshot) => {
-            // console.log("Transection = >" ,childSnapshot.to)
-            console.log("Transection = >", childSnapshot)
-            // console.log("show value ===>",childSnapshot.tokens) //จัดได้เลยๆ  . ค่าเอาเลยจร้า
-            let show = childSnapshot.tokens / 1000000000000000000 ;
-            console.log("show ===",show)
-            var tr = document.createElement('tr')
-            tr.innerHTML = `
-                        <td>${childSnapshot.from}</td>
+        axios({
+            method: 'GET',
+            url: '/getWalletById', //ส่งไปค่านี้
+            headers: {
+                id: id  // รหัสนักศึกษา
+            }
+        }).then(test => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+
+      
+
+            console.log("test.data.address = >", test.data.address) //address
+            result.data.forEach((childSnapshot) => {
+                // console.log("Transection = >" ,childSnapshot.to)
+                console.log("Transection = >", childSnapshot)
+                // console.log("show value ===>",childSnapshot.tokens) //จัดได้เลยๆ  . ค่าเอาเลยจร้า
+                let show = childSnapshot.tokens / 1000000000000000000;
+                console.log("show ===", result)
+
+                if (childSnapshot.to == test.data.address) {
+                    var tr = document.createElement('tr')
+                    tr.innerHTML = `
+                        <td>${childSnapshot.from}</td> 
                         <td>${childSnapshot.to}</td>
                         <td>${show}</td>
-                        <td>Resive</td>
+                        <td>RECEIVED</td>
                     
                     `
-            $(document).ready(() => {
-                document.querySelector('#ex-table').append(tr) //อัพ    
-            });
+                    $(document).ready(() => {
+                        document.querySelector('#ex-table').append(tr) //อัพ    
+                    });
 
-            $("#ex-table").html("") //ลบ
+                    $("#ex-table").html("") //ลบ
+
+                }
+
+                if (childSnapshot.from == test.data.address) {
+                    var tr = document.createElement('tr')
+                    tr.innerHTML = `
+                        <td class="green">${childSnapshot.from}</td class="green"> 
+                        <td class="green">${childSnapshot.to}</td class="green">
+                        <td class="green">${show}</td class="green">
+                        <td class="green">SEND</td class="green">
+                    
+                    `
+                    $(document).ready(() => {
+                        document.querySelector('#ex-table').append(tr) //อัพ    
+                    });
+
+                    $("#ex-table").html("") //ลบ
+
+                }
+
+            })
+
+
+
         })
+
+
+
+
+
+        // console.log("transection....",)
+
+
 
 
     });

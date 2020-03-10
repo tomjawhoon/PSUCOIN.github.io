@@ -332,33 +332,68 @@ router.route('/transection/:id/confirm')
         const toAddress = await getReceiverWalletFromId(id)
         const toAddress2 = toAddress.val();
         const address = toAddress2.address;
-        console.log("address ==================>",address);
+        console.log("address ==================>", address);
         const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
         const contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
         const contract = new web3.eth.Contract(abi, contractAddress);
-        
+
         try {
             const events = await contract.getPastEvents('Transfer', {
-                filter: { to: address  },
+                filter: { to: null },
                 fromBlock: 0,
                 toBlock: 'latest'
 
             });
             //let transactions = {}
-            let transections =  events.map((event) => {
-            //console.log("event ===> " ,event  );
+            let transections = events.map((event) => {
+                //console.log("event ===> " ,event  );
                 const { returnValues } = event;
                 console.log(returnValues);
-                const { from, to, tokens} = returnValues;
-                return  { from: from, to: to, tokens: tokens  }
+                const { from, to, tokens, address } = returnValues;
+                return { from: from, to: to, tokens: tokens, address: address }
             })
-           // res.json(JSON.stringify(returnValues))
+            // res.json(JSON.stringify(returnValues))
             res.json(transections);
         } catch (e) {
             console.error(e);
             res.json(e)
         }
     });
+
+
+/*router.route('/transection_from/:id/confirm')
+    .get(async (req, res) => {
+        const id = req.headers.id;
+        const toAddress = await getReceiverWalletFromId(id)
+        const toAddress2 = toAddress.val();
+        const address = toAddress2.address;
+        console.log("address ==================> frommm", address);
+        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
+        const contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
+        const contract = new web3.eth.Contract(abi, contractAddress);
+
+        try {
+            const events = await contract.getPastEvents('Transfer', {
+                filter: { from: null },
+                fromBlock: 0,
+                toBlock: 'latest'
+
+            });
+            //let transactions = {}
+            let transections = events.map((event) => {
+                //console.log("event ===> " ,event  );
+                const { returnValues } = event;
+                console.log(returnValues);
+                const { from, to, tokens } = returnValues;
+                return { from: from, to: to, tokens: tokens, }
+            })
+            // res.json(JSON.stringify(returnValues))
+            res.json(transections);
+        } catch (e) {
+            console.error(e);
+            res.json(e)
+        }
+    });*/
 
 // <!--===============================================================================================-->
 
