@@ -235,7 +235,7 @@
                     tr.innerHTML = `
                         <td>${childSnapshot.from}</td> 
                         <td>${childSnapshot.to}</td>
-                        <td>${show}</td>
+                        <td>${"+" + show}</td>
                         <td>RECEIVED</td>
                         <td>${link}</td>
                     `
@@ -249,7 +249,7 @@
                     tr.innerHTML = `
                         <td class="green">${childSnapshot.from}</td class="green"> 
                         <td class="green">${childSnapshot.to}</td class="green">
-                        <td class="green">${show}</td class="green">
+                        <td class="green">${"-"+show}</td class="green">
                         <td class="green">SEND</td class="green">
                         <td class="green">${link}</td>
                     `
