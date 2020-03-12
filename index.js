@@ -346,13 +346,13 @@ router.route('/transection/:id/confirm')
             });
             //let transactions = {}
             let transections = events.map((event) => {
-               
+
                 const transaction = event.transactionHash;
-                console.log("event ===> " ,transaction);
-                const { returnValues  } = event;
+                console.log("event ===> ", transaction);
+                const { returnValues } = event;
                 console.log(returnValues);
-                const { from, to, tokens,  } = returnValues;
-                return { from: from, to: to, tokens: tokens, transaction : transaction }
+                const { from, to, tokens, } = returnValues;
+                return { from: from, to: to, tokens: tokens, transaction: transaction }
             })
             // res.json(JSON.stringify(returnValues))
             res.json(transections);
@@ -636,6 +636,12 @@ router.route('/Receive/:id')
 router.route('/test/:id')
     .get((req, res) => {
         res.render('test.html')
+    })
+
+
+router.route('/test1/:id')
+    .get((req, res) => {
+        res.render('test1.html')
     })
 
 router.route('/errorlogin')
