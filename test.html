@@ -198,22 +198,22 @@
     })()
 
 
-    var monthNamesThai = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-        "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤษจิกายน", "ธันวาคม"];
+    // var monthNamesThai = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+    //     "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤษจิกายน", "ธันวาคม"];
 
-    var dayNames = ["วันอาทิตย์ที่", "วันจันทร์ที่", "วันอังคารที่", "วันพุทธที่", "วันพฤหัสบดีที่", "วันศุกร์ที่", "วันเสาร์ที่"];
+    // var dayNames = ["วันอาทิตย์ที่", "วันจันทร์ที่", "วันอังคารที่", "วันพุทธที่", "วันพฤหัสบดีที่", "วันศุกร์ที่", "วันเสาร์ที่"];
 
-    var monthNamesEng = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"];
+    // var monthNamesEng = ["January", "February", "March", "April", "May", "June",
+    //     "July", "August", "September", "October", "November", "December"];
 
-    var dayNamesEng = ['Sunday', 'Monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    // var dayNamesEng = ['Sunday', 'Monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
-    var d = new Date();
+    // var d = new Date();
 
-    var showdate = dayNames[d.getDay()] + " " + d.getDate() + " " + monthNamesThai[d.getMonth()] + " "
-        + d.getFullYear() + " " + d.toLocaleTimeString();
+    // var showdate = dayNames[d.getDay()] + " " + d.getDate() + " " + monthNamesThai[d.getMonth()] + " "
+    //     + d.getFullYear() + " " + d.toLocaleTimeString();
 
-    console.log("Date ==== >", showdate)
+    // console.log("Date ==== >", showdate)
 
 
 
@@ -236,9 +236,18 @@
                 id: id  // รหัสนักศึกษา
             }
         }).then(test => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-
-
-
+//================== ========= ========= ========= ========= DATE ========= ========= ========= ========= ========= ========= ========= ========= 
+            var monthNamesThai = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+                "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤษจิกายน", "ธันวาคม"];
+            var dayNames = ["วันอาทิตย์ที่", "วันจันทร์ที่", "วันอังคารที่", "วันพุทธที่", "วันพฤหัสบดีที่", "วันศุกร์ที่", "วันเสาร์ที่"];
+            var monthNamesEng = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            var dayNamesEng = ['Sunday', 'Monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+            var d = new Date();
+            var showdate = dayNames[d.getDay()] + " " + d.getDate() + " " + monthNamesThai[d.getMonth()] + " "
+                + d.getFullYear() + " " + d.toLocaleTimeString();
+            console.log("Date ==== >", showdate)
+//================== ========= ========= ========= ========= ========= ========= ========= ========= ========= ========= ========= 
             console.log("test.data.address = >", test.data.address) //address
             result.data.forEach((childSnapshot) => {
 
