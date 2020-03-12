@@ -119,7 +119,7 @@
                             <th><input type="text" class="form-control" placeholder="FORM"></th>
                             <th><input type="text" class="form-control" placeholder="TO"></th>
                             <th><input type="text" class="form-control" placeholder="TOKEN"></th>
-                            <th><input type="text" class="form-control" placeholder="PSUCOIN"></th>
+                            <th><input type="text" class="form-control" placeholder="STATUS"></th>
                             <th><input type="text" class="form-control" placeholder="View"></th>
                         </tr>
                     </thead>
@@ -127,7 +127,7 @@
                         <thead>
                             <tr>
 
-                                <a id="result">View on Etherscan</a>
+                                <!-- <a id="result">View on Etherscan</a> -->
 
                             </tr>
                         </thead>
@@ -237,7 +237,7 @@
                         <td>${childSnapshot.to}</td>
                         <td>${"+" + show}</td>
                         <td>RECEIVED</td>
-                        <td>${link}</td>
+                        <td><a href='${link}' target='_blank' >View on Etherscan</a></td>
                     `
                     $(document).ready(() => {
                         document.querySelector('#ex-table').append(tr) //อัพ    
@@ -249,9 +249,9 @@
                     tr.innerHTML = `
                         <td class="green">${childSnapshot.from}</td class="green"> 
                         <td class="green">${childSnapshot.to}</td class="green">
-                        <td class="green">${"-"+show}</td class="green">
+                        <td class="green">${"-" + show}</td class="green">
                         <td class="green">SEND</td class="green">
-                        <td class="green">${link}</td>
+                        <td class="green"><a href='${link}' target='_blank' >View on Etherscan</a></td class="green">
                     `
                     $(document).ready(() => {
                         document.querySelector('#ex-table').append(tr) //อัพ    
