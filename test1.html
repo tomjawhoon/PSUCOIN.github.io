@@ -628,6 +628,81 @@
             height: 28px;
         }
     }
+
+    .transaction-container {
+        min-height: calc(100vh - 310px);
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .card {
+        width: 90%;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 3px;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .transactions-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 30%;
+        width: 100%;
+        padding-right: 10px;
+        padding-left: 10px;
+        font-size: 10px;
+    }
+
+
+    .explorer-container {
+        display: flex;
+        align-items: center;
+        color: #7957d5;
+        padding-right: 5px;
+
+    }
+
+    .explorer-PSUCOIN {
+        display: flex;
+        align-items: center;
+        color: #16c516;
+        padding-right: 5px;
+
+    }
+
+    .transactions-footer {
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        height: 35%;
+        width: 100%;
+        font-size: 11px;
+    }
+
+    .transactions-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 10px;
+        padding-left: 10px;
+        height: 35%;
+        width: 100%;
+        font-size: inherit;
+        font-weight: bold;
+        color: #16c516;
+    }
+
+    .threebtn {
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+        height: 150px;
+        justify-content: space-around;
+        align-items: center;
+    }
 </style>
 
 <body>
@@ -663,25 +738,43 @@
     </nav>
     <div>
         <div class="Boxcontainer">
-            <div>
-                <img class="Logo" src="https://dorm.psu.ac.th/system/files/images/psu-logo.png" alt="">
-            </div>
-            <div class="Boxwallet">
-                <div class="card-img-top" id="qrcode" alt="Card image" style="width:100%"></div>
-            </div>
+            <div class="transaction-container" >
+                <div class="card">
+                    <div class="address content">
+                        <div v-if="fetched" class="align-center">
+                            <div class="transactions-header">
+                                Wed, 04 Mar 2020 15:39:16 GMT
+                                <div class="explorer-container">
+                                    <a target="_blank">
+                                        <b-icon icon="link" size="is-small">
+                                        </b-icon>
+                                        Explorer link
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="transactions-body">
+                                RECEIVED
+                                <div class="explorer-PSUCOIN" >
+                                    <a v-bind:href="transaction.explorerLink" target="_blank">
+                                        <b-icon icon="link" size="is-small">
+                                        </b-icon>
+                                        200 PSUCOIN
+                                    </a>
+                                </div>
 
-            <a id="fromAddress" class="symbolcoin" style="color:#FFFFFF"></a>
-            <div class="threebtn">
-                <button type="button" class="btn btn-light Allbtn">
-                    <ion-icon name="qr-scanner"></ion-icon>
-                    </ion-icon><span onclick="gotoCheckBalance()">Payment</span>
-                </button>
-                <button type="button" class="btn btn-light Allbtn">
-                    <ion-icon name="arrow-back"></ion-icon>
-                    </ion-icon><span onclick="gotoCheckBalance1()">Back</span>
-                </button>
-            </div>
+                            </div>
 
+
+                            <div class="transactions-footer">
+                                <div style="color: #7957d5; padding-right: 5px;" id="ex-table-from">
+                                    From address: 00000000a550c18
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
         <div class="Sponsored">
             <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
@@ -749,24 +842,24 @@
             id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
         })()
 
-        
 
-        var monthNamesThai = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-            "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤษจิกายน", "ธันวาคม"];
 
-        var dayNames = ["วันอาทิตย์ที่", "วันจันทร์ที่", "วันอังคารที่", "วันพุทธที่", "วันพฤหัสบดีที่", "วันศุกร์ที่", "วันเสาร์ที่"];
-
-        var monthNamesEng = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"];
-
-        var dayNamesEng = ['Sunday', 'Monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-
-        var d = new Date();
-
-      var showdate = dayNames[d.getDay()] + " " + d.getDate() + " " + monthNamesThai[d.getMonth()] + " " 
-      + d.getFullYear() + " " + d.toLocaleTimeString();
-
-        console.log("Date ==== >", showdate)
+        /*  var monthNamesThai = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+              "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤษจิกายน", "ธันวาคม"];
+  
+          var dayNames = ["วันอาทิตย์ที่", "วันจันทร์ที่", "วันอังคารที่", "วันพุทธที่", "วันพฤหัสบดีที่", "วันศุกร์ที่", "วันเสาร์ที่"];
+  
+          var monthNamesEng = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"];
+  
+          var dayNamesEng = ['Sunday', 'Monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  
+          var d = new Date();
+  
+          var showdate = dayNames[d.getDay()] + " " + d.getDate() + " " + monthNamesThai[d.getMonth()] + " "
+              + d.getFullYear() + " " + d.toLocaleTimeString();
+  
+          console.log("Date ==== >", showdate)*/
 
 
         // // let unix_timestamp = 1549312452
@@ -829,108 +922,119 @@
         //Thu, 12 Mar 2020 09:24:26 GMT
         axios({
             method: 'GET',
-            url: '/getProfileforbalance', //ส่งไปค่านี้
+            // url: '/getWalletById', //???????????
+            url: '/transection/' + id + '/confirm',
+
+            //url: '/balance/' + id + '/confirm', // ??????????????
             headers: {
-                id: id  // รหัสนักศึกษา
+                id: id,
+                //result : result,
             }
-        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-            console.log("result_data_balance", result.data)
-            $("#result").attr("href", result.data)
-            $("#result").text(result.data)
-            // $("#result").val()
-        })
+        }).then(result => {
+            console.log("test ===>", result)
 
-        axios({
-            method: 'GET',
-            url: '/getWalletById', //ส่งไปค่านี้
-            headers: {
-                id: id  // รหัสนักศึกษา
-            }
-        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-            console.log("result_data", result)
-            console.log("result_address", result.data.address)
-            console.log("result_privateKey", result.data.privateKey)
-            console.log("result_id", result.config.headers.id)
+            axios({
+                method: 'GET',
+                url: '/getWalletById', //ส่งไปค่านี้
+                headers: {
+                    id: id  // รหัสนักศึกษา
+                }
+            }).then(test => {
+                console.log("test ===>", test)
+                // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+                //================== ========= ========= ========= ========= DATE ========= ========= ========= ========= ========= ========= ========= ========= 
+                var monthNamesThai = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+                    "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤษจิกายน", "ธันวาคม"];
+                var dayNames = ["วันอาทิตย์ที่", "วันจันทร์ที่", "วันอังคารที่", "วันพุทธที่", "วันพฤหัสบดีที่", "วันศุกร์ที่", "วันเสาร์ที่"];
+                var monthNamesEng = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"];
+                var dayNamesEng = ['Sunday', 'Monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+                var d = new Date();
+                var showdate = dayNames[d.getDay()] + " " + d.getDate() + " " + monthNamesThai[d.getMonth()] + " "
+                    + d.getFullYear() + " " + d.toLocaleTimeString();
+                console.log("Date ==== >", showdate)
+                //================== ========= ========= ========= ========= ========= ========= ========= ========= ========= ========= ========= 
+                console.log("test.data.address = >", test.data.address) //address
+                result.data.forEach((childSnapshot) => {
 
-            $("#fromAddress").attr("href", result.data.address)
-            $("#fromAddress").text(result.data.address)
+                    // $("#result").attr("href", link)
+                    // console.log("Transection = >" ,childSnapshot.to)
+                    // console.log("show value ===>",childSnapshot.tokens) //จัดได้เลยๆ  . ค่าเอาเลยจร้า
+                    let show = childSnapshot.tokens / 1000000000000000000;
+                    //console.log("show ===", childSnapshot.traneiei)
+                    let link = "https://kovan.etherscan.io/tx/" + childSnapshot.transaction
+                    // $("#result").attr("href", link)
+                    if (childSnapshot.to == test.data.address) {
+                        var tr = document.createElement('div')
+                        let view;
 
-            //var test = result.data.address;
+                        tr.innerHTML = `
+                        <class="transactions-footer">${childSnapshot.from}</class="transactions-footer"> 
+                
 
+                    `
+                        $(document).ready(() => {
+                            document.querySelector('#ex-table-from').append(tr) //อัพ    
+                        });
+                        $("#ex-table-from").html("") //ลบ
 
+                        /*$(document).ready(() => {
+                            document.querySelector('#ex-table-coin').append(tr) //อัพ    
+                        });
+                        $("#ex-table-coin").html("") //ลบ    */
 
-            // $('#privateKey').val(result.data.privateKey)
-            $('#showid').val(result.config.headers.id)
-
-            $(document).ready(function () {
-                $("a").click(function () {
-                    $('#privateKey').val(result.data.privateKey)
-                });
-
-                $(function () {
-                    // กำหนดการตั้งค่ารูปแบบ qrcode ที่ต้องการเรียกใช้
-                    var qrcodeConfig = {
-                        width: 220,
-                        height: 200,
-                        correctLevel: 0
                     }
 
-                    // สมมติค่าเริ่มเต้น ที่ตอ้งการแสดงเป็น qrcode
-                    $("#qrcode").qrcode($.extend(qrcodeConfig, {
-
-                        text: result.data.address
-
-                    }));
-
-
-                    $('a.printPage').click(function () {
-                        window.print();
-                        return false;
-                    });
-
-                    // เมื่อมีการเปลี่ยนแปลงค่าใน input text และเกิด blur หรือ keypress event
-                    /* $("#fromAddress").on("keypress blur", function (e) {
-                       if (e.type == 'keypress' && e.keyCode == 13) { // ถ้ามีการกรอกข้อมูลใหม่ และกด Enter
-                         $("#qrcode").html("") // ล้างค่า qrcode
-                           .qrcode($.extend(qrcodeConfig, {
-                             text: $(this).val()
-                           }));
-                       } else if (e.type == 'blur') { // ถ้ามีการกรอกข้อมูล แล้ว โฟกัสออกจาก input text
-                         $("#qrcode").html("") // ล้างค่า qrcode
-                           .qrcode($.extend(qrcodeConfig, {
-                             text: $(this).val()
-                           }));
-                       }
-                     });*/
-                });
-
-            });
-
-        })
+                    /* if (childSnapshot.from == test.data.address) {
+                          var tr = document.createElement('tr')
+                          tr.innerHTML = `
+                          <td class="green">${childSnapshot.from}</td class="green"> 
+                          <td class="green">${childSnapshot.to}</td class="green">
+                          <td class="green">${"-" + show}</td class="green">
+                          <td class="green">SEND</td class="green">
+                          <td class="green"><a href='${link}' target='_blank' >View on Etherscan</a></td class="green">
+                      `
+                          $(document).ready(() => {
+                              document.querySelector('#ex-table').append(tr) //อัพ    
+                          });
+                          $("#ex-table").html("") //ลบ
+                      }*/
 
 
+                  /*  if (childSnapshot.from == test.data.address) {
+                        var tr = document.createElement('div')
+                        tr.innerHTML = `
+                                <div class="transactions-footer">${childSnapshot.from}</div class="transactions-footer"> 
+                            `
+                        $(document).ready(() => {
+                            document.querySelector('#ex-table').append(a) //อัพ    
+                        });
+                        $("#ex-table").html("") //ลบ
 
+                        var tr = document.createElement('div')
+                        tr.innerHTML = `
+                                <class="explorer-PSUCOIN">${show}</class="explorer-PSUCOIN"> 
+                            `
+                        $(document).ready(() => {
+                            document.querySelector('#ex-table1').append(a) //อัพ    
+                        });
+                        $("#ex-table1").html("") //ลบ
 
-        document.querySelector('#submitSend').addEventListener('submit', e => {
-            e.preventDefault()
-            axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
-                method: 'GET',
-                url: '/balance/' + id + '/confirm', // ส่งไปยังค่านี้
-                headers: {
-                    fromAddress: $('#fromAddress').val(),
-                }
-            }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-                console.log("Retuen_value_balance", result)
-                console.log("test_send => ", result.data)
-                // $('#fromAddress').val(result.data.address)
-                $('#result').text(result.data)
-            }).catch(result => {
-                console.log("errr")
+                        var tr = document.createElement('div')
+                        tr.innerHTML = `
+                                <div class="transactions-footer">${childSnapshot.from}</div class="transactions-footer"> 
+                            `
+                        $(document).ready(() => {
+                            document.querySelector('#ex-table2').append(a) //อัพ    
+                        });
+                        $("#ex-table2").html("") //ลบ
+                        
+                    }*/
+                })
             })
-        })
+        });
 
-        // var unix = Math.round(+new Date()/1000);
-        // console.log("unix.......",unix)
+ // <!--===============================================================================================-->
 
     </script>
 
