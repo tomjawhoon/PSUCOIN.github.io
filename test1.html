@@ -635,6 +635,7 @@
         margin: 0 auto;
     }
 
+ 
     .card {
         width: 90%;
         margin: 0 auto;
@@ -642,6 +643,18 @@
         border-radius: 3px;
         margin-top: 2rem;
         margin-bottom: 2rem;
+        overflow: auto;
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #f1f1f1;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, .125);
+        border-radius: .25rem;
     }
 
     .transactions-header {
@@ -708,6 +721,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+
     }
 </style>
 
@@ -761,7 +775,7 @@
                             <div class="transactions-body">
                                 RECEIVED
                                 <div class="explorer-PSUCOIN">
-                                    <a  target="_blank">
+                                    <a target="_blank">
                                         <b-icon icon="link" size="is-small">
                                         </b-icon>
                                         200 PSUCOIN
@@ -830,11 +844,6 @@
             window.location.href = url.replace('Receive', 'balance', 'send')
         }
 
-
-
-
-
-
     </script>
     <script>
 
@@ -845,84 +854,6 @@
             id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
         })()
 
-
-
-        /*  var monthNamesThai = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-              "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤษจิกายน", "ธันวาคม"];
-  
-          var dayNames = ["วันอาทิตย์ที่", "วันจันทร์ที่", "วันอังคารที่", "วันพุทธที่", "วันพฤหัสบดีที่", "วันศุกร์ที่", "วันเสาร์ที่"];
-  
-          var monthNamesEng = ["January", "February", "March", "April", "May", "June",
-              "July", "August", "September", "October", "November", "December"];
-  
-          var dayNamesEng = ['Sunday', 'Monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-  
-          var d = new Date();
-  
-          var showdate = dayNames[d.getDay()] + " " + d.getDate() + " " + monthNamesThai[d.getMonth()] + " "
-              + d.getFullYear() + " " + d.toLocaleTimeString();
-  
-          console.log("Date ==== >", showdate)*/
-
-
-        // // let unix_timestamp = 1549312452
-        // // Create a new JavaScript Date object based on the timestamp
-        // // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-        // var date = new Date(d * 1000);
-        // // Hours part from the timestamp
-        // var hours = date.getHours();
-        // // Minutes part from the timestamp
-        // var minutes = "0" + date.getMinutes();
-        // // Seconds part from the timestamp
-        // var seconds = "0" + date.getSeconds();
-
-        // // Will display time in 10:30:23 format
-        // var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-
-        // console.log(formattedTime);
-        // console.log("test ====>", showdate)
-
-        // var ts = new Date();
-        // var test111 = ts.toTimeString();
-        // console.log(ts.toDateString());
-        // // # Thu Mar 12 2020
-        // console.log(test111);
-        // console.log(ts.toGMTString());
-
-
-
-
-        // var ts = new Date();
-        // var show = ts.toDateString() + "  " + ts.toLocaleTimeString();
-        // console.log(show);
-        //Thu Mar 12 2020
-
-        // console.log(ts.toGMTString());
-        // //Thu, 12 Mar 2020 09:24:26 GMT
-
-        // console.log(ts.toISOString());
-        // //2020-03-12T09:24:26.303Z
-
-        // console.log(ts.toJSON());
-        // //2020-03-12T09:24:26.303Z
-
-        // console.log(ts.toLocaleDateString());
-        // //12/3/2563
-
-        // console.log(ts.toLocaleTimeString());
-        // //16:24:26
-
-        // console.log(ts.toLocaleString());
-        // //12/3/2563 16:24:26
-
-        // console.log(ts.toString());
-        // //Thu Mar 12 2020 16:24:26 GMT+0700 (เวลาอินโดจีน)
-
-        // console.log(ts.toTimeString());
-        // //16:24:26 GMT+0700 (เวลาอินโดจีน)
-
-        // console.log(ts.toUTCString());
-        //Thu, 12 Mar 2020 09:24:26 GMT
         axios({
             method: 'GET',
             // url: '/getWalletById', //???????????
@@ -972,7 +903,6 @@
 
                         tr.innerHTML = `
                         <class="transactions-footer">${childSnapshot.from}</class="transactions-footer"> 
-            
                     `
                         $(document).ready(() => {
                             document.querySelector('#ex-table-from').append(tr) //อัพ    
