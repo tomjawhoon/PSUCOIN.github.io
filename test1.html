@@ -703,6 +703,12 @@
         justify-content: space-around;
         align-items: center;
     }
+
+    .align-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 </style>
 
 <body>
@@ -738,10 +744,10 @@
     </nav>
     <div>
         <div class="Boxcontainer">
-            <div class="transaction-container" >
+            <div class="transaction-container">
                 <div class="card">
                     <div class="address content">
-                        <div v-if="fetched" class="align-center">
+                        <div class="align-center">
                             <div class="transactions-header">
                                 Wed, 04 Mar 2020 15:39:16 GMT
                                 <div class="explorer-container">
@@ -754,17 +760,14 @@
                             </div>
                             <div class="transactions-body">
                                 RECEIVED
-                                <div class="explorer-PSUCOIN" >
-                                    <a v-bind:href="transaction.explorerLink" target="_blank">
+                                <div class="explorer-PSUCOIN">
+                                    <a  target="_blank">
                                         <b-icon icon="link" size="is-small">
                                         </b-icon>
                                         200 PSUCOIN
                                     </a>
                                 </div>
-
                             </div>
-
-
                             <div class="transactions-footer">
                                 <div style="color: #7957d5; padding-right: 5px;" id="ex-table-from">
                                     From address: 00000000a550c18
@@ -969,8 +972,7 @@
 
                         tr.innerHTML = `
                         <class="transactions-footer">${childSnapshot.from}</class="transactions-footer"> 
-                
-
+            
                     `
                         $(document).ready(() => {
                             document.querySelector('#ex-table-from').append(tr) //อัพ    
@@ -1000,35 +1002,35 @@
                       }*/
 
 
-                  /*  if (childSnapshot.from == test.data.address) {
-                        var tr = document.createElement('div')
-                        tr.innerHTML = `
-                                <div class="transactions-footer">${childSnapshot.from}</div class="transactions-footer"> 
-                            `
-                        $(document).ready(() => {
-                            document.querySelector('#ex-table').append(a) //อัพ    
-                        });
-                        $("#ex-table").html("") //ลบ
-
-                        var tr = document.createElement('div')
-                        tr.innerHTML = `
-                                <class="explorer-PSUCOIN">${show}</class="explorer-PSUCOIN"> 
-                            `
-                        $(document).ready(() => {
-                            document.querySelector('#ex-table1').append(a) //อัพ    
-                        });
-                        $("#ex-table1").html("") //ลบ
-
-                        var tr = document.createElement('div')
-                        tr.innerHTML = `
-                                <div class="transactions-footer">${childSnapshot.from}</div class="transactions-footer"> 
-                            `
-                        $(document).ready(() => {
-                            document.querySelector('#ex-table2').append(a) //อัพ    
-                        });
-                        $("#ex-table2").html("") //ลบ
-                        
-                    }*/
+                    /*  if (childSnapshot.from == test.data.address) {
+                          var tr = document.createElement('div')
+                          tr.innerHTML = `
+                                  <div class="transactions-footer">${childSnapshot.from}</div class="transactions-footer"> 
+                              `
+                          $(document).ready(() => {
+                              document.querySelector('#ex-table').append(a) //อัพ    
+                          });
+                          $("#ex-table").html("") //ลบ
+  
+                          var tr = document.createElement('div')
+                          tr.innerHTML = `
+                                  <class="explorer-PSUCOIN">${show}</class="explorer-PSUCOIN"> 
+                              `
+                          $(document).ready(() => {
+                              document.querySelector('#ex-table1').append(a) //อัพ    
+                          });
+                          $("#ex-table1").html("") //ลบ
+  
+                          var tr = document.createElement('div')
+                          tr.innerHTML = `
+                                  <div class="transactions-footer">${childSnapshot.from}</div class="transactions-footer"> 
+                              `
+                          $(document).ready(() => {
+                              document.querySelector('#ex-table2').append(a) //อัพ    
+                          });
+                          $("#ex-table2").html("") //ลบ
+                          
+                      }*/
                 })
             })
         });
