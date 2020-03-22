@@ -674,6 +674,14 @@
 
     }
 
+    .explorer-PSUCOIN-send {
+        display: flex;
+        align-items: center;
+        color: #d3311c;
+        padding-right: 5px;
+
+    }
+
     .transactions-footer {
         display: flex;
         align-items: center;
@@ -695,6 +703,20 @@
         font-size: inherit;
         font-weight: bold;
         color: #16c516;
+    }
+
+    .transactions-body-send {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 10px;
+        padding-left: 10px;
+        height: 35%;
+        width: 100%;
+        font-size: inherit;
+        font-weight: bold;
+        color: #d3311c;
     }
 
     .threebtn {
@@ -796,7 +818,7 @@
 
                 </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
         </div>
-        <h1>Vanta.JS birds </h1>
+        <!-- <h1>Vanta.JS birds </h1> -->
 
         <!-- <div id="vantajs" style="height: 400px;"></div> -->
 
@@ -932,7 +954,7 @@
                                         <a target="_blank">
                                             <b-icon icon="link" size="is-small">
                                             </b-icon>
-                                            Explorer link
+                                            <a href='${link}' target='_blank' >View on Etherscan</a>
                                         </a>
                                     </div>
                                 </div>
@@ -942,13 +964,68 @@
                                         <a target="_blank">
                                             <b-icon icon="link" size="is-small">
                                             </b-icon>
-                                            200 PSUCOIN
+                                            ${"+" + show} PSU
                                         </a>
                                     </div>
                                 </div>
                                 <div class="transactions-footer">
                                     <div style="color: #7957d5; padding-right: 5px;" id="ex-table-from">
                                         From address: ${childSnapshot.from}
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>    `
+
+
+                        $(document).ready(() => {
+                            document.querySelector('#ex-table-from').append(tr) //อัพ    
+                        });
+                        $("#ex-table-from").html("") //ลบ
+
+                        /*$(document).ready(() => {
+                            document.querySelector('#ex-table-coin').append(tr) //อัพ    
+                        });
+                        $("#ex-table-coin").html("") //ลบ    */
+
+                    } if (childSnapshot.from == test.data.address) {
+                        var tr = document.createElement('div')
+                        let view;
+
+
+                        //     tr.innerHTML = `
+                        //     <card>${childSnapshot.from}</card> 
+                        // `
+
+                        tr.innerHTML = ` 
+
+                        <div class="card">
+                        <div class="address content">
+                            <div class="align-center">
+                                <div class="transactions-header">
+                                    Wed, 04 Mar 2020 15:39:16 GMT
+                                    <div class="explorer-container">
+                                        <a target="_blank">
+                                            <b-icon icon="link" size="is-small">
+                                            </b-icon>
+                                            <a href='${link}' target='_blank' >View on Etherscan</a>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="transactions-body-send">
+                                    SEND
+                                    <div class="explorer-PSUCOIN-send">
+                                        <a target="_blank">
+                                            <b-icon icon="link" size="is-small">
+                                            </b-icon>
+                                            ${"-" + show} PSU
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="transactions-footer">
+                                    <div style="color: #7957d5; padding-right: 5px;" id="ex-table-from">
+                                        To address: ${childSnapshot.to}
                                     </div> 
                                 </div>
                             </div>
