@@ -635,7 +635,7 @@
         margin: 0 auto;
     }
 
- 
+
     .card {
         width: 90%;
         margin: 0 auto;
@@ -644,17 +644,6 @@
         margin-top: 2rem;
         margin-bottom: 2rem;
         overflow: auto;
-        position: relative;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #f1f1f1;
-        background-clip: border-box;
-        border: 1px solid rgba(0, 0, 0, .125);
-        border-radius: .25rem;
     }
 
     .transactions-header {
@@ -722,6 +711,7 @@
         flex-direction: column;
         align-items: center;
 
+
     }
 </style>
 
@@ -758,8 +748,8 @@
     </nav>
     <div>
         <div class="Boxcontainer">
-            <div class="transaction-container">
-                <div class="card">
+            <div class="transaction-container" id="ex-table-from">
+                <!-- <div class="card" >
                     <div class="address content">
                         <div class="align-center">
                             <div class="transactions-header">
@@ -790,7 +780,10 @@
                         </div>
                     </div>
 
-                </div>
+                </div> -->
+
+
+
             </div>
         </div>
         <div class="Sponsored">
@@ -803,6 +796,10 @@
 
                 </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
         </div>
+        <h1>Vanta.JS birds </h1>
+
+        <!-- <div id="vantajs" style="height: 400px;"></div> -->
+
     </div>
     </div>
 
@@ -818,6 +815,25 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="/front/js/jquery.qrcode.min.js"></script>
+    <script src="three.r95.min.js"></script>
+    <script src="vanta.dots.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
+    <script src="https://www.vantajs.com/dist/vanta.net.min.js"></script>
+    <script>
+        VANTA.NET({
+            el: "#vantajs",
+            mouseControls: true,
+            touchControls: true,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            points: 16.00,
+            maxDistance: 33.00,
+            spacing: 18.00
+        })
+    </script>
     <script>
         function gotoSendETH() {
             window.location.href = window.location.href.replace('Receive', 'send', 'index')
@@ -900,9 +916,47 @@
                         var tr = document.createElement('div')
                         let view;
 
-                        tr.innerHTML = `
-                        <class="transactions-footer">${childSnapshot.from}</class="transactions-footer"> 
-                    `
+
+                        //     tr.innerHTML = `
+                        //     <card>${childSnapshot.from}</card> 
+                        // `
+
+                        tr.innerHTML = ` 
+
+                        <div class="card">
+                        <div class="address content">
+                            <div class="align-center">
+                                <div class="transactions-header">
+                                    Wed, 04 Mar 2020 15:39:16 GMT
+                                    <div class="explorer-container">
+                                        <a target="_blank">
+                                            <b-icon icon="link" size="is-small">
+                                            </b-icon>
+                                            Explorer link
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="transactions-body">
+                                    RECEIVED
+                                    <div class="explorer-PSUCOIN">
+                                        <a target="_blank">
+                                            <b-icon icon="link" size="is-small">
+                                            </b-icon>
+                                            200 PSUCOIN
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="transactions-footer">
+                                    <div style="color: #7957d5; padding-right: 5px;" id="ex-table-from">
+                                        From address: ${childSnapshot.from}
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>    `
+
+
                         $(document).ready(() => {
                             document.querySelector('#ex-table-from').append(tr) //อัพ    
                         });
