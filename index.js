@@ -671,6 +671,11 @@ router.route('/Notid/:id')
         res.render('Notid.html')
     })
 
+router.route('/transection/:id')
+    .get((req, res) => {
+        res.render('transection.html')
+    })
+
 
 router.route('/TranferQrcode/:id/confirm')
     .get((req, res) => {
