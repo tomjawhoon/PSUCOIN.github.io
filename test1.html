@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="/front/js/jquery.qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <style>
     .imgcontainer {
@@ -861,18 +862,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
     <script src="https://www.vantajs.com/dist/vanta.net.min.js"></script>
     <script>
-        VANTA.NET({
-            el: "#vantajs",
-            mouseControls: true,
-            touchControls: true,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            points: 16.00,
-            maxDistance: 33.00,
-            spacing: 18.00
-        })
+
     </script>
     <script>
         function gotoSendETH() {
@@ -909,20 +899,20 @@
 
 
         var modal = document.getElementById('id01');
-        $("#id01").show();
+        //$("#id01").show();
 
         // When the user clicks anywhere outside of the modal, close it
-      /*  window.onclick = (event) => {
-            if (event.target == modal) {
-                modal.style.display = "none";
-                console.log("modal ==<>")
-            }
-        }*/
+        /*  window.onclick = (event) => {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+                  console.log("modal ==<>")
+              }
+          }*/
 
         axios({
             method: 'GET',
             // url: '/getWalletById', //???????????
-            url: '/transection/' + id + '/confirm',
+            url: '/transectionrealtime/' + id + '/confirm',
 
             //url: '/balance/' + id + '/confirm', // ??????????????
             headers: {
@@ -930,16 +920,8 @@
                 //result : result,
             }
         }).then(result => {
-            console.log("test ===>", result)
-
-            if (result != '') {
-                    $(() => {
-                        $(document).ready(() => {
-                            console.log("Show === result === Modal")
-                            $("#id01").hide();
-                        });
-                    });
-                }
+            console.log("result.data ===>", result.data)
+            console.log("showRealtime ===>", result.data.returnValues)
 
             axios({
                 method: 'GET',
@@ -948,7 +930,7 @@
                     id: id  // รหัสนักศึกษา
                 }
             }).then(test => {
-                console.log("test ===>", test)
+                console.log("ID SHOW getWalletById  ===>", test)
                 // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
                 //================== ========= ========= ========= ========= DATE ========= ========= ========= ========= ========= ========= ========= ========= 
                 var monthNamesThai = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
@@ -963,172 +945,32 @@
                 console.log("Date ==== >", showdate)
                 //================== ========= ========= ========= ========= ======== ========= 
                 console.log("test.data.address = >", test.data.address) //address
-                result.data.forEach((childSnapshot) => {
+                // var show = result.data;
+                // result.data.returnValues.forEach((childSnapshot) => {
+                //console.log("To <==== me")
+                // console.log("Transection = >" ,childSnapshot.to)
+                // console.log("show value ===>",childSnapshot.tokens) //จัดได้เลยๆ  . ค่าเอาเลยจร้า
+                let show = result.data.returnValues.tokens / 1000000000000000000;
+                let from = result.data.returnValues.from;
+                //console.log("show ===", childSnapshot.traneiei)
+                let link = "https://kovan.etherscan.io/tx/" + result.data.transactionHash
 
-                    // console.log("Transection = >" ,childSnapshot.to)
-                    // console.log("show value ===>",childSnapshot.tokens) //จัดได้เลยๆ  . ค่าเอาเลยจร้า
-                    let show = childSnapshot.tokens / 1000000000000000000;
-                    //console.log("show ===", childSnapshot.traneiei)
-                    let link = "https://kovan.etherscan.io/tx/" + childSnapshot.transaction
-                    // $("#result").attr("href", link)
-                    if (childSnapshot.to == test.data.address) {
-                        var tr = document.createElement('div')
-                        let view;
-
-
-                        //     tr.innerHTML = `
-                        //     <card>${childSnapshot.from}</card> 
-                        // `
-
-                        tr.innerHTML = ` 
-
-                        <div class="card">
-                        <div class="address content">
-                            <div class="align-center">
-                                <div class="transactions-header">
-                                    Wed, 04 Mar 2020 15:39:16 GMT
-                                    <div class="explorer-container">
-                                        <a target="_blank">
-                                            <b-icon icon="link" size="is-small">
-                                            </b-icon>
-                                            <a href='${link}' target='_blank' >View on Etherscan</a>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="transactions-body">
-                                    RECEIVED
-                                    <div class="explorer-PSUCOIN">
-                                        <a target="_blank">
-                                            <b-icon icon="link" size="is-small">
-                                            </b-icon>
-                                            ${"+" + show} PSU
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="transactions-footer">
-                                    <div style="color: #7957d5; padding-right: 5px;" id="ex-table-from">
-                                        From address: ${childSnapshot.from}
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>    `
-
-
-                        $(document).ready(() => {
-                            document.querySelector('#ex-table-from').append(tr) //อัพ    
-                        });
-                        $("#ex-table-from").html("") //ลบ
-
-                        /*$(document).ready(() => {
-                            document.querySelector('#ex-table-coin').append(tr) //อัพ    
-                        });
-                        $("#ex-table-coin").html("") //ลบ    */
-
-                    } if (childSnapshot.from == test.data.address) {
-                        var tr = document.createElement('div')
-                        let view;
-
-
-                        //     tr.innerHTML = `
-                        //     <card>${childSnapshot.from}</card> 
-                        // `
-
-                        tr.innerHTML = ` 
-
-                        <div class="card">
-                        <div class="address content">
-                            <div class="align-center">
-                                <div class="transactions-header">
-                                    Wed, 04 Mar 2020 15:39:16 GMT
-                                    <div class="explorer-container">
-                                        <a target="_blank">
-                                            <b-icon icon="link" size="is-small">
-                                            </b-icon>
-                                            <a href='${link}' target='_blank' >View on Etherscan</a>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="transactions-body-send">
-                                    SEND
-                                    <div class="explorer-PSUCOIN-send">
-                                        <a target="_blank">
-                                            <b-icon icon="link" size="is-small">
-                                            </b-icon>
-                                            ${"-" + show} PSU
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="transactions-footer">
-                                    <div style="color: #7957d5; padding-right: 5px;" id="ex-table-from">
-                                        To address: ${childSnapshot.to}
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>    `
-
-
-                        $(document).ready(() => {
-                            document.querySelector('#ex-table-from').append(tr) //อัพ    
-                        });
-                        $("#ex-table-from").html("") //ลบ
-
-                        /*$(document).ready(() => {
-                            document.querySelector('#ex-table-coin').append(tr) //อัพ    
-                        });
-                        $("#ex-table-coin").html("") //ลบ    */
-
-                    }
-
-                    /* if (childSnapshot.from == test.data.address) {
-                          var tr = document.createElement('tr')
-                          tr.innerHTML = `
-                          <td class="green">${childSnapshot.from}</td class="green"> 
-                          <td class="green">${childSnapshot.to}</td class="green">
-                          <td class="green">${"-" + show}</td class="green">
-                          <td class="green">SEND</td class="green">
-                          <td class="green"><a href='${link}' target='_blank' >View on Etherscan</a></td class="green">
-                      `
-                          $(document).ready(() => {
-                              document.querySelector('#ex-table').append(tr) //อัพ    
-                          });
-                          $("#ex-table").html("") //ลบ
-                      }*/
-
-
-                    /*  if (childSnapshot.from == test.data.address) {
-                          var tr = document.createElement('div')
-                          tr.innerHTML = `
-                                  <div class="transactions-footer">${childSnapshot.from}</div class="transactions-footer"> 
-                              `
-                          $(document).ready(() => {
-                              document.querySelector('#ex-table').append(a) //อัพ    
-                          });
-                          $("#ex-table").html("") //ลบ
-  
-                          var tr = document.createElement('div')
-                          tr.innerHTML = `
-                                  <class="explorer-PSUCOIN">${show}</class="explorer-PSUCOIN"> 
-                              `
-                          $(document).ready(() => {
-                              document.querySelector('#ex-table1').append(a) //อัพ    
-                          });
-                          $("#ex-table1").html("") //ลบ
-  
-                          var tr = document.createElement('div')
-                          tr.innerHTML = `
-                                  <div class="transactions-footer">${childSnapshot.from}</div class="transactions-footer"> 
-                              `
-                          $(document).ready(() => {
-                              document.querySelector('#ex-table2').append(a) //อัพ    
-                          });
-                          $("#ex-table2").html("") //ลบ
-                          
-                      }*/
-                })
+                if (result.data.returnValues.to == test.data.address) {
+                    console.log("Order ===> ME")
+                    console.log("Money", show)
+                    console.log("link", link)
+                    console.log("from", from)
+                    console.log("Date ==== >", showdate)
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title1:    "goood" +   show,
+                        title2:    "goood"+    link,
+                        title:      "goood" +  from,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
             })
         });
 

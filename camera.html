@@ -784,7 +784,7 @@
         </div>
         <div id="output">
             <div id="outputMessage" hidden></div>
-           <div id="outputData" hidden></div>
+            <div id="outputData" hidden></div>
 
         </div>
         <div class="Sponsored">
@@ -837,10 +837,6 @@
             // window.location.href = url.replace('send', 'Receive')
             window.location.href = url.replace('Receive', 'camera', 'send')
         }
-
-
-
-
 
 
     </script>
@@ -1025,7 +1021,7 @@
                         })
                     })
 
-                    axios({ 
+                    axios({
                         method: 'GET',
                         url: '/camera/' + id + '/confirm', // ส่งไปยังค่านี้
                         headers: {
@@ -1033,7 +1029,7 @@
                         }
                     },
                         $('#show').val(code.data),
-          
+
                     ).then(result => {
                         console.log("Good Get Api ", result.data)
 

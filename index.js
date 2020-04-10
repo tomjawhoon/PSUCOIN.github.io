@@ -11,7 +11,6 @@ const EthereumTx = require('ethereumjs-tx').Transaction;
 const Buffer = require('safer-buffer').Buffer;
 const cors = require('cors');
 require('tls').DEFAULT_MIN_VERSION = 'TLSv1'
-const _ = require("lodash")
 const infura = {
     projectId: '37dd526435b74012b996e147cda1c261',
     projectSecret: '55c6430534c042a1b762cd5f6e0f0a55',
@@ -336,17 +335,13 @@ router.route('/transection/:id/confirm')
         const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
         const contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
         const contract = new web3.eth.Contract(abi, contractAddress);
-
         try {
             const events = await contract.getPastEvents('Transfer', {
                 filter: { to: null },
                 fromBlock: 0,
                 toBlock: 'latest'
-
             });
-            //let transactions = {}
             let transections = events.map((event) => {
-
                 const transaction = event.transactionHash;
                 console.log("event ===> ", transaction);
                 const { returnValues } = event;
@@ -354,12 +349,66 @@ router.route('/transection/:id/confirm')
                 const { from, to, tokens, } = returnValues;
                 return { from: from, to: to, tokens: tokens, transaction: transaction }
             })
-            // res.json(JSON.stringify(returnValues))
             res.json(transections);
         } catch (e) {
             console.error(e);
             res.json(e)
         }
+    });
+
+
+router.route('/transection/:id/confirm')
+    .get(async (req, res) => {
+        const id = req.headers.id;
+        const toAddress = await getReceiverWalletFromId(id)
+        const toAddress2 = toAddress.val();
+        const address = toAddress2.address;
+        console.log("address ==================>", address);
+        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
+        const contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
+        const contract = new web3.eth.Contract(abi, contractAddress);
+        try {
+            const events = await contract.getPastEvents('Transfer', {
+                filter: { to: null },
+                fromBlock: 0,
+                toBlock: 'latest'
+            });
+            let transections = events.map((event) => {
+                const transaction = event.transactionHash;
+                console.log("event ===> ", transaction);
+                const { returnValues } = event;
+                console.log(returnValues);
+                const { from, to, tokens, } = returnValues;
+                return { from: from, to: to, tokens: tokens, transaction: transaction }
+            })
+            res.json(transections);
+        } catch (e) {
+            console.error(e);
+            res.json(e)
+        }
+    });
+
+router.route('/transectionrealtime/:id/confirm')
+    .get(async (req, res) => {
+        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
+        const config = {
+            address: '0x0d01bc6041ac8f72e1e4b831714282f755012764' // set to contract address
+        }
+        const provider = new Web3.providers.WebsocketProvider("wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261")
+        const web3 = new Web3(provider)
+        const contract = new web3.eth.Contract(abi, config.address);
+        contract.events.allEvents(function (err, event) {
+            if (err) {
+                console.error('Error', err)
+                process.exit(1)
+            }
+
+            console.log('Event', event)
+            res.json(event);
+
+        })
+
+        console.log('Waiting for events...')
     });
 
 
