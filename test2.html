@@ -23,28 +23,23 @@
 <script>
 
     var url;
-    var id;
+    var id; //5935512088
     (() => {
         url = window.location.href
         id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
     })()
     // ทำการเชื่อม Websocket Server ตาม url ที่กำหนด
     var connection = new WebSocket('ws://localhost:4000')
-    connection.onopen = function () {
+    connection.onopen = () => {
         // จะทำงานเมื่อเชื่อมต่อสำเร็จ
         console.log("connect webSocket");
         connection.send(id); // ส่ง Data ไปที่ Server //5935512088
     };
-        connection.onerror = function (error) {
-            console.error('WebSocket Error ' + error);
+    connection.onerror = (error) => {
+        console.error('WebSocket Error ' + error);
     };
-    connection.onmessage = function (result) {
-        console.log("show data eeeeeeeeeeeeeeeeeeee ==>: ", result)
-        console.log("message from server: ", result.data.transactionHash)
-        //console.log("message from server: ", result.data.returnValues.Result)
-        //console.log("message from server: ", result.data.from)
-        //console.log("message from server: ", result.data.token)
-        //console.log("message from server: ", result.data.returnValues)
+    connection.onmessage = (result) => {
+        console.log("result Server ==>: ", result)
         Swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -56,11 +51,11 @@
 
     };
  /* function createDivElement(data) {
-          var newDiv = document.createElement('div')
-          newDiv.setAttribute("id", "myDiv");
-          newDiv.innerHTML = data
-          document.body.appendChild(newDiv)
-        }*/
+             var newDiv = document.createElement('div')
+             newDiv.setAttribute("id", "myDiv");
+             newDiv.innerHTML = data
+             document.body.appendChild(newDiv)
+           }*/
 </script>
 
 </html>
