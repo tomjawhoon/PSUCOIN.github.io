@@ -14,6 +14,7 @@
   "dependencies": {
     "consolidate": "^0.15.1",
     "ethereumjs-tx": "2.1.0",
+    "express": "^4.15.2",
     "firebase": "^4.8.0",
     "instascan": "^1.0.0",
     "lodash": "^4.17.15",
@@ -21,6 +22,8 @@
     "nodemon": "^1.19.4",
     "safer-buffer": "2.1.2",
     "soap": "^0.29.0",
-    "web3": "^1.2.1"
+    "socket.io": "^2.3.0",
+    "web3": "^1.2.1",
+    "ws": "^7.2.5"
   }
 }

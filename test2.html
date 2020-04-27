@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TEST WEBSOCKET</title>
+    <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+    
+
+</head>
+<style type="text/css">
+    #myDiv {
+        border: 1px solid #000;
+        padding: 9px;
+        width: 50%;
+        margin-bottom: 14px;
+    }
+</style>
+
+<body>
+    <div id="myDiv"></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+
+    var url;
+    var id;
+    (() => {
+        url = window.location.href
+        id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
+    })()
+    // ทำการเชื่อม Websocket Server ตาม url ที่กำหนด
+    var connection = new WebSocket('ws://localhost:4000')
+    connection.onopen = function () {
+        // จะทำงานเมื่อเชื่อมต่อสำเร็จ
+        console.log("connect webSocket");
+        connection.send(id); // ส่ง Data ไปที่ Server //5935512088
+    };
+    connection.onerror = function (error) {
+        console.error('WebSocket Error ' + error);
+    };
+    connection.onmessage = function (e) { // e => data from server
+        // log ค่าที่ถูกส่งมาจาก server
+        console.log("show data eeeeeeeeeeeeeeeeeeee ==>: ", e)
+        console.log("message from server: ", e.data)
+        Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title:  'มีเงินโอนเข้ามา',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+        //createDivElement(e.data)
+    };
+ /* function createDivElement(data) {
+       var newDiv = document.createElement('div')
+       newDiv.setAttribute("id", "myDiv");
+       newDiv.innerHTML = data
+       document.body.appendChild(newDiv)
+     }*/
+</script>
+
+</html>

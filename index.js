@@ -10,7 +10,11 @@ const path = require('path');
 const EthereumTx = require('ethereumjs-tx').Transaction;
 const Buffer = require('safer-buffer').Buffer;
 const cors = require('cors');
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 4000 });
 require('tls').DEFAULT_MIN_VERSION = 'TLSv1'
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 const infura = {
     projectId: '37dd526435b74012b996e147cda1c261',
     projectSecret: '55c6430534c042a1b762cd5f6e0f0a55',
@@ -357,7 +361,63 @@ router.route('/transection/:id/confirm')
     });
 
 
-router.route('/transection/:id/confirm')
+router.route('/transectionrealtime/:id/confirm')
+    .get(async (req, res) => {
+        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
+        const address = '0x0d01bc6041ac8f72e1e4b831714282f755012764' // set to contract address
+        const provider = new Web3.providers.WebsocketProvider("wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261")
+        const web3 = new Web3(provider)
+        const contract = new web3.eth.Contract(abi, address);
+        contract.events.allEvents((err, event) => {
+            if (err) {
+                console.error('Error', err)
+                process.exit(1)
+            }
+            console.log('Event', event)
+            res.json(event);
+        })
+        console.log('Waiting ...!')
+    });
+
+
+wss.on('connection', function connection(ws) { // สร้าง connection
+    ws.on('message', function incoming(message) {
+        // รอรับ data อะไรก็ตาม ที่มาจาก client แบบตลอดเวลา
+        console.log('client: %s', message); //header
+        console.log('show  data from client  : %s', message);
+        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
+        const address = '0x0d01bc6041ac8f72e1e4b831714282f755012764' // set to contract address
+        const provider = new Web3.providers.WebsocketProvider("wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261")
+        const web3 = new Web3(provider)
+        const contract = new web3.eth.Contract(abi, address);
+        contract.events.allEvents((err, event) => {
+            if (err) {
+                console.error('Error', err)
+                process.exit(1)
+            }
+            console.log('Event', event)
+            ws.send(event);
+        })
+        console.log('Waiting ...!')
+    });
+    ws.on('close', function close() {
+        // จะทำงานเมื่อปิด Connection ในตัวอย่างคือ ปิด Browser
+        console.log('disconnected');
+    });
+    //ws.send('init message to client');
+    // ส่ง data ไปที่ client เชื่อมกับ websocket server นี้
+    /*setInterval(() => {
+        const data = "55555555"
+        console.log('sending to data to client:', data)
+        ws.send(JSON.stringify(data))
+    }, 1000)*/
+});
+
+console.log('show server')
+
+
+
+/*router.route('/transection/:id/confirm')
     .get(async (req, res) => {
         const id = req.headers.id;
         const toAddress = await getReceiverWalletFromId(id)
@@ -386,17 +446,17 @@ router.route('/transection/:id/confirm')
             console.error(e);
             res.json(e)
         }
-    });
+    });*/
 
-router.route('/transectionrealtime/:id/confirm')
-    .get(async (req, res) => {
+
+
+/*io.on('/transectionrealtime/:id/confirm',  (socket)  => {
+    socket.on(async (req, res) => {
         const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
-        const config = {
-            address: '0x0d01bc6041ac8f72e1e4b831714282f755012764' // set to contract address
-        }
+        const address = '0x0d01bc6041ac8f72e1e4b831714282f755012764' // set to contract address
         const provider = new Web3.providers.WebsocketProvider("wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261")
         const web3 = new Web3(provider)
-        const contract = new web3.eth.Contract(abi, config.address);
+        const contract = new web3.eth.Contract(abi, address);
         contract.events.allEvents(function (err, event) {
             if (err) {
                 console.error('Error', err)
@@ -407,10 +467,10 @@ router.route('/transectionrealtime/:id/confirm')
             res.json(event);
 
         })
-
         console.log('Waiting for events...')
     });
-
+});
+*/
 
 /*router.route('/transection_from/:id/confirm')
     .get(async (req, res) => {
@@ -693,6 +753,11 @@ router.route('/test1/:id')
         res.render('test1.html')
     })
 
+router.route('/test2/:id')
+    .get((req, res) => {
+        res.render('test2.html')
+    })
+
 router.route('/errorlogin')
     .get((req, res) => {
         res.render('errorlogin.html')
@@ -943,14 +1008,17 @@ router.route('/balance_admin/:id/confirm')
 
 router.route('/getWalletById')
     .get((req, res) => {
+        //const id = "5935512088"
         const id = req.headers.id;
         console.log("get", id)
+        // for (let i in id) {
         database.ref('users').child(id).once("value", snapshot => {
             res.send(JSON.stringify({
                 address: snapshot.val().address,
                 privateKey: snapshot.val().privateKey,
             }))
         })
+        //  }
     })
 
 // <!--===============================================================================================-->
@@ -1104,6 +1172,9 @@ async function getReceiverWalletFromId(id) {
     return await database.ref('users').child(id).once("value")
     // console.log("getReceiverWalletFromId = >",id)
 }
+
+
+
 // <!--===============================================================================================-->
 app.listen(5001, () => console.log('Server is ready!'))
 

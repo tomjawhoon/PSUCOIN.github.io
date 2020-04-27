@@ -915,14 +915,13 @@
             url: '/transectionrealtime/' + id + '/confirm',
 
             //url: '/balance/' + id + '/confirm', // ??????????????
-            headers: {
+           /* headers: {
                 id: id,
                 //result : result,
-            }
+            }*/
         }).then(result => {
             console.log("result.data ===>", result.data)
             console.log("showRealtime ===>", result.data.returnValues)
-
             axios({
                 method: 'GET',
                 url: '/getWalletById', //ส่งไปค่านี้
@@ -964,9 +963,9 @@
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Your work has been saved'+ JSON.stringify(from),
+                        title:  'มีเงินโอนเข้ามา',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2000
                     })
                 }
             })
@@ -975,8 +974,6 @@
         // <!--===============================================================================================-->
         //'Student ID Error  ' + JSON.stringify(from),
     </script>
-    JSON.stringify
-
 </body>
 
 </html>
