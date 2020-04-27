@@ -294,7 +294,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="/front/vendor/jquery/jquery.min.js"></script>
     <script src="/front/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!-- Plugin JavaScript -->
     <script src="/front/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="/front/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
@@ -312,6 +312,34 @@
         url = window.location.href
         id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
       })()
+
+
+      var connection = new WebSocket('ws://localhost:4000')
+    connection.onopen = function () {
+        // จะทำงานเมื่อเชื่อมต่อสำเร็จ
+        console.log("connect webSocket");
+        connection.send(id); // ส่ง Data ไปที่ Server //5935512088
+    };
+        connection.onerror = function (error) {
+            console.error('WebSocket Error ' + error);
+    };
+    connection.onmessage = function (result) {
+        console.log("show data eeeeeeeeeeeeeeeeeeee ==>: ", result)
+        console.log("message from server: ", result.data.transactionHash)
+        //console.log("message from server: ", result.data.returnValues.Result)
+        //console.log("message from server: ", result.data.from)
+        //console.log("message from server: ", result.data.token)
+        //console.log("message from server: ", result.data.returnValues)
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'มีเงินโอนเข้ามา',
+            showConfirmButton: false,
+            timer: 2000
+        })
+        //createDivElement(e.data)
+
+    };
 
 
       function gotosendadmin() {

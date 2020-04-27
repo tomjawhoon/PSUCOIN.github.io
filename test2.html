@@ -4,7 +4,7 @@
 <head>
     <title>TEST WEBSOCKET</title>
     <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
-    
+
 
 </head>
 <style type="text/css">
@@ -35,28 +35,32 @@
         console.log("connect webSocket");
         connection.send(id); // ส่ง Data ไปที่ Server //5935512088
     };
-    connection.onerror = function (error) {
-        console.error('WebSocket Error ' + error);
+        connection.onerror = function (error) {
+            console.error('WebSocket Error ' + error);
     };
-    connection.onmessage = function (e) { // e => data from server
-        // log ค่าที่ถูกส่งมาจาก server
-        console.log("show data eeeeeeeeeeeeeeeeeeee ==>: ", e)
-        console.log("message from server: ", e.data)
+    connection.onmessage = function (result) {
+        console.log("show data eeeeeeeeeeeeeeeeeeee ==>: ", result)
+        console.log("message from server: ", result.data.transactionHash)
+        //console.log("message from server: ", result.data.returnValues.Result)
+        //console.log("message from server: ", result.data.from)
+        //console.log("message from server: ", result.data.token)
+        //console.log("message from server: ", result.data.returnValues)
         Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title:  'มีเงินโอนเข้ามา',
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
+            position: 'top-end',
+            icon: 'success',
+            title: 'มีเงินโอนเข้ามา',
+            showConfirmButton: false,
+            timer: 2000
+        })
         //createDivElement(e.data)
+
     };
  /* function createDivElement(data) {
-       var newDiv = document.createElement('div')
-       newDiv.setAttribute("id", "myDiv");
-       newDiv.innerHTML = data
-       document.body.appendChild(newDiv)
-     }*/
+          var newDiv = document.createElement('div')
+          newDiv.setAttribute("id", "myDiv");
+          newDiv.innerHTML = data
+          document.body.appendChild(newDiv)
+        }*/
 </script>
 
 </html>

@@ -361,7 +361,7 @@ router.route('/transection/:id/confirm')
     });
 
 
-router.route('/transectionrealtime/:id/confirm')
+/*router.route('/transectionrealtime/:id/confirm')
     .get(async (req, res) => {
         const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
         const address = '0x0d01bc6041ac8f72e1e4b831714282f755012764' // set to contract address
@@ -378,7 +378,7 @@ router.route('/transectionrealtime/:id/confirm')
         })
         console.log('Waiting ...!')
     });
-
+*/
 
 wss.on('connection', function connection(ws) { // สร้าง connection
     ws.on('message', async function incoming(message) {
