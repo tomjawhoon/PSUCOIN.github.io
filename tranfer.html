@@ -915,7 +915,7 @@
             </div>
             <h5 style="color:rgb(228, 46, 46)">PSUCOIN</h5>
             <div class="form-group">
-              <input type="number" name="money" id="money" class="form-control" placeholder="PSUCOIN"  />
+              <input type="number" name="money" id="money" class="form-control" placeholder="PSUCOIN" />
             </div>
 
           </div>
@@ -1037,19 +1037,6 @@
       id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
     })()
 
-    /* $(function () {
-       var $input = $("#money");
- 
- 
-       
-         var input = $input.val();
-         alert(input);
- 
-     });*/
-
-
-
-
     axios({
       method: 'GET',
       url: '/getProfileforbalance', //ส่งไปค่านี้
@@ -1077,9 +1064,7 @@
     }).catch(result => {
       console.log("errr")
     })
-
     document.querySelector('#submitSend').addEventListener('submit', e => {
-
       e.preventDefault()
       axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
         method: 'GET',
@@ -1090,13 +1075,13 @@
           privateKey: $('#privateKey').val(),
           money: $('#money').val(),
           TEST: 'test string',
-          id:id
+          id: id
         }
       }).then(result => {
         console.log("result.TEST", result.data)
         if (result.data == "IDERROR") {
           swal.fire(
-            'Student ID Error', 
+            'Student ID Error',
             'กรุณากรอกข้อมูลให้ถูกต้อง',
             "error"
           ).then(function () {
@@ -1106,7 +1091,7 @@
         }
         else if (result.data == "ERROR") {
           swal.fire(
-            'Payment Error', 
+            'Payment Error',
             'ใส่จำนวนเงินใหม่',
             "error"
           ).then(function () {
@@ -1148,7 +1133,7 @@
           headers: {
             id: e.target.value  // รหัสนักศึกษา
           }
-        }).then(result => { 
+        }).then(result => {
           $('#receiverName').val(result.data.name)
           $('#receiverLastName').val(result.data.lastName)
           $('#receiverLastID').val(result.data.id)
