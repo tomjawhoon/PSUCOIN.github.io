@@ -20,6 +20,7 @@
     "lodash": "^4.17.15",
     "mustache": "^3.1.0",
     "nodemon": "^1.19.4",
+    "push.js": "^1.0.12",
     "safer-buffer": "2.1.2",
     "soap": "^0.29.0",
     "socket.io": "^2.3.0",

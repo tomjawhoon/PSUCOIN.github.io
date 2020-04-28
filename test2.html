@@ -4,6 +4,7 @@
 <head>
     <title>TEST WEBSOCKET</title>
     <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
 
 
 </head>
@@ -21,8 +22,8 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
 <script>
 
     var url;
@@ -41,8 +42,8 @@ integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="ano
             id: id  // รหัสนักศึกษา
         }
     }).then(test => {
-        console.log("test ===>",test);
-        console.log("test.address ===>",test.address);
+        console.log("test ===>", test);
+        console.log("test.address ===>", test.data.address);
         var connection = new WebSocket('ws://localhost:4000')
         connection.onopen = () => {
             // จะทำงานเมื่อเชื่อมต่อสำเร็จ
@@ -63,6 +64,14 @@ integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="ano
                 timer: 2000
             })
             //createDivElement(e.data)
+            Push.create("PSUCOIN WELCOME", {
+                body: "มีเงินโอนเข้ามาเด้อ",
+                icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Prince_of_Songkla_University_Emblem.png/150px-Prince_of_Songkla_University_Emblem.png",
+                timeout: 5000,
+                onClick: function () {
+                    console.log(this);
+                }
+            });
         };
     })
 
