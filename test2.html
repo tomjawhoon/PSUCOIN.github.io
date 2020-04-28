@@ -20,6 +20,9 @@
     <div id="myDiv"></div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script>
 
     var url;
@@ -29,33 +32,46 @@
         id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
     })()
     // ทำการเชื่อม Websocket Server ตาม url ที่กำหนด
-    var connection = new WebSocket('ws://localhost:4000')
-    connection.onopen = () => {
-        // จะทำงานเมื่อเชื่อมต่อสำเร็จ
-        console.log("connect webSocket");
-        connection.send(id); // ส่ง Data ไปที่ Server //5935512088
-    };
-    connection.onerror = (error) => {
-        console.error('WebSocket Error ' + error);
-    };
-    connection.onmessage = (result) => {
-        console.log("result Server ==>: ", result)
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'มีเงินโอนเข้ามา',
-            showConfirmButton: false,
-            timer: 2000
-        })
-        //createDivElement(e.data)
 
-    };
- /* function createDivElement(data) {
-             var newDiv = document.createElement('div')
-             newDiv.setAttribute("id", "myDiv");
-             newDiv.innerHTML = data
-             document.body.appendChild(newDiv)
-           }*/
+
+    axios({
+        method: 'GET',
+        url: '/getWalletById', //ส่งไปค่านี้
+        headers: {
+            id: id  // รหัสนักศึกษา
+        }
+    }).then(test => {
+        console.log("test ===>",test);
+        console.log("test.address ===>",test.address);
+        var connection = new WebSocket('ws://localhost:4000')
+        connection.onopen = () => {
+            // จะทำงานเมื่อเชื่อมต่อสำเร็จ
+            console.log("connect webSocket");
+            connection.send(id); // ส่ง Data ไปที่ Server //5935512088
+        };
+        connection.onerror = (error) => {
+            console.error('WebSocket Error ' + error);
+        };
+        connection.onmessage = (result) => {
+            console.log("result Server ==>: ", result)
+            console.log("result Server.data ==>: ", result.data)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'มีเงินโอนเข้ามา',
+                showConfirmButton: false,
+                timer: 2000
+            })
+            //createDivElement(e.data)
+        };
+    })
+
+    /* function createDivElement(data) {
+                var newDiv = document.createElement('div')
+                newDiv.setAttribute("id", "myDiv");
+                newDiv.innerHTML = data
+                document.body.appendChild(newDiv)
+              }*/
 </script>
 
 </html>
