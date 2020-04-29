@@ -400,7 +400,6 @@ wss.on('connection', function connection(ws) { // สร้าง connection
             ws.send(JSON.stringify(event))
            // ws.send(test);
         })
-
         console.log('Waiting ...!')
     });
     ws.on('close', function close() {
@@ -415,10 +414,6 @@ wss.on('connection', function connection(ws) { // สร้าง connection
         ws.send(JSON.stringify(data))
     }, 1000)*/
 });
-
-console.log('show server')
-
-
 
 /*router.route('/transection/:id/confirm')
     .get(async (req, res) => {
@@ -1057,7 +1052,6 @@ router.route('/sendadmin/:id/confirm')
             var contract = new web3.eth.Contract(abi, contractAddress, { from: fromAddress });
             var weiTokenAmount = web3.utils.toWei(String(money), 'ether');
             var privKey = Buffer.from(privateKey, 'hex');
-
             for (let i in id) {
                 let response = await getReceiverWalletFromId(id[i]) //5935512088
                 let wallet = response.val()
@@ -1175,8 +1169,6 @@ async function getReceiverWalletFromId(id) {
     return await database.ref('users').child(id).once("value")
     // console.log("getReceiverWalletFromId = >",id)
 }
-
-
 
 // <!--===============================================================================================-->
 app.listen(5001, () => console.log('Server is ready!'))
