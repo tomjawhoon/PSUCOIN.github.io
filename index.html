@@ -314,42 +314,55 @@
         id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
       })()
 
+      axios({
+        method: 'GET',
+        url: '/getWalletById', //ส่งไปค่านี้
+        headers: {
+          id: id  // รหัสนักศึกษา
+        }
+      }).then(test => {
+        console.log("test ===>", test);
+        console.log("test.address ===>", test.data.address);
+        var connection = new WebSocket('ws://localhost:4000')
+        connection.onopen = () => {
+          // จะทำงานเมื่อเชื่อมต่อสำเร็จ
+          console.log("connect webSocket");
+          connection.send(id); // ส่ง Data ไปที่ Server //5935512088
+        };
+        connection.onerror = (error) => {
+          console.error('WebSocket Error ' + error);
+        };
+        connection.onmessage = (result) => {
+          const check = JSON.parse(result.data)
+          const money = check.returnValues.tokens / 1000000000000000000;
+          console.log("result Server ==>: ", check)
+          console.log("result Server.data ==>: ", check.returnValues.to)
+          console.log("result Server.data ==>: ", money)
+          console.log("result Server.data ==>: ", check.returnValues.from)
+          if (check.returnValues.to == test.data.address) {
+            console.log("in loop ")
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'มีเงินโอนเข้ามา',
+              showConfirmButton: false,
+              timer: 2000
+            })
+            //createDivElement(e.data)
+            Push.create("PSUCOIN WELCOME", {
+              body: "มีเงินโอนเข้ามาเด้อ",
+              icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Prince_of_Songkla_University_Emblem.png/150px-Prince_of_Songkla_University_Emblem.png",
+              timeout: 5000,
+              //link: "https://www.youtube.com/watch?v=KlLDR4090ts",
 
-      var connection = new WebSocket('ws://localhost:4000')
-      connection.onopen = function () {
-        // จะทำงานเมื่อเชื่อมต่อสำเร็จ
-        console.log("connect webSocket");
-        connection.send(id); // ส่ง Data ไปที่ Server //5935512088
-      };
-      connection.onerror = function (error) {
-        console.error('WebSocket Error ' + error);
-      };
-      connection.onmessage = function (result) {
-        console.log("show data eeeeeeeeeeeeeeeeeeee ==>: ", result)
-        console.log("message from server: ", result.data.transactionHash)
-        //console.log("message from server: ", result.data.returnValues.Result)
-        //console.log("message from server: ", result.data.from)
-        //console.log("message from server: ", result.data.token)
-        //console.log("message from server: ", result.data.returnValues)
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'มีเงินโอนเข้ามา',
-          showConfirmButton: false,
-          timer: 2000
-        })
-
-        Push.create("PSUCOIN WELCOME", {
-          body: "มีเงินโอนเข้ามาเด้อ",
-          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Prince_of_Songkla_University_Emblem.png/150px-Prince_of_Songkla_University_Emblem.png",
-          timeout: 5000,
-          onClick: () => {
-            console.log(this);
+            });
+          } else {
+            console.log("Not in loop ")
           }
-        });
-        //createDivElement(e.data)
+        }
+      })
 
-      };
+
 
 
       function gotosendadmin() {
@@ -406,7 +419,7 @@
           }
         })
       })
-      
+
     </script>
 
 </body>
