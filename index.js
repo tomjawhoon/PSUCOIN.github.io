@@ -406,13 +406,7 @@ wss.on('connection', function connection(ws) { // สร้าง connection
         // จะทำงานเมื่อปิด Connection ในตัวอย่างคือ ปิด Browser
         console.log('disconnected');
     });
-    //ws.send('init message to client');
-    // ส่ง data ไปที่ client เชื่อมกับ websocket server นี้
-    /*setInterval(() => {
-        const data = "55555555"
-        console.log('sending to data to client:', data)
-        ws.send(JSON.stringify(data))
-    }, 1000)*/
+
 });
 
 /*router.route('/transection/:id/confirm')
