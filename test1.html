@@ -13,6 +13,52 @@
 </head>
 
 <style type="text/css">
+    .icon-inner,
+    svg {
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+
+    .btnsend {
+        border: none;
+        background: none;
+        outline: none;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+
+        left: 0;
+        top: 0;
+        width: 100%;
+
+        height: 100%;
+
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        /* background-color: #fefefe; */
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%;
+        /* Could be more or less, depending on screen size */
+    }
+
     a.button4 {
         display: inline-block;
         padding: 0.3em 1.2em;
@@ -130,11 +176,12 @@
         flex-direction: column;
         align-items: center;
         font-family: 'Francois One', sans-serif;
+        font-size: 20px;
 
     }
 
     .BoxwalletSymnol {
-        font-size: 50px;
+        font-size: 90px;
 
     }
 
@@ -831,6 +878,7 @@
         width: calc(100% - 50px);
         -webkit-transition: all .2s ease;
         transition: all .2s ease;
+
     }
 
     .pay-btn:hover {
@@ -945,12 +993,66 @@
     }
 
     @media (max-width: 375px) {
+
+        a.button4 {
+            display: inline-block;
+            padding: 0.3em 1.2em;
+            margin: 0 0.1em 0.1em 0;
+            border: 0.16em solid rgba(250, 250, 250, 0);
+            border-radius: 2em;
+            box-sizing: border-box;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            color: #FFFFFF;
+            text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        a.button4:hover {
+            border-color: rgba(255, 255, 255, 1);
+        }
+
+        @media all and (max-width:30em) {
+            a.button4 {
+                display: block;
+                margin: 0.2em auto;
+            }
+        }
+
         .window {
             width: 100%;
             height: 100%;
             display: block;
             border-radius: 0px;
             margin-top: 10em;
+        }
+
+        .Boxwallet {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Francois One', sans-serif;
+            font-size: 15px;
+
+        }
+
+        .pay-btn {
+            border: none;
+            background: #22b877;
+            line-height: 2em;
+            border-radius: 10px;
+            font-size: 19px;
+            font-size: 1.2rem;
+            color: #fff;
+            cursor: pointer;
+            position: absolute;
+            bottom: 25px;
+            width: calc(100% - 50px);
+            -webkit-transition: all .2s ease;
+            transition: all .2s ease;
+            margin-left: -0px;
         }
 
         .Sponsored {
@@ -1051,8 +1153,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class='price'><a href="something" class="button4"
-                                            style="background-color:#f14e4e">SEND</a></div>
+                                    <div class='price'><a class="button4" style="background-color:#f14e4e"
+                                            onclick="gotoSendETH()">SEND</a></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -1072,8 +1174,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class='price'><a href="something" class="button4"
-                                            style="background-color:#f14e4e">Payment</a></div>
+                                    <div class='price'><a class="button4" style="background-color:#f14e4e"
+                                            onclick="gotoPayment()">Payment</a></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -1093,8 +1195,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class='price'><a href="something" class="button4"
-                                            style="background-color:#f14e4e">Transection</a></div>
+                                    <div class='price'><a class="button4" style="background-color:#f14e4e"
+                                            onclick="gotoReceive()">Transection</a></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -1119,54 +1221,57 @@
             </div>
             <div class='credit-info'>
                 <div class='credit-info-content'>
-                    <table class='half-input-table'>
-                        <tr>
-                            <td>Please select your card: </td>
-                            <td>
-                                <div class='dropdown' id='card-dropdown'>
-                                    <div class='dropdown-btn' id='current-card'>Visa</div>
-                                    <div class='dropdown-select'>
-                                        <ul>
-                                            <li>Master Card</li>
-                                            <li>American Express</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
                     <img src='https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/Logo-PSU-TH-01.png'
                         height='300' class='credit-card-image' id='credit-card-image'></img>
-                    Card Number
-                    <input class='input-field'></input>
-                    Card Holder
-                    <input class='input-field'></input>
-                    <table class='half-input-table'>
-                        <tr>
-                            <td> Expires
-                                <input class='input-field'></input>
-                            </td>
-                            <td>CVC
-                                <input class='input-field'></input>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="Boxwallet">
+                        <form id="submitSend" method="GET">
+                            <div class="credit-info-content-text">
+                                Total coin :
+                                <span> <a id="result" style="color:rgb(255, 255, 255)" class="symbolcoin"></a>PSU
+                                </span>
+                                <button type="submit" onclick="document.getElementById('id01').style.display='block' "
+                                    class=" btnsend" value="re">
+                                    <ion-icon name="refresh" class="iconre" style="color:rgb(252, 248, 248)"></ion-icon>
+                                </button>
+                                <input type="hidden" class="form-control" name="fromAddress1" id="fromAddress1"
+                                    size="80"></input>
+                        </form>
+                    </div>
+
+                    Wallet:<a id="fromAddress" class="symbolcoin" style="color:#FFFFFF"></a>
                     <button class='pay-btn'>Checkout</button>
-
                 </div>
-
             </div>
+
         </div>
+
+    </div>
+    </div>
 
     </div>
 
 
-
+    <center>
+        <div id="id01" class="modal">
+            <form action="/action_page.php" method="post">
+                <div class="imgcontainer">
+                    <div class="loadingio-spinner-rolling-n2856siz85m">
+                        <div class="ldio-2fzcezdt162">
+                            <div></div>
+                        </div>
+                    </div>
+                    <p>Loading .....</p>
+                </div>
+                <div class="container">
+                </div>
+    </center>
 
 
 
 
 </body>
+
+
 
 <script src="./web3.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -1182,6 +1287,156 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
 <script src="https://www.vantajs.com/dist/vanta.net.min.js"></script>
+<script>
+    function gotoSendETH() {
+        window.location.href = window.location.href.replace('test1', 'send', 'index')
+    }
+
+    function gotoindex() {
+        // window.location.href = url.replace('send', 'balance')
+        window.location.href = url.replace('test1', 'index', 'send')
+    }
+
+    function gotoPayment() {
+        // window.location.href = url.replace('send', 'test1')
+        window.location.href = url.replace('test1', 'camera', 'send')
+    }
+
+    function gotoReceive() {
+        // window.location.href = url.replace('send', 'test1')
+        window.location.href = url.replace('test1', 'transection', 'send')
+    }
+
+
+
+
+</script>
+<script>
+
+
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            console.log("modal ==<>")
+            console.log("modal ==<>")
+        }
+    }
+
+    var url;
+    var id;
+    (() => {
+        url = window.location.href
+        id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
+    })()
+
+    axios({
+        method: 'GET',
+        url: '/getProfileforbalance', //ส่งไปค่านี้
+        headers: {
+            id: id  // รหัสนักศึกษา
+        }
+    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+        console.log("result_data_balance", result.data)
+        $("#result").attr("href", result.data)
+        $("#result").text(result.data)
+        // $("#result").val()
+    })
+
+    axios({
+        method: 'GET',
+        url: '/getWalletById', //ส่งไปค่านี้
+        headers: {
+            id: id // รหัสนักศึกษา
+        }
+    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+        console.log("result_formaxios_getWalletById", result)
+        console.log("result_formaxios_getWalletById", result.config.headers.id)
+        $("#fromAddress1").val(result.data.address)
+
+        $("#fromAddress").attr("href", result.data.address)
+        $("#fromAddress").text(result.data.address)
+
+        $('#showid').val(result.config.headers.id)
+
+        $(document).ready(function () {
+            $("a").click(function () {
+                $('#privateKey').val(result.data.privateKey)
+            });
+
+            $(function () {
+                // กำหนดการตั้งค่ารูปแบบ qrcode ที่ต้องการเรียกใช้
+                var qrcodeConfig = {
+                    width: 200,
+                    height: 200,
+                    correctLevel: 0
+                }
+                // สมมติค่าเริ่มเต้น ที่ตอ้งการแสดงเป็น qrcode
+                $("#qrcode").qrcode($.extend(qrcodeConfig, {
+                    text: result.data.address
+
+                }));
+
+
+                $('a.printPage').click(function () {
+                    window.print();
+                    return false;
+                });
+
+                // เมื่อมีการเปลี่ยนแปลงค่าใน input text และเกิด blur หรือ keypress event
+                /* $("#fromAddress").on("keypress blur", function (e) {
+                   if (e.type == 'keypress' && e.keyCode == 13) { // ถ้ามีการกรอกข้อมูลใหม่ และกด Enter
+                     $("#qrcode").html("") // ล้างค่า qrcode
+                       .qrcode($.extend(qrcodeConfig, {
+                         text: $(this).val()
+                       }));
+                   } else if (e.type == 'blur') { // ถ้ามีการกรอกข้อมูล แล้ว โฟกัสออกจาก input text
+                     $("#qrcode").html("") // ล้างค่า qrcode
+                       .qrcode($.extend(qrcodeConfig, {
+                         text: $(this).val()
+                       }));
+                   }
+                 });*/
+            });
+
+        });
+
+
+    }).catch(result => {
+        console.log("errr")
+    })
+    document.querySelector('#submitSend').addEventListener('submit', e => {
+        e.preventDefault()
+        axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
+            method: 'GET',
+            url: '/balance/' + id + '/confirm', // ส่งไปยังค่านี้
+            headers: {
+                fromAddress: $('#fromAddress1').val(),
+                id: id,
+
+            }
+        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+            if (result != '') {
+                $(() => {
+                    $(document).ready(() => {
+                        console.log("Show === result === Modal")
+                        $("#id01").hide();
+                    });
+                });
+            }
+            console.log("Retuen_value_balance", result)
+            console.log("test_send => ", result.data)
+            // $('#fromAddress').val(result.data.address)
+            $('#result').text(result.data)
+        }).catch(result => {
+            console.log("errr")
+        })
+    })
+
+</script>
+
 <script>
     VANTA.NET({
         el: "#vantajs",
