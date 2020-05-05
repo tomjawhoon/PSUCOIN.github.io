@@ -382,7 +382,7 @@ router.route('/transection/:id/confirm')
 
 wss.on('connection', function connection(ws) { // สร้าง connection
     ws.on('message', async function incoming(message) {
-       // var test = [];
+        // var test = [];
         // รอรับ data อะไรก็ตาม ที่มาจาก client แบบตลอดเวลา
         console.log('client: %s', message); //header
         //console.log('show  data from client  : %s', message);
@@ -398,7 +398,7 @@ wss.on('connection', function connection(ws) { // สร้าง connection
             }
             console.log('Event', event)
             ws.send(JSON.stringify(event))
-           // ws.send(test);
+            // ws.send(test);
         })
         console.log('Waiting ...!')
     });
@@ -748,6 +748,17 @@ router.route('/test1/:id')
 router.route('/test2/:id')
     .get((req, res) => {
         res.render('test2.html')
+    })
+
+router.route('/test3/:id')
+    .get((req, res) => {
+        res.render('test3.html')
+    })
+
+
+router.route('/test4/:id')
+    .get((req, res) => {
+        res.render('test4.html')
     })
 
 router.route('/errorlogin')

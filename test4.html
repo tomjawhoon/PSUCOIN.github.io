@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="/front/js/jquery.qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
 </head>
 
@@ -182,6 +183,7 @@
         align-items: center;
         font-family: 'Francois One', sans-serif;
         font-size: 20px;
+        margin-top: 20px;
 
     }
 
@@ -884,6 +886,7 @@
         width: calc(100% - 50px);
         -webkit-transition: all .2s ease;
         transition: all .2s ease;
+        margin-left: -35px;
 
     }
 
@@ -1031,7 +1034,7 @@
 
         .window {
             width: 100%;
-            height: 100%;
+            height: 30%;
             display: block;
             border-radius: 0px;
             margin-top: 10em;
@@ -1048,7 +1051,7 @@
 
         .pay-btn {
             border: none;
-            background: #22b877;
+            background: #e24655;
             line-height: 2em;
             border-radius: 10px;
             font-size: 19px;
@@ -1060,7 +1063,7 @@
             width: calc(100% - 50px);
             -webkit-transition: all .2s ease;
             transition: all .2s ease;
-            margin-left: -0px;
+            margin-top: 55px;
         }
 
         .Sponsored {
@@ -1096,7 +1099,7 @@
         }
 
         .pay-btn {
-            border-radius: 0px;
+            border-radius: 35px;
         }
 
         .credit-card-image {
@@ -1553,7 +1556,12 @@
             margin-bottom: 15px;
         }
 
-        
+        .btnContact {
+            border-radius: 25px;
+            background-color: #f7e287
+        }
+
+
     }
 </style>
 
@@ -1668,26 +1676,69 @@
             </div>
             <div class='credit-info'>
                 <div class='credit-info-content'>
-                    <img src='https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/Logo-PSU-TH-01.png'
+                    <img src='https://www.digipay.guru/wp-content/uploads/2019/12/digital-wallet-money-transfer-banner-img.png'
                         height='300' class='credit-card-image' id='credit-card-image'></img>
                     <div class="Boxwallet">
                         <form id="submitSend" method="GET">
-                            <div class="credit-info-content-text">
-                                Total coin :
-                                <span> <a id="result" style="color:#f7e287" class="symbolcoin"></a><a
-                                        class="psucenter">PSU</a>
-                                </span>
-                                <button type="submit" onclick="document.getElementById('id01').style.display='block' "
-                                    class=" btnsend" value="re">
-                                    <ion-icon name="refresh" class="iconre" style="color:rgb(252, 248, 248)"></ion-icon>
-                                </button>
-                                <input type="hidden" class="form-control" name="fromAddress1" id="fromAddress1"
-                                    size="80"></input>
+                            <input type="hidden" class="form-control" name="fromAddress" id="showid"
+                                size="80"></input><br>
+                            <input type="hidden" class="form-control" name="fromAddress" id="fromAddress"
+                                size="80"></input>
+                            <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
+                            <!-- <h5>privateKey</h5> -->
+                            <input type="hidden" class="form-control" name="privateKey" id="privateKey"
+                                size="80"></input>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="thin1">(Student ID) Recipient </span>
+                                    <div class="form-group">
+                                        <input type="text" name="toAddress" id="toAddress" class="form-control"
+                                            placeholder="Recipients" />
+                                    </div>
+                                    <h5 style="color:rgb(255, 255, 255)">PSUCOIN</h5>
+                                    <div class="form-group">
+                                        <input type="number" name="money" id="money" class="form-control"
+                                            placeholder="PSUCOIN" />
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 style="color:rgb(255, 255, 255)">(PROFILE) Recipient</h5>
+
+                                    <div class="form-group">
+                                        <input id="receiverName" type="text" class="form-control"
+                                            placeholder="receiverName" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input id="receiverLastName" type="text" class="form-control"
+                                            placeholder="receiverLastName" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input id="receiverLastID" type="text" class="form-control"
+                                            placeholder="receiverLastID" />
+                                    </div>
+
+
+                                    <a id="result" style="color:rgb(255, 255, 255)">View on Etherscan</a>
+
+
+
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+
+
+
+                                <button type="submit" name="btnSubmit" value="Send Coin" class='pay-btn'
+                                    onclick="document.getElementById('id01').style.display='block'">Send</button>
+                            </div>
+
+
                         </form>
                     </div>
-
-                    Wallet:<a id="fromAddress" class="symbolcoin" style="color:#f7e287"></a>
-                    <button class='pay-btn' onclick="gotoindex()">Home</button>
                 </div>
             </div>
 
@@ -1761,15 +1812,16 @@
 </script>
 <script>
 
+    $("#result").hide();
+
+
 
     var modal = document.getElementById('id01');
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
+    window.onclick = (event) => {
         if (event.target == modal) {
             modal.style.display = "none";
-            console.log("modal ==<>")
-            console.log("modal ==<>")
         }
     }
 
@@ -1788,8 +1840,8 @@
         }
     }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
         console.log("result_data_balance", result.data)
-        $("#result").attr("href", result.data)
-        $("#result").text(result.data)
+        $("#result1").attr("href", result.data)
+        $("#result1").text(result.data)
         // $("#result").val()
     })
 
@@ -1800,58 +1852,10 @@
             id: id // รหัสนักศึกษา
         }
     }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        console.log("result_formaxios_getWalletById", result)
-        console.log("result_formaxios_getWalletById", result.config.headers.id)
-        $("#fromAddress1").val(result.data.address)
-
-        $("#fromAddress").attr("href", result.data.address)
-        $("#fromAddress").text(result.data.address)
-
+        console.log("result_data", result)
+        $('#fromAddress').val(result.data.address)
+        $('#privateKey').val(result.data.privateKey)
         $('#showid').val(result.config.headers.id)
-
-        $(document).ready(function () {
-            $("a").click(function () {
-                $('#privateKey').val(result.data.privateKey)
-            });
-
-            $(function () {
-                // กำหนดการตั้งค่ารูปแบบ qrcode ที่ต้องการเรียกใช้
-                var qrcodeConfig = {
-                    width: 200,
-                    height: 200,
-                    correctLevel: 0
-                }
-                // สมมติค่าเริ่มเต้น ที่ตอ้งการแสดงเป็น qrcode
-                $("#qrcode").qrcode($.extend(qrcodeConfig, {
-                    text: result.data.address
-
-                }));
-
-
-                $('a.printPage').click(function () {
-                    window.print();
-                    return false;
-                });
-
-                // เมื่อมีการเปลี่ยนแปลงค่าใน input text และเกิด blur หรือ keypress event
-                /* $("#fromAddress").on("keypress blur", function (e) {
-                   if (e.type == 'keypress' && e.keyCode == 13) { // ถ้ามีการกรอกข้อมูลใหม่ และกด Enter
-                     $("#qrcode").html("") // ล้างค่า qrcode
-                       .qrcode($.extend(qrcodeConfig, {
-                         text: $(this).val()
-                       }));
-                   } else if (e.type == 'blur') { // ถ้ามีการกรอกข้อมูล แล้ว โฟกัสออกจาก input text
-                     $("#qrcode").html("") // ล้างค่า qrcode
-                       .qrcode($.extend(qrcodeConfig, {
-                         text: $(this).val()
-                       }));
-                   }
-                 });*/
-            });
-
-        });
-
-
     }).catch(result => {
         console.log("errr")
     })
@@ -1859,28 +1863,94 @@
         e.preventDefault()
         axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
             method: 'GET',
-            url: '/balance/' + id + '/confirm', // ส่งไปยังค่านี้
+            url: '/send/' + id + '/confirm', // ส่งไปยังค่านี้
             headers: {
-                fromAddress: $('#fromAddress1').val(),
-                id: id,
-
+                fromAddress: $('#fromAddress').val(),
+                toAddress: $('#toAddress').val(),
+                privateKey: $('#privateKey').val(),
+                money: $('#money').val(),
+                TEST: 'test string',
+                id: id
             }
-        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-            if (result != '') {
+        }).then(result => {
+            console.log("result.TEST", result.data)
+            if (result.data == "IDERROR") {
+                swal.fire(
+                    'Student ID Error',
+                    'กรุณากรอกข้อมูลให้ถูกต้อง',
+                    "error"
+                ).then(function () {
+                    location.reload();
+                }
+                );
+            }
+            else if (result.data == "ERROR") {
+                swal.fire(
+                    'Payment Error',
+                    'ใส่จำนวนเงินใหม่',
+                    "error"
+                ).then(function () {
+                    location.reload();
+                }
+                );
+            }
+            else {
                 $(() => {
                     $(document).ready(() => {
                         console.log("Show === result === Modal")
                         $("#id01").hide();
+                        console.log("SUCCESS")
+                        // $("#result").alert("Hello! I am an alert box!");
+                        // window.location.href = url.replace('send', 'SUCCESS')
                     });
+                    let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
+                    $("#result").attr("href", link)
+                    $("#result").show(1000);
+                    Swal.fire(
+                        'Complete',
+                        'Payment Success',
+                        'success'
+                    )
                 });
             }
-            console.log("Retuen_value_balance", result)
-            console.log("test_send => ", result.data)
-            // $('#fromAddress').val(result.data.address)
-            $('#result').text(result.data)
+
         }).catch(result => {
             console.log("errr")
         })
+    })
+
+
+    document.querySelector('#toAddress').addEventListener('keyup', e => {
+        if (e.target.value) {
+            axios({
+                method: 'GET',
+                url: '/getProfileById', //ส่งไปค่านี้
+                headers: {
+                    id: e.target.value  // รหัสนักศึกษา
+                }
+            }).then(result => {
+                $('#receiverName').val(result.data.name)
+                $('#receiverLastName').val(result.data.lastName)
+                $('#receiverLastID').val(result.data.id)
+            })
+        }
+
+    })
+
+    document.querySelector('#toAddress').addEventListener('keyup', e => {
+        if (e.target.value) {
+            axios({
+                method: 'GET',
+                url: '/getProfileforbalance', //ส่งไปค่านี้
+                headers: {
+                    id: e.target.value,
+                    value1: $('#value1').val(), // รหัสนักศึกษา
+                }
+            }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+                console.log("testapi_getProfileforbalance", result)
+                $('#value1').val(result)
+            })
+        }
     })
 
 </script>
