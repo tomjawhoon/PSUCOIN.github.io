@@ -1553,7 +1553,7 @@
             margin-bottom: 15px;
         }
 
-        
+
     }
 </style>
 
@@ -1799,9 +1799,12 @@
         headers: {
             id: id // รหัสนักศึกษา
         }
-    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+    }).then(result => {
+        
+        // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
         console.log("result_formaxios_getWalletById", result)
         console.log("result_formaxios_getWalletById", result.config.headers.id)
+        
         $("#fromAddress1").val(result.data.address)
 
         $("#fromAddress").attr("href", result.data.address)
@@ -1851,6 +1854,8 @@
 
         });
 
+
+    
 
     }).catch(result => {
         console.log("errr")
