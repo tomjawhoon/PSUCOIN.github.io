@@ -2020,7 +2020,7 @@
             id: id  // รหัสนักศึกษา
         }
     }).then(resultgetWalletById => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        console.log("resultgetWalletById_data", resultgetWalletById)
+       // console.log("resultgetWalletById_data", resultgetWalletById)
         $('#fromAddress').val(resultgetWalletById.data.address)
         $('#privateKey').val(resultgetWalletById.data.privateKey)
         $('#showid').val(resultgetWalletById.config.headers.id)

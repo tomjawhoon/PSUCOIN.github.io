@@ -1838,7 +1838,7 @@
       id: id  // รหัสนักศึกษา
     }
   }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-    console.log("result_data_balance", result.data)
+   // console.log("result_data_balance", result.data)
     $("#result1").attr("href", result.data)
     $("#result1").text(result.data)
     // $("#result").val()
@@ -1863,8 +1863,8 @@
     connection.onmessage = (result) => {
       const check = JSON.parse(result.data)
       const money = check.returnValues.tokens / 1000000000000000000;
-      console.log("connect webSocket", resultgetWalletById.data.address);
-      console.log("connect check.returnValues.to", check.returnValues.to);
+     // console.log("connect webSocket", resultgetWalletById.data.address);
+     // console.log("connect check.returnValues.to", check.returnValues.to);
       if (check.returnValues.to == resultgetWalletById.data.address) {
         console.log("in loop ")
         Swal.fire({
@@ -1884,7 +1884,7 @@
         console.log("Not in loop ")
       }
     } // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-    console.log("resultgetWalletById_data", resultgetWalletById)
+   // console.log("resultgetWalletById_data", resultgetWalletById)
     $('#fromAddress').val(resultgetWalletById.data.address)
     $('#privateKey').val(resultgetWalletById.data.privateKey)
     $('#showid').val(resultgetWalletById.config.headers.id)
@@ -1905,7 +1905,7 @@
         id: id
       }
     }).then(result => {
-      console.log("result.TEST", result.data)
+    //  console.log("result.TEST", result.data)
       if (result.data == "IDERROR") {
         swal.fire(
           'Student ID Error',
@@ -1929,9 +1929,9 @@
       else {
         $(() => {
           $(document).ready(() => {
-            console.log("Show === result === Modal")
+        //    console.log("Show === result === Modal")
             $("#id01").hide();
-            console.log("SUCCESS")
+         //   console.log("SUCCESS")
             // $("#result").alert("Hello! I am an alert box!");
             // window.location.href = url.replace('send', 'SUCCESS')
           });
@@ -1988,7 +1988,7 @@
           value1: $('#value1').val(), // รหัสนักศึกษา
         }
       }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        console.log("testapi_getProfileforbalance", result)
+      //  console.log("testapi_getProfileforbalance", result)
         $('#value1').val(result)
 
       })
