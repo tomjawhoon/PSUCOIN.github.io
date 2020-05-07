@@ -1732,9 +1732,10 @@
 <script src="/front/js/jquery.qrcode.min.js"></script>
 <script src="three.r95.min.js"></script>
 <script src="vanta.dots.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
 <script src="https://www.vantajs.com/dist/vanta.net.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
 <script>
     function gotoSendETH() {
         window.location.href = window.location.href.replace('balance', 'send', 'index')
@@ -1768,8 +1769,7 @@
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
-            console.log("modal ==<>")
-            console.log("modal ==<>")
+
         }
     }
 
@@ -1787,7 +1787,7 @@
             id: id  // รหัสนักศึกษา
         }
     }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        console.log("result_data_balance", result.data)
+        //console.log("result_data_balance", result.data)
         $("#result").attr("href", result.data)
         $("#result").text(result.data)
         // $("#result").val()
@@ -1799,22 +1799,62 @@
         headers: {
             id: id // รหัสนักศึกษา
         }
-    }).then(result => {
-        
+    }).then(resultgetWalletById => {
+
+
+        var connection = new WebSocket('ws://localhost:4000')
+        connection.onopen = () => {
+            // จะทำงานเมื่อเชื่อมต่อสำเร็จ
+            //console.log("connect webSocket");
+            connection.send(id); // ส่ง Data ไปที่ Server //5935512088
+        };
+        connection.onerror = (error) => {
+            //console.error('WebSocket Error ' + error);
+        };
+        connection.onmessage = (result) => {
+            const check = JSON.parse(result.data)
+            const money = check.returnValues.tokens / 1000000000000000000;
+           // console.log("connect webSocket",resultgetWalletById.data.address);
+            //console.log("connect check.returnValues.to",check.returnValues.to);
+            if (check.returnValues.to == resultgetWalletById.data.address) {
+                console.log("in loop ")
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'มีเงินโอนเข้ามา',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                //createDivElement(e.data)
+                Push.create("PSUCOIN WELCOME", {
+                    body: "มีเงินโอนเข้ามา",
+                    icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Prince_of_Songkla_University_Emblem.png/150px-Prince_of_Songkla_University_Emblem.png",
+                    timeout: 5000,
+                });
+            } else {
+                console.log("Not in loop ")
+            }
+        }
+
+
+
+
         // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        console.log("result_formaxios_getWalletById", result)
-        console.log("result_formaxios_getWalletById", result.config.headers.id)
-        
-        $("#fromAddress1").val(result.data.address)
+        //console.log("result_formaxios_getWalletById", resultgetWalletById)
+        //console.log("result_formaxios_getWalletById", resultgetWalletById.config.headers.id)
 
-        $("#fromAddress").attr("href", result.data.address)
-        $("#fromAddress").text(result.data.address)
+        $("#fromAddress1").val(resultgetWalletById.data.address)
 
-        $('#showid').val(result.config.headers.id)
+        $("#fromAddress").attr("href", resultgetWalletById.data.address)
+        $("#fromAddress").text(resultgetWalletById.data.address)
+
+        $('#showid').val(resultgetWalletById.config.headers.id)
 
         $(document).ready(function () {
+
+
             $("a").click(function () {
-                $('#privateKey').val(result.data.privateKey)
+                $('#privateKey').val(resultgetWalletById.data.privateKey)
             });
 
             $(function () {
@@ -1826,7 +1866,7 @@
                 }
                 // สมมติค่าเริ่มเต้น ที่ตอ้งการแสดงเป็น qrcode
                 $("#qrcode").qrcode($.extend(qrcodeConfig, {
-                    text: result.data.address
+                    text: resultgetWalletById.data.address
 
                 }));
 
@@ -1855,7 +1895,7 @@
         });
 
 
-    
+
 
     }).catch(result => {
         console.log("errr")
@@ -1879,8 +1919,8 @@
                     });
                 });
             }
-            console.log("Retuen_value_balance", result)
-            console.log("test_send => ", result.data)
+            //console.log("Retuen_value_balance", result)
+           // console.log("test_send => ", result.data)
             // $('#fromAddress').val(result.data.address)
             $('#result').text(result.data)
         }).catch(result => {

@@ -10,8 +10,15 @@ const path = require('path');
 const EthereumTx = require('ethereumjs-tx').Transaction;
 const Buffer = require('safer-buffer').Buffer;
 const cors = require('cors');
+
+
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 4000 });
+
+
+
+
+
 require('tls').DEFAULT_MIN_VERSION = 'TLSv1'
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -381,11 +388,8 @@ router.route('/transection/:id/confirm')
 */
 
 wss.on('connection', function connection(ws) { // สร้าง connection
-    ws.on('message', async function incoming(message) {
-        // var test = [];
-        // รอรับ data อะไรก็ตาม ที่มาจาก client แบบตลอดเวลา
-        console.log('client: %s', message); //header
-        //console.log('show  data from client  : %s', message);
+    ws.on('message', async function incoming(message) { // รอรับ data อะไรก็ตาม ที่มาจาก client แบบตลอดเวลา
+        console.log('client:', message); 
         const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
         const address = '0x0d01bc6041ac8f72e1e4b831714282f755012764' // set to contract address
         const provider = new Web3.providers.WebsocketProvider("wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261")
@@ -398,15 +402,12 @@ wss.on('connection', function connection(ws) { // สร้าง connection
             }
             console.log('Event', event)
             ws.send(JSON.stringify(event))
-            // ws.send(test);
         })
         console.log('Waiting ...!')
     });
     ws.on('close', function close() {
-        // จะทำงานเมื่อปิด Connection ในตัวอย่างคือ ปิด Browser
-        console.log('disconnected');
+        console.log('disconnected');    // จะทำงานเมื่อปิด Connection ในตัวอย่างคือ ปิด Browser
     });
-
 });
 
 /*router.route('/transection/:id/confirm')
