@@ -929,12 +929,12 @@
                 //result : result,
             }
         }).then(result => {
-            console.log("test ===>", result)
+         //   console.log("test ===>", result)
 
             if (result != '') {
                 $(() => {
                     $(document).ready(() => {
-                        console.log("Show === result === Modal")
+             //           console.log("Show === result === Modal")
                         $("#id01").hide();
                     });
                 });
@@ -946,7 +946,7 @@
                     id: id  // รหัสนักศึกษา
                 }
             }).then(resultgetWalletById => {
-                console.log("resultgetWalletById ===>", resultgetWalletById)
+            //    console.log("resultgetWalletById ===>", resultgetWalletById)
                 var connection = new WebSocket('ws://localhost:4000')
                 connection.onopen = () => {
                     // จะทำงานเมื่อเชื่อมต่อสำเร็จ
@@ -959,8 +959,8 @@
                 connection.onmessage = (result) => {
                     const check = JSON.parse(result.data)
                     const money = check.returnValues.tokens / 1000000000000000000;
-                    console.log("connect webSocket", resultgetWalletById.data.address);
-                    console.log("connect check.returnValues.to", check.returnValues.to);
+              //      console.log("connect webSocket", resultgetWalletById.data.address);
+               //     console.log("connect check.returnValues.to", check.returnValues.to);
                     if (check.returnValues.to == resultgetWalletById.data.address) {
                         console.log("in loop ")
                         Swal.fire({
@@ -993,9 +993,9 @@
                 var d = new Date();
                 var showdate = dayNames[d.getDay()] + " " + d.getDate() + " " + monthNamesThai[d.getMonth()] + " "
                     + d.getFullYear() + " " + d.toLocaleTimeString();
-                console.log("Date ==== >", showdate)
+              //  console.log("Date ==== >", showdate)
                 //================== ========= ========= ========= ========= ======== ========= 
-                console.log("resultgetWalletById.data.address = >", resultgetWalletById.data.address) //address
+              //  console.log("resultgetWalletById.data.address = >", resultgetWalletById.data.address) //address
                 result.data.forEach((childSnapshot) => {
 
                     // console.log("Transection = >" ,childSnapshot.to)

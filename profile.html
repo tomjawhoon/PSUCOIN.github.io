@@ -353,7 +353,7 @@ Licensed under MIT
       id: id  // รหัสนักศึกษา
     }
   }).then(result => {
-    console.log("result_data_getProfileById", result)
+   // console.log("result_data_getProfileById", result)
     // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
     $('#receiverName').val(result.data.name)
     $('#receiverLastName').val(result.data.lastName)
@@ -375,10 +375,10 @@ Licensed under MIT
       id: id  // รหัสนักศึกษา
     }
   }).then(resultgetWalletById => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-    console.log("resultgetWalletById_data", resultgetWalletById)
-    console.log("resultgetWalletById_address", resultgetWalletById.data.address)
-    console.log("resultgetWalletById_privateKey", resultgetWalletById.data.privateKey)
-    console.log("resultgetWalletById_id", resultgetWalletById.config.headers.id)
+   // console.log("resultgetWalletById_data", resultgetWalletById)
+   // console.log("resultgetWalletById_address", resultgetWalletById.data.address)
+   // console.log("resultgetWalletById_privateKey", resultgetWalletById.data.privateKey)
+   // console.log("resultgetWalletById_id", resultgetWalletById.config.headers.id)
 
     var connection = new WebSocket('ws://localhost:4000')
     connection.onopen = () => {
@@ -392,8 +392,8 @@ Licensed under MIT
     connection.onmessage = (result) => {
       const check = JSON.parse(result.data)
       const money = check.returnValues.tokens / 1000000000000000000;
-      console.log("connect webSocket", resultgetWalletById.data.address);
-      console.log("connect check.returnValues.to", check.returnValues.to);
+     // console.log("connect webSocket", resultgetWalletById.data.address);
+     // console.log("connect check.returnValues.to", check.returnValues.to);
       if (check.returnValues.to == resultgetWalletById.data.address) {
         console.log("in loop ")
         Swal.fire({

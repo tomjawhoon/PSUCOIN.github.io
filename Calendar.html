@@ -779,7 +779,7 @@ border-bottom-right-radius: 3px;
             url = window.location.href
             id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
         })()
-        console.log("id...", id)
+       // console.log("id...", id)
 
         axios({
             method: 'GET',
@@ -788,7 +788,7 @@ border-bottom-right-radius: 3px;
                 id: id // รหัสนักศึกษา
             }
         }).then(resultgetWalletById => {
-            console.log("test res ==>", resultgetWalletById)
+           // console.log("test res ==>", resultgetWalletById)
             var connection = new WebSocket('ws://localhost:4000')
             connection.onopen = () => {
                 // จะทำงานเมื่อเชื่อมต่อสำเร็จ
@@ -801,8 +801,8 @@ border-bottom-right-radius: 3px;
             connection.onmessage = (result) => {
                 const check = JSON.parse(result.data)
                 const money = check.returnValues.tokens / 1000000000000000000;
-                console.log("connect webSocket", resultgetWalletById.data.address);
-                console.log("connect check.returnValues.to", check.returnValues.to);
+           //     console.log("connect webSocket", resultgetWalletById.data.address);
+            //    console.log("connect check.returnValues.to", check.returnValues.to);
                 if (check.returnValues.to == resultgetWalletById.data.address) {
                     console.log("in loop ")
                     Swal.fire({
