@@ -1806,7 +1806,7 @@
         var connection = new WebSocket('ws://localhost:4000')
         connection.onopen = () => {
             // จะทำงานเมื่อเชื่อมต่อสำเร็จ
-            //console.log("connect webSocket");
+            console.log("connect webSocket");
             connection.send(id); // ส่ง Data ไปที่ Server //5935512088
         };
         connection.onerror = (error) => {

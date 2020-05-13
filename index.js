@@ -10,19 +10,17 @@ const path = require('path');
 const EthereumTx = require('ethereumjs-tx').Transaction;
 const Buffer = require('safer-buffer').Buffer;
 const cors = require('cors');
-
+//TEST GIT
 
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 4000 });
 
 
-
-
-
 require('tls').DEFAULT_MIN_VERSION = 'TLSv1'
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-const infura = {
+const infura =
+{
     projectId: '37dd526435b74012b996e147cda1c261',
     projectSecret: '55c6430534c042a1b762cd5f6e0f0a55',
     endpoint: "wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261"
@@ -389,7 +387,7 @@ router.route('/transection/:id/confirm')
 
 wss.on('connection', function connection(ws) { // สร้าง connection
     ws.on('message', async function incoming(message) { // รอรับ data อะไรก็ตาม ที่มาจาก client แบบตลอดเวลา
-        console.log('client:', message); 
+        console.log('client:', message);
         const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
         const address = '0x0d01bc6041ac8f72e1e4b831714282f755012764' // set to contract address
         const provider = new Web3.providers.WebsocketProvider("wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261")
@@ -1181,3 +1179,4 @@ app.listen(5001, () => console.log('Server is ready!'))
 
 
 // 791786F6D865B4FAFAC0E92A5961D0526AF0072EFA757D5E46E59A69EF63FF70
+
