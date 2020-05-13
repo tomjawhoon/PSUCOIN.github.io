@@ -312,6 +312,7 @@
       (() => {
         url = window.location.href
         id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
+        console.log("id ===>", id);
       })()
 
       axios({
@@ -321,8 +322,7 @@
           id: id  // รหัสนักศึกษา
         }
       }).then(test => {
-        console.log("test ===>", test);
-        console.log("test.address ===>", test.data.address);
+        
         var connection = new WebSocket('ws://localhost:4000')
         connection.onopen = () => {
           // จะทำงานเมื่อเชื่อมต่อสำเร็จ
@@ -335,10 +335,6 @@
         connection.onmessage = (result) => {
           const check = JSON.parse(result.data)
           const money = check.returnValues.tokens / 1000000000000000000;
-          console.log("result Server ==>: ", check)
-          console.log("result Server.data ==>: ", check.returnValues.to)
-          console.log("result Server.data ==>: ", money)
-          console.log("result Server.data ==>: ", check.returnValues.from)
           if (check.returnValues.to == test.data.address) {
             console.log("in loop ")
             Swal.fire({
@@ -350,15 +346,16 @@
             })
             //createDivElement(e.data)
             Push.create("PSUCOIN WELCOME", {
-              body: "มีเงินโอนเข้ามาเด้อ",
+              body: "มีเงินโอนเข้ามา",
               icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Prince_of_Songkla_University_Emblem.png/150px-Prince_of_Songkla_University_Emblem.png",
               timeout: 5000,
-              //link: "https://www.youtube.com/watch?v=KlLDR4090ts",
             });
           } else {
             console.log("Not in loop ")
           }
         }
+
+
       })
 
 

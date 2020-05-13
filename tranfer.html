@@ -8,46 +8,27 @@
   <!-- <link rel="stylesheet" href="style.css"> -->
   <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script src="/front/js/jquery.qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
 </head>
-<style>
-  @import url('https://fonts.googleapis.com/css?family=Francois+One&display=swap');
-  
 
-  .front {
-    font-size: 125%;
+<style type="text/css">
+  .psucenter {
+    margin-left: 11px;
   }
 
-
-  .imgcontainer {
-    text-align: center;
-    margin: 10px 0 10px 0;
-    position: relative;
+  .icon-inner,
+  svg {
+    display: block;
+    height: 100%;
+    width: 100%;
   }
 
-  .symbolcoin {
-    margin-right: 20px;
-  }
-
-  .iconre {
-    width: 30px;
-    height: 20px;
-
-  }
-
-
-
-  img.avatar {
-    width: 10%;
-    border-radius: 50%;
-  }
-
-
-
-  span.psw {
-    float: right;
-    padding-top: 16px;
+  .btnsend {
+    border: none;
+    background: none;
+    outline: none;
   }
 
   /* The Modal (background) */
@@ -57,13 +38,13 @@
     position: fixed;
     /* Stay in place */
     z-index: 1;
-    /* Sit on top */
+
     left: 0;
     top: 0;
     width: 100%;
-    /* Full width */
+
     height: 100%;
-    /* Full height */
+
     overflow: auto;
     /* Enable scroll if needed */
     background-color: rgb(0, 0, 0);
@@ -83,140 +64,41 @@
     /* Could be more or less, depending on screen size */
   }
 
-  .btnsend {
-    border: none;
-    background: none;
-    outline: none;
+  a.button4 {
+
+    display: inline-block;
+    padding: 0.3em 1.2em;
+    margin: 0 0.1em 0.1em 0;
+    border: 0.16em solid rgba(255, 255, 255, 0);
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #FFFFFF;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    text-align: center;
+    transition: all 0.2s;
   }
 
-
-
-  /*************************************************************************************************************
-    /* The Close Button (x) */
-  .close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
+  a.button4:hover {
+    border-color: rgba(255, 255, 255, 1);
   }
 
-  .close:hover,
-  .close:focus {
-    color: red;
-    cursor: pointer;
-  }
-
-  /* Add Zoom Animation */
-  .animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
-  }
-
-  @-webkit-keyframes animatezoom {
-    from {
-      -webkit-transform: scale(0)
-    }
-
-    to {
-      -webkit-transform: scale(1)
-    }
-  }
-
-  @keyframes animatezoom {
-    from {
-      transform: scale(0)
-    }
-
-    to {
-      transform: scale(1)
-    }
-  }
-
-  /* Change styles for span and cancel button on extra small screens */
-  @media screen and (max-width: 300px) {
-    span.psw {
+  @media all and (max-width:30em) {
+    a.button4 {
       display: block;
-      float: none;
+      margin: 0.2em auto;
     }
-
-    .cancelbtn {
-      width: 100%;
-    }
-
-
   }
-</style>
-<style>
+
   body {
-    background: -webkit-linear-gradient(left,#e7961c, rgb(116, 83, 235));
-   
-    font-family: "Open Sans", -apple-system,
-      BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
-      "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(130deg, #e7961c, rgb(116, 83, 235));
   }
 
-  .contact-form {
-    background: #fff;
-    margin-top: 7%;
-    margin-bottom: 5%;
-    /*width: 100%;*/
-  }
-
-  .contact-form .form-control {
-    border-radius: 1rem;
-  }
-
-  .contact-image {
-    text-align: center;
-  }
-
-  .contact-image img {
-    border-radius: 6rem;
-    width: 11%;
-    margin-top: -3%;
-
-  }
-
-  .contact-form form {
-    padding: 5%;
-  }
-
-  .contact-form form .row {
-    margin-bottom: -3%;
-  }
-
-  .contact-form h3 {
-    margin-bottom: 8%;
-    margin-top: -10%;
-    text-align: center;
-    color: #0062cc;
-  }
-
-  .contact-form .btnContact {
-    width: 50%;
-    border: none;
-    border-radius: 1rem;
-    padding: 1.5%;
-    background: #0ccf36;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-
-  }
-
-  .btnContactSubmit {
-    width: 50%;
-    border-radius: 1rem;
-    padding: 1.5%;
-    color: #fff;
-    background-color: #0062cc;
-    border: none;
-    cursor: pointer;
-  }
-</style>
-<style type="text/css">
   @keyframes ldio-2fzcezdt162 {
     0% {
       transform: translate(-50%, -50%) rotate(0deg);
@@ -271,7 +153,7 @@
   body {
     display: flex;
     justify-content: center;
-    height: 90%;
+    height: 100vh;
   }
 
   .Boxcontainer {
@@ -282,7 +164,7 @@
     height: 600px;
     justify-content: space-around;
     align-items: center;
-    background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+    /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
     margin-top: 80px;
 
   }
@@ -300,11 +182,13 @@
     flex-direction: column;
     align-items: center;
     font-family: 'Francois One', sans-serif;
+    font-size: 20px;
+    margin-top: 20px;
 
   }
 
   .BoxwalletSymnol {
-    font-size: 50px;
+    font-size: 90px;
 
   }
 
@@ -352,25 +236,6 @@
   }
 
   @media (max-width:1024px) {
-
-    .Sponsored {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 15px;
-    }
-
-    .Textsponsored {
-      font-size: 24px;
-      vertical-align: super;
-      margin-left: 10px;
-    }
-
-    #canvas {
-      width: 250px;
-      height: 310px;
-    }
-
     .Boxcontainer {
       display: flex;
       flex-direction: column;
@@ -378,7 +243,7 @@
       height: 600px;
       justify-content: space-around;
       align-items: center;
-      background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+      /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
       margin-top: 80px;
 
     }
@@ -430,13 +295,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 15px;
+      margin: -35px;
     }
 
     .Textsponsored {
       font-size: 20px;
       vertical-align: super;
-      margin-left: 10px;
+      /* margin-left: 10px; */
+      margin-top: 10px;
     }
 
     .imgCOC {
@@ -447,27 +313,6 @@
   }
 
   @media (max-width:768px) {
-
-    .Sponsored {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 15px;
-    }
-
-    .Textsponsored {
-      font-size: 24px;
-      vertical-align: super;
-      margin-left: 10px;
-    }
-
-    .contact-form {
-      background: #fff;
-      margin-top: 25%;
-      margin-bottom: 45%;
-      width: 100%;
-    }
-
     .Boxcontainer {
       display: flex;
       flex-direction: column;
@@ -475,7 +320,7 @@
       height: 600px;
       justify-content: space-around;
       align-items: center;
-      background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+      /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
       margin-top: 80px;
 
     }
@@ -538,36 +383,14 @@
   }
 
   @media (max-width:425px) {
-
-    .Sponsored {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: -5px;
-    }
-
-    .Textsponsored {
-      font-size: 24px;
-      vertical-align: super;
-      margin-left: 10px;
-    }
-
-    .contact-form {
-      background: #fff;
-      margin-top: 25%;
-      margin-bottom: 30%;
-      width: 90%;
-    }
-
-
     .Boxcontainer {
       display: flex;
       flex-direction: column;
       width: 425px;
-      height: 300px;
+      height: 550px;
       justify-content: space-around;
       align-items: center;
-      background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+      /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
       margin-top: 80px;
 
     }
@@ -636,44 +459,14 @@
 
 
   @media (max-width:375px) {
-
-
-    .Sponsored {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 15px;
-    }
-
-    .Textsponsored {
-      font-size: 24px;
-      vertical-align: super;
-      margin-left: 10px;
-    }
-
-    .contact-image img {
-      border-radius: 6rem;
-      width: 11%;
-      margin-top: 3%;
-    }
-
-
-    .contact-form {
-      background: #fff;
-      margin-top: 22%;
-      margin-bottom: 5%;
-      width: 95%;
-      height: 65%;
-    }
-
     .Boxcontainer {
       display: flex;
       flex-direction: column;
-      width: 600px;
-      height: 470px;
+      width: 375px;
+      height: 410px;
       justify-content: space-around;
       align-items: center;
-      background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+      /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
       margin-top: 80px;
 
     }
@@ -712,7 +505,7 @@
       display: flex;
       flex-direction: column;
       width: 300px;
-      height: 150px;
+      height: 110px;
       justify-content: space-around;
       align-items: center;
     }
@@ -740,55 +533,22 @@
     }
   }
 
-
-
   @media (max-width:320px) {
-
-    .Sponsored {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 15px;
-    }
-
-    .Textsponsored {
-      font-size: 24px;
-      vertical-align: super;
-      margin-left: 10px;
-    }
-
-    .contact-form {
-      background: #fff;
-      margin-top: 35%;
-      margin-bottom: 5%;
-      width: 80%;
-      height: 55%;
-    }
-
-
-    .contact-form {
-      background: #fff;
-      margin-top: 25%;
-      margin-bottom: 30%;
-      width: 90%;
-    }
-
-
     .Boxcontainer {
       display: flex;
       flex-direction: column;
-      width: 425px;
-      height: 300px;
+      width: 320px;
+      height: 550px;
       justify-content: space-around;
       align-items: center;
-      background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+      /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
       margin-top: 80px;
 
     }
 
     .Logo {
-      width: 140px;
-      height: 78px;
+      width: 100px;
+      height: 48px;
 
     }
 
@@ -806,9 +566,18 @@
     }
 
     .Boxpublickey {
-      font-size: 15px;
+      font-size: 11px;
       margin-top: 18px;
       color: white;
+    }
+
+    .threebtn {
+      display: flex;
+      flex-direction: column;
+      width: 280px;
+      height: 120px;
+      justify-content: space-around;
+      align-items: center;
     }
 
     .Allbtn {
@@ -816,17 +585,8 @@
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      width: 300px;
+      width: 280px;
       height: 40px;
-    }
-
-    .threebtn {
-      display: flex;
-      flex-direction: column;
-      width: 425px;
-      height: 120px;
-      justify-content: space-around;
-      align-items: center;
     }
 
     .Sponsored {
@@ -836,331 +596,1422 @@
       margin: 15px;
     }
 
-    .Textsponsored {
-      font-size: 15px;
-      vertical-align: super;
-    }
-
     .imgCOC {
 
-      width: 90px;
-      height: 32px;
+      width: 80px;
+      height: 28px;
     }
+  }
+
+  .transaction-container {
+    min-height: calc(100vh - 310px);
+    width: 100%;
+    margin: 0 auto;
+  }
+
+
+  .card {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 3px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    overflow: auto;
+  }
+
+  .transactions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30%;
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 10px;
+  }
+
+
+  .explorer-container {
+    display: flex;
+    align-items: center;
+    color: #7957d5;
+    padding-right: 5px;
+
+  }
+
+  .explorer-PSUCOIN {
+    display: flex;
+    align-items: center;
+    color: #16c516;
+    padding-right: 5px;
+
+  }
+
+  .explorer-PSUCOIN-send {
+    display: flex;
+    align-items: center;
+    color: #d3311c;
+    padding-right: 5px;
+
+  }
+
+  .transactions-footer {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    height: 35%;
+    width: 100%;
+    font-size: 11px;
+  }
+
+  .transactions-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    height: 35%;
+    width: 100%;
+    font-size: inherit;
+    font-weight: bold;
+    color: #16c516;
+  }
+
+  .transactions-body-send {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    height: 35%;
+    width: 100%;
+    font-size: inherit;
+    font-weight: bold;
+    color: #d3311c;
+  }
+
+  .threebtn {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 150px;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .align-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+  }
+</style>
+
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+
+  body,
+  html {
+    height: 100%;
+    margin: 0;
+    font-family: lato;
+  }
+
+  h2 {
+    margin-bottom: 0px;
+    margin-top: 25px;
+    text-align: center;
+    font-weight: 200;
+    font-size: 19px;
+    font-size: 1.2rem;
+
+  }
+
+  .container {
+    height: 100%;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+  }
+
+  .dropdown-select.visible {
+    display: block;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul li {
+    list-style: none;
+    padding-left: 10px;
+    cursor: pointer;
+  }
+
+  ul li:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .dropdown-select {
+    position: absolute;
+    background: #77aaee;
+    text-align: left;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 90%;
+    left: 2px;
+    line-height: 2em;
+    margin-top: 2px;
+    box-sizing: border-box;
+  }
+
+  .thin {
+    font-weight: 650;
+    color: rgb(15, 31, 102);
+  }
+
+  .small {
+    font-size: 12px;
+    font-size: .8rem;
+  }
+
+  .half-input-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .half-input-table td:first-of-type {
+    border-right: 10px solid #4488dd;
+    width: 50%;
+  }
+
+  .window {
+    height: 750px;
+    width: 1100px;
+    background: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    z-index: 10;
+    margin-top: 85px;
+  }
+
+  .order-info {
+    height: 100%;
+    width: 50%;
+    padding-left: 25px;
+    padding-right: 25px;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 55px;
+  }
+
+  .price {
+    bottom: 0px;
+    position: absolute;
+    right: 0px;
+    color: #4488dd;
+  }
+
+  .order-table td:first-of-type {
+    width: 30%;
+  }
+
+  .order-table {
+    position: relative;
+  }
+
+  .line {
+    height: 1px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #ddd;
+  }
+
+  .order-table td:last-of-type {
+    vertical-align: top;
+    padding-left: 25px;
+  }
+
+  .order-info-content {
+    table-layout: fixed;
+
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .pay-btn {
+    border: none;
+    background: #e24655;
+    line-height: 2em;
+    border-radius: 10px;
+    font-size: 19px;
+    font-size: 1.2rem;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    bottom: 25px;
+    width: calc(100% - 50px);
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    margin-left: -35px;
+
+  }
+
+  .pay-btn:hover {
+    background: #22a877;
+    color: #eee;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+  }
+
+  .total {
+    margin-top: -10px;
+    font-size: 20px;
+    font-size: 1.3rem;
+    position: absolute;
+    bottom: 30px;
+    right: 27px;
+    left: 35px;
+  }
+
+  .dense {
+    line-height: 1.2em;
+    font-size: 16px;
+    font-size: 1rem;
+  }
+
+  .input-field {
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+    margin-top: 3px;
+    line-height: 1.5em;
+    font-size: 20px;
+    font-size: 1.3rem;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    color: #fff;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .credit-info {
+    background: #44c8dd;
+    height: 100%;
+    width: 50%;
+    color: #eee;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 14px;
+    font-size: .9rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    box-sizing: border-box;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    position: relative;
+  }
+
+  .dropdown-btn {
+    background: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 1.5em;
+    cursor: pointer;
+    position: relative;
+    -webkit-transition: background .2s ease;
+    transition: background .2s ease;
+  }
+
+  .dropdown-btn:after {
+    content: '\25BE';
+    right: 8px;
+    position: absolute;
+  }
+
+  .dropdown-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    -webkit-transition: background .2s ease;
+    transition: background .2s ease;
+  }
+
+  .dropdown-select {
+    display: none;
+  }
+
+  .credit-card-image {
+    display: block;
+    max-height: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+    margin-bottom: 15px;
+  }
+
+  .credit-info-content {
+    margin-top: 25px;
+    -webkit-flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+  }
+
+  @media (max-width: 375px) {
+
+    a.button4 {
+      display: inline-block;
+      padding: 0.3em 1.2em;
+      margin: 0 0.1em 0.1em 0;
+      border: 0.16em solid rgba(250, 250, 250, 0);
+      border-radius: 2em;
+      box-sizing: border-box;
+      text-decoration: none;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      color: #FFFFFF;
+      text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    a.button4:hover {
+      border-color: rgba(255, 255, 255, 1);
+    }
+
+
+
+    @media all and (max-width:30em) {
+      a.button4 {
+        display: block;
+        margin: 0.2em auto;
+      }
+    }
+
+    .window {
+      width: 100%;
+      height: 30%;
+      display: block;
+      border-radius: 25px;
+      margin-top: 10em;
+    }
+
+    .Boxwallet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Francois One', sans-serif;
+      font-size: 15px;
+
+    }
+
+    .pay-btn {
+      border: none;
+      background: #e24655;
+      line-height: 2em;
+      border-radius: 10px;
+      font-size: 19px;
+      font-size: 1.2rem;
+      color: #fff;
+      cursor: pointer;
+      position: absolute;
+      bottom: 25px;
+      width: calc(100% - 50px);
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+      margin-left: -55px;
+    }
+
+    .Sponsored {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: -35px;
+    }
+
+
+    .total {
+      margin-top: -10px;
+      font-size: 20px;
+      font-size: 1.3rem;
+      position: absolute;
+      bottom: 30px;
+      right: 27px;
+      left: 35px;
+    }
+
+    .order-info {
+      width: 100%;
+      height: auto;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+
+    .credit-info {
+      width: 100%;
+      height: auto;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+
+    .pay-btn {
+      border-radius: 35px;
+    }
+
+    .credit-card-image {
+      display: block;
+      max-height: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 35px;
+      margin-bottom: 15px;
+    }
+  }
+
+
+  @media (max-width: 425px) {
+
+    a.button4 {
+      display: inline-block;
+      padding: 0.3em 1.2em;
+      margin: 0 0.1em 0.1em 0;
+      border: 0.16em solid rgba(250, 250, 250, 0);
+      border-radius: 2em;
+      box-sizing: border-box;
+      text-decoration: none;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      color: #FFFFFF;
+      text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    a.button4:hover {
+      border-color: rgba(255, 255, 255, 1);
+    }
+
+
+
+    @media all and (max-width:30em) {
+      a.button4 {
+        display: block;
+        margin: 0.2em auto;
+      }
+    }
+
+    .window {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 0px;
+      margin-top: 10em;
+    }
+
+    .Boxwallet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Francois One', sans-serif;
+      font-size: 15px;
+
+    }
+
+    .pay-btn {
+      border: none;
+      background: #22b877;
+      line-height: 2em;
+      border-radius: 10px;
+      font-size: 19px;
+      font-size: 1.2rem;
+      color: #fff;
+      cursor: pointer;
+      position: absolute;
+      bottom: 25px;
+      width: calc(100% - 50px);
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+      margin-left: -0px;
+    }
+
+    .Sponsored {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: -35px;
+    }
+
+
+    .total {
+      margin-top: -10px;
+      font-size: 20px;
+      font-size: 1.3rem;
+      position: absolute;
+      bottom: 30px;
+      right: 27px;
+      left: 35px;
+    }
+
+    .order-info {
+      width: 100%;
+      height: auto;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+
+    .credit-info {
+      width: 100%;
+      height: auto;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+
+    .pay-btn {
+      border-radius: 0px;
+    }
+
+    .credit-card-image {
+      display: block;
+      max-height: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 35px;
+      margin-bottom: 15px;
+    }
+  }
+
+  @media (max-width: 768px) {
+
+    a.button4 {
+      display: inline-block;
+      padding: 0.3em 1.2em;
+      margin: 0 0.1em 0.1em 0;
+      border: 0.16em solid rgba(250, 250, 250, 0);
+      border-radius: 2em;
+      box-sizing: border-box;
+      text-decoration: none;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      color: #FFFFFF;
+      text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    a.button4:hover {
+      border-color: rgba(255, 255, 255, 1);
+    }
+
+
+
+    @media all and (max-width:30em) {
+      a.button4 {
+        display: block;
+        margin: 0.2em auto;
+      }
+    }
+
+    .window {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 25px;
+      margin-top: 10em;
+    }
+
+    .Boxwallet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Francois One', sans-serif;
+      font-size: 15px;
+
+    }
+
+    .pay-btn {
+      border: none;
+      background: #22b877;
+      line-height: 2em;
+      border-radius: 10px;
+      font-size: 19px;
+      font-size: 1.2rem;
+      color: #fff;
+      cursor: pointer;
+      position: absolute;
+      bottom: 25px;
+      width: calc(100% - 50px);
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+      margin-left: -0px;
+    }
+
+    .Sponsored {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: -35px;
+    }
+
+
+    .total {
+      margin-top: -10px;
+      font-size: 20px;
+      font-size: 1.3rem;
+      position: absolute;
+      bottom: 30px;
+      right: 27px;
+      left: 35px;
+    }
+
+    .order-info {
+      width: 100%;
+      height: auto;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+
+    .credit-info {
+      width: 100%;
+      height: auto;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+
+    .pay-btn {
+      border-radius: 0px;
+    }
+
+    .credit-card-image {
+      display: block;
+      max-height: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 35px;
+      margin-bottom: 15px;
+    }
+  }
+
+  /* @media (max-width: 1024px) {
+
+    a.button4 {
+      display: inline-block;
+      padding: 0.3em 1.2em;
+      margin: 0 0.1em 0.1em 0;
+      border: 0.16em solid rgba(250, 250, 250, 0);
+      border-radius: 2em;
+      box-sizing: border-box;
+      text-decoration: none;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      color: #FFFFFF;
+      text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    a.button4:hover {
+      border-color: rgba(255, 255, 255, 1);
+    }
+
+
+
+    @media all and (max-width:30em) {
+      a.button4 {
+        display: block;
+        margin: 0.2em auto;
+      }
+    }
+
+    .window {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 25px;
+      margin-top: 10em;
+    }
+
+    .Boxwallet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Francois One', sans-serif;
+      font-size: 15px;
+
+    }
+
+    .pay-btn {
+      border: none;
+      background: #22b877;
+      line-height: 2em;
+      border-radius: 10px;
+      font-size: 19px;
+      font-size: 1.2rem;
+      color: #fff;
+      cursor: pointer;
+      position: absolute;
+      bottom: 25px;
+      width: calc(100% - 50px);
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+      margin-left: -250px;
+    }
+
+    .Sponsored {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: -35px;
+    }
+
+
+    .total {
+      margin-top: -10px;
+      font-size: 20px;
+      font-size: 1.3rem;
+      position: absolute;
+      bottom: 30px;
+      right: 27px;
+      left: 35px;
+    }
+
+    .order-info {
+      width: 100%;
+      height: auto;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+
+    .credit-info {
+      width: 100%;
+      height: auto;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+
+    .pay-btn {
+      border-radius: 0px;
+    }
+
+    .credit-card-image {
+      display: block;
+      max-height: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 35px;
+      margin-bottom: 15px;
+    }
+  } */
+
+  @media (max-width: 320px) {
+
+    a.button4 {
+      display: inline-block;
+      padding: 0.3em 1.2em;
+      margin: 0 0.1em 0.1em 0;
+      border: 0.16em solid rgba(250, 250, 250, 0);
+      border-radius: 2em;
+      box-sizing: border-box;
+      text-decoration: none;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      color: #FFFFFF;
+      text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    a.button4:hover {
+      border-color: rgba(255, 255, 255, 1);
+    }
+
+
+
+    @media all and (max-width:30em) {
+      a.button4 {
+        display: block;
+        margin: 0.2em auto;
+      }
+    }
+
+    .window {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 25px;
+      margin-top: 10em;
+    }
+
+    .Boxwallet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Francois One', sans-serif;
+      font-size: 15px;
+
+    }
+
+    .pay-btn {
+      border: none;
+      background: #22b877;
+      line-height: 2em;
+      border-radius: 10px;
+      font-size: 19px;
+      font-size: 1.2rem;
+      color: #fff;
+      cursor: pointer;
+      position: absolute;
+      bottom: 25px;
+      width: calc(100% - 50px);
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+      margin-left: -0px;
+    }
+
+    .Sponsored {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: -35px;
+    }
+
+
+    .total {
+      margin-top: -10px;
+      font-size: 20px;
+      font-size: 1.3rem;
+      position: absolute;
+      bottom: 30px;
+      right: 27px;
+      left: 35px;
+    }
+
+    .order-info {
+      width: 100%;
+      height: 90%;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+
+    .credit-info {
+      width: 100%;
+      height: auto;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+
+    .pay-btn {
+      border-radius: 0px;
+    }
+
+    .credit-card-image {
+      display: block;
+      max-height: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 35px;
+      margin-bottom: 15px;
+    }
+
+    .btnContact {
+      border-radius: 25px;
+      background-color: #f7e287
+    }
+
+
   }
 </style>
 
 <body>
-
-  <!DOCTYPE html>
-  <html>
-
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-    <script src="/front/js/jquery.qrcode.min.js"></script>
-    <script src="https://cozmo.github.io/jsQR/jsQR.js"></script>
-  </head>
-
-
-  <body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
-      <div class="container">
-        <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52"
-          onclick="gotoindex()">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-          data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto my-2 my-lg-0">
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Home</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
-            </li>
-
-          </ul>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
+    <div class="container">
+      <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52"
+        onclick="gotoindex()">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Home</a>
+          </li>
+          <!-- <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" onclick="gotoindex()">Tranfers</a>
+                      </li> -->
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
+          </li>
+          <!-- <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                            </li> -->
+        </ul>
       </div>
+    </div>
 
-    </nav>
-    <div class="container contact-form">
-      <span class="front"> Balance</span> <a class="front" id="result1"></a> PSU
-      <div class="contact-image">
-        <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="rocket_contact" />
-      </div>
-      <form id="submitSend" method="GET">
-        <input type="hidden" class="form-control" name="fromAddress" id="showid" size="80"></input><br>
-        <input type="hidden" class="form-control" name="fromAddress" id="fromAddress" size="80"></input>
-        <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
-        <!-- <h5>privateKey</h5> -->
-        <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="80"></input>
-        <div class="row">
-          <div class="col-md-6">
-            <h5 style="color:rgb(228, 46, 46)">(Student ID) Recipient </h5>
-            <div class="form-group">
-              <input type="text" name="toAddress" id="toAddress" class="form-control" placeholder="Recipients" />
-            </div>
-            <h5 style="color:rgb(228, 46, 46)">PSUCOIN</h5>
-            <div class="form-group">
-              <input type="number" name="money" id="money" class="form-control" placeholder="PSUCOIN" />
+  </nav>
+
+  <div class='container'>
+    <div class='window'>
+      <div class='order-info'>
+        <div class='order-info-content'>
+          <h4>PSUcoin Function</h4>
+          <div class='line'></div>
+          <table class='order-table'>
+            <tbody>
+              <tr>
+                <td><img
+                    src='https://www.digipay.guru/wp-content/uploads/2019/12/digital-wallet-money-transfer-banner-img.png'
+                    class='full-width'></img>
+                </td>
+                <td>
+                  <br> <span class='thin'>SEND</span>
+                  <br> โอนเงินไปยังบัญชีอื่น<br>
+
+                  <a class="button4" style="background-color:#f7e287" onclick="gotoSendETH()">SEND</a>
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+          <div class='line'></div>
+          <table class='order-table'>
+            <tbody>
+              <tr>
+                <td><img src='https://www.bestidc.net/wp-content/uploads/2019/05/Payment-PNG-Free-Download.png'
+                    class='full-width'></img>
+                </td>
+                <td>
+                  <br> <span class='thin'>Payment</span>
+                  <br>โอนเงินโดยใช้การสแกน QRcode<br>
+                  <a class="button4" style="background-color:#f7e287" onclick="gotoPayment()">Payment</a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <div class='line'></div>
+          <table class='order-table'>
+            <tbody>
+              <tr>
+                <td><img src='https://cdn4.vectorstock.com/i/thumb-large/96/13/tax-payment-concept-vector-24749613.jpg'
+                    class='full-width'></img>
+                </td>
+                <td>
+                  <br> <span class='thin'>Transection</span>
+                  <br>ตรวจสอบธุรกรรมต่าง ๆ <br>
+                  <a class="button4" style="background-color:#f7e287" onclick="gotoReceive()">Transection</a>
+                </td>
+
+              </tr>
+
+            </tbody>
+          </table>
+          <div class='line'></div>
+          <div class='total'>
+            <div class="Sponsored">
+              <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
+              <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
+                  class="Textsponsored">
+                  Sponsored by
+                  <img src="https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/COC_logo.png"
+                    alt="Smiley face" class="imgCOC"><br data-v-4df4bd6a=""> Blockchain Research
+                  Team
+                  <br data-v-4df4bd6a=""><br data-v-4df4bd6a="">
+                  <!-- <a data-v-4df4bd6a="" target="_blank" href="https://github.com/tomjawhoon/PSUCOIN.github.io">Github</a>. -->
+                </span></div>
             </div>
 
           </div>
-          <div class="col-md-6">
-            <h5 style="color:rgb(228, 46, 46)">(PROFILE) Recipient</h5>
-
-            <div class="form-group">
-              <input id="receiverName" type="text" class="form-control" placeholder="receiverName" />
-            </div>
-
-            <div class="form-group">
-              <input id="receiverLastName" type="text" class="form-control" placeholder="receiverLastName" />
-            </div>
-
-            <div class="form-group">
-              <input id="receiverLastID" type="text" class="form-control" placeholder="receiverLastID" />
-            </div>
-
-
-            <a id="result">View on Etherscan</a>
-
-
-
-          </div>
         </div>
-        <br>
-        <div class="form-group">
+      </div>
+      <div class='credit-info'>
+        <div class='credit-info-content'>
+          <img src='https://www.digipay.guru/wp-content/uploads/2019/12/digital-wallet-money-transfer-banner-img.png'
+            height='300' class='credit-card-image' id='credit-card-image'></img>
+          <div class="Boxwallet">
+            <form id="submitSend" method="GET">
+              <input type="hidden" class="form-control" name="fromAddress" id="showid" size="80"></input><br>
+              <input type="hidden" class="form-control" name="fromAddress" id="fromAddress" size="80"></input>
+              <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
+              <!-- <h5>privateKey</h5> -->
+              <input type="hidden" class="form-control" name="privateKey" id="privateKey" size="80"></input>
+              <div class="row">
+                <div class="col-md-6">
+                  <span class="thin1">(Student ID) Recipient </span>
+                  <div class="form-group">
+                    <input type="text" name="toAddress" id="toAddress" class="form-control" placeholder="Recipients" />
+                  </div>
+                  <h5 style="color:rgb(255, 255, 255)">PSUCOIN</h5>
+                  <div class="form-group">
+                    <input type="number" name="money" id="money" class="form-control" placeholder="PSUCOIN" />
+                  </div>
 
-          <input type="submit" name="btnSubmit" class="btnContact" value="Send Coin"
-            onclick="document.getElementById('id01').style.display='block'" style="width:auto;" />
+                </div>
+                <div class="col-md-6">
+                  <h5 style="color:rgb(255, 255, 255)">(PROFILE) Recipient</h5>
 
-        </div>
+                  <div class="form-group">
+                    <input id="receiverName" type="text" class="form-control" placeholder="receiverName" />
+                  </div>
+
+                  <div class="form-group">
+                    <input id="receiverLastName" type="text" class="form-control" placeholder="receiverLastName" />
+                  </div>
+
+                  <div class="form-group">
+                    <input id="receiverLastID" type="text" class="form-control" placeholder="receiverLastID" />
+                  </div>
 
 
-      </form>
+                  <a id="result" style="color:rgb(255, 255, 255)">View on Etherscan</a>
 
-      <div id="id01" class="modal">
-        <form action="/action_page.php" method="post">
-          <div class="imgcontainer">
-            <div class="loadingio-spinner-rolling-n2856siz85m">
-              <div class="ldio-2fzcezdt162">
-                <div></div>
+
+
+                </div>
               </div>
-            </div>
-            <p style="color:#FFFFFF">Loading .....</p>
+              <br>
+              <div class="form-group">
+
+
+
+                <button type="submit" name="btnSubmit" value="Send Coin" class='pay-btn'
+                  onclick="document.getElementById('id01').style.display='block'">Send</button>
+              </div>
+
+
+            </form>
           </div>
-
-          <div class="container">
-
-          </div>
-
-
+        </div>
       </div>
-
-
 
     </div>
 
+  </div>
+  </div>
+
+  </div>
 
 
-  </body>
+  <center>
+    <div id="id01" class="modal">
+      <form action="/action_page.php" method="post">
+        <div class="imgcontainer">
+          <div class="loadingio-spinner-rolling-n2856siz85m">
+            <div class="ldio-2fzcezdt162">
+              <div></div>
+            </div>
+          </div>
+          <p>Loading .....</p>
+        </div>
+        <div class="container">
+        </div>
+  </center>
 
 
-
-  <script src="./web3.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <!-- <script src="./psulogin.js"></script>  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
-  <script>
-    function gotoSendETH() {
-      window.location.href = window.location.href.replace('send', 'send')
-    }
-
-    function gotoindex() {
-
-      window.location.href = url.replace('send', 'index')
-    }
-
-    function gotoCheckBalance() {
-
-      window.location.href = url.replace('send', 'balance')
-    }
-
-    function gotoReceive() {
-
-      window.location.href = url.replace('send', 'Receive')
-    }
-
-
-
-
-  </script>
-
-
-  <script>
-
-    $("#result").hide();
-
-
-
-    var modal = document.getElementById('id01');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = (event) => {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-
-    var url;
-    var id;
-    (() => {
-      url = window.location.href
-      id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
-    })()
-
-    axios({
-      method: 'GET',
-      url: '/getProfileforbalance', //ส่งไปค่านี้
-      headers: {
-        id: id  // รหัสนักศึกษา
-      }
-    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-      console.log("result_data_balance", result.data)
-      $("#result1").attr("href", result.data)
-      $("#result1").text(result.data)
-      // $("#result").val()
-    })
-
-    axios({
-      method: 'GET',
-      url: '/getWalletById', //ส่งไปค่านี้
-      headers: {
-        id: id // รหัสนักศึกษา
-      }
-    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-      console.log("result_data", result)
-      $('#fromAddress').val(result.data.address)
-      $('#privateKey').val(result.data.privateKey)
-      $('#showid').val(result.config.headers.id)
-    }).catch(result => {
-      console.log("errr")
-    })
-    document.querySelector('#submitSend').addEventListener('submit', e => {
-      e.preventDefault()
-      axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
-        method: 'GET',
-        url: '/send/' + id + '/confirm', // ส่งไปยังค่านี้
-        headers: {
-          fromAddress: $('#fromAddress').val(),
-          toAddress: $('#toAddress').val(),
-          privateKey: $('#privateKey').val(),
-          money: $('#money').val(),
-          TEST: 'test string',
-          id: id
-        }
-      }).then(result => {
-        console.log("result.TEST", result.data)
-        if (result.data == "IDERROR") {
-          swal.fire(
-            'Student ID Error',
-            'กรุณากรอกข้อมูลให้ถูกต้อง',
-            "error"
-          ).then(function () {
-            location.reload();
-          }
-          );
-        }
-        else if (result.data == "ERROR") {
-          swal.fire(
-            'Payment Error',
-            'ใส่จำนวนเงินใหม่',
-            "error"
-          ).then(function () {
-            location.reload();
-          }
-          );
-        }
-        else {
-          $(() => {
-            $(document).ready(() => {
-              console.log("Show === result === Modal")
-              $("#id01").hide();
-              console.log("SUCCESS")
-              // $("#result").alert("Hello! I am an alert box!");
-              // window.location.href = url.replace('send', 'SUCCESS')
-            });
-            let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
-            $("#result").attr("href", link)
-            $("#result").show(1000);
-            Swal.fire(
-              'Complete',
-              'Payment Success',
-              'success'
-            )
-          });
-        }
-
-      }).catch(result => {
-        console.log("errr")
-      })
-    })
-
-
-    document.querySelector('#toAddress').addEventListener('keyup', e => {
-      if (e.target.value) {
-        axios({
-          method: 'GET',
-          url: '/getProfileById', //ส่งไปค่านี้
-          headers: {
-            id: e.target.value  // รหัสนักศึกษา
-          }
-        }).then(result => {
-          $('#receiverName').val(result.data.name)
-          $('#receiverLastName').val(result.data.lastName)
-          $('#receiverLastID').val(result.data.id)
-        })
-      }
-
-    })
-
-    document.querySelector('#toAddress').addEventListener('keyup', e => {
-      if (e.target.value) {
-        axios({
-          method: 'GET',
-          url: '/getProfileforbalance', //ส่งไปค่านี้
-          headers: {
-            id: e.target.value,
-            value1: $('#value1').val(), // รหัสนักศึกษา
-          }
-        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-          console.log("testapi_getProfileforbalance", result)
-          $('#value1').val(result)
-        })
-      }
-    })
-
-  </script>
 
 
 </body>
+
+
+
+<script src="./web3.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script src="/front/js/jquery.qrcode.min.js"></script>
+<script src="three.r95.min.js"></script>
+<script src="vanta.dots.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
+<script src="https://www.vantajs.com/dist/vanta.net.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+  function gotoSendETH() {
+    window.location.href = window.location.href.replace('send', 'send', 'index')
+  }
+
+  function gotoindex() {
+    // window.location.href = url.replace('send', 'balance')
+    window.location.href = url.replace('send', 'index', 'send')
+  }
+
+  function gotoPayment() {
+    // window.location.href = url.replace('send', 'send')
+    window.location.href = url.replace('send', 'camera', 'send')
+  }
+
+  function gotoReceive() {
+    // window.location.href = url.replace('send', 'send')
+    window.location.href = url.replace('send', 'transection', 'send')
+  }
+
+
+  function gotoCheckBalance() {
+    // window.location.href = url.replace('send', 'tranfer')
+    window.location.href = url.replace('send', 'balance', 'send')
+  }
+
+
+
+
+
+
+</script>
+<script>
+
+  $("#result").hide();
+
+
+  var modal = document.getElementById('id01');
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = (event) => {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  var url;
+  var id;
+  (() => {
+    url = window.location.href
+    id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
+  })()
+
+  axios({
+    method: 'GET',
+    url: '/getProfileforbalance', //ส่งไปค่านี้
+    headers: {
+      id: id  // รหัสนักศึกษา
+    }
+  }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+    // console.log("result_data_balance", result.data)
+    $("#result1").attr("href", result.data)
+    $("#result1").text(result.data)
+    // $("#result").val()
+  })
+
+  axios({
+    method: 'GET',
+    url: '/getWalletById', //ส่งไปค่านี้
+    headers: {
+      id: id // รหัสนักศึกษา
+    }
+  }).then(resultgetWalletById => {
+    var connection = new WebSocket('ws://localhost:4000')
+    connection.onopen = () => {
+      // จะทำงานเมื่อเชื่อมต่อสำเร็จ
+      console.log("connect webSocket");
+      connection.send(id); // ส่ง Data ไปที่ Server //5935512088
+    };
+    connection.onerror = (error) => {
+      console.error('WebSocket Error ' + error);
+    };
+    connection.onmessage = (result) => {
+      const check = JSON.parse(result.data)
+      const money = check.returnValues.tokens / 1000000000000000000;
+      // console.log("connect webSocket", resultgetWalletById.data.address);
+      // console.log("connect check.returnValues.to", check.returnValues.to);
+      if (check.returnValues.to == resultgetWalletById.data.address) {
+        console.log("in loop ")
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'มีเงินโอนเข้ามา',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        //createDivElement(e.data)
+        Push.create("PSUCOIN WELCOME", {
+          body: "มีเงินโอนเข้ามา",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Prince_of_Songkla_University_Emblem.png/150px-Prince_of_Songkla_University_Emblem.png",
+          timeout: 5000,
+        });
+      } else {
+        console.log("Not in loop ")
+      }
+    } // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+    // console.log("resultgetWalletById_data", resultgetWalletById)
+    $('#fromAddress').val(resultgetWalletById.data.address)
+    $('#privateKey').val(resultgetWalletById.data.privateKey)
+    $('#showid').val(resultgetWalletById.config.headers.id)
+  }).catch(resultgetWalletById => {
+    console.log("errr")
+  })
+  document.querySelector('#submitSend').addEventListener('submit', e => {
+    e.preventDefault()
+    axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
+      method: 'GET',
+      url: '/send/' + id + '/confirm', // ส่งไปยังค่านี้
+      headers: {
+        fromAddress: $('#fromAddress').val(),
+        toAddress: $('#toAddress').val(),
+        privateKey: $('#privateKey').val(),
+        money: $('#money').val(),
+        TEST: 'test string',
+        id: id
+      }
+    }).then(result => {
+      //  console.log("result.TEST", result.data)
+      if (result.data == "IDERROR") {
+        swal.fire(
+          'Student ID Error',
+          'กรุณากรอกข้อมูลให้ถูกต้อง',
+          "error"
+        ).then(function () {
+          location.reload();
+        }
+        );
+      }
+      else if (result.data == "ERROR") {
+        swal.fire(
+          'Payment Error',
+          'ใส่จำนวนเงินใหม่',
+          "error"
+        ).then(function () {
+          location.reload();
+        }
+        );
+      }
+      else {
+        $(() => {
+          $(document).ready(() => {
+            //    console.log("Show === result === Modal")
+            $("#id01").hide();
+            //   console.log("SUCCESS")
+            // $("#result").alert("Hello! I am an alert box!");
+            // window.location.href = url.replace('send', 'SUCCESS')
+          });
+          let link = "https://kovan.etherscan.io/tx/" + result.data.split('"')[1]
+          $("#result").attr("href", link)
+          $("#result").show(1000);
+          Swal.fire(
+            'Complete',
+            'Payment Success',
+            'success'
+          ).then(function () {
+            // location.reload();
+          })
+        });
+      }
+
+    }).catch(result => {
+      console.log("errr")
+    })
+  })
+
+
+  document.querySelector('#toAddress').addEventListener('keyup', e => {
+    if (e.target.value) {
+      axios({
+        method: 'GET',
+        url: '/getProfileById', //ส่งไปค่านี้
+        headers: {
+          id: e.target.value  // รหัสนักศึกษา
+        }
+      }).then(result => {
+        if (result != '') {
+          $('#receiverName').val(result.data.name)
+          $('#receiverLastName').val(result.data.lastName)
+          $('#receiverLastID').val(result.data.id)
+          $("#receiverName").show(1500);
+          $("#receiverLastName").show(1500);
+          $("#receiverLastID").show(1500);
+
+        }
+
+      })
+    }
+
+  })
+
+  document.querySelector('#toAddress').addEventListener('keyup', e => {
+    if (e.target.value) {
+      axios({
+        method: 'GET',
+        url: '/getProfileforbalance', //ส่งไปค่านี้
+        headers: {
+          id: e.target.value,
+          value1: $('#value1').val(), // รหัสนักศึกษา
+        }
+      }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+        //  console.log("testapi_getProfileforbalance", result)
+        $('#value1').val(result)
+
+      })
+    }
+  })
+
+</script>
+
+<script>
+  VANTA.NET({
+    el: "#vantajs",
+    mouseControls: true,
+    touchControls: true,
+    minHeight: 1040.00,
+    minWidth: 1000.00,
+    scale: 1.00,
+    scaleMobile: 1.00,
+    points: 16.00,
+    maxDistance: 33.00,
+    spacing: 18.00
+  })
+</script>
 
 </html>
