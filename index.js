@@ -13,7 +13,7 @@ const cors = require('cors');
 //TEST GIT
 //TEST GIT
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: 4000 });
 
 
 require('tls').DEFAULT_MIN_VERSION = 'TLSv1'
