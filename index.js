@@ -366,24 +366,6 @@ router.route('/transection/:id/confirm')
     });
 
 
-/*router.route('/transectionrealtime/:id/confirm')
-    .get(async (req, res) => {
-        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
-        const address = '0x0d01bc6041ac8f72e1e4b831714282f755012764' // set to contract address
-        const provider = new Web3.providers.WebsocketProvider("wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261")
-        const web3 = new Web3(provider)
-        const contract = new web3.eth.Contract(abi, address);
-        contract.events.allEvents((err, event) => {
-            if (err) {
-                console.error('Error', err)
-                process.exit(1)
-            }
-            console.log('Event', event)
-            res.json(event);
-        })
-        console.log('Waiting ...!')
-    });
-*/
 
 wss.on('connection', function connection(ws) { // สร้าง connection
     ws.on('message', async function incoming(message) { // รอรับ data อะไรก็ตาม ที่มาจาก client แบบตลอดเวลา

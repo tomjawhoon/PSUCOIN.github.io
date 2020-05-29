@@ -1639,10 +1639,10 @@
                                         class='full-width'></img>
                                 </td>
                                 <td>
-                                    <br> <span class='thin'>Transection</span>
+                                    <br> <span class='thin'>Transaction</span>
                                     <br>ตรวจสอบธุรกรรมต่าง ๆ <br>
                                     <a class="button4" style="background-color:#f7e287"
-                                        onclick="gotoReceive()">Transection</a>
+                                        onclick="gotoReceive()">Transaction</a>
                                 </td>
 
                             </tr>
@@ -1810,7 +1810,7 @@
             connection.send(id); // ส่ง Data ไปที่ Server //5935512088
         };
         connection.onerror = (error) => {
-            //console.error('WebSocket Error ' + error);
+            console.error('WebSocket Error ' + error);
         };
         connection.onmessage = (result) => {
             const check = JSON.parse(result.data)
