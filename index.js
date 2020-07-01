@@ -35,7 +35,8 @@ app.set('views', __dirname + '/');
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 var Web3EthAccounts = require('web3-eth-accounts');
-var firebase = require('firebase')
+var firebase = require('firebase');
+const cons = require('consolidate');
 app.use(bodyParser.urlencoded({ extended: true }), router)
 app.use(bodyParser.json, router)
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
@@ -225,10 +226,8 @@ router.route('/send/:id/confirm')
             const privateKey = req.headers.privatekey;
             const id_sender = req.headers.id;
             let testid = "IDERROR"
-
-            // const testvalue = req.headers.result;
-
-            // console.log('xx: ', req.headers)
+            const startTime = new Date().valueOf()
+            console.log("startTime ======================== >", startTime) //
             console.log("id", id) //to id 
             //////////////////////////// sender ///////////////////////////////////////////////////
             console.log("id_sender", id_sender)
@@ -254,8 +253,6 @@ router.route('/send/:id/confirm')
 
 
             const toAddress = await getReceiverWalletFromId(id)
-
-
             console.log("toAddress_show_toAddress =>", toAddress)
 
             let toAddress2 = toAddress.val();
@@ -303,6 +300,8 @@ router.route('/send/:id/confirm')
             const tx = new EthereumTx(Transaction, { chain: 'kovan' });
             tx.sign(privKey);
             var serializedTx = tx.serialize();
+            const spendTime = new Date().valueOf() - startTime
+            console.log("spendTime ====================================================================================== =>", spendTime)
             console.log("serializedTx =>", serializedTx)
             /////////////////////////////////////////////////// errrrorr //////////////////////////////////////////////////////////////////////////
             /*if (money <= id_sendershow_balance) {
