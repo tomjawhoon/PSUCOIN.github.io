@@ -129,7 +129,7 @@ router.route('/loginadmin')
                 if (snapshot.exists()) { // check ????????????????????????
                     console.log('already exists')
                     // res.send('<script>alert("??????????????????");</script>');
-                    res.redirect('/index/' + user.username)
+                    res.redirect('/indexadmin/' + user.username)
                     return false;
                 } else {
                     console.log('Error admin')
@@ -248,10 +248,6 @@ router.route('/send/:id/confirm')
                 console.log("TESTID")
                 res.json(testid)
             }
-
-
-
-
             const toAddress = await getReceiverWalletFromId(id)
             console.log("toAddress_show_toAddress =>", toAddress)
 
@@ -288,7 +284,7 @@ router.route('/send/:id/confirm')
             var Transaction = {
                 "from": fromAddress,
                 "nonce": "0x" + count.toString(16),
-                "gasPrice": "0x003B9ACA00",
+                "gasPrice": web3.utils.toHex(web3.utils.toWei(String(1), 'gwei')),
                 "gasLimit": "0x250CA",//151754
                 "to": contractAddress,
                 "value": "0x0",
@@ -300,15 +296,22 @@ router.route('/send/:id/confirm')
             const tx = new EthereumTx(Transaction, { chain: 'kovan' });
             tx.sign(privKey);
             var serializedTx = tx.serialize();
-            const spendTime = new Date().valueOf() - startTime
-            console.log("spendTime ====================================================================================== =>", spendTime)
+
+
             console.log("serializedTx =>", serializedTx)
             /////////////////////////////////////////////////// errrrorr //////////////////////////////////////////////////////////////////////////
             /*if (money <= id_sendershow_balance) {
                 console.log("errorrrrrrrrrrrrrrrrrrrrrrrr.receipt")
                 res.json(moneybalance)
             }*/
-            var receipt = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
+
+
+
+
+            var receipt = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).on('transactionHash', () => { console.log('hashtime', new Date().valueOf() - startTime) })
+            .on('receipt', () => { console.log('blocktime', new Date().valueOf() - startTime) })
+            //const spendTime = new Date().valueOf() - startTime
+            //console.log("spendTime_ฺHasTime ====================================================================================== =>", spendTime)
             console.log("receipt =>", receipt)
             res.json(JSON.stringify(receipt.transactionHash))
             database.ref('users').child(id).once("value", snapshot => {
@@ -1160,4 +1163,3 @@ app.listen(5001, () => console.log('Server is ready!'))
 
 
 // 791786F6D865B4FAFAC0E92A5961D0526AF0072EFA757D5E46E59A69EF63FF70
-
