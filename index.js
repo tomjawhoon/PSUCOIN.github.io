@@ -284,7 +284,7 @@ router.route('/send/:id/confirm')
             var Transaction = {
                 "from": fromAddress,
                 "nonce": "0x" + count.toString(16),
-                "gasPrice": web3.utils.toHex(web3.utils.toWei(String(1), 'gwei')),
+                "gasPrice": web3.utils.toHex(web3.utils.toWei(String(63), 'gwei')),
                 "gasLimit": "0x250CA",//151754
                 "to": contractAddress,
                 "value": "0x0",
