@@ -151,9 +151,7 @@ Licensed under MIT
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-          </li>
+
         </ul>
       </div>
     </div>
@@ -201,8 +199,9 @@ Licensed under MIT
                   <label for="first_name">
                     <h4>First name</h4>
                   </label>
+
                   <input type="text" class="form-control" name="first_name" id="receiverName" placeholder="first name"
-                    title="enter your first name if any.">
+                    title="enter your first name if any." readonly>
                 </div>
             </div>
             <div class="form-group">
@@ -212,7 +211,7 @@ Licensed under MIT
                   <h4>Last name</h4>
                 </label>
                 <input type="text" class="form-control" name="last_name" id="receiverLastName" placeholder="last name"
-                  title="enter your last name if any.">
+                  title="enter your last name if any." readonly>
               </div>
             </div>
 
@@ -224,7 +223,7 @@ Licensed under MIT
                   <h4>Student ID</h4>
                 </label>
                 <input type="text" class="form-control" name="phone" id="receiverLastID" placeholder="enter phone"
-                  title="enter your phone number if any.">
+                  title="enter your phone number if any." readonly>
               </div>
 
             </div>
@@ -237,7 +236,7 @@ Licensed under MIT
 
                 </label>
                 <input type="text" class="form-control" name="mobile" id="fromAddress" placeholder="enter mobile number"
-                  title="enter your mobile number if any.">
+                  title="enter your mobile number if any." readonly>
               </div>
             </div>
 
@@ -253,8 +252,8 @@ Licensed under MIT
                   <h4>PrivateKey <a>show</a></h4>
 
                 </label>
-                <input class="form-control" name="password" id="privateKey" placeholder="password"
-                  title="enter your password.">
+                <input class="form-control" name="password" id="privateKey" placeholder="Password"
+                  title="enter your password." readonly>
               </div>
             </div>
             <div class="form-group">
@@ -353,7 +352,7 @@ Licensed under MIT
       id: id  // รหัสนักศึกษา
     }
   }).then(result => {
-   // console.log("result_data_getProfileById", result)
+    // console.log("result_data_getProfileById", result)
     // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
     $('#receiverName').val(result.data.name)
     $('#receiverLastName').val(result.data.lastName)
@@ -375,10 +374,10 @@ Licensed under MIT
       id: id  // รหัสนักศึกษา
     }
   }).then(resultgetWalletById => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-   // console.log("resultgetWalletById_data", resultgetWalletById)
-   // console.log("resultgetWalletById_address", resultgetWalletById.data.address)
-   // console.log("resultgetWalletById_privateKey", resultgetWalletById.data.privateKey)
-   // console.log("resultgetWalletById_id", resultgetWalletById.config.headers.id)
+    // console.log("resultgetWalletById_data", resultgetWalletById)
+    // console.log("resultgetWalletById_address", resultgetWalletById.data.address)
+    // console.log("resultgetWalletById_privateKey", resultgetWalletById.data.privateKey)
+    // console.log("resultgetWalletById_id", resultgetWalletById.config.headers.id)
 
     var connection = new WebSocket('ws://localhost:4000')
     connection.onopen = () => {
@@ -392,8 +391,8 @@ Licensed under MIT
     connection.onmessage = (result) => {
       const check = JSON.parse(result.data)
       const money = check.returnValues.tokens / 1000000000000000000;
-     // console.log("connect webSocket", resultgetWalletById.data.address);
-     // console.log("connect check.returnValues.to", check.returnValues.to);
+      // console.log("connect webSocket", resultgetWalletById.data.address);
+      // console.log("connect check.returnValues.to", check.returnValues.to);
       if (check.returnValues.to == resultgetWalletById.data.address) {
         console.log("in loop ")
         Swal.fire({
