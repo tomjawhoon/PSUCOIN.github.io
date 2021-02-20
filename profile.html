@@ -6,9 +6,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 </head>
 <style>
@@ -130,7 +132,8 @@ Licensed under MIT
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
     <div class="container">
-      <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52" onclick="gotoindex()">
+      <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52"
+        onclick="gotoindex()">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">PSU COIN</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -148,9 +151,7 @@ Licensed under MIT
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" onclick="gotoCheckBalance()">Balance</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-          </li>
+
         </ul>
       </div>
     </div>
@@ -182,7 +183,7 @@ Licensed under MIT
           </div>
           <!-- END SIDEBAR BUTTONS -->
           <!-- SIDEBAR MENU -->
-         
+
           <!-- END MENU -->
         </div>
       </div>
@@ -190,94 +191,95 @@ Licensed under MIT
         <div class="profile-content">
           <div class="tab-content">
             <div class="tab-pane active" id="home">
-     
+
               <form class="form" action="##" method="post" id="registrationForm">
                 <div class="form-group">
 
                   <div class="col-xs-6"></div>
-                    <label for="first_name">
-                      <h4>First name</h4>
-                    </label>
-                    <input type="text" class="form-control" name="first_name" id="receiverName" placeholder="first name"
-                      title="enter your first name if any.">
-                  </div>
+                  <label for="first_name">
+                    <h4>First name</h4>
+                  </label>
+
+                  <input type="text" class="form-control" name="first_name" id="receiverName" placeholder="first name"
+                    title="enter your first name if any." readonly>
                 </div>
-                <div class="form-group">
+            </div>
+            <div class="form-group">
 
-                  <div class="col-xs-6">
-                    <label for="last_name">
-                      <h4>Last name</h4>
-                    </label>
-                    <input type="text" class="form-control" name="last_name" id="receiverLastName"
-                      placeholder="last name" title="enter your last name if any.">
-                  </div>
-                </div>
+              <div class="col-xs-6">
+                <label for="last_name">
+                  <h4>Last name</h4>
+                </label>
+                <input type="text" class="form-control" name="last_name" id="receiverLastName" placeholder="last name"
+                  title="enter your last name if any." readonly>
+              </div>
+            </div>
 
-                <div class="form-group">
+            <div class="form-group">
 
-                  <div class="col-xs-6">
-                    <label for="phone">
-        
-                      <h4>Student ID</h4>
-                    </label>
-                    <input type="text" class="form-control" name="phone" id="receiverLastID" placeholder="enter phone"
-                      title="enter your phone number if any.">
-                  </div>
+              <div class="col-xs-6">
+                <label for="phone">
 
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-6">
-                    <label for="mobile">
-                 
-                      <h4>Wallet</h4>
-
-                    </label>
-                    <input type="text" class="form-control" name="mobile" id="fromAddress"
-                      placeholder="enter mobile number" title="enter your mobile number if any.">
-                  </div>
-                </div>
-
-                <div class="form-group">
-
-
-                </div>
-                <div class="form-group">
-
-                  <div class="col-xs-10">
-                    <label for="password">
-             
-                      <h4>PrivateKey <a>show</a></h4>
-
-                    </label>
-                    <input class="form-control" name="password" id="privateKey" placeholder="password"
-                      title="enter your password.">
-                  </div>
-                </div>
-                <div class="form-group">
-
-                </div>
-                <div class="form-group">
-                  <div class="col-xs-12">
-
-                    <a class="btn btn-lg btn-success" onclick="gotoindex()">BACK</a>
-                  </div>
-                </div>
-              </form>
-
-        
+                  <h4>Student ID</h4>
+                </label>
+                <input type="text" class="form-control" name="phone" id="receiverLastID" placeholder="enter phone"
+                  title="enter your phone number if any." readonly>
+              </div>
 
             </div>
-            </form>
-            
 
-  
+            <div class="form-group">
+              <div class="col-xs-6">
+                <label for="mobile">
+
+                  <h4>Wallet</h4>
+
+                </label>
+                <input type="text" class="form-control" name="mobile" id="fromAddress" placeholder="enter mobile number"
+                  title="enter your mobile number if any." readonly>
+              </div>
+            </div>
+
+            <div class="form-group">
+
+
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-10">
+                <label for="password">
+
+                  <h4>PrivateKey <a>show</a></h4>
+
+                </label>
+                <input class="form-control" name="password" id="privateKey" placeholder="Password"
+                  title="enter your password." readonly>
+              </div>
+            </div>
+            <div class="form-group">
+
+            </div>
+            <div class="form-group">
+              <div class="col-xs-12">
+
+                <a class="btn btn-lg btn-success" onclick="gotoindex()">BACK</a>
+              </div>
+            </div>
+            </form>
+
+
 
           </div>
-          <!--/tab-pane-->
+          </form>
+
+
+
+
         </div>
+        <!--/tab-pane-->
       </div>
     </div>
+  </div>
   </div>
 
 
@@ -350,7 +352,7 @@ Licensed under MIT
       id: id  // รหัสนักศึกษา
     }
   }).then(result => {
-    console.log("result_data_getProfileById", result)
+    // console.log("result_data_getProfileById", result)
     // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
     $('#receiverName').val(result.data.name)
     $('#receiverLastName').val(result.data.lastName)
@@ -371,22 +373,58 @@ Licensed under MIT
     headers: {
       id: id  // รหัสนักศึกษา
     }
-  }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-    console.log("result_data", result)
-    console.log("result_address", result.data.address)
-    console.log("result_privateKey", result.data.privateKey)
-    console.log("result_id", result.config.headers.id)
+  }).then(resultgetWalletById => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+    // console.log("resultgetWalletById_data", resultgetWalletById)
+    // console.log("resultgetWalletById_address", resultgetWalletById.data.address)
+    // console.log("resultgetWalletById_privateKey", resultgetWalletById.data.privateKey)
+    // console.log("resultgetWalletById_id", resultgetWalletById.config.headers.id)
+
+    var connection = new WebSocket('ws://localhost:4000')
+
+    connection.onopen = () => {
+      // จะทำงานเมื่อเชื่อมต่อสำเร็จ
+      console.log("connect webSocket");
+      connection.send(id); // ส่ง Data ไปที่ Server //5935512088
+    };
+    connection.onerror = (error) => {
+      console.error('WebSocket Error ' + error);
+    };
+    connection.onmessage = (result) => {
+      const check = JSON.parse(result.data)
+      const money = check.returnValues.tokens / 1000000000000000000;
+      // console.log("connect webSocket", resultgetWalletById.data.address);
+      // console.log("connect check.returnValues.to", check.returnValues.to);
+      if (check.returnValues.to == resultgetWalletById.data.address) {
+        console.log("in loop ")
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'มีเงินโอนเข้ามา',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        //createDivElement(e.data)
+        Push.create("PSUCOIN WELCOME", {
+          body: "มีเงินโอนเข้ามา",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Prince_of_Songkla_University_Emblem.png/150px-Prince_of_Songkla_University_Emblem.png",
+          timeout: 5000,
+        });
+      } else {
+        console.log("Not in loop ")
+      }
+    }
+
 
     //var test = result.data.address;
 
 
-    $('#fromAddress').val(result.data.address)
-    // $('#privateKey').val(result.data.privateKey)
-    $('#showid').val(result.config.headers.id)
+    $('#fromAddress').val(resultgetWalletById.data.address)
+    // $('#privateKey').val(resultgetWalletById.data.privateKey)
+    $('#showid').val(resultgetWalletById.config.headers.id)
 
     $(document).ready(function () {
       $("a").click(function () {
-        $('#privateKey').val(result.data.privateKey)
+        $('#privateKey').val(resultgetWalletById.data.privateKey)
       });
 
       $(function () {
@@ -398,7 +436,7 @@ Licensed under MIT
         }
         // สมมติค่าเริ่มเต้น ที่ตอ้งการแสดงเป็น qrcode
         $("#qrcode").qrcode($.extend(qrcodeConfig, {
-          text: result.data.address
+          text: resultgetWalletById.data.address
 
         }));
 
@@ -436,7 +474,7 @@ Licensed under MIT
         headers: {
           id: e.target.value  // รหัสนักศึกษา
         }
-      }).then(result => {
+      }).then(resultgetWalletById => {
         console.log("getProfileById_Showptofile",result) // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
         $('#receiverName').val(result.data.name)
         $('#receiverLastName').val(result.data.lastName)

@@ -813,7 +813,6 @@
         box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.2);
         border-radius: 30px;
         z-index: 10;
-        margin-top: 85px;
     }
 
     .order-info {
@@ -1554,7 +1553,7 @@
             margin-bottom: 15px;
         }
 
-
+        
     }
 </style>
 
@@ -1593,7 +1592,7 @@
         <div class='window'>
             <div class='order-info'>
                 <div class='order-info-content'>
-                    <h4>PSUCOIN Function</h4>
+                    <h4>PSUcoin Function</h4>
                     <div class='line'></div>
                     <table class='order-table'>
                         <tbody>
@@ -1602,10 +1601,10 @@
                                         class='full-width'></img>
                                 </td>
                                 <td>
-                                    <br> <span class='thin'>Send</span>
+                                    <br> <span class='thin'>SEND</span>
                                     <br> โอนเงินไปยังบัญชีอื่น<br>
 
-                                    <a class="button4" style="background-color:#f7e287" onclick="gotoSendETH()">Send</a>
+                                    <a class="button4" style="background-color:#f7e287" onclick="gotoSendETH()">SEND</a>
 
                                 </td>
 
@@ -1639,10 +1638,10 @@
                                         class='full-width'></img>
                                 </td>
                                 <td>
-                                    <br> <span class='thin'>Transaction</span>
+                                    <br> <span class='thin'>Transection</span>
                                     <br>ตรวจสอบธุรกรรมต่าง ๆ <br>
                                     <a class="button4" style="background-color:#f7e287"
-                                        onclick="gotoReceive()">Transaction</a>
+                                        onclick="gotoReceive()">Transection</a>
                                 </td>
 
                             </tr>
@@ -1675,7 +1674,7 @@
                         <form id="submitSend" method="GET">
                             <div class="credit-info-content-text">
                                 Total coin :
-                                <span> <span id="result" style="color:#f7e287" class="symbolcoin"></span><a
+                                <span> <a id="result" style="color:#f7e287" class="symbolcoin"></a><a
                                         class="psucenter">PSU</a>
                                 </span>
                                 <button type="submit" onclick="document.getElementById('id01').style.display='block' "
@@ -1687,7 +1686,7 @@
                         </form>
                     </div>
 
-                    Wallet:<span id="fromAddress" class="symbolcoin" style="color:#f7e287"></span>
+                    Wallet:<a id="fromAddress" class="symbolcoin" style="color:#f7e287"></a>
                     <button class='pay-btn' onclick="gotoindex()">Home</button>
                 </div>
             </div>
@@ -1733,28 +1732,27 @@
 <script src="/front/js/jquery.qrcode.min.js"></script>
 <script src="three.r95.min.js"></script>
 <script src="vanta.dots.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
 <script src="https://www.vantajs.com/dist/vanta.net.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
 <script>
     function gotoSendETH() {
-        window.location.href = window.location.href.replace('balance', 'send', 'index')
+        window.location.href = window.location.href.replace('test1', 'send', 'index')
     }
 
     function gotoindex() {
         // window.location.href = url.replace('send', 'balance')
-        window.location.href = url.replace('balance', 'index', 'send')
+        window.location.href = url.replace('test1', 'index', 'send')
     }
 
     function gotoPayment() {
-        // window.location.href = url.replace('send', 'balance')
-        window.location.href = url.replace('balance', 'camera', 'send')
+        // window.location.href = url.replace('send', 'test1')
+        window.location.href = url.replace('test1', 'camera', 'send')
     }
 
     function gotoReceive() {
-        // window.location.href = url.replace('send', 'balance')
-        window.location.href = url.replace('balance', 'transection', 'send')
+        // window.location.href = url.replace('send', 'test1')
+        window.location.href = url.replace('test1', 'transection', 'send')
     }
 
 
@@ -1770,7 +1768,8 @@
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
-
+            console.log("modal ==<>")
+            console.log("modal ==<>")
         }
     }
 
@@ -1788,7 +1787,7 @@
             id: id  // รหัสนักศึกษา
         }
     }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        //console.log("result_data_balance", result.data)
+        console.log("result_data_balance", result.data)
         $("#result").attr("href", result.data)
         $("#result").text(result.data)
         // $("#result").val()
@@ -1800,62 +1799,19 @@
         headers: {
             id: id // รหัสนักศึกษา
         }
-    }).then(resultgetWalletById => {
+    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+        console.log("result_formaxios_getWalletById", result)
+        console.log("result_formaxios_getWalletById", result.config.headers.id)
+        $("#fromAddress1").val(result.data.address)
 
-        
-        var connection = new WebSocket('ws://localhost:4000')
-        connection.onopen = () => {
-            // จะทำงานเมื่อเชื่อมต่อสำเร็จ
-            console.log("connect webSocket");
-            connection.send(id); // ส่ง Data ไปที่ Server //5935512088
-        };
-        connection.onerror = (error) => {
-            console.error('WebSocket Error ' + error);
-        };
-        connection.onmessage = (result) => {
-            const check = JSON.parse(result.data)
-            const money = check.returnValues.tokens / 1000000000000000000;
-           // console.log("connect webSocket",resultgetWalletById.data.address);
-            //console.log("connect check.returnValues.to",check.returnValues.to);
-            if (check.returnValues.to == resultgetWalletById.data.address) {
-                console.log("in loop ")
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'มีเงินโอนเข้ามา',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-                //createDivElement(e.data)
-                Push.create("PSUCOIN WELCOME", {
-                    body: "มีเงินโอนเข้ามา",
-                    icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Prince_of_Songkla_University_Emblem.png/150px-Prince_of_Songkla_University_Emblem.png",
-                    timeout: 5000,
-                });
-            } else {
-                console.log("Not in loop ")
-            }
-        }
+        $("#fromAddress").attr("href", result.data.address)
+        $("#fromAddress").text(result.data.address)
 
-
-
-
-        // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        //console.log("result_formaxios_getWalletById", resultgetWalletById)
-        //console.log("result_formaxios_getWalletById", resultgetWalletById.config.headers.id)
-
-        $("#fromAddress1").val(resultgetWalletById.data.address)
-
-        $("#fromAddress").attr("href", resultgetWalletById.data.address)
-        $("#fromAddress").text(resultgetWalletById.data.address)
-
-        $('#showid').val(resultgetWalletById.config.headers.id)
+        $('#showid').val(result.config.headers.id)
 
         $(document).ready(function () {
-
-
             $("a").click(function () {
-                $('#privateKey').val(resultgetWalletById.data.privateKey)
+                $('#privateKey').val(result.data.privateKey)
             });
 
             $(function () {
@@ -1867,7 +1823,7 @@
                 }
                 // สมมติค่าเริ่มเต้น ที่ตอ้งการแสดงเป็น qrcode
                 $("#qrcode").qrcode($.extend(qrcodeConfig, {
-                    text: resultgetWalletById.data.address
+                    text: result.data.address
 
                 }));
 
@@ -1896,8 +1852,6 @@
         });
 
 
-
-
     }).catch(result => {
         console.log("errr")
     })
@@ -1920,8 +1874,8 @@
                     });
                 });
             }
-            //console.log("Retuen_value_balance", result)
-           // console.log("test_send => ", result.data)
+            console.log("Retuen_value_balance", result)
+            console.log("test_send => ", result.data)
             // $('#fromAddress').val(result.data.address)
             $('#result').text(result.data)
         }).catch(result => {

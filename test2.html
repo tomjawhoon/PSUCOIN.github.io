@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="/front/js/jquery.qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cozmo.github.io/jsQR/jsQR.js"></script>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
 </head>
 
@@ -182,6 +184,7 @@
         align-items: center;
         font-family: 'Francois One', sans-serif;
         font-size: 20px;
+        margin-top: 20px;
 
     }
 
@@ -466,6 +469,12 @@
             /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
             margin-top: 80px;
 
+        }
+
+        #canvas {
+            width: 500px;
+            height: 330px;
+            margin-top: 130px;
         }
 
         .Logo {
@@ -803,7 +812,7 @@
     }
 
     .window {
-        height: 770px;
+        height: 700px;
         width: 1100px;
         background: #fff;
         display: -webkit-box;
@@ -813,7 +822,7 @@
         box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.2);
         border-radius: 30px;
         z-index: 10;
-        margin-top: 85px;
+        margin-top: 30px;
     }
 
     .order-info {
@@ -885,6 +894,7 @@
         width: calc(100% - 50px);
         -webkit-transition: all .2s ease;
         transition: all .2s ease;
+        margin-left: -35px;
 
     }
 
@@ -928,7 +938,7 @@
     }
 
     .credit-info {
-        background: #4488dd;
+        background: #63dd44;
         height: 100%;
         width: 50%;
         color: #eee;
@@ -1001,6 +1011,15 @@
 
     @media (max-width: 375px) {
 
+
+
+        #canvas {
+            width: 300px;
+            height: 330px;
+            margin-top: 130px;
+        }
+
+
         a.button4 {
             display: inline-block;
             padding: 0.3em 1.2em;
@@ -1032,9 +1051,9 @@
 
         .window {
             width: 100%;
-            height: 100%;
+            height: 30%;
             display: block;
-            border-radius: 30px;
+            border-radius: 25px;
             margin-top: 10em;
         }
 
@@ -1049,7 +1068,7 @@
 
         .pay-btn {
             border: none;
-            background: #22b877;
+            background: #e24655;
             line-height: 2em;
             border-radius: 10px;
             font-size: 19px;
@@ -1061,7 +1080,7 @@
             width: calc(100% - 50px);
             -webkit-transition: all .2s ease;
             transition: all .2s ease;
-            margin-left: -0px;
+            margin-top: 55px;
         }
 
         .Sponsored {
@@ -1097,7 +1116,7 @@
         }
 
         .pay-btn {
-            border-radius: 0px;
+            border-radius: 35px;
         }
 
         .credit-card-image {
@@ -1146,7 +1165,7 @@
             width: 100%;
             height: 100%;
             display: block;
-            border-radius: 30px;
+            border-radius: 0px;
             margin-top: 10em;
         }
 
@@ -1257,7 +1276,7 @@
             width: 100%;
             height: 100%;
             display: block;
-            border-radius: 30px;
+            border-radius: 25px;
             margin-top: 10em;
         }
 
@@ -1368,7 +1387,7 @@
             width: 100%;
             height: 100%;
             display: block;
-            border-radius: 30px;
+            border-radius: 25px;
             margin-top: 10em;
         }
 
@@ -1479,7 +1498,7 @@
             width: 100%;
             height: 100%;
             display: block;
-            border-radius: 30px;
+            border-radius: 25px;
             margin-top: 10em;
         }
 
@@ -1554,6 +1573,142 @@
             margin-bottom: 15px;
         }
 
+        .btnContact {
+            border-radius: 25px;
+            background-color: #f7e287
+        }
+
+
+    }
+
+
+</style>
+
+<style>
+
+    .form-control {
+        border-radius: 1rem;
+    }
+
+    #canvas {
+        /* width: 500px; */
+        height: 330px;
+        margin-top: 17px;
+    }
+
+    .imgcontainer {
+        text-align: center;
+        margin: 10px 0 10px 0;
+        position: relative;
+    }
+
+    img.avatar {
+        width: 10%;
+        border-radius: 50%;
+    }
+
+
+
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        /* background-color: #fefefe; */
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    .btnsend {
+        border: none;
+        background: none;
+        outline: none;
+    }
+
+    /*************************************************************************************************************
+    /* The Close Button (x) */
+    .close {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: red;
+        cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @keyframes animatezoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+
+        .cancelbtn {
+            width: 100%;
+        }
+
+
+
 
     }
 </style>
@@ -1593,7 +1748,7 @@
         <div class='window'>
             <div class='order-info'>
                 <div class='order-info-content'>
-                    <h4>PSUCOIN Function</h4>
+                    <h4>PSUcoin Function</h4>
                     <div class='line'></div>
                     <table class='order-table'>
                         <tbody>
@@ -1602,10 +1757,10 @@
                                         class='full-width'></img>
                                 </td>
                                 <td>
-                                    <br> <span class='thin'>Send</span>
+                                    <br> <span class='thin'>SEND</span>
                                     <br> โอนเงินไปยังบัญชีอื่น<br>
 
-                                    <a class="button4" style="background-color:#f7e287" onclick="gotoSendETH()">Send</a>
+                                    <a class="button4" style="background-color:#f7e287" onclick="gotoSendETH()">SEND</a>
 
                                 </td>
 
@@ -1639,10 +1794,10 @@
                                         class='full-width'></img>
                                 </td>
                                 <td>
-                                    <br> <span class='thin'>Transaction</span>
+                                    <br> <span class='thin'>Transection</span>
                                     <br>ตรวจสอบธุรกรรมต่าง ๆ <br>
                                     <a class="button4" style="background-color:#f7e287"
-                                        onclick="gotoReceive()">Transaction</a>
+                                        onclick="gotoReceive()">Transection</a>
                                 </td>
 
                             </tr>
@@ -1669,28 +1824,53 @@
             </div>
             <div class='credit-info'>
                 <div class='credit-info-content'>
-                    <img src='https://www.computing.psu.ac.th/th/wp-content/uploads/2018/03/Logo-PSU-TH-01.png'
-                        height='300' class='credit-card-image' id='credit-card-image'></img>
-                    <div class="Boxwallet">
-                        <form id="submitSend" method="GET">
-                            <div class="credit-info-content-text">
-                                Total coin :
-                                <span> <span id="result" style="color:#f7e287" class="symbolcoin"></span><a
-                                        class="psucenter">PSU</a>
-                                </span>
-                                <button type="submit" onclick="document.getElementById('id01').style.display='block' "
-                                    class=" btnsend" value="re">
-                                    <ion-icon name="refresh" class="iconre" style="color:rgb(252, 248, 248)"></ion-icon>
-                                </button>
-                                <input type="hidden" class="form-control" name="fromAddress1" id="fromAddress1"
-                                    size="80"></input>
-                        </form>
-                    </div>
+                        <img src='https://www.bestidc.net/wp-content/uploads/2019/05/Payment-PNG-Free-Download.png'
+                        height='130' class='credit-card-image' id='credit-card-image'></img>
 
-                    Wallet:<span id="fromAddress" class="symbolcoin" style="color:#f7e287"></span>
-                    <button class='pay-btn' onclick="gotoindex()">Home</button>
+
+                    <div class="Boxwallet">
+                        <div class="card-img-top" id="qrcode" alt="Card image" style="width:100%"></div>
+                    </div>
+                    <div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam
+                        enabled)</div>
+                    <canvas id="canvas" hidden></canvas>
+                    <form id="submitSend" method="POST" action="/sendQrcode">
+                        <div id="output" hidden">
+
+                            <div id="outputMessage" hidden></div>
+                            <!-- <div hidden><b>Data:</b> <span id="outputData"></span></div> -->
+                            <br>
+                            <!-- <p>Toaddress Wallet</p> -->
+                            <input id="show" name="show" type="text" class="form-control" size="38"
+                                placeholder="Toaddress Wallet"></input>
+                            <p></p>
+                            <input type="number" class="form-control" name="money" id="money" size="38"
+                                placeholder="Money"></input>
+
+                            <!-- <input type="number" class="form-control" name="money1" id="money1" size="80"
+                                        placeholder="Money"></input> -->
+
+                            <input type="hidden" class="form-control" name="showid" id="showid" size="38"></input><br>
+
+                            <input type="hidden" class="form-control" name="fromAddress" id="fromAddress"
+                                size="38"></input>
+                            <!-- <p>e.g. 0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a</p> -->
+                            <!-- <h5>privateKey</h5> -->
+                            <input type="hidden" class="form-control" name="privateKey" id="privateKey"
+                                size="38"></input>
+                            <br>
+                            <center><button id="btnEnter" type="submit" class="btn btn-primary"
+                                    onclick="document.getElementById('id01').style.display='block'"
+                                    style="width:auto;">ENTER</button></center>
+                            <!-- <button onclick="stop()">stop</button> -->
+                            <!-- <a id="result"></a> -->
+
+                        </div>
+
+                    </form>
                 </div>
             </div>
+
 
         </div>
 
@@ -1714,7 +1894,29 @@
                 <div class="container">
                 </div>
     </center>
+    <div id="output">
+        <div id="outputMessage" hidden></div>
+        <!-- <div hidden><b>Data:</b> <span id="outputData"></span></div> -->
 
+    </div>
+    <!-- 
+    <div class="threebtn">
+        <button type="button" class="btn btn-light Allbtn">
+            <ion-icon name="qr-scanner"></ion-icon>
+            </ion-icon><span onclick="gotoCheckBalance()">Payment</span>
+        </button>
+        <button type="button" class="btn btn-light Allbtn">
+            <ion-icon name="arrow-back"></ion-icon>
+            </ion-icon><span onclick="gotoCheckBalance1()">Back</span>
+        </button>
+    </div> -->
+
+    </div>
+    <div id="output">
+        <div id="outputMessage" hidden></div>
+        <div id="outputData" hidden></div>
+
+    </div>
 
 
 
@@ -1733,36 +1935,37 @@
 <script src="/front/js/jquery.qrcode.min.js"></script>
 <script src="three.r95.min.js"></script>
 <script src="vanta.dots.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
 <script src="https://www.vantajs.com/dist/vanta.net.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
 <script>
     function gotoSendETH() {
-        window.location.href = window.location.href.replace('balance', 'send', 'index')
+        window.location.href = window.location.href.replace('Receive', 'send', 'index')
     }
 
     function gotoindex() {
-        // window.location.href = url.replace('send', 'balance')
-        window.location.href = url.replace('balance', 'index', 'send')
+        // window.location.href = url.replace('send', 'Receive')
+        window.location.href = url.replace('Receive', 'index', 'send')
     }
 
     function gotoPayment() {
-        // window.location.href = url.replace('send', 'balance')
-        window.location.href = url.replace('balance', 'camera', 'send')
+        // window.location.href = url.replace('send', 'Receive')
+        window.location.href = url.replace('Receive', 'balance')
     }
 
-    function gotoReceive() {
-        // window.location.href = url.replace('send', 'balance')
-        window.location.href = url.replace('balance', 'transection', 'send')
+    function gotoCheckBalance1() {
+        // window.location.href = url.replace('send', 'Receive')
+        window.location.href = url.replace('Receive', 'balance', 'send')
     }
 
-
+    function gotoCheckBalance() {
+        // window.location.href = url.replace('send', 'Receive')
+        window.location.href = url.replace('Receive', 'camera', 'send')
+    }
 
 
 </script>
 <script>
-
 
     var modal = document.getElementById('id01');
 
@@ -1770,16 +1973,63 @@
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
-
         }
     }
 
+    // ======  manage input PSU Coin section ====
+    $("#btnEnter").hide();
+    $("#show").hide();
+    $("#money").hide();
+    // $("#money1").hide();
+
+
+    //    $("#btnEnter").hide();
+
+
+
+
+    var video = document.createElement("video");
+    var canvasElement = document.getElementById("canvas");
+    var canvas = canvasElement.getContext("2d");
+    var loadingMessage = document.getElementById("loadingMessage");
+    var outputContainer = document.getElementById("output");
+    var outputMessage = document.getElementById("outputMessage");
+    var outputData = document.getElementById("outputData");
     var url;
     var id;
     (() => {
         url = window.location.href
         id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
     })()
+
+    function gotoCheckBalance() {
+        // window.location.href = url.replace('send', 'balance')
+        window.location.href = url.replace('camera', 'balance', 'index')
+    }
+    function gotoindex() {
+        // window.location.href = url.replace('camera', 'balance')
+        window.location.href = url.replace('camera', 'index', 'send')
+    }
+    // var video = document.querySelector("#videoElement");
+    // var button = document.querySelector("#videoElement");
+
+
+    axios({
+        method: 'GET',
+        url: '/getWalletById', //ส่งไปค่านี้
+        headers: {
+            id: id  // รหัสนักศึกษา
+        }
+    }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
+        console.log("result_data", result)
+        $('#fromAddress').val(result.data.address)
+        $('#privateKey').val(result.data.privateKey)
+        $('#showid').val(result.config.headers.id)
+    })
+
+
+
+
 
     axios({
         method: 'GET',
@@ -1788,162 +2038,166 @@
             id: id  // รหัสนักศึกษา
         }
     }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        //console.log("result_data_balance", result.data)
-        $("#result").attr("href", result.data)
-        $("#result").text(result.data)
-        // $("#result").val()
+        console.log("result_data_balance", result.data)
+        // $('#fromAddress').val(result.data.address)
+        // $('#privateKey').val(result.data.privateKey)
+        // $('#showid').val(result.config.headers.id)
     })
 
-    axios({
-        method: 'GET',
-        url: '/getWalletById', //ส่งไปค่านี้
-        headers: {
-            id: id // รหัสนักศึกษา
-        }
-    }).then(resultgetWalletById => {
+    // function stop(e) { //stop
+    //         var stream = video.srcObject;
+    //         var tracks = stream.getTracks();
 
-        
-        var connection = new WebSocket('ws://localhost:4000')
-        connection.onopen = () => {
-            // จะทำงานเมื่อเชื่อมต่อสำเร็จ
-            console.log("connect webSocket");
-            connection.send(id); // ส่ง Data ไปที่ Server //5935512088
-        };
-        connection.onerror = (error) => {
-            console.error('WebSocket Error ' + error);
-        };
-        connection.onmessage = (result) => {
-            const check = JSON.parse(result.data)
-            const money = check.returnValues.tokens / 1000000000000000000;
-           // console.log("connect webSocket",resultgetWalletById.data.address);
-            //console.log("connect check.returnValues.to",check.returnValues.to);
-            if (check.returnValues.to == resultgetWalletById.data.address) {
-                console.log("in loop ")
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'มีเงินโอนเข้ามา',
-                    showConfirmButton: false,
-                    timer: 2000
+    //         for (var i = 0; i < tracks.length; i++) {
+    //             var track = tracks[i];
+    //             track.stop();
+    //         }
+
+    //         video.srcObject = null;
+    //     }
+
+
+
+    function drawLine(begin, end, color) {
+        canvas.beginPath();
+        canvas.moveTo(begin.x, begin.y);
+        canvas.lineTo(end.x, end.y);
+        canvas.lineWidth = 4;
+        canvas.strokeStyle = color;
+        canvas.stroke();
+    }
+
+    // Use facingMode: environment to attemt to get the front camera on phones
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
+        video.srcObject = stream;
+        video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+        video.play();
+        requestAnimationFrame(tick);
+    });
+
+    function tick() {
+        loadingMessage.innerText = "⌛ Loading video..."
+        if (video.readyState === video.HAVE_ENOUGH_DATA) {
+            loadingMessage.hidden = true;
+            canvasElement.hidden = false;
+            outputContainer.hidden = false;
+            canvasElement.height = video.videoHeight;
+            canvasElement.width = video.videoWidth;
+            canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+            var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+            var code = jsQR(imageData.data, imageData.width, imageData.height, {
+                inversionAttempts: "dontInvert",
+            });
+            if (code) {
+                drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
+                drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
+                drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
+                drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
+                outputMessage.hidden = true;
+
+                outputData.parentElement.hidden = false;
+                outputData.innerText = code.data;
+                // console.log("QRcode ====== >", code.data)
+                document.querySelector('#submitSend').addEventListener('submit', e => {
+                    e.preventDefault()
+                    axios({
+                        method: 'POST',
+                        url: '/ShowTranferQrcode/' + id + '/confirm', // ส่งไปยังค่านี้
+                        headers: {
+                            id: id,
+                            fromAddress: $('#fromAddress').val(),
+                            toAddress: $('#toAddress').val(),
+                            privateKey: $('#privateKey').val(),
+                            money: $('#money').val(),
+                            content: code.data, //toaddress wallet
+                        }
+                    }).then(result => {
+                        console.log("result.TEST", result.data)
+
+                        if (result.data == "ERROR") {
+                            swal.fire(
+                                'Payment Error',
+                                'ใส่จำนวนเงินใหม่',
+                                "error"
+                            ).then(function () {
+                                location.reload();
+                            }
+                            );
+                        }
+                        else {
+                            $(() => {
+                                $(document).ready(() => {
+                                    console.log("Show === result === Modal")
+                                    $("#id01").hide();
+                                    // window.location.href = url.replace('camera', 'SUCCESS')
+                                    swal.fire(
+                                        'Complete',
+                                        'Payment Success',
+                                        'success'
+                                    ).then(function () {
+                                        // location.reload();
+                                       location.href = url.replace('test2', 'balance', 'index')
+                                    }
+                                    );
+                                });
+                            });
+                        }
+                    }).catch(result => {
+                        console.log("errr_send")
+                    })
                 })
-                //createDivElement(e.data)
-                Push.create("PSUCOIN WELCOME", {
-                    body: "มีเงินโอนเข้ามา",
-                    icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Prince_of_Songkla_University_Emblem.png/150px-Prince_of_Songkla_University_Emblem.png",
-                    timeout: 5000,
-                });
+
+                axios({
+                    method: 'GET',
+                    url: '/camera/' + id + '/confirm', // ส่งไปยังค่านี้
+                    headers: {
+                        content: code.data
+                    }
+                },
+                    $('#show').val(code.data),
+
+                ).then(result => {
+                    console.log("Good Get Api ", result.data)
+
+                }).catch(result => {
+                    console.log("errr")
+                })
+
+                if (code.data != '') {
+                    $(() => {
+                        $(document).ready(() => {
+                            var stream = video.srcObject;
+                            var tracks = stream.getTracks();
+                            for (var i = 0; i < tracks.length; i++) {
+                                var track = tracks[i];
+                                track.stop();
+                            }
+                            console.log("Show")
+                            $("#canvas").hide(3000);
+                            $("#btnEnter").show(2000);
+                            $("#show").show(2000);
+                            $("#money").show(2000);
+                            // $("#money1").show(2000);
+                        });
+                    });
+                }
+
+
+
+                // console.log("QRcode 555555 ====== >", outputData)
             } else {
-                console.log("Not in loop ")
+                outputMessage.hidden = false;
+                outputData.parentElement.hidden = true;
             }
         }
+        requestAnimationFrame(tick);
 
 
 
 
-        // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-        //console.log("result_formaxios_getWalletById", resultgetWalletById)
-        //console.log("result_formaxios_getWalletById", resultgetWalletById.config.headers.id)
-
-        $("#fromAddress1").val(resultgetWalletById.data.address)
-
-        $("#fromAddress").attr("href", resultgetWalletById.data.address)
-        $("#fromAddress").text(resultgetWalletById.data.address)
-
-        $('#showid').val(resultgetWalletById.config.headers.id)
-
-        $(document).ready(function () {
-
-
-            $("a").click(function () {
-                $('#privateKey').val(resultgetWalletById.data.privateKey)
-            });
-
-            $(function () {
-                // กำหนดการตั้งค่ารูปแบบ qrcode ที่ต้องการเรียกใช้
-                var qrcodeConfig = {
-                    width: 200,
-                    height: 200,
-                    correctLevel: 0
-                }
-                // สมมติค่าเริ่มเต้น ที่ตอ้งการแสดงเป็น qrcode
-                $("#qrcode").qrcode($.extend(qrcodeConfig, {
-                    text: resultgetWalletById.data.address
-
-                }));
-
-
-                $('a.printPage').click(function () {
-                    window.print();
-                    return false;
-                });
-
-                // เมื่อมีการเปลี่ยนแปลงค่าใน input text และเกิด blur หรือ keypress event
-                /* $("#fromAddress").on("keypress blur", function (e) {
-                   if (e.type == 'keypress' && e.keyCode == 13) { // ถ้ามีการกรอกข้อมูลใหม่ และกด Enter
-                     $("#qrcode").html("") // ล้างค่า qrcode
-                       .qrcode($.extend(qrcodeConfig, {
-                         text: $(this).val()
-                       }));
-                   } else if (e.type == 'blur') { // ถ้ามีการกรอกข้อมูล แล้ว โฟกัสออกจาก input text
-                     $("#qrcode").html("") // ล้างค่า qrcode
-                       .qrcode($.extend(qrcodeConfig, {
-                         text: $(this).val()
-                       }));
-                   }
-                 });*/
-            });
-
-        });
-
-
-
-
-    }).catch(result => {
-        console.log("errr")
-    })
-    document.querySelector('#submitSend').addEventListener('submit', e => {
-        e.preventDefault()
-        axios({ // ส่งค่าทั้งหมดไปๆ ยัง ฝั่ง nodejs
-            method: 'GET',
-            url: '/balance/' + id + '/confirm', // ส่งไปยังค่านี้
-            headers: {
-                fromAddress: $('#fromAddress1').val(),
-                id: id,
-
-            }
-        }).then(result => { // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
-            if (result != '') {
-                $(() => {
-                    $(document).ready(() => {
-                        console.log("Show === result === Modal")
-                        $("#id01").hide();
-                    });
-                });
-            }
-            //console.log("Retuen_value_balance", result)
-           // console.log("test_send => ", result.data)
-            // $('#fromAddress').val(result.data.address)
-            $('#result').text(result.data)
-        }).catch(result => {
-            console.log("errr")
-        })
-    })
-
+    }
 </script>
 
-<script>
-    VANTA.NET({
-        el: "#vantajs",
-        mouseControls: true,
-        touchControls: true,
-        minHeight: 1040.00,
-        minWidth: 1000.00,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        points: 16.00,
-        maxDistance: 33.00,
-        spacing: 18.00
-    })
-</script>
+
 
 </html>

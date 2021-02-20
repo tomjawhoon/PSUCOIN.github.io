@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css?family=Francois+One&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="/front/js/jquery.qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
 </head>
 <style>
     .imgcontainer {
@@ -45,7 +47,7 @@
         /* Full height */
         overflow: auto;
         /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255);
         /* Fallback color */
         background-color: rgba(0, 0, 0, 0.4);
         /* Black w/ opacity */
@@ -57,7 +59,7 @@
         /* background-color: #fefefe; */
         margin: 5% auto 15% auto;
         /* 5% from the top, 15% from the bottom and centered */
-        border: 1px solid #888;
+        border: 1px solid rgb(0, 0, 0);
         width: 80%;
         /* Could be more or less, depending on screen size */
     }
@@ -193,7 +195,7 @@
         height: 600px;
         justify-content: space-around;
         align-items: center;
-        background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+        /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
         margin-top: 80px;
 
     }
@@ -270,7 +272,7 @@
             height: 600px;
             justify-content: space-around;
             align-items: center;
-            background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+            /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
             margin-top: 80px;
 
         }
@@ -346,7 +348,7 @@
             height: 600px;
             justify-content: space-around;
             align-items: center;
-            background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+            /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
             margin-top: 80px;
 
         }
@@ -416,7 +418,7 @@
             height: 550px;
             justify-content: space-around;
             align-items: center;
-            background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+            /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
             margin-top: 80px;
 
         }
@@ -492,7 +494,7 @@
             height: 410px;
             justify-content: space-around;
             align-items: center;
-            background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+            /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
             margin-top: 80px;
 
         }
@@ -567,7 +569,7 @@
             height: 550px;
             justify-content: space-around;
             align-items: center;
-            background: linear-gradient(to bottom right, #9471d0, #43b7e6);
+            /* background: linear-gradient(to bottom right, #9471d0, #43b7e6); */
             margin-top: 80px;
 
         }
@@ -785,12 +787,12 @@
                                 </div>
                             </div>
                             <div class="transactions-body">
-                                RECEIVED
+                                       RECEIVED
                                 <div class="explorer-PSUCOIN">
                                     <a target="_blank">
                                         <b-icon icon="link" size="is-small">
                                         </b-icon>
-                                        200 PSUCOIN
+                                       + 200 COIN
                                     </a>
                                 </div>
                             </div>
@@ -808,7 +810,7 @@
 
             </div>
         </div>
-        <div class="Sponsored">
+        <!-- <div class="Sponsored">
             <div data-v-4df4bd6a="" data-v-59c1e84d="" class="content has-text-centered"></div>
             <div data-v-4df4bd6a="" id="comp-jy5zp152inlineContent-gridContainer"><span data-v-4df4bd6a=""
                     class="Textsponsored">
@@ -817,12 +819,27 @@
                         alt="Smiley face" class="imgCOC"> Blockchain Research Team
 
                 </span><br data-v-4df4bd6a=""><br data-v-4df4bd6a=""></div>
-        </div>
-        <h1>Vanta.JS birds </h1>
+        </div> -->
 
-        <div id="vantajs" style="height: 400px;">PSUCOIN</div>
 
     </div>
+    <div id="id01" class="modal">
+        <form action="/action_page.php" method="post">
+            <div class="imgcontainer">
+
+                <div class="loadingio-spinner-rolling-n2856siz85m">
+                    <div class="ldio-2fzcezdt162">
+                        <div></div>
+                    </div>
+                </div>
+                <p style="color:#FFFFFF">Loading .....</p>
+            </div>
+
+            <div class="container">
+
+            </div>
+
+
     </div>
 
 
@@ -854,32 +871,29 @@
             points: 16.00,
             maxDistance: 33.00,
             spacing: 18.00
-            
         })
     </script>
     <script>
         function gotoSendETH() {
-            window.location.href = window.location.href.replace('Receive', 'send', 'index')
+            window.location.href = window.location.href.replace('transection', 'send', 'index')
         }
-
         function gotoindex() {
-            // window.location.href = url.replace('send', 'Receive')
-            window.location.href = url.replace('Receive', 'index', 'send')
+            // window.location.href = url.replace('send', 'transection')
+            window.location.href = url.replace('transection', 'index', 'send')
         }
-
         function gotoPayment() {
-            // window.location.href = url.replace('send', 'Receive')
-            window.location.href = url.replace('Receive', 'balance')
+            // window.location.href = url.replace('send', 'transection')
+            window.location.href = url.replace('transection', 'balance')
         }
 
         function gotoCheckBalance1() {
-            // window.location.href = url.replace('send', 'Receive')
-            window.location.href = url.replace('Receive', 'balance', 'send')
+            // window.location.href = url.replace('send', 'transection')
+            window.location.href = url.replace('transection', 'balance', 'send')
         }
 
         function gotoCheckBalance() {
-            // window.location.href = url.replace('send', 'Receive')
-            window.location.href = url.replace('Receive', 'balance', 'send')
+            // window.location.href = url.replace('send', 'transection')
+            window.location.href = url.replace('transection', 'balance', 'send')
         }
 
     </script>
@@ -892,6 +906,18 @@
             id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
         })()
 
+
+        var modal = document.getElementById('id01');
+        $("#id01").show();
+
+        // When the user clicks anywhere outside of the modal, close it
+        /*  window.onclick = (event) => {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+                  console.log("modal ==<>")
+              }
+          }*/
+
         axios({
             method: 'GET',
             // url: '/getWalletById', //???????????
@@ -903,16 +929,59 @@
                 //result : result,
             }
         }).then(result => {
-            console.log("test ===>", result)
+         //   console.log("test ===>", result)
 
+            if (result != '') {
+                $(() => {
+                    $(document).ready(() => {
+             //           console.log("Show === result === Modal")
+                        $("#id01").hide();
+                    });
+                });
+            }
             axios({
                 method: 'GET',
                 url: '/getWalletById', //ส่งไปค่านี้
                 headers: {
                     id: id  // รหัสนักศึกษา
                 }
-            }).then(test => {
-                console.log("test ===>", test)
+            }).then(resultgetWalletById => {
+            //    console.log("resultgetWalletById ===>", resultgetWalletById)
+                var connection = new WebSocket('ws://localhost:4000')
+                connection.onopen = () => {
+                    // จะทำงานเมื่อเชื่อมต่อสำเร็จ
+                    console.log("connect webSocket");
+                    connection.send(id); // ส่ง Data ไปที่ Server //5935512088
+                };
+                connection.onerror = (error) => {
+                    console.error('WebSocket Error ' + error);
+                };
+                connection.onmessage = (result) => {
+                    const check = JSON.parse(result.data)
+                    const money = check.returnValues.tokens / 1000000000000000000;
+              //      console.log("connect webSocket", resultgetWalletById.data.address);
+               //     console.log("connect check.returnValues.to", check.returnValues.to);
+                    if (check.returnValues.to == resultgetWalletById.data.address) {
+                        console.log("in loop ")
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'มีเงินโอนเข้ามา',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        //createDivElement(e.data)
+                        Push.create("PSUCOIN WELCOME", {
+                            body: "มีเงินโอนเข้ามา",
+                            icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Prince_of_Songkla_University_Emblem.png/150px-Prince_of_Songkla_University_Emblem.png",
+                            timeout: 5000,
+                        });
+                    } else {
+                        console.log("Not in loop ")
+                    }
+                }
+
+
                 // ดึงค่ามาใส่ใน input ด้วย axios โดยตรง
                 //================== ========= ========= ========= ========= DATE ========= ========= ========= ========= ========= ========= ========= ========= 
                 var monthNamesThai = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
@@ -924,9 +993,9 @@
                 var d = new Date();
                 var showdate = dayNames[d.getDay()] + " " + d.getDate() + " " + monthNamesThai[d.getMonth()] + " "
                     + d.getFullYear() + " " + d.toLocaleTimeString();
-                console.log("Date ==== >", showdate)
+              //  console.log("Date ==== >", showdate)
                 //================== ========= ========= ========= ========= ======== ========= 
-                console.log("test.data.address = >", test.data.address) //address
+              //  console.log("resultgetWalletById.data.address = >", resultgetWalletById.data.address) //address
                 result.data.forEach((childSnapshot) => {
 
                     // console.log("Transection = >" ,childSnapshot.to)
@@ -935,7 +1004,7 @@
                     //console.log("show ===", childSnapshot.traneiei)
                     let link = "https://kovan.etherscan.io/tx/" + childSnapshot.transaction
                     // $("#result").attr("href", link)
-                    if (childSnapshot.to == test.data.address) {
+                    if (childSnapshot.to == resultgetWalletById.data.address) {
                         var tr = document.createElement('div')
                         let view;
 
@@ -950,7 +1019,6 @@
                         <div class="address content">
                             <div class="align-center">
                                 <div class="transactions-header">
-                                    Wed, 04 Mar 2020 15:39:16 GMT
                                     <div class="explorer-container">
                                         <a target="_blank">
                                             <b-icon icon="link" size="is-small">
@@ -990,7 +1058,7 @@
                         });
                         $("#ex-table-coin").html("") //ลบ    */
 
-                    } if (childSnapshot.from == test.data.address) {
+                    } if (childSnapshot.from == resultgetWalletById.data.address) {
                         var tr = document.createElement('div')
                         let view;
 
@@ -1005,7 +1073,6 @@
                         <div class="address content">
                             <div class="align-center">
                                 <div class="transactions-header">
-                                    Wed, 04 Mar 2020 15:39:16 GMT
                                     <div class="explorer-container">
                                         <a target="_blank">
                                             <b-icon icon="link" size="is-small">
@@ -1047,7 +1114,7 @@
 
                     }
 
-                    /* if (childSnapshot.from == test.data.address) {
+                    /* if (childSnapshot.from == resultgetWalletById.data.address) {
                           var tr = document.createElement('tr')
                           tr.innerHTML = `
                           <td class="green">${childSnapshot.from}</td class="green"> 
@@ -1063,7 +1130,7 @@
                       }*/
 
 
-                    /*  if (childSnapshot.from == test.data.address) {
+                    /*  if (childSnapshot.from == resultgetWalletById.data.address) {
                           var tr = document.createElement('div')
                           tr.innerHTML = `
                                   <div class="transactions-footer">${childSnapshot.from}</div class="transactions-footer"> 

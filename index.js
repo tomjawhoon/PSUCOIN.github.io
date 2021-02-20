@@ -7,12 +7,25 @@ const router = express.Router()
 const Web3 = require("web3");
 const fs = require('fs');
 const path = require('path');
-const web3 = new Web3();
 const EthereumTx = require('ethereumjs-tx').Transaction;
 const Buffer = require('safer-buffer').Buffer;
 const cors = require('cors');
+//TEST GIT
+//TEST GIT
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 4000 });
+
+
 require('tls').DEFAULT_MIN_VERSION = 'TLSv1'
-const _ = require("lodash")
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+const infura =
+{
+    projectId: '37dd526435b74012b996e147cda1c261',
+    projectSecret: '55c6430534c042a1b762cd5f6e0f0a55',
+    endpoint: "wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261"
+}
+const web3 = new Web3(infura.endpoint);
 // <!--===============================================================================================-->
 app.use(cors());
 var engines = require('consolidate');
@@ -22,13 +35,17 @@ app.set('views', __dirname + '/');
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 var Web3EthAccounts = require('web3-eth-accounts');
-var firebase = require('firebase')
+var firebase = require('firebase');
+const cons = require('consolidate');
 app.use(bodyParser.urlencoded({ extended: true }), router)
 app.use(bodyParser.json, router)
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
+//app.use(bodyParser.json({ type: 'X-Foo', 'bar'}))
+// app.use(bodyParser.json(200, { 'Content-Type': 'text/plain' }))
 // app.use(function (req, res, next) {
 //     console.log(req.body) // populated!
 // })
+
 // <!--===============================================================================================-->
 var firebaseConfig = {
     apiKey: "AIzaSyDPwR_Tlxe5MODIEPugWCnO_drEh6-4jjw",
@@ -197,6 +214,7 @@ router.route('/send/:id')
     .get((req, res) => {
         res.render('tranfer.html')
     })
+
 router.route('/send/:id/confirm')
     .get((req, res) => {
         async function Tranfer() {
@@ -208,10 +226,8 @@ router.route('/send/:id/confirm')
             const privateKey = req.headers.privatekey;
             const id_sender = req.headers.id;
             let testid = "IDERROR"
-
-            // const testvalue = req.headers.result;
-
-            // console.log('xx: ', req.headers)
+            const startTime = new Date().valueOf()
+            console.log("startTime ======================== >", startTime) //
             console.log("id", id) //to id 
             //////////////////////////// sender ///////////////////////////////////////////////////
             console.log("id_sender", id_sender)
@@ -232,13 +248,7 @@ router.route('/send/:id/confirm')
                 console.log("TESTID")
                 res.json(testid)
             }
-
-    
-
-
             const toAddress = await getReceiverWalletFromId(id)
-        
-
             console.log("toAddress_show_toAddress =>", toAddress)
 
             let toAddress2 = toAddress.val();
@@ -274,7 +284,7 @@ router.route('/send/:id/confirm')
             var Transaction = {
                 "from": fromAddress,
                 "nonce": "0x" + count.toString(16),
-                "gasPrice": "0x003B9ACA00",
+                "gasPrice": web3.utils.toHex(web3.utils.toWei(String(1), 'gwei')),
                 "gasLimit": "0x250CA",//151754
                 "to": contractAddress,
                 "value": "0x0",
@@ -286,13 +296,22 @@ router.route('/send/:id/confirm')
             const tx = new EthereumTx(Transaction, { chain: 'kovan' });
             tx.sign(privKey);
             var serializedTx = tx.serialize();
+
+
             console.log("serializedTx =>", serializedTx)
             /////////////////////////////////////////////////// errrrorr //////////////////////////////////////////////////////////////////////////
             /*if (money <= id_sendershow_balance) {
                 console.log("errorrrrrrrrrrrrrrrrrrrrrrrr.receipt")
                 res.json(moneybalance)
             }*/
-            var receipt = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'));
+
+
+
+
+            var receipt = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).on('transactionHash', () => { console.log('hashtime', new Date().valueOf() - startTime) })
+            .on('receipt', () => { console.log('blocktime', new Date().valueOf() - startTime) })
+            //const spendTime = new Date().valueOf() - startTime
+            //console.log("spendTime_ฺHasTime ====================================================================================== =>", spendTime)
             console.log("receipt =>", receipt)
             res.json(JSON.stringify(receipt.transactionHash))
             database.ref('users').child(id).once("value", snapshot => {
@@ -315,6 +334,153 @@ router.route('/send/:id/confirm')
 
 
     })
+// <!--===============================================================================================-->
+
+router.route('/transection/:id/confirm')
+    .get(async (req, res) => {
+        const id = req.headers.id;
+        const toAddress = await getReceiverWalletFromId(id)
+        const toAddress2 = toAddress.val();
+        const address = toAddress2.address;
+        console.log("address ==================>", address);
+        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
+        const contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
+        const contract = new web3.eth.Contract(abi, contractAddress);
+        try {
+            const events = await contract.getPastEvents('Transfer', {
+                filter: { to: null },
+                fromBlock: 0,
+                toBlock: 'latest'
+            });
+            let transections = events.map((event) => {
+                const transaction = event.transactionHash;
+                console.log("event ===> ", transaction);
+                const { returnValues } = event;
+                console.log(returnValues);
+                const { from, to, tokens, } = returnValues;
+                return { from: from, to: to, tokens: tokens, transaction: transaction }
+            })
+            res.json(transections);
+        } catch (e) {
+            console.error(e);
+            res.json(e)
+        }
+    });
+
+
+
+wss.on('connection', function connection(ws) { // สร้าง connection
+    ws.on('message', async function incoming(message) { // รอรับ data อะไรก็ตาม ที่มาจาก client แบบตลอดเวลา
+        console.log('client:', message);
+        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
+        const address = '0x0d01bc6041ac8f72e1e4b831714282f755012764' // set to contract address
+        const provider = new Web3.providers.WebsocketProvider("wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261")
+        const web3 = new Web3(provider)
+        const contract = new web3.eth.Contract(abi, address);
+        contract.events.allEvents((err, event) => {
+            if (err) {
+                console.error('Error', err)
+                process.exit(1)
+            }
+            console.log('Event', event)
+            ws.send(JSON.stringify(event))
+        })
+        console.log('Waiting ...!')
+    });
+    ws.on('close', function close() {
+        console.log('disconnected');    // จะทำงานเมื่อปิด Connection ในตัวอย่างคือ ปิด Browser
+    });
+});
+
+/*router.route('/transection/:id/confirm')
+    .get(async (req, res) => {
+        const id = req.headers.id;
+        const toAddress = await getReceiverWalletFromId(id)
+        const toAddress2 = toAddress.val();
+        const address = toAddress2.address;
+        console.log("address ==================>", address);
+        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
+        const contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
+        const contract = new web3.eth.Contract(abi, contractAddress);
+        try {
+            const events = await contract.getPastEvents('Transfer', {
+                filter: { to: null },
+                fromBlock: 0,
+                toBlock: 'latest'
+            });
+            let transections = events.map((event) => {
+                const transaction = event.transactionHash;
+                console.log("event ===> ", transaction);
+                const { returnValues } = event;
+                console.log(returnValues);
+                const { from, to, tokens, } = returnValues;
+                return { from: from, to: to, tokens: tokens, transaction: transaction }
+            })
+            res.json(transections);
+        } catch (e) {
+            console.error(e);
+            res.json(e)
+        }
+    });*/
+
+
+
+/*io.on('/transectionrealtime/:id/confirm',  (socket)  => {
+    socket.on(async (req, res) => {
+        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
+        const address = '0x0d01bc6041ac8f72e1e4b831714282f755012764' // set to contract address
+        const provider = new Web3.providers.WebsocketProvider("wss://kovan.infura.io/ws/v3/37dd526435b74012b996e147cda1c261")
+        const web3 = new Web3(provider)
+        const contract = new web3.eth.Contract(abi, address);
+        contract.events.allEvents(function (err, event) {
+            if (err) {
+                console.error('Error', err)
+                process.exit(1)
+            }
+
+            console.log('Event', event)
+            res.json(event);
+
+        })
+        console.log('Waiting for events...')
+    });
+});
+*/
+
+/*router.route('/transection_from/:id/confirm')
+    .get(async (req, res) => {
+        const id = req.headers.id;
+        const toAddress = await getReceiverWalletFromId(id)
+        const toAddress2 = toAddress.val();
+        const address = toAddress2.address;
+        console.log("address ==================> frommm", address);
+        const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './abi.json'), 'utf-8'));
+        const contractAddress = "0x0d01bc6041ac8f72e1e4b831714282f755012764";
+        const contract = new web3.eth.Contract(abi, contractAddress);
+
+        try {
+            const events = await contract.getPastEvents('Transfer', {
+                filter: { from: null },
+                fromBlock: 0,
+                toBlock: 'latest'
+
+            });
+            //let transactions = {}
+            let transections = events.map((event) => {
+                //console.log("event ===> " ,event  );
+                const { returnValues } = event;
+                console.log(returnValues);
+                const { from, to, tokens } = returnValues;
+                return { from: from, to: to, tokens: tokens, }
+            })
+            // res.json(JSON.stringify(returnValues))
+            res.json(transections);
+        } catch (e) {
+            console.error(e);
+            res.json(e)
+        }
+    });*/
+
 // <!--===============================================================================================-->
 
 router.route('/showdata/:id')
@@ -363,9 +529,9 @@ router.route('/error')
         res.render('error.html')
     })
 // <!--===============================================================================================-->
-router.route('/adminlogin/')
+router.route('/demo/')
     .get((req, res) => {
-        res.render('adminlogin.html')
+        res.render('demo.html')
     })
 // <!--===============================================================================================-->
 
@@ -556,6 +722,28 @@ router.route('/test/:id')
         res.render('test.html')
     })
 
+
+router.route('/test1/:id')
+    .get((req, res) => {
+        res.render('test1.html')
+    })
+
+router.route('/test2/:id')
+    .get((req, res) => {
+        res.render('test2.html')
+    })
+
+router.route('/test3/:id')
+    .get((req, res) => {
+        res.render('test3.html')
+    })
+
+
+router.route('/test4/:id')
+    .get((req, res) => {
+        res.render('test4.html')
+    })
+
 router.route('/errorlogin')
     .get((req, res) => {
         res.render('errorlogin.html')
@@ -581,6 +769,11 @@ router.route('/notsend/:id')
 router.route('/Notid/:id')
     .get((req, res) => {
         res.render('Notid.html')
+    })
+
+router.route('/transection/:id')
+    .get((req, res) => {
+        res.render('transection.html')
     })
 
 
@@ -801,14 +994,17 @@ router.route('/balance_admin/:id/confirm')
 
 router.route('/getWalletById')
     .get((req, res) => {
+        //const id = "5935512088"
         const id = req.headers.id;
         console.log("get", id)
+        // for (let i in id) {
         database.ref('users').child(id).once("value", snapshot => {
             res.send(JSON.stringify({
                 address: snapshot.val().address,
                 privateKey: snapshot.val().privateKey,
             }))
         })
+        //  }
     })
 
 // <!--===============================================================================================-->
@@ -844,7 +1040,6 @@ router.route('/sendadmin/:id/confirm')
             var contract = new web3.eth.Contract(abi, contractAddress, { from: fromAddress });
             var weiTokenAmount = web3.utils.toWei(String(money), 'ether');
             var privKey = Buffer.from(privateKey, 'hex');
-
             for (let i in id) {
                 let response = await getReceiverWalletFromId(id[i]) //5935512088
                 let wallet = response.val()
@@ -925,9 +1120,9 @@ router.route('/getProfileByIdadmin')
                 //console.log("data", data)
                 res.send(JSON.stringify({
                     // id: data,
-                    name:     data1,
+                    name: data1,
                     lastName: data2,
-                    balance:  data3
+                    balance: data3
                 }))
             } else {
                 res.send(JSON.stringify({
@@ -962,6 +1157,7 @@ async function getReceiverWalletFromId(id) {
     return await database.ref('users').child(id).once("value")
     // console.log("getReceiverWalletFromId = >",id)
 }
+
 // <!--===============================================================================================-->
 app.listen(5001, () => console.log('Server is ready!'))
 

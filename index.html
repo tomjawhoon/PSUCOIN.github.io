@@ -17,6 +17,7 @@
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic'
     rel='stylesheet' type='text/css'>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
 
   <!-- Plugin CSS -->
   <link href="/front/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
@@ -31,7 +32,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-1" id="mainNav">
     <div class="container">
-    <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
+      <img src="/front/img/Prince_of_Songkla_University_Emblem.png" alt="Smiley face" width="42" height="52">
       <a class="navbar-brand js-scroll-trigger" onclick="gotoindex()">PSU COIN</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -41,7 +42,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
 
-   
+
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#about" onclick="gotoStatic()">Payment</a>
           </li>
@@ -100,9 +101,9 @@
         <div class="col-lg-8 text-center">
           <h2 class="text-white mt-0">Calendar</h2>
           <hr class="divider light my-4">
-          <p class="text-white-50 mb-4">     
+          <p class="text-white-50 mb-4">
           </p>
-          <a class="btn btn-light btn-xl js-scroll-trigger" href="#services" onclick="gotoCalendar()" >Calendar</a>
+          <a class="btn btn-light btn-xl js-scroll-trigger" href="#services" onclick="gotoCalendar()">Calendar</a>
         </div>
       </div>
     </div>
@@ -294,7 +295,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="/front/vendor/jquery/jquery.min.js"></script>
     <script src="/front/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!-- Plugin JavaScript -->
     <script src="/front/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="/front/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
@@ -311,7 +312,53 @@
       (() => {
         url = window.location.href
         id = url.split('/').slice(-1).toString() // ไอดี ของผู้ login
+        console.log("id ===>", id);
       })()
+
+      axios({
+        method: 'GET',
+        url: '/getWalletById', //ส่งไปค่านี้
+        headers: {
+          id: id  // รหัสนักศึกษา
+        }
+      }).then(test => {
+        
+        var connection = new WebSocket('ws://localhost:4000')
+        connection.onopen = () => {
+          // จะทำงานเมื่อเชื่อมต่อสำเร็จ
+          console.log("connect webSocket");
+          connection.send(id); // ส่ง Data ไปที่ Server //5935512088
+        };
+        connection.onerror = (error) => {
+          console.error('WebSocket Error ' + error);
+        };
+        connection.onmessage = (result) => {
+          const check = JSON.parse(result.data)
+          const money = check.returnValues.tokens / 1000000000000000000;
+          if (check.returnValues.to == test.data.address) {
+            console.log("in loop ")
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'มีเงินโอนเข้ามา',
+              showConfirmButton: false,
+              timer: 2000
+            })
+            //createDivElement(e.data)
+            Push.create("PSUCOIN WELCOME", {
+              body: "มีเงินโอนเข้ามา",
+              icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Prince_of_Songkla_University_Emblem.png/150px-Prince_of_Songkla_University_Emblem.png",
+              timeout: 5000,
+            });
+          } else {
+            console.log("Not in loop ")
+          }
+        }
+
+
+      })
+
+
 
 
       function gotosendadmin() {
@@ -368,6 +415,7 @@
           }
         })
       })
+
     </script>
 
 </body>
